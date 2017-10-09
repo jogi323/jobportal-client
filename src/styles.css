@@ -1,0 +1,6 @@
+/* You can add global styles to this file, and also import other style files */
+.checkbox input[type="text"] {
+    height: 29px !important;
+    margin-bottom: 0px !important;
+    padding: 3.5px;
+}

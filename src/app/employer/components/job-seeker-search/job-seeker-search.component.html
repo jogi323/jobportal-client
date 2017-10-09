@@ -1,0 +1,145 @@
+
+
+
+
+
+<div class="container-fluid">
+	<div class="col-lg-3">
+		<section class="page-title text-center bg-light">
+			<h2 class="heading relative uppercase bottom-line full-grey mb-30">Search Job Seekers</h2>
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<label for="billing_address_1" class="pull-left">Position
+							<abbr class="required" title="required">*</abbr>
+						</label>
+						<p class="form-row form-row-wide ">
+							<select name="calc_shipping_country" id="calc_shipping_country" class="country_to_state" rel="calc_shipping_state">
+								<option *ngFor="let Position of Positions">{{Position.Position_Id}}</option>
+							</select>
+						</p>
+				</div>
+				<div class="col-sm-10 col-sm-offset-1">
+						<label for="billing_address_1" class="pull-left">HoursGuarnteed
+							<abbr class="required" title="required">*</abbr>
+						</label>
+					<p class="form-row form-row-wide">
+						<input type="text" class="input-text" value placeholder="State / county" name="calc_shipping_state" id="calc_shipping_state">
+					</p>
+				</div>
+				<div class="col-sm-10 col-sm-offset-1">
+						<label for="billing_address_1" class="pull-left">Pay Requested
+								<abbr class="required" title="required">*</abbr>
+							</label>
+					<p class="form-row form-row-wide">
+						<input type="text" class="input-text" value placeholder="Postcode" name="calc_shipping_postcode" id="calc_shipping_postcode">
+					</p>
+				</div>
+				<div class="col-sm-10 col-sm-offset-1">
+						<label for="billing_address_1" class="pull-left">Distance
+								<abbr class="required" title="required">*</abbr>
+							</label>
+							<p class="form-row form-row-wide ">
+								<select name="calc_shipping_country" id="calc_shipping_country" class="country_to_state" rel="calc_shipping_state">
+																	<option value="VG">Virgin Islands, British</option>
+									<option value="VI">Virgin Islands, U.S.</option>
+									<option value="WF">Wallis and Futuna</option>
+									<option value="EH">Western Sahara</option>
+									<option value="YE">Yemen</option>
+									<option value="ZM">Zambia</option>
+									<option value="ZW">Zimbabwe</option>
+								</select>
+							</p>
+				</div>
+			</div>
+		</section>
+	</div>
+	<div class="col-lg-9">
+			<h2 class="heading relative uppercase bottom-line full-grey mb-30">Job Seekers</h2>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="table-wrap mb-30">
+						<table class="shop_table cart table">
+							<thead>
+								<tr>
+									<th class="product-name" colspan="2">Position</th>
+									<th class="product-price">Hourly Rate</th>
+									<th class="product-quantity">Experience</th>
+									<th class="product-subtotal" colspan="2">Zip Code</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="cart_item">
+									<td class="product-thumbnail">
+										<a href="#">
+											<img src="img/shop/shop_item_3.jpg" alt="">
+										</a>
+									</td>
+									<td class="product-name">
+										<a href="#">Position Name</a>
+										<ul>
+												Available
+											<li><b>From:</b> 8:00</li>
+											<li><b>To:</b> 1:00</li>
+										</ul>
+									</td>
+									<td class="product-price">
+										<span class="amount">$1250</span>
+									</td>
+									<td class="product-quantity">
+										<div class="quantity buttons_added">
+											<input type="number" step="1" min="0" value="1" title="Qty" class="input-text qty text">
+
+										</div>
+									</td>
+									<td class="product-subtotal">
+										<span class="amount">53558</span>
+									</td>
+									<td class="product-remove">
+										<a href="#" class="remove" title="Remove this item">
+											<i class="ui-close"></i>
+										</a>
+									</td>
+								</tr>
+								<tr class="cart_item">
+										<td class="product-thumbnail">
+											<a href="#">
+												<img src="img/shop/shop_item_3.jpg" alt="">
+											</a>
+										</td>
+										<td class="product-name">
+											<a href="#">Position Name</a>
+											<ul>
+												Available
+												<li><b>From:</b> 8:00</li>
+												<li><b>To:</b> 1:00</li>
+											</ul>
+										</td>
+										<td class="product-price">
+											<span class="amount">$1250</span>
+										</td>
+										<td class="product-quantity">
+											<div class="quantity buttons_added">
+												<input type="number" step="1" min="0" value="1" title="Qty" class="input-text qty text">
+	
+											</div>
+										</td>
+										<td class="product-subtotal">
+											<span class="amount">53558</span>
+										</td>
+										<td class="product-remove">
+											<a href="#" class="remove" title="Remove this item">
+												<i class="ui-close"></i>
+											</a>
+										</td>
+									</tr>
+
+							</tbody>
+						</table>
+					</div>
+
+
+
+				</div>
+			</div>
+	</div>
+</div>

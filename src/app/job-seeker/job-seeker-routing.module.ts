@@ -1,0 +1,30 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { JobSeekerComponent } from './job-seeker.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { WorkScheduleComponent } from './components/work-schedule/work-schedule.component';
+import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
+import { ViewProfileComponent } from './components/view-profile/view-profile.component';
+import { JobOffersComponent } from './components/job-offers/job-offers.component';
+
+const routes: Routes = [
+  {
+    path:'', 
+    component:JobSeekerComponent, 
+    children:[
+      {path:'', redirectTo:'dashboard'},
+      {path:'dashboard', component:DashboardComponent},
+      {path:'schedule', component:WorkScheduleComponent},
+      {path:'update', component:UpdateProfileComponent},
+      {path:'profile', component:ViewProfileComponent},
+      {path:'joboffers', component:JobOffersComponent}
+    ]
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class JobSeekerRoutingModule { }

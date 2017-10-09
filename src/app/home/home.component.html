@@ -1,0 +1,153 @@
+<!-- Promo Banners -->
+<section class="section-wrap promo-banners pb-30">
+  <div class="container">
+    <div class="row">
+
+      <div *ngIf="!selectedUserType || (userType == 'employer')" (click)="selectedUser('employer')" class="col-xs-4 col-xxs-12 mb-30 promo-banner color-base">
+        <a >
+          <img src="assets/img/shop/collection_1.jpg" alt="">
+          
+          <div class="promo-inner valign">
+            <h2>Employee</h2>
+            <span>Join and Find Job Seekers Now</span>
+              <!-- <div class="buttons-holder">
+                  <a class="btn btn-lg btn-transparent"><span>Join Now</span></a>
+              </div> -->
+          </div>
+          <!-- <a class="btn btn-lg btn-transparent"><span>Join Now</span></a> -->
+        </a>                        
+      </div>
+
+      <div *ngIf="!selectedUserType || (userType == 'jobseeker')" (click)="selectedUser('jobseeker')" class="col-xs-4 col-xxs-12 mb-30 promo-banner color-base">
+        <a >
+          <img src="assets/img/shop/collection_3.jpg" alt="">
+          
+          <div class="promo-inner valign">
+            <h2>Job Seeker</h2>
+            <span>Join To find Work</span>
+            <!-- <a  class="btn btn-lg btn-transparent"><span>Join Now</span></a> -->
+          </div>
+        </a>                        
+      </div>
+
+      <div *ngIf="!selectedUserType" class="col-xs-4 col-xxs-12 mb-30 product-description-wrap">
+        <h1 class="product-title">Modren Business Card</h1>
+        <!-- <span class="rating">
+        <a >3 Reviews</a>
+        </span> -->
+        <p class="short-description">At vero eos et accusamus et iusto odio
+            dignissimos ducimus qui blanditiis praesentium voluptatum 
+            deleniti atque corrupti quos dolores et quas molestias 
+            excepturi sint occaecati cupiditate non provident. similique 
+            sunt in culpa qui officia deserunt mollitia animi, id est laborum
+            et dolorum fuga.
+        </p>
+ 
+      </div>
+
+      <div *ngIf="selectedUserType" class="col-xs-8 col-xxs-12 mb-30 forms-container form-box-pad">
+        <h3>Register</h3>
+        <div class="">
+          <!-- <p>If you dont have an account, register now.</p> -->
+          <form>
+
+            <label for="username">Refered By</label>
+            <select name="billing_country" id="billing_country" class="country_to_state country_select" title="Country *">
+                <option>Select One…</option>
+                <option value="AF">Google</option>
+                <option value="AX">Advertisment</option>
+                <option value="AL">Other</option>
+            </select>
+
+
+            
+            <div class="row">
+              <div class="pull-left col-lg-6">
+                <label for="username">First Name</label>
+                <input name="text" type="text" placeholder="FirstName">
+              </div>
+              <div class="pull-right col-lg-6">
+                <label for="username">Last Name</label>
+                <input name="text" type="text" placeholder="LastName">
+              </div>
+            </div>
+
+            <label for="email">Email address:</label>
+            <input name="text" type="email" placeholder="Email address">
+
+
+            <label for="pwd">Password:</label>
+            <input name="password" id="password" type="password" placeholder="Password ">
+
+            <div class="checkbox">
+              <input type="checkbox" class="input-checkbox" name="checkbox" id="checkbox2" value="2">
+              <label for="rememberme">Agree to Privacy Policy / Terms and Conditions</label>
+            </div>
+
+            <div class="container-fluid">
+              <div class="row">
+                <a  class="btn btn-md btn-dark pull-right"><span>Register</span></a>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+      
+    </div>
+  </div>
+</section> <!-- end promo banners -->
+
+<!-- Testimonials -->
+<section class="section-wrap relative testimonials bg-parallax overlay" style="background-image:url(assets/img/testimonials/testimonial_bg.jpg);">
+  <div class="container relative">
+
+    <div class="row heading-row mb-20">
+      <div class="col-md-6 col-md-offset-3 text-center">
+        <h2 class="heading white bottom-line">Happy Clients</h2>
+      </div>
+    </div>
+
+    <div id="owl-testimonials" class="owl-carousel owl-theme text-center">
+
+      <div class="item">
+        <div class="testimonial">
+          <p class="testimonial-text">I’am amazed, I should say thank you so much for your awesome template. Design is so good and neat, every detail has been taken care these team are realy amazing and talented! I will work only with this agency.</p>
+          <span>Donald Trump / CEO of Trump organization</span>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="testimonial">
+          <p class="testimonial-text">This is the excellent theme. It has many useful features that can be use for any kind of business. The support is just amazing and design</p>
+          <span>John C. Marshall / Art Director</span>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="testimonial">
+          <p class="testimonial-text">Needless to say, beautifully designed theme that serves many purpose. Even more sutomers support is the best! Highly recommend this theme to anyone who enjoys a fine product.</p>
+          <span>Matthew Whilson / PR Agent</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section> <!-- end testimonials -->
+
+<!-- Newsletter -->
+<section class="newsletter" id="subscribe">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h4>Get the latest updates</h4>
+        <form class="relative newsletter-form">
+          <input type="email" class="newsletter-input" placeholder="Enter your email">
+          <input type="submit" class="btn btn-lg btn-dark newsletter-submit" value="Subscribe">
+        </form>
+      </div>
+    </div>
+  </div>       
+</section>

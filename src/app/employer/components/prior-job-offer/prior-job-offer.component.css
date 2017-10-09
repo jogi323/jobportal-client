@@ -1,0 +1,9 @@
+.prior_job_table thead tr{
+    background-color: #333;
+    padding:15px 25px;
+    color:#FFF
+}
+
+.prior_job_table thead tr th{
+    padding:15px 25px;
+}

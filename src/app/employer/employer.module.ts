@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
+import { FileUploadModule } from "ng2-file-upload"; 
 
 import { EmployerRoutingModule } from './employer-routing.module';
 import { EmployerComponent } from './employer.component';
@@ -13,11 +16,14 @@ import { PriorJobOfferComponent } from './components/prior-job-offer/prior-job-o
 import { PaymentComponent } from './components/payment/payment.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
+
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    EmployerRoutingModule
+    FormsModule,
+    EmployerRoutingModule,
+    FileUploadModule
   ],
   declarations: [
     EmployerComponent, 
@@ -28,6 +34,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     TransactionHistoryComponent,
     PriorJobOfferComponent,
     PaymentComponent,
-    ProfileComponent]
+    ProfileComponent],
+  providers:[  ]
 })
 export class EmployerModule { }

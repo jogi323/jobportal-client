@@ -19,7 +19,7 @@ const routes: Routes = [
       {path:'', component:DashboardComponent},
       {path:'search', component:JobSeekerSearchComponent},
       {path:'update', component:UpdateProfileComponent},
-      {path:'profile', component:ViewProfileComponent},
+      // {path:'profile', component:ViewProfileComponent},
       {path:'history', component:TransactionHistoryComponent},
       {path:'joboffers', component:PriorJobOfferComponent},
       {path:'payment', component:PaymentComponent},

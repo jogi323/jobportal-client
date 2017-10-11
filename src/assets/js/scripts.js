@@ -57,7 +57,7 @@
       $stickyNav.removeClass("offset");
     }
 
-    if ($(window).scrollTop() > 500 & windowWidth > 974){
+    if ($(window).scrollTop() > 400 & windowWidth > 974){
       $stickyNav.addClass("scrolling");
     } else {
       $stickyNav.removeClass("scrolling");

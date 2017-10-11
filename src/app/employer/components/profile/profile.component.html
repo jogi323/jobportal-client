@@ -1,90 +1,299 @@
-			<!-- 404 -->
-			<section class="section-wrap">
-          <div class="container">
-  
-            <div class="row">
-  
-  
-  
-  
-              <div class="container-fluid ">
-  
-                <div class="col-sm-6 forms-container">
-  
-                  <h3>Login</h3>
-                  <div class="form-box-pad">
-                    <p>If you have an account, sign in with your e-mail address.</p>
-                    <form>
-  
-                      <label for="username">Username</label>
-                      <input name="text" type="text" placeholder="Username">
-  
-  
-  
-                      <label for="pwd">Password:</label>
-                      <input name="password" id="password" type="password" placeholder="Password ">
-  
-                      <div class="checkbox">
-                        <input type="checkbox" class="input-checkbox" name="checkbox" id="checkbox2" value="2">
-                        <label for="rememberme">Remember Me</label>
-                      </div>
-  
-                      <div class="container-fluid">
-                        <div class="row">
-                          <a href="#" class="btn btn-md btn-dark pull-left"><span>Login</span></a>
-  
-                          <a href="#" class="btn btn-md btn-stroke pull-right"><span>Forgot Password?</span></a>
-                        </div>
-                      </div>
-  
-                    </form>
-  
-                  </div>
-  
-  
-                </div>
-  
-                <div class="col-sm-6 forms-container">
-                  <h3>Register</h3>
-                  <div class="form-box-pad">
-                    <p>If you dont have an account, register now.</p>
-                    <form>
-  
-                      <label for="email">Email address:</label>
-                      <input name="text" type="email" placeholder="Email address">
-  
-                      <label for="username">Username</label>
-                      <input name="text" type="text" placeholder="Username">
-  
-                      <label for="pwd">Password:</label>
-                      <input name="password" id="password" type="password" placeholder="Password ">
-  
-  
-  
-                      <div class="container-fluid">
-                        <div class="row">
-                          <a href="#" class="btn btn-md btn-dark "><span>Register</span></a>
-  
-  
-                        </div>
-                      </div>
-  
-                    </form>
-  
-                  </div>
-                </div>
-  
-  
-  
-  
-              </div>
-  
-  
-  
-            </div>
-  
+
+<section class="section-wrap">
+  <div class="container">
+    <div class="row">
+      <div class="container-fluid ">
+        <div class="col-sm-6 forms-container">
+          <div class="forms-container-heading">
+              <h3><i class="fa fa-user" aria-hidden="true"></i> Personal</h3>
           </div>
-        </section>
-        <!-- end 404 -->
-  
-  
+          <!-- view Profile -->
+          <div class="form-box-pad" *ngIf="!isUserDataEdit">
+            <form>
+              <div class="row">
+                <div class="col-md-6">
+                    <label for="Firstname"><b>Username:</b></label>
+                    <p>{{user.Firstname}}</p>
+
+                    <label for="Lastname"><b>Full Name:</b></label>
+                    <p>{{user.Lastname}}</p>
+
+                    <label for="email"><b>Email:</b></label>
+                    <p>{{user.Email}}</p>
+                </div>
+                <div class="col-md-6">
+                    <label for="username"><b>Photo:</b></label>
+                    <p>
+                      <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/17241-200.png" height="160" width="140" alt="">
+                    </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                    <label for="username"><b>Street Address:</b></label>
+                    <p>{{user.Address_street}}</p>
+                </div>
+                <div class="col-md-12">
+                    <label for="username"><b>Land Mark:</b></label>
+                    <p class="">{{user.Address_Unit}}</p>
+                </div>
+                <div class="col-md-6">
+                    <label for="username"><b>city/state:</b></label>
+                    <p>{{user.City}}/{{user.State}}</p>
+                </div>
+                <div class="col-md-6">
+                    <label for="username"><b>Zip code:</b></label>
+                    <p>{{user.Zip_Code}}</p>
+                </div>
+              </div>
+              <div class="clear"></div>
+              <div class="container-fluid">
+                <div class="row">
+                  <!-- <a class="btn btn-md btn-dark pull-left" (click)="cancelUpdate()"><span>Cancel</span></a> -->
+      
+                  <a class="btn btn-md btn-stroke pull-right" (click)="editUserData()"><span>Edit Profile</span></a>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- edit profile -->
+          <div class="form-box-pad" *ngIf="isUserDataEdit">
+            <p>please Edit you profile.</p>
+            <form>
+              <div class="row">
+                <div class="col-lg-6">
+                  <label for="User_Firstname">First Name
+                  <abbr class="required" title="required">*</abbr>
+                  </label>
+                  <input type="text" class="input-text" placeholder [(ngModel)]="user.Firstname" value="" name="Firstname" id="User_Firstname">
+                  <label for="User_Lastname">Last Name
+                  <abbr class="required" title="required">*</abbr>
+                  </label>
+                  <input type="text" class="input-text" placeholder [(ngModel)]="user.Lastname" value="" name="Lastname" id="User_Lastname">
+                  <label for="User_Email">Last Name
+                      <abbr class="required" title="required">*</abbr>
+                      </label>
+                      <input type="email" class="input-text" placeholder [(ngModel)]="user.Email" value="" name="Email" id="User_Email">
+                </div>
+                <div class="col-lg-6">
+                    <input type="file" (change)="changeListener($event)" />
+                    <img class="preview_image" src="{{user.image}}" height="220" width="160" *ngIf="user.image">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="User_Address_street">Address
+                  <abbr class="required" title="required">*</abbr>
+                  </label>
+                  <input type="text" class="input-text" placeholder="Street address" [(ngModel)]="user.Address_street" value="" name="Address_street" id="User_Address_street">
+                  <input type="text" class="input-text" placeholder="Apartment, suite, unit etc. (optional)" [(ngModel)]="user.Address_Unit" value="" name="Address_Unit" id="User_Address_Unit">
+                </div>
+                <div class="col-md-4">
+                  <input type="text" class="input-text" placeholder="Town / City" [(ngModel)]="user.City" value="" name="City" id="USer+City">
+                  
+                </div>
+                <div class="col-md-4">
+                  <select name="User_State" [(ngModel)]="user.State" id="User_State" class="country_to_state country_select" title="State *">
+                    <option value="" disabled selected>State</option>
+                    <option *ngFor="let state of statesList" [attr.value]="state.name">{{state.name}}</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <input type="text" class="input-text" placeholder="Zip Code" value="{{user.Zip_Code}}" name="Zip_Code" id="User_Zip_Code">
+                </div>
+              </div>
+              <div class="container-fluid">
+                <div class="row">
+                  <a class="btn btn-md btn-dark pull-left" (click)="cancelUpdate()"><span>Cancel</span></a>
+      
+                  <a class="btn btn-md btn-stroke pull-right" (click)="updateUserData(user)"><span>Update</span></a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-sm-6 forms-container">
+            <div class="forms-container-heading">
+                <h3><i class="fa fa-briefcase" aria-hidden="true"></i> Work</h3>
+            </div>
+          <!-- view work information -->
+          <div class="form-box-pad" *ngIf="!isWorkDataEdit">
+            <form>
+                <div class="row">
+                  <div class="col-md-12">
+                      <label for="username"><b>Practice Name:</b></label>
+                      <p>{{user.Practice_Name}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                      <label for="username"><b>Practice Phone:</b></label>
+                      <p>{{user.Practice_Phone}}</p>
+                  </div>
+                  <div class="col-md-6">
+                      <label for="username"><b>Speciality:</b></label>
+                      <p>{{user.Speciality}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                      <label for="username"><b>No Of Operations:</b></label>
+                      <p>{{user.Nr_of_Operations}}</p>
+                  </div>
+                  <div class="col-md-4">
+                      <label for="username"><b>No of staff:</b></label>
+                      <p>{{user.Nr_of_Staff}}</p>
+                  </div>
+                  <div class="col-md-4">
+                      <label for="username"><b>Languages:</b></label>
+                      <p>{{user.Languages}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                      <label for="username"><b>Dental School / <i>Graduated Year</i></b></label>
+                      <p>{{user.Dental_School}}/{{user.Year_Graduated}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="username"><b>Licence Number:</b></label>
+                        <p>{{user.License_Nr}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="username"><b>Years in Practice:</b></label>
+                        <p>{{user.Years_in_Practice}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="username"><b>Contact Person:</b></label>
+                        <p>{{user.Contact_Person}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="username"><b>Contact Phone:</b></label>
+                        <p>{{user.Contact_Phone_Nr}}</p>
+                    </div>
+                </div>
+              <div class="container-fluid">
+                <div class="row">
+                  <a class="btn btn-md btn-dark pull-right" (click)="editWorkData()"><span>Update Work Info</span></a>
+                </div>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- edit work information -->
+          <div class="form-box-pad" *ngIf="isWorkDataEdit">
+            <form>
+              <div class="row">
+                <div class="col-lg-12">
+                  <label for="user_Practice_Name">Practice Name
+                  <!-- <abbr class="required" title="required">*</abbr> -->
+                  </label>
+                  <input type="text" class="input-text" placeholder [(ngModel)]="user.Practice_Name" value name="Practice_Name" id="user_Practice_Name">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <label for="user_Practice_Phone">Practice Phone
+                  <!-- <abbr class="required" title="required">*</abbr> -->
+                  </label>
+                  <input type="number" class="input-text" placeholder [(ngModel)]="user.Practice_Phone" value name="Practice_Phone" id="user_Practice_Phone">
+                </div>
+                <div class="col-lg-6">
+                  <label for="User_Speciality">Speciality
+                  <abbr class="required" title="required">*</abbr>
+                  </label>
+                  <select name="Speciality" [(ngModel)]="user.Speciality" id="Speciality" class="country_to_state country_select" title="Speciality *">
+                    <option value="" disabled selected>select</option>
+                    <option *ngFor="let speciality of specialityList" [attr.value]="speciality.name">{{speciality.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="User_Nr_of_Operations">No Of Operations
+                  <abbr class="required" title="required">*</abbr>
+                  </label>
+                  <input type="text" class="input-text" [(ngModel)]="user.Nr_of_Operations" placeholder="Nr_of_Operations" value name="Nr_of_Operations" id="User_Nr_of_Operations">
+                </div>
+                <div class="col-md-4">
+                  <label for="User_Nr_of_Staff">Number of Staff
+                  <abbr class="required" title="required">*</abbr>
+                  </label>
+                  <input type="text" class="input-text" placeholder="Street address" [(ngModel)]="user.Nr_of_Staff" value name="Nr_of_Staff" id="User_Nr_of_Staff">
+                </div>
+                <div class="col-lg-4">
+                  <label for="User_Languages">Languages
+                  <abbr class="required" title="required">*</abbr>
+                  </label>
+                  <select name="Languages" id="Languages" [(ngModel)]="user.Languages" class="country_to_state country_select" title="Languages *">
+                    <option value="" disabled selected>Select</option>
+                    <option *ngFor="let language of languagesList" [attr.value]="language.name">{{language.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <label for="User_Dental_School">Dental School
+                  <!-- <abbr class="required" title="required">*</abbr> -->
+                  </label>
+                  <input type="text" class="input-text" placeholder [(ngModel)]="user.Dental_School" value name="Dental_School" id="User_Dental_School">
+                </div>
+                <div class="col-lg-6">
+                  <label for="User_Year_Graduated">Year Graduated
+                  <abbr class="required" title="required">*</abbr>
+                  </label>
+                  <select name="Year_Graduated" id="Year_Graduated" [(ngModel)]="user.Year_Graduated" class="country_to_state country_select" title="Year Graduated *">
+                    <option value="" disabled selected>Year</option>
+                    <option *ngFor="let year of yearsList" [attr.value]="year.year">{{year.year}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <label for="User_License_Nr">License Number
+                  <!-- <abbr class="required" title="required">*</abbr> -->
+                  </label>
+                  <input type="text" class="input-text" [(ngModel)]="user.License_Nr" placeholder value name="License_Nr" id="User_License_Nr">
+                </div>
+                <div class="col-lg-6">
+                  <label for="User_Years_in_Practice">Years in practice
+                  <abbr class="required" title="required">*</abbr>
+                  </label>
+                  <input type="text" class="input-text" [(ngModel)]="user.Years_in_Practice" placeholder value name="Years_in_Practice" id="User_Years_in_Practice">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <label for="User_Contact_Person">Contact person
+                  <abbr class="required" title="required">*</abbr>
+                  </label>
+                  <input type="text" class="input-text" [(ngModel)]="user.Contact_Person" placeholder value name="Contact_Person" id="User_Contact_Person">
+                </div>
+                <div class="col-lg-6">
+                  <label for="User_Contact_Phone_Nr">Contact phone number
+                  <abbr class="required" title="required">*</abbr>
+                  </label>
+                  <input type="number" class="input-text" [(ngModel)]="user.Contact_Phone_Nr" placeholder value name="Contact_Phone_Nr" id="User_Contact_Phone_Nr">   
+                </div>
+              </div>
+              <div class="container-fluid">
+                <div class="row">
+                  <a class="btn btn-md btn-dark pull-left" (click)="cancelWorkUpdate()"><span>Cancel</span></a>
+      
+                  <a class="btn btn-md btn-stroke pull-right" (click)="updateWorkData(user)"><span>Update</span></a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

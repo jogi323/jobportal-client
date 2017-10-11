@@ -4,3 +4,17 @@
     margin-bottom: 0px !important;
     padding: 3.5px;
 }
+a:hover.btn.btn-md.btn-dark {
+    background-color: white !important;
+    color: #273142;
+    border: 1px solid #273142;
+}
+.btn:hover span{
+    color: #273142 !important;
+}
+.navigation.scrolling .navbar-nav > li > a{
+    color: #fff;
+}
+.navigation.scrolling .nav-cart-inner a{
+    color: #fff !important;
+}

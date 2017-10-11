@@ -1023,6 +1023,8 @@ ol.numbers {
   -ms-transform: translate3d(0, 0px, 0);
   -o-transform: translate3d(0, 0px, 0);
   transform: translate3d(0, 0px, 0);
+  background-color: #273142 !important;
+  color: #fff;
 }
 
 .navigation.sticky {
@@ -1138,7 +1140,7 @@ header .flex-child.flex-right {
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.01em;
-  color: #000;
+  color: #273142;
   font-size: 13px;
   padding: 0 17px;
   line-height: 100px;
@@ -1797,7 +1799,7 @@ input.main-search-input:-ms-input-placeholder {
 /* Top Bar
 /*-------------------------------------------------------*/
 .top-bar {
-  background-color: #121212;
+  background-color: #273142;
   width: 100%;
   position: relative;
   height: 44px;
@@ -3167,12 +3169,22 @@ input.main-search-input:-ms-input-placeholder {
   transition: color 0.3s !important;
 }
 
+.btn.btn-color span{
+  color: #273142;
+}
+
+.btn.btn-color:hover span {
+  color: #fff !important;
+}
+
 .btn.btn-color:before {
-  background-color: #37b5b7;
+  color: #273142;
+  border: 1px solid #273142;
+  background-color: #fff;
 }
 
 .btn.btn-color:after {
-  background-color: #171717;
+  background-color: #273142;
 }
 
 .btn.btn-transparent {
@@ -3217,11 +3229,11 @@ input.main-search-input:-ms-input-placeholder {
 }
 
 .btn.btn-dark:before {
-  background-color: #171717;
+  background-color: #273142;
 }
 
 .btn.btn-dark:after {
-  background-color: #37b5b7;
+  background-color: #fff;
 }
 
 .btn.btn-white {

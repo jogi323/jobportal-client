@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute} from '@angular/router';
 
 import { User } from '../../../shared/models/user.model';
 import { JsonLoaderService } from '../../../shared/services/json-loader.service';
-import { FileUploader } from 'ng2-file-upload';
 
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
@@ -21,7 +21,6 @@ export class ProfileComponent implements OnInit {
   languagesList:any[];
   yearsList:any[];
 
-  public uploader:FileUploader = new FileUploader({url: URL});
 
   positionList = [
     {"name":"Dental Assistant"},
@@ -34,9 +33,10 @@ export class ProfileComponent implements OnInit {
   ]
 
   constructor(
-    private jsonLoaderService:JsonLoaderService
+    private jsonLoaderService:JsonLoaderService,
+    private router: Router
   ) { 
-
+    localStorage.setItem('url',this.router.url);
   }
 
   editUserData(){
@@ -48,7 +48,6 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUserData(user){
-    console.log(this.uploader);
     this.isUserDataEdit = !this.isUserDataEdit;    
   }
 
@@ -61,7 +60,7 @@ export class ProfileComponent implements OnInit {
   }
 
   updateWorkData(user){
-    console.log(user)
+    // console.log(user)
     this.isWorkDataEdit = !this.isWorkDataEdit;    
   }
 
@@ -71,21 +70,21 @@ export class ProfileComponent implements OnInit {
     this.jsonLoaderService.getStates()
                             .subscribe(data => {
                               this.statesList = data;
-                              console.log(data);
+                              // console.log(data);
                             }, error => {
                               console.log(error);
                             });
     this.jsonLoaderService.getLanguages()
                             .subscribe(data => {
                               this.languagesList = data;
-                              console.log(data);
+                              // console.log(data);
                             }, error => {
                               console.log(error);
                             });
     this.jsonLoaderService.getYears()
                             .subscribe(data => {
                               this.yearsList = data;
-                              console.log(data);
+                              // console.log(data); 
                             }, error => {
                               console.log(error);
                             });
@@ -98,13 +97,14 @@ export class ProfileComponent implements OnInit {
         "Address_street" : "103, burgers road",
         "Address_Unit": "New park Road",
         "City" : "hydarebad",
+        "Phone1":45446464654,
+        "Phone2":5464645646546,
         "State" : "Andhra Pradesh",
         "Zip_Code":500016,
-        "Phone1":2347973246,
-        "Phone2":3410400120,
+        "Hourly_Pay":545,
+        "Travel_Distance":45,
+        "Experience":8,
         "Position":"Dental Assistant",
-        "Experience":5,
-        "Hourly_Pay":250,
         "Practice_Name":"Surgeon",
         "Speciality":"General Dentistry",
         "Practice_Phone":253773,
@@ -113,7 +113,6 @@ export class ProfileComponent implements OnInit {
         "Languages":"English",
         "Dental_School":"NRI medical College",
         "Year_Graduated":2014,
-        "Travel_Distance":50,
         "License_Nr":"A8SA43VFG454",
         "Years_in_Practice":5,
         "Contact_Person":"brad pit",

@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./job-seeker-search.component.css']
 })
 export class JobSeekerSearchComponent implements OnInit {
+  value: Date;
+  minDate: any;
   jobSeekers = [
     {"Position_id":"34983","user_id":"bpit", "Zip_code":"324234","Experience":"4","Hourly_Pay":"$300","Time_start":"08.00","Time_Finish":"13:00"},
     {"Position_id":"34983","user_id":"bpit", "Zip_code":"324234","Experience":"4","Hourly_Pay":"$300","Time_start":"08.00","Time_Finish":"13:00"},
@@ -30,9 +32,11 @@ export class JobSeekerSearchComponent implements OnInit {
     {"Position_Id":"Lab Technician"},
   ]
 
-  constructor() { }
+  constructor() { 
+  }
 
   ngOnInit() {
+    this.minDate = new Date();
   }
 
 }

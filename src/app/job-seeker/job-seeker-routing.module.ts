@@ -7,6 +7,7 @@ import { WorkScheduleComponent } from './components/work-schedule/work-schedule.
 import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 import { JobOffersComponent } from './components/job-offers/job-offers.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -17,7 +18,7 @@ const routes: Routes = [
       {path:'dashboard', component:DashboardComponent},
       {path:'schedule', component:WorkScheduleComponent},
       {path:'update', component:UpdateProfileComponent},
-      {path:'profile', component:ViewProfileComponent},
+      {path:'profile', component:ProfileComponent},
       {path:'joboffers', component:JobOffersComponent}
     ]
   }

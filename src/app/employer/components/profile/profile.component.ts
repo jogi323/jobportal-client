@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { User } from '../../../shared/models/user.model';
 import { JsonLoaderService } from '../../../shared/services/json-loader.service';
-import { FileUploader } from 'ng2-file-upload';
-
-const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +18,6 @@ export class ProfileComponent implements OnInit {
   languagesList:any[];
   yearsList:any[];
 
-  public uploader:FileUploader = new FileUploader({url: URL});
 
   specialityList = [
     {"name":"General Dentistry"},
@@ -47,7 +43,6 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUserData(user){
-    console.log(this.uploader);
     this.isUserDataEdit = !this.isUserDataEdit;    
   }
 
@@ -93,7 +88,7 @@ export class ProfileComponent implements OnInit {
         "_id":"1",
         "Firstname" : "tyler",
         "Lastname" : "durden",
-        "Email":"slvrsmiles@gmail.com",
+        "Email_Address":"slvrsmiles@gmail.com",
         "Address_street" : "103, burgers road",
         "Address_Unit": "New park Road",
         "City" : "hydarebad",

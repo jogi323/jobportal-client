@@ -1,13 +1,16 @@
-
-
-
-
-
 <div class="container-fluid">
 	<div class="col-lg-3">
 		<section class="page-title text-center bg-light searchjobseeker-section">
 			<h2 class="heading relative uppercase bottom-line full-grey mb-30">Search Job Seekers</h2>
 			<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+							<label for="billing_address_1" class="pull-left">Date
+									<abbr class="required" title="required">*</abbr>
+								</label>
+								<p class="form-row form-row-wide ">
+									<p-calendar [(ngModel)]="value" dateFormat="yy-mm-dd" dataType="string" [minDate] = 'minDate'></p-calendar>
+								</p>
+						</div>
 				<div class="col-sm-10 col-sm-offset-1">
 					<label for="billing_address_1" class="pull-left">Position
 							<abbr class="required" title="required">*</abbr>
@@ -23,7 +26,7 @@
 							<abbr class="required" title="required">*</abbr>
 						</label>
 					<p class="form-row form-row-wide">
-						<input type="text" class="input-text" value placeholder="State / county" name="calc_shipping_state" id="calc_shipping_state">
+						<input type="text" class="input-text" value placeholder="No. of hours" name="calc_shipping_state" id="calc_shipping_state">
 					</p>
 				</div>
 				<div class="col-sm-10 col-sm-offset-1">
@@ -31,7 +34,7 @@
 								<abbr class="required" title="required">*</abbr>
 							</label>
 					<p class="form-row form-row-wide">
-						<input type="text" class="input-text" value placeholder="Postcode" name="calc_shipping_postcode" id="calc_shipping_postcode">
+						<input type="text" class="input-text" value placeholder="Pay Reuested" name="calc_shipping_postcode" id="calc_shipping_postcode">
 					</p>
 				</div>
 				<div class="col-sm-10 col-sm-offset-1">
@@ -40,13 +43,13 @@
 							</label>
 							<p class="form-row form-row-wide ">
 								<select name="calc_shipping_country" id="calc_shipping_country" class="country_to_state" rel="calc_shipping_state">
-																	<option value="VG">Virgin Islands, British</option>
-									<option value="VI">Virgin Islands, U.S.</option>
-									<option value="WF">Wallis and Futuna</option>
-									<option value="EH">Western Sahara</option>
-									<option value="YE">Yemen</option>
-									<option value="ZM">Zambia</option>
-									<option value="ZW">Zimbabwe</option>
+									<option value="VG">Select distance</option>
+									<option value="VI">10</option>
+									<option value="WF">20</option>
+									<option value="EH">30</option>
+									<option value="YE">40</option>
+									<option value="ZM">50</option>
+									<option value="ZW">60</option>
 								</select>
 							</p>
 				</div>

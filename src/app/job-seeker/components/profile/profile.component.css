@@ -13,3 +13,9 @@
     margin-bottom: 0px;
     font-weight: normal;
 }
+.profile-minheight{
+    min-height: 561px !important;
+}
+.workinfo-paddingTop {
+    padding-top: 48%;
+}

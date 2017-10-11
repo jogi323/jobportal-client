@@ -8,9 +8,9 @@ export  class User {
     City : String;
     State : String;
     Zip_Code: number;
-    Phone1:number;
-    Phone2:number;
-    Position:String;
+    Phone1?:number;
+    Phone2?:number;
+    Position?:String;
     Experience?:number;
     Hourly_Pay?:number;
     Practice_Name: String;

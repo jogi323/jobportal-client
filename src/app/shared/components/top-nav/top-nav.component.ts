@@ -13,15 +13,24 @@ export class TopNavComponent implements OnInit {
 
   userType:String;
   isLoggedIn:Boolean = false;
+  showJobseekerNav:boolean;
+  showEmployerNav:boolean;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private dialogService:DialogService
-  ) { }
+  ) { 
+  }
 
   ngOnInit() {
-    this.userType = this.router.url;
+    this.userType = localStorage.getItem('url');
+    if(this.userType && this.userType === 'jobseeker'){
+      this.showJobseekerNav = true;
+    }
+    if(localStorage.getItem('url') && localStorage.getItem('url') === 'employer'){
+      this.showEmployerNav = true;
+    }
   }
 
   showConfirm() {

@@ -18,3 +18,11 @@ a:hover.btn.btn-md.btn-dark {
 .navigation.scrolling .nav-cart-inner a{
     color: #fff !important;
 }
+input.ng-tns-c5-0.ui-inputtext.ui-widget.ui-state-default.ui-corner-all{
+    margin-bottom: 0px !important;
+    background-color: #fff !important;
+    /* padding: 0 40px !important; */
+}
+span.ng-tns-c5-0.ui-calendar {
+    width: 100%;
+}   

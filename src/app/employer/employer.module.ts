@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
-import { FileUploadModule } from "ng2-file-upload"; 
+import {CalendarModule} from 'primeng/primeng';
 
 import { EmployerRoutingModule } from './employer-routing.module';
 import { EmployerComponent } from './employer.component';
@@ -23,7 +22,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     RouterModule,
     FormsModule,
     EmployerRoutingModule,
-    FileUploadModule
+    CalendarModule
   ],
   declarations: [
     EmployerComponent, 

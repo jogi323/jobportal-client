@@ -47,15 +47,13 @@
               
               <!-- <ul class="nav navbar-nav" *ngIf="userType == 'jobseeker'"> -->
               <ul class="nav navbar-nav">
-                <li >
-                  <a [routerLink]="['jobseeker/dashboard']" routerLinkActive="active">Schedule Work</a>
+                <li *ngIf= 'showJobseekerNav'>
+                  <a [routerLink]="['jobseeker/schedule']" routerLinkActive="active">Schedule Work</a>
                 </li>
-                <li>
+                <li *ngIf= 'showJobseekerNav'>
                   <a [routerLink]="['jobseeker/joboffers']" routerLinkActive="active">My Job Offers</a>
                 </li>
-                <li class="mobile-links hidden-lg hidden-md">
-                  <a  [routerLink]="['jobseeker/profile']" routerLinkActive="active">View Profile</a>
-                </li>
+                
                 <li class="mobile-links hidden-lg hidden-md">
                   <a  [routerLink]="['jobseeker/schedule']" routerLinkActive="active">Change Password</a>
                 </li>
@@ -64,21 +62,21 @@
                 </li>
 
               </ul> <!-- end menu -->
-              <ul class="nav navbar-nav" *ngIf="userType == 'employer'">
-                <li >
+              <ul class="nav navbar-nav" *ngIf="showEmployerNav">
+                <!-- <li >
                   <a [routerLink]="['jobseeker/dashboard']" routerLinkActive="active">Dashboard</a>
+                </li> -->
+                <li>
+                  <a [routerLink]="['employer/search']" routerLinkActive="active">Search Job Seakers</a>
                 </li>
                 <li>
-                  <a [routerLink]="['jobseeker/schedule']" routerLinkActive="active">Schedule Work</a>
+                  <a [routerLink]="['employer/joboffers']" routerLinkActive="active">Job Offers</a>
                 </li>
                 <li>
-                  <a [routerLink]="['jobseeker/joboffers']" routerLinkActive="active">Prior Job Offers</a>
+                  <a [routerLink]="['employer/history']" routerLinkActive="active">Payment</a>
                 </li>
                 <li>
-                  <a [routerLink]="['jobseeker/history']" routerLinkActive="active">Transaction History</a>
-                </li>
-                <li>
-                  <a [routerLink]="['jobseeker/search']" routerLinkActive="active">Search Job Seakers</a>
+                  <a [routerLink]="['employer/search']" routerLinkActive="active">History</a>
                 </li>
 
                 <li class="mobile-links hidden-lg hidden-md">

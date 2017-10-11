@@ -15,6 +15,7 @@ import { WorkScheduleComponent } from './components/work-schedule/work-schedule.
 import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 import { JobOffersComponent } from './components/job-offers/job-offers.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,7 @@ import { JobOffersComponent } from './components/job-offers/job-offers.component
     JobSeekerComponent, 
     DashboardComponent, 
     WorkScheduleComponent, 
-    UpdateProfileComponent, ViewProfileComponent, JobOffersComponent
+    UpdateProfileComponent, ViewProfileComponent, JobOffersComponent, ProfileComponent
   ]
 })
 export class JobSeekerModule { }

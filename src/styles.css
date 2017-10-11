@@ -6,11 +6,11 @@
 }
 a:hover.btn.btn-md.btn-dark {
     background-color: white !important;
-    color: #273142;
-    border: 1px solid #273142;
+    color: #00394E;
+    border: 1px solid #00394E;
 }
 .btn:hover span{
-    color: #273142 !important;
+    color: #00394E !important;
 }
 .navigation.scrolling .navbar-nav > li > a{
     color: #fff;

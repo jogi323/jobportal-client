@@ -70,7 +70,7 @@
 }
 
 .bg-dark {
-  background-color: #171717;
+  background-color: #00394E;
 }
 
 .bg-darkblue {
@@ -671,7 +671,7 @@ ul {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Montserrat", sans-serif;
   margin-top: 0;
-  color: #000;
+  color: #00394E;
   font-weight: 700;
   line-height: 1.2;
   text-transform: uppercase;
@@ -751,7 +751,7 @@ a {
 
 a:hover {
   text-decoration: none;
-  color: #171717;
+  color: #00394E;
   outline: none;
 }
 
@@ -1023,7 +1023,7 @@ ol.numbers {
   -ms-transform: translate3d(0, 0px, 0);
   -o-transform: translate3d(0, 0px, 0);
   transform: translate3d(0, 0px, 0);
-  background-color: #273142 !important;
+  background-color: #00394E !important;
   color: #fff;
 }
 
@@ -1140,7 +1140,7 @@ header .flex-child.flex-right {
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.01em;
-  color: #273142;
+  color: #00394E;
   font-size: 13px;
   padding: 0 17px;
   line-height: 100px;
@@ -1210,7 +1210,7 @@ header .flex-child.flex-right {
   min-width: 230px;
   margin: 0;
   padding: 20px 0;
-  background-color: #171717;
+  background-color: #00394E;
   border: none;
   border-radius: 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -1799,7 +1799,7 @@ input.main-search-input:-ms-input-placeholder {
 /* Top Bar
 /*-------------------------------------------------------*/
 .top-bar {
-  background-color: #273142;
+  background-color: #00394E;
   width: 100%;
   position: relative;
   height: 44px;
@@ -2360,7 +2360,7 @@ input.main-search-input:-ms-input-placeholder {
 }
 
 .call-to-action.bg-color .btn-white:hover span {
-  color: #171717;
+  color: #00394E;
 }
 
 
@@ -3127,7 +3127,7 @@ input.main-search-input:-ms-input-placeholder {
   height: 0;
   top: 0;
   left: 0;
-  background: #171717;
+  background: #00394E;
   content: '';
   position: absolute;
   -webkit-transition: all 0.3s ease-in-out;
@@ -3170,7 +3170,7 @@ input.main-search-input:-ms-input-placeholder {
 }
 
 .btn.btn-color span{
-  color: #273142;
+  color: #00394E;
 }
 
 .btn.btn-color:hover span {
@@ -3178,13 +3178,13 @@ input.main-search-input:-ms-input-placeholder {
 }
 
 .btn.btn-color:before {
-  color: #273142;
-  border: 1px solid #273142;
+  color: #00394E;
+  border: 1px solid #00394E;
   background-color: #fff;
 }
 
 .btn.btn-color:after {
-  background-color: #273142;
+  background-color: #00394E;
 }
 
 .btn.btn-transparent {
@@ -3229,7 +3229,7 @@ input.main-search-input:-ms-input-placeholder {
 }
 
 .btn.btn-dark:before {
-  background-color: #273142;
+  background-color: #00394E;
 }
 
 .btn.btn-dark:after {
@@ -3238,7 +3238,7 @@ input.main-search-input:-ms-input-placeholder {
 
 .btn.btn-white {
   box-shadow: 1px 1.732px 3px 0px rgba(0, 0, 0, 0.05);
-  color: #171717;
+  color: #00394E;
 }
 
 .btn.btn-white:before {
@@ -3518,7 +3518,7 @@ input[type="radio"] + label:before {
 }
 
 input[type="radio"]:checked + label:before {
-  background-color: #171717;
+  background-color: #00394E;
   border: 5px solid #fff;
   padding: 1px;
 }
@@ -3851,7 +3851,7 @@ table th {
   position: absolute;
   bottom: -35px;
   width: 100%;
-  background-color: #171717;
+  background-color: #00394E;
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -6408,3 +6408,20 @@ abbr.required {
 	}
 }
 
+.btn.btn-inv:hover {
+  background-color: #003A51 !important;
+  border-color: #003A51 !important;
+}
+.btn.btn-inv:hover span {
+  color: #fff !important;
+}
+.btn.btn-inv:after {
+  background-color: #003A51 !important;
+}
+.btn.btn-inv.btn-stroke:before {
+  border: 2px solid #003A51 !important;
+}
+.btn-inv.btn-stroke {
+  background-color: #fff !important;
+  color: #003A51 !important;
+}

@@ -46,12 +46,20 @@
                     <p>{{user.Zip_Code}}</p>
                 </div>
               </div>
+              <div class="row">
+                <div class="col-md-6">
+                    <label for="Phone1"><b>Cell Phone:</b></label>
+                    <p>{{user.Phone1}}</p>
+                </div>
+                <div class="col-md-6">
+                    <label for="Phone2"><b>Secondary Phone:</b></label>
+                    <p>{{user.Phone2}}</p>
+                </div>
+              </div>
               <div class="clear"></div>
               <div class="container-fluid">
                 <div class="row">
-                  <!-- <a class="btn btn-md btn-dark pull-left" (click)="cancelUpdate()"><span>Cancel</span></a> -->
-      
-                  <a class="btn btn-md btn-stroke pull-right" (click)="editUserData()"><span>Edit Profile</span></a>
+                  <a class="btn btn-inv btn-md btn-stroke pull-right" (click)="editUserData()"><span>Edit Profile</span></a>
                 </div>
               </div>
             </form>
@@ -103,11 +111,26 @@
                   <input type="text" class="input-text" placeholder="Zip Code" value="{{user.Zip_Code}}" name="Zip_Code" id="User_Zip_Code">
                 </div>
               </div>
+              <div class="row">>
+                <div class="col-lg-6">
+                  
+                  <label for="User_Phone1">Cell Phone
+                  <abbr class="required" title="required">*</abbr>
+                  </label>
+                  <input type="text" class="input-text" placeholder [(ngModel)]="user.Phone1" value="" name="Phone1" id="User_Phone1">
+                  
+                </div>
+                <div class="col-lg-6">
+                    <label for="User_Phone2">Secondary Phone
+                    </label>
+                    <input type="text" class="input-text" placeholder [(ngModel)]="user.Phone2" value="" name="Phone2" id="User_Phone2">
+                </div>
+              </div>
               <div class="container-fluid">
                 <div class="row">
-                  <a class="btn btn-md btn-dark pull-left" (click)="cancelUpdate()"><span>Cancel</span></a>
-      
-                  <a class="btn btn-md btn-stroke pull-right" (click)="updateUserData(user)"><span>Update</span></a>
+                    <a class="btn btn-inv btn-md btn-stroke pull-left" (click)="cancelUpdate()"><span>Cancel</span></a>
+
+                  <a class="btn btn-md btn-dark pull-right" (click)="updateUserData(user)"><span>Update Info</span></a>
                 </div>
               </div>
             </form>
@@ -123,32 +146,22 @@
             <form>
                 <div class="row">
                   <div class="col-md-12">
-                      <label for="username"><b>Practice Name:</b></label>
-                      <p>{{user.Practice_Name}}</p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                      <label for="username"><b>Practice Phone:</b></label>
-                      <p>{{user.Practice_Phone}}</p>
-                  </div>
-                  <div class="col-md-6">
-                      <label for="username"><b>Speciality:</b></label>
-                      <p>{{user.Speciality}}</p>
+                      <label for="Position"><b>Position :</b></label>
+                      <p>{{user.Position}}</p>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-4">
-                      <label for="username"><b>No Of Operations:</b></label>
-                      <p>{{user.Nr_of_Operations}}</p>
+                      <label for="Experience"><b>Experience:</b></label>
+                      <p>{{user.Experience}}</p>
                   </div>
                   <div class="col-md-4">
-                      <label for="username"><b>No of staff:</b></label>
-                      <p>{{user.Nr_of_Staff}}</p>
+                      <label for="Travel_Distance"><b>Travel Distance:</b></label>
+                      <p>{{user.Travel_Distance}}</p>
                   </div>
                   <div class="col-md-4">
-                      <label for="username"><b>Languages:</b></label>
-                      <p>{{user.Languages}}</p>
+                      <label for="Hourly_Pay"><b>Hourly Pay:</b></label>
+                      <p>{{user.Hourly_Pay}}</p>
                   </div>
                 </div>
                 <div class="row">
@@ -163,20 +176,11 @@
                         <p>{{user.License_Nr}}</p>
                     </div>
                     <div class="col-md-6">
-                        <label for="username"><b>Years in Practice:</b></label>
-                        <p>{{user.Years_in_Practice}}</p>
+                        <label for="username"><b>Languages:</b></label>
+                        <p>{{user.Languages}}</p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="username"><b>Contact Person:</b></label>
-                        <p>{{user.Contact_Person}}</p>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="username"><b>Contact Phone:</b></label>
-                        <p>{{user.Contact_Phone_Nr}}</p>
-                    </div>
-                </div>
+
               <div class="container-fluid">
                 <div class="row">
                   <a class="btn btn-md btn-dark pull-right" (click)="editWorkData()"><span>Update Work Info</span></a>
@@ -191,10 +195,13 @@
             <form>
               <div class="row">
                 <div class="col-lg-12">
-                  <label for="user_Practice_Name">Practice Name
-                  <!-- <abbr class="required" title="required">*</abbr> -->
+                  <label for="User_Position">Position
+                  <abbr class="required" title="required">*</abbr>
                   </label>
-                  <input type="text" class="input-text" placeholder [(ngModel)]="user.Practice_Name" value name="Practice_Name" id="user_Practice_Name">
+                  <select name="Position" [(ngModel)]="user.Position" id="Position" class="country_to_state country_select" title="Position *">
+                    <option value="" disabled selected>select</option>
+                    <option *ngFor="let position of positionList" [attr.value]="position.name">{{position.name}}</option>
+                  </select>
                 </div>
               </div>
               <div class="row">
@@ -216,16 +223,16 @@
               </div>
               <div class="row">
                 <div class="col-md-4">
-                  <label for="User_Nr_of_Operations">No Of Operations
+                  <label for="UserExperiences">Experience
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                  <input type="text" class="input-text" [(ngModel)]="user.Nr_of_Operations" placeholder="Nr_of_Operations" value name="Nr_of_Operations" id="User_Nr_of_Operations">
+                  <input type="text" class="input-text" [(ngModel)]="user.Experience" placeholder="Experience" value name="Experience" id="UserExperience">
                 </div>
                 <div class="col-md-4">
-                  <label for="User_Nr_of_Staff">Number of Staff
+                  <label for="UserHourly_Pay">Hourly Pay
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                  <input type="text" class="input-text" placeholder="Street address" [(ngModel)]="user.Nr_of_Staff" value name="Nr_of_Staff" id="User_Nr_of_Staff">
+                  <input type="text" class="input-text" placeholder="Hourly Pay" [(ngModel)]="user.Hourly_Pay" value name="Hourly_Pay" id="UserHourly_Pay">
                 </div>
                 <div class="col-lg-4">
                   <label for="User_Languages">Languages
@@ -262,31 +269,18 @@
                   <input type="text" class="input-text" [(ngModel)]="user.License_Nr" placeholder value name="License_Nr" id="User_License_Nr">
                 </div>
                 <div class="col-lg-6">
-                  <label for="User_Years_in_Practice">Years in practice
+                  <label for="User_Travel_Distance">Travel Distance
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                  <input type="text" class="input-text" [(ngModel)]="user.Years_in_Practice" placeholder value name="Years_in_Practice" id="User_Years_in_Practice">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-6">
-                  <label for="User_Contact_Person">Contact person
-                  <abbr class="required" title="required">*</abbr>
-                  </label>
-                  <input type="text" class="input-text" [(ngModel)]="user.Contact_Person" placeholder value name="Contact_Person" id="User_Contact_Person">
-                </div>
-                <div class="col-lg-6">
-                  <label for="User_Contact_Phone_Nr">Contact phone number
-                  <abbr class="required" title="required">*</abbr>
-                  </label>
-                  <input type="number" class="input-text" [(ngModel)]="user.Contact_Phone_Nr" placeholder value name="Contact_Phone_Nr" id="User_Contact_Phone_Nr">   
+                  <input type="text" class="input-text" [(ngModel)]="user.Travel_Distance" placeholder value name="Travel_Distance" id="User_Travel_Distance">
                 </div>
               </div>
               <div class="container-fluid">
                 <div class="row">
-                  <a class="btn btn-md btn-dark pull-left" (click)="cancelWorkUpdate()"><span>Cancel</span></a>
-      
-                  <a class="btn btn-md btn-stroke pull-right" (click)="updateWorkData(user)"><span>Update</span></a>
+                    <a class="btn btn-inv btn-md btn-stroke pull-left" (click)="cancelWorkUpdate()"><span>Cancel</span></a>
+                    
+                    <a class="btn btn-md btn-dark pull-right" (click)="updateWorkData(user)"><span>Update Work Info</span></a>
+               
                 </div>
               </div>
             </form>

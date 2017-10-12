@@ -43,15 +43,16 @@
               </div>
               <div class="col-md-12">
                 <div class="col-sm-6 col-xs-12 footer-payment-systems text-right sm-text-center mt-sml-10 pull-right">
-                  <i class="fa fa-cc-paypal"></i>
-                  <i class="fa fa-cc-visa"></i>
-                  <i class="fa fa-cc-mastercard"></i>
-                  <i class="fa fa-cc-discover"></i>
-                  <i class="fa fa-cc-amex"></i>
+                  <!--<i class="fa fa-cc-paypal"></i>-->
+                  <i class="fa fa-cc-visa" [ngClass]="{active: cardType=='Visa'}"></i>
+                  <i class="fa fa-cc-mastercard" [ngClass]="{active: cardType=='Mastercard'}"></i>
+                  <i class="fa fa-cc-discover" [ngClass]="{active: cardType=='Discover'}"></i>
+                  <i class="fa fa-cc-amex" [ngClass]="{active: cardType=='AMEX'}"></i>
                 </div>
               </div>
               <div class="col-md-12">
-                  <input type="number" class="input-text" placeholder="Card number" value name="billing_address_1" id="billing_address_1">
+                  <input type="number" class="input-text" placeholder="Card number" value name="cardNumber" id="cardNumber" [(ngModel)]="cardNumber"  (change)="GetCardType(cardNumber)">
+                  {{cardType}}
               </div>
               <div class="col-md-3">
                 Expiry Date

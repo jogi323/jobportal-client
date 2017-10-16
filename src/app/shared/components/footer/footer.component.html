@@ -11,30 +11,69 @@
                     </div>
                   </div> <!-- end about us -->
     
-                  <div class="col-md-2 col-md-offset-1 col-sm-6 col-xs-12">
+                  <!-- <div class="col-md-2 col-md-offset-1 col-sm-6 col-xs-12">
                     <div class="widget footer-links">
                       <h5 class="widget-title bottom-line left-align grey">Update Profile</h5>
 
                     </div>
+                  </div> -->
+                  <div class="col-md-2 col-sm-6 col-xs-12" *ngIf = 'showEmployerFooter'>
+                    <div class="widget footer-links">
+                      <h5 class="widget-title bottom-line left-align grey">
+                        <a [routerLink]="['employer/joboffers']" routerLinkActive="active">Prior Job Offers</a>
+                      </h5>
+
+                    </div>
                   </div>
-    
+
+                  <div class="col-md-2 col-sm-6 col-xs-12" *ngIf = 'showEmployerFooter'>
+                    <div class="widget footer-links">
+                      <h5 class="widget-title bottom-line left-align grey">
+                        <a [routerLink]="['employer/history']" routerLinkActive="active">History</a>
+                      </h5>
+
+                    </div>
+                  </div>
+
+                  <div class="col-md-2 col-sm-6 col-xs-12" *ngIf = 'showJobseekerFooter'>
+                    <div class="widget footer-links">
+                      <h5 class="widget-title bottom-line left-align grey">
+                        <a [routerLink]="['jobseeker/schedule']" routerLinkActive="active">Schedule</a>
+                      </h5>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2 col-sm-6 col-xs-12" *ngIf = 'showJobseekerFooter'>
+                    <div class="widget footer-links">
+                      <h5 class="widget-title bottom-line left-align grey">
+                      <a [routerLink]="['jobseeker/profile']" routerLinkActive="active">View Profile</a>
+                    </h5>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-2 col-sm-6 col-xs-12" *ngIf = 'showEmployerFooter'>
+                      <div class="widget footer-links">
+                        <h5 class="widget-title bottom-line left-align grey">
+                        <a [routerLink]="['employer/profile']" routerLinkActive="active">View Profile</a>
+                      </h5>
+                      </div>
+                    </div>
+
                   <div class="col-md-2 col-sm-6 col-xs-12">
                     <div class="widget footer-links">
-                      <h5 class="widget-title bottom-line left-align grey">View Profile</h5>
+                      <h5 class="widget-title bottom-line left-align grey">
+                        <a [routerLink]="['contactus']" routerLinkActive="active">Feedback</a>
+                      </h5>
 
                     </div>
                   </div>
     
-                  <div class="col-md-2 col-sm-6 col-xs-12">
+                  <div class="col-md-2 col-sm-6 col-xs-12" *ngIf = 'showJobseekerFooter'>
                     <div class="widget footer-links">
-                      <h5 class="widget-title bottom-line left-align grey">Feedback</h5>
-
-                    </div>
-                  </div>
-    
-                  <div class="col-md-2 col-sm-6 col-xs-12">
-                    <div class="widget footer-links">
-                      <h5 class="widget-title bottom-line left-align grey">History</h5>
+                      <h5 class="widget-title bottom-line left-align grey">
+                          <a [routerLink]="['jobseeker/joboffers']" outerLinkActive="active">Offers</a>
+                          
+                      </h5>
 
                     </div>
                   </div>

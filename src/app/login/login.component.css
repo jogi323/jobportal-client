@@ -8,7 +8,24 @@
 .modal-title{
     color:#FFF;
 }
-
+input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="tel"], input[type="number"], input[type="date"], input[type="search"], select, textarea {
+    margin-bottom: 10px !important;
+}
+.form-control:focus{
+    border-color: #DEDEDE !important;
+}
+.checkbox input[type=checkbox]{
+    margin-left: 0px !important;
+}
+span.remember{
+    margin-left: 5%;
+}
+input.btn.btn-stroke, button.btn.btn-stroke{
+    border: none !important;
+}
+.register{
+    padding-top: 2%;
+}
 /* .modal {
     position: fixed;
     top: 0;

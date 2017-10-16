@@ -1,0 +1,114 @@
+<section class="section-wrap promo-banners pb-30 slider-section">
+  <div class="container">
+    <div class="row">
+      <div *ngIf="!selectedUserType || (userType == 'employer')" (click)="selectedUser('employer')" class="col-xs-4 col-xxs-12 mb-30 promo-banner color-base">
+        <a><img src="assets/img/shop/collection_1.jpg" alt="">
+          <div class="promo-inner valign">
+            <h2>Employee</h2>
+            <span>Join and Find Job Seekers Now</span>
+          </div>
+        </a>
+      </div>
+
+      <div *ngIf="!selectedUserType || (userType == 'jobseeker')" (click)="selectedUser('jobseeker')" class="col-xs-4 col-xxs-12 mb-30 promo-banner color-base">
+        <a><img src="assets/img/shop/collection_3.jpg" alt="">
+          <div class="promo-inner valign">
+            <h2>Job Seeker</h2>
+            <span>Join To find Work</span>
+          </div>
+        </a>
+      </div>
+
+      <div *ngIf="!selectedUserType" class="col-xs-4 col-xxs-12 mb-30 product-description-wrap">
+        <h1 class="product-title">Register to Hire Job Seekers</h1>
+        <p class="short-description">As many in the dental industry reach retirement, job opportunities are expected to increase. The employment outlook for
+          this group projects an 18% average increase between 2014 and 2024. States with the highest concentrations of opportunities
+          for dental occupations overall include Massachusetts and Maryland.
+        </p>
+      </div>
+      <div class="back-icon" *ngIf="selectedUserType">
+        <h2><i class="fa fa-arrow-left" aria-hidden="true" (click)='goBack()'></i></h2>
+      </div>
+      <div *ngIf="selectedUserType" class="col-xs-8 col-xxs-12 mb-30 forms-container form-box-pad">
+        <h3>Register</h3>
+        <div class="">
+          <!-- <p>If you dont have an account, register now.</p> -->
+          <form name="employeeRegisterForm" #employeeRegisterForm='ngForm' novalidate>
+            <div class="form-group">
+              <label for="username">Refered By</label>
+              <select name="reference" id="select" class="form-control" [(ngModel)]="employee.reference" #reference="ngModel" required>
+                        <option value="">Select One…</option>
+                        <option value="AF">Mailing</option>
+                        <option value="AX">Deental Meeting/Convection</option>
+                        <option value="AL">Internet Search</option>
+                        <option value="AF">Facebook</option>
+                        <option value="AX">Friend</option>
+                        <option value="AL">Other</option>
+                    </select>
+              <div *ngIf="reference.errors && (reference.dirty || reference.touched)" class="error">
+                <div [hidden]="!reference.errors.required">Please select reference from options</div>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="pull-left col-lg-6 form-group">
+                <label for="username">First Name</label>
+                <input name="FirstName" type="text" placeholder="FirstName" class="form-control" [(ngModel)]="employee.FirstName" #FirstName="ngModel"
+                  required>
+                <div *ngIf="FirstName.errors && (FirstName.dirty || FirstName.touched)" class="error">
+                  <div [hidden]="!FirstName.errors.required">Please Enter Firstname</div>
+                </div>
+              </div>
+              <div class="pull-right col-lg-6 form-group">
+                <label for="username">Last Name</label>
+                <input name="LastName" type="text" placeholder="LastName" class="form-control" [(ngModel)]="employee.LastName" #LastName="ngModel"
+                  required>
+                <div *ngIf="LastName.errors && (LastName.dirty || LastName.touched)" class="error">
+                  <div [hidden]="!LastName.errors.required">Please Enter Lastname</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email address:</label>
+              <input name="email" type="email" placeholder="Email address" class="form-control" [(ngModel)]="employee.email" #email="ngModel"
+                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+              <div *ngIf="email.errors && (email.dirty || email.touched)" class="error">
+                <div [hidden]="!email.errors.required">Please Enter Email-Id</div>
+                <div [hidden]="!email.errors.pattern">Please Enter proper email-Id</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="pwd">Password:</label>
+              <input name="password" id="password" type="password" placeholder="Password " class="form-control" [(ngModel)]="employee.password"
+                minlength="8" #password="ngModel" required>
+              <div *ngIf="password.errors && (password.dirty || password.touched)" class="error">
+                <div [hidden]="!password.errors.required">Please Enter password</div>
+                <div [hidden]="!password.errors.minlength">Password length should be more than 8 </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+
+              <input type="checkbox" [(ngModel)]="employee.checkbox" name="checkbox" #checkbox="ngModel" required>
+              <span class="remember">Agree to Privacy Policy / Terms and Conditions</span>
+              <div *ngIf="checkbox.errors && (checkbox.dirty || checkbox.touched)" class="error">
+                <div [hidden]="!checkbox.errors.required">Please Agree to Privacy Policy / Terms and Conditions
+                </div>
+              </div>
+            </div>
+
+            <div class="container-fluid">
+              <div class="row">
+                <button class="btn btn-md btn-dark pull-right" [disabled]="!employeeRegisterForm.form.valid"><span>Register</span></button>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

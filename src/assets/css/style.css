@@ -3459,9 +3459,9 @@ select::-ms-expand {
 
 /* Checkboxes & Radio Buttons
 -------------------------------------------------------*/
-input[type="checkbox"] {
+/* input[type="checkbox"] {
   display: none;
-}
+} */
 
 input[type="checkbox"] + label:before {
   width: 17px;

@@ -10,29 +10,40 @@
      <!-- <div class="modal-body"> -->
       <div *ngIf="isLogin" class="form-box-pad">
         <p>If you have an account, sign in with your e-mail address.</p>
-        <form>
-    
-          <label for="username">Username</label>
-          <input name="text" type="text" placeholder="Username">
-    
-    
-    
-          <label for="pwd">Password:</label>
-          <input name="password" id="password" type="password" placeholder="Password ">
-    
-          <div class="checkbox">
-            <input type="checkbox" class="input-checkbox" name="checkbox" id="checkbox2" value="2">
-            <label for="rememberme">Remember Me</label>
-          </div>
-    
-          <div class="container-fluid">
-            <div class="row">
-              <a  class="btn btn-md btn-dark pull-left"><span>Login</span></a>
-              <a class="btn btn-inv btn-md btn-stroke pull-right" (click)="forgotPassword()"><span>Forgot Password?</span></a>
-
+        <form name="loginForm" #loginForm = 'ngForm' novalidate>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input name="userName" type="email" placeholder="Enter your username" class="form-control" [(ngModel)]="user.userName" #userName="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+            <div  *ngIf="userName.errors && (userName.dirty || userName.touched)" class="error">
+              <div [hidden]="!userName.errors.required">Please Enter username</div>
+              <div [hidden]="!userName.errors.pattern">Please Enter proper username correctly</div>
             </div>
           </div>
     
+    
+          <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input name="password" type="password" placeholder="Password " class="form-control"  [(ngModel)]="user.password" #password="ngModel" minlength="8" required>
+            <div  *ngIf="password.errors && (password.dirty || password.touched)" class="error">
+              <div [hidden]="!password.errors.required">Please Enter password</div>
+              <div [hidden]="!password.errors.minlength">Password length should be more than 8 </div>
+            </div>
+          </div>
+    
+          <div class="checkbox">
+            <input type="checkbox" class="input-checkbox" name="checkbox" id="checkbox2" value="2">
+            <span class="remember">Remember Me</span>
+          </div>
+          
+          <div class="container-fluid">
+            <div class="row">
+              <button  class="btn btn-md btn-dark pull-left" [disabled]="!loginForm.form.valid" (click)="login()"><span>Login</span></button>
+              <button class="btn btn-inv btn-md btn-stroke pull-right" (click)="forgotPassword()"><span>Forgot Password?</span></button>
+            </div>
+            
+          </div>
+          <span class="register">Not yet registered?<a (click)="navigateToRegister()">Click to register.</a></span>
+          
         </form>
     
       </div>
@@ -40,14 +51,18 @@
       <!-- <div class="modal-body"> -->
       <div *ngIf="!isLogin" class="form-box-pad">
         <p>Enter your registered e-mail address.</p>
-        <form>
-    
-          <label for="username">Email</label>
-          <input name="Email" type="text" placeholder="Registered Email">
-
+        <form name="forgotPasswordForm" #forgotPasswordForm = 'ngForm' novalidate>
+          <div class="form-group">
+            <label for="Email">Email</label>
+            <input type="email" placeholder="Registered Email" name="email" required #email="ngModel" [(ngModel)]="forgotPasswordData.email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+            <div  *ngIf="email.errors && (email.dirty || email.touched)" class="error">
+              <div [hidden]="!email.errors.required">Please Enter registered email-Id</div>
+              <div [hidden]="!email.errors.pattern">Please Enter proper email-Id</div>
+            </div>
+          </div>
           <div class="container-fluid">
             <div class="row">
-                <a class="btn btn-inv btn-md btn-stroke pull-right" ><span>Reset Password</span></a>
+                <button class="btn btn-inv btn-md btn-stroke pull-right" [disabled]="!forgotPasswordForm.form.valid" (click)='reset()'><span>Reset Password</span></button>
             </div>
           </div>
     

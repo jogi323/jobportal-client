@@ -6,12 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  // employee:employeeRegister;
   selectedUserType:boolean=false;
 
   userType:string = '';
   
-  constructor() { }
+  constructor() { 
+    // this.employee = {
+    //   reference: '',
+    //   FirstName: '',
+    //   LastName: '',
+    //   email: '',
+    //   Password: '',
+    //   check: true
+    // }
+  }
 
   ngOnInit() {
   }
@@ -22,3 +31,11 @@ export class HomeComponent implements OnInit {
   }
 
 }
+// export interface employeeRegister {
+//   reference: String;
+//   FirstName: String;
+//   LastName: String;
+//   email: String;
+//   Password: String;
+//   check: boolean;
+// }

@@ -26,3 +26,14 @@ input.ng-tns-c5-0.ui-inputtext.ui-widget.ui-state-default.ui-corner-all{
 span.ng-tns-c5-0.ui-calendar {
     width: 100%;
 }   
+.error {
+    color: red;
+    text-align: right;
+}
+input.ng-dirty.ng-invalid, input.ng-touched.ng-invalid {
+    border:1px solid red
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="tel"], input[type="number"], input[type="date"], input[type="search"], select, textarea {
+    margin-bottom: 10px !important;
+}

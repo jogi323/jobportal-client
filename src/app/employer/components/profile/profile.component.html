@@ -1,55 +1,54 @@
-
 <section class="section-wrap">
   <div class="container">
     <div class="row">
       <div class="container-fluid ">
         <div class="col-sm-6 forms-container">
           <div class="forms-container-heading">
-              <h3><i class="fa fa-user" aria-hidden="true"></i> Personal</h3>
+            <h3><i class="fa fa-user" aria-hidden="true"></i> Personal</h3>
           </div>
           <!-- view Profile -->
           <div class="form-box-pad" *ngIf="!isUserDataEdit">
             <form>
               <div class="row">
                 <div class="col-md-6">
-                    <label for="Firstname"><b>Username:</b></label>
-                    <p>{{user.Firstname}}</p>
+                  <label for="Firstname"><b>Username:</b></label>
+                  <p>{{user.Firstname}}</p>
 
-                    <label for="Lastname"><b>Full Name:</b></label>
-                    <p>{{user.Lastname}}</p>
+                  <label for="Lastname"><b>Full Name:</b></label>
+                  <p>{{user.Lastname}}</p>
 
-                    <label for="email"><b>Email:</b></label>
-                    <p>{{user.Email_Address}}</p>
+                  <label for="email"><b>Email:</b></label>
+                  <p>{{user.Email_Address}}</p>
                 </div>
                 <div class="col-md-6">
-                    <label for="username"><b>Photo:</b></label>
-                    <p>
-                      <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/17241-200.png" height="160" width="140" alt="">
-                    </p>
+                  <label for="username"><b>Photo:</b></label>
+                  <p>
+                    <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/17241-200.png" height="160" width="140" alt="">
+                  </p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                    <label for="username"><b>Street Address:</b></label>
-                    <p>{{user.Address_street}}</p>
+                  <label for="username"><b>Street Address:</b></label>
+                  <p>{{user.Address_street}}</p>
                 </div>
                 <div class="col-md-12">
-                    <label for="username"><b>Land Mark:</b></label>
-                    <p class="">{{user.Address_Unit}}</p>
+                  <label for="username"><b>Land Mark:</b></label>
+                  <p class="">{{user.Address_Unit}}</p>
                 </div>
                 <div class="col-md-6">
-                    <label for="username"><b>city/state:</b></label>
-                    <p>{{user.City}}/{{user.State}}</p>
+                  <label for="username"><b>city/state:</b></label>
+                  <p>{{user.City}}/{{user.State}}</p>
                 </div>
                 <div class="col-md-6">
-                    <label for="username"><b>Zip code:</b></label>
-                    <p>{{user.Zip_Code}}</p>
+                  <label for="username"><b>Zip code:</b></label>
+                  <p>{{user.Zip_Code}}</p>
                 </div>
               </div>
               <div class="clear"></div>
               <div class="container-fluid">
                 <div class="row  padding-top">
-                  
+
                   <a class="btn btn-inv btn-md btn-stroke pull-right" (click)="editUserData()"><span>Edit Profile</span></a>
                 </div>
               </div>
@@ -59,25 +58,33 @@
           <!-- edit profile -->
           <div class="form-box-pad" *ngIf="isUserDataEdit">
             <p>please Edit you profile.</p>
-            <form>
-              <div class="row">
+            <form name="updatePersonalForm" #updatePersonalForm='ngForm' novalidate>
+              <div class="row form-group">
                 <div class="col-lg-6">
                   <label for="User_Firstname">First Name
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                  <input type="text" class="input-text" placeholder [(ngModel)]="user.Firstname" value="" name="Firstname" id="User_Firstname">
+                  <input type="text" class="input-text" placeholder [(ngModel)]="user.Firstname" value="" name="Firstname" #Firstname='ngModel'
+                    required>
+                  <div *ngIf="Firstname.errors && (Firstname.dirty || Firstname.touched)" class="error">
+                    <div [hidden]="!Firstname.errors.required">Please Enter Firstname</div>
+                  </div>
                   <label for="User_Lastname">Last Name
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                  <input type="text" class="input-text" placeholder [(ngModel)]="user.Lastname" value="" name="Lastname" id="User_Lastname">
-                  <label for="User_Email_Address">Last Name
+                  <input type="text" class="input-text" placeholder [(ngModel)]="user.Lastname" value="" name="Lastname" id="User_Lastname"
+                    #Lastname='ngModel' required>
+                  <div *ngIf="Lastname.errors && (Lastname.dirty || Lastname.touched)" class="error">
+                    <div [hidden]="!Lastname.errors.required">Please Enter Lastname</div>
+                  </div>
+                  <label for="User_Email_Address">Email
                       <abbr class="required" title="required">*</abbr>
                       </label>
-                      <input type="email" class="input-text" placeholder [(ngModel)]="user.Email_Address" value="" name="Email_Address" id="User_Email_Address">
+                  <input type="email" class="input-text" placeholder [(ngModel)]="user.Email_Address" value="" name="Email_Address" id="User_Email_Address">
                 </div>
                 <div class="col-lg-6">
-                    <input type="file" (change)="changeListener($event)" />
-                    <img class="preview_image" src="{{user.image}}" height="220" width="160" *ngIf="user.image">
+                  <input type="file" (change)="changeListener($event)" />
+                  <img class="preview_image" src="{{user.image}}" height="220" width="160" *ngIf="user.image">
                 </div>
               </div>
               <div class="row">
@@ -85,12 +92,17 @@
                   <label for="User_Address_street">Address
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                  <input type="text" class="input-text" placeholder="Street address" [(ngModel)]="user.Address_street" value="" name="Address_street" id="User_Address_street">
-                  <input type="text" class="input-text" placeholder="Apartment, suite, unit etc. (optional)" [(ngModel)]="user.Address_Unit" value="" name="Address_Unit" id="User_Address_Unit">
+                  <input type="text" class="input-text" placeholder="Street address" [(ngModel)]="user.Address_street" value="" name="Address_street"
+                    id="User_Address_street">
+                  <input type="text" class="input-text" placeholder="Apartment, suite, unit etc. (optional)" [(ngModel)]="user.Address_Unit"
+                    value="" name="Address_Unit" id="User_Address_Unit" #Address_Unit='ngModel' required>
+                  <div *ngIf="Address_Unit.errors && (Address_Unit.dirty || Address_Unit.touched)" class="error">
+                    <div [hidden]="!Address_Unit.errors.required">This field is required</div>
+                  </div>
                 </div>
                 <div class="col-md-4">
                   <input type="text" class="input-text" placeholder="Town / City" [(ngModel)]="user.City" value="" name="City" id="USer+City">
-                  
+
                 </div>
                 <div class="col-md-4">
                   <select name="User_State" [(ngModel)]="user.State" id="User_State" class="country_to_state country_select" title="State *">
@@ -105,7 +117,7 @@
               <div class="container-fluid">
                 <div class="row">
                   <a class="btn btn-inv btn-md btn-stroke pull-left" (click)="cancelUpdate()"><span>Cancel</span></a>
-                  <a class="btn btn-md btn-dark pull-right" (click)="updateUserData()"><span>Update  Info</span></a>
+                  <button class="btn btn-md btn-dark pull-right" [disabled]="!updatePersonalForm.form.valid" (click)="updateUserData()"><span>Update  Info</span></button>
                 </div>
               </div>
             </form>
@@ -113,68 +125,68 @@
         </div>
 
         <div class="col-sm-6 forms-container">
-            <div class="forms-container-heading">
-                <h3><i class="fa fa-briefcase" aria-hidden="true"></i> Work</h3>
-            </div>
+          <div class="forms-container-heading">
+            <h3><i class="fa fa-briefcase" aria-hidden="true"></i> Work</h3>
+          </div>
           <!-- view work information -->
           <div class="form-box-pad" *ngIf="!isWorkDataEdit">
             <form>
-                <div class="row">
-                  <div class="col-md-12">
-                      <label for="username"><b>Practice Name:</b></label>
-                      <p>{{user.Practice_Name}}</p>
-                  </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="username"><b>Practice Name:</b></label>
+                  <p>{{user.Practice_Name}}</p>
                 </div>
-                <div class="row">
-                  <div class="col-md-6">
-                      <label for="username"><b>Practice Phone:</b></label>
-                      <p>{{user.Practice_Phone}}</p>
-                  </div>
-                  <div class="col-md-6">
-                      <label for="username"><b>Speciality:</b></label>
-                      <p>{{user.Speciality}}</p>
-                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="username"><b>Practice Phone:</b></label>
+                  <p>{{user.Practice_Phone}}</p>
                 </div>
-                <div class="row">
-                  <div class="col-md-4">
-                      <label for="username"><b>No Of Operations:</b></label>
-                      <p>{{user.Nr_of_Operations}}</p>
-                  </div>
-                  <div class="col-md-4">
-                      <label for="username"><b>No of staff:</b></label>
-                      <p>{{user.Nr_of_Staff}}</p>
-                  </div>
-                  <div class="col-md-4">
-                      <label for="username"><b>Languages:</b></label>
-                      <p>{{user.Languages}}</p>
-                  </div>
+                <div class="col-md-6">
+                  <label for="username"><b>Speciality:</b></label>
+                  <p>{{user.Speciality}}</p>
                 </div>
-                <div class="row">
-                  <div class="col-md-12">
-                      <label for="username"><b>Dental School / <i>Graduated Year</i></b></label>
-                      <p>{{user.Dental_School}}/{{user.Year_Graduated}}</p>
-                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="username"><b>No Of Operations:</b></label>
+                  <p>{{user.Nr_of_Operations}}</p>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="username"><b>Licence Number:</b></label>
-                        <p>{{user.License_Nr}}</p>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="username"><b>Years in Practice:</b></label>
-                        <p>{{user.Years_in_Practice}}</p>
-                    </div>
+                <div class="col-md-4">
+                  <label for="username"><b>No of staff:</b></label>
+                  <p>{{user.Nr_of_Staff}}</p>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="username"><b>Contact Person:</b></label>
-                        <p>{{user.Contact_Person}}</p>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="username"><b>Contact Phone:</b></label>
-                        <p>{{user.Contact_Phone_Nr}}</p>
-                    </div>
+                <div class="col-md-4">
+                  <label for="username"><b>Languages:</b></label>
+                  <p>{{user.Languages}}</p>
                 </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="username"><b>Dental School / <i>Graduated Year</i></b></label>
+                  <p>{{user.Dental_School}}/{{user.Year_Graduated}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="username"><b>Licence Number:</b></label>
+                  <p>{{user.License_Nr}}</p>
+                </div>
+                <div class="col-md-6">
+                  <label for="username"><b>Years in Practice:</b></label>
+                  <p>{{user.Years_in_Practice}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="username"><b>Contact Person:</b></label>
+                  <p>{{user.Contact_Person}}</p>
+                </div>
+                <div class="col-md-6">
+                  <label for="username"><b>Contact Phone:</b></label>
+                  <p>{{user.Contact_Phone_Nr}}</p>
+                </div>
+              </div>
               <div class="container-fluid">
                 <div class="row">
                   <a class="btn btn-md btn-dark pull-right" (click)="editWorkData()"><span>Update Work Info</span></a>
@@ -186,7 +198,7 @@
 
           <!-- edit work information -->
           <div class="form-box-pad" *ngIf="isWorkDataEdit">
-            <form>
+            <form name="updateWorkForm" #updateWorkForm='ngForm' novalidate>
               <div class="row">
                 <div class="col-lg-12">
                   <label for="user_Practice_Name">Practice Name
@@ -200,16 +212,24 @@
                   <label for="user_Practice_Phone">Practice Phone
                   <!-- <abbr class="required" title="required">*</abbr> -->
                   </label>
-                  <input type="number" class="input-text" placeholder [(ngModel)]="user.Practice_Phone" value name="Practice_Phone" id="user_Practice_Phone">
+                  <input type="number" class="input-text" placeholder [(ngModel)]="user.Practice_Phone" value name="Practice_Phone" id="user_Practice_Phone"
+                    #Practice_Phone='ngModel' required>
+                  <div *ngIf="Practice_Phone.errors && (Practice_Phone.dirty || Practice_Phone.touched)" class="error">
+                    <div [hidden]="!Practice_Phone.errors.required">This field is required</div>
+                  </div>
                 </div>
                 <div class="col-lg-6">
                   <label for="User_Speciality">Speciality
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                  <select name="Speciality" [(ngModel)]="user.Speciality" id="Speciality" class="country_to_state country_select" title="Speciality *">
+                  <select name="Speciality" [(ngModel)]="user.Speciality" id="Speciality" class="country_to_state country_select" title="Speciality *"
+                    #Speciality='ngModel' required>
                     <option value="" disabled selected>select</option>
                     <option *ngFor="let speciality of specialityList" [attr.value]="speciality.name">{{speciality.name}}</option>
                   </select>
+                  <div *ngIf="Speciality.errors && (Speciality.dirty || Speciality.touched)" class="error">
+                    <div [hidden]="!Speciality.errors.required">This field is required</div>
+                  </div>
                 </div>
               </div>
               <div class="row">
@@ -217,13 +237,15 @@
                   <label for="User_Nr_of_Operations">No Of Operations
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                  <input type="text" class="input-text" [(ngModel)]="user.Nr_of_Operations" placeholder="Nr_of_Operations" value name="Nr_of_Operations" id="User_Nr_of_Operations">
+                  <input type="text" class="input-text" [(ngModel)]="user.Nr_of_Operations" placeholder="Nr_of_Operations" value name="Nr_of_Operations"
+                    id="User_Nr_of_Operations">
                 </div>
                 <div class="col-md-4">
                   <label for="User_Nr_of_Staff">Number of Staff
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                  <input type="text" class="input-text" placeholder="Street address" [(ngModel)]="user.Nr_of_Staff" value name="Nr_of_Staff" id="User_Nr_of_Staff">
+                  <input type="text" class="input-text" placeholder="Street address" [(ngModel)]="user.Nr_of_Staff" value name="Nr_of_Staff"
+                    id="User_Nr_of_Staff">
                 </div>
                 <div class="col-lg-4">
                   <label for="User_Languages">Languages
@@ -246,7 +268,8 @@
                   <label for="User_Year_Graduated">Year Graduated
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                  <select name="Year_Graduated" id="Year_Graduated" [(ngModel)]="user.Year_Graduated" class="country_to_state country_select" title="Year Graduated *">
+                  <select name="Year_Graduated" id="Year_Graduated" [(ngModel)]="user.Year_Graduated" class="country_to_state country_select"
+                    title="Year Graduated *">
                     <option value="" disabled selected>Year</option>
                     <option *ngFor="let year of yearsList" [attr.value]="year.year">{{year.year}}</option>
                   </select>
@@ -271,22 +294,29 @@
                   <label for="User_Contact_Person">Contact person
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                  <input type="text" class="input-text" [(ngModel)]="user.Contact_Person" placeholder value name="Contact_Person" id="User_Contact_Person">
+                  <input type="text" class="input-text" [(ngModel)]="user.Contact_Person" placeholder value name="Contact_Person" id="User_Contact_Person"
+                    #Contact_Person='ngModel' required>
+                  <div *ngIf="Contact_Person.errors && (Contact_Person.dirty || Contact_Person.touched)" class="error">
+                    <div [hidden]="!Contact_Person.errors.required">This field is required</div>
+                  </div>
                 </div>
                 <div class="col-lg-6">
                   <label for="User_Contact_Phone_Nr">Contact phone number
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                  <input type="number" class="input-text" [(ngModel)]="user.Contact_Phone_Nr" placeholder value name="Contact_Phone_Nr" id="User_Contact_Phone_Nr">   
+                  <input type="number" class="input-text" [(ngModel)]="user.Contact_Phone_Nr" placeholder value name="Contact_Phone_Nr" id="User_Contact_Phone_Nr"
+                    #Contact_Phone_Nr='ngModel' pattern="[0-9]{10}" required>
+                  <div *ngIf="Contact_Phone_Nr.errors && (Contact_Phone_Nr.dirty || Contact_Phone_Nr.touched)" class="error">
+                    <div [hidden]="!Contact_Phone_Nr.errors.required">This field is required</div>
+                    <div [hidden]="!Contact_Phone_Nr.errors.pattern">Enter valid mobile number</div>
+
+                  </div>
                 </div>
               </div>
               <div class="container-fluid">
                 <div class="row">
-
-                    <a class="btn btn-inv btn-md btn-stroke pull-left" (click)="cancelWorkUpdate()"><span>Cancel</span></a>
-                    <a class="btn btn-md btn-dark pull-right" (click)="updateWorkData()"><span>Update  Info</span></a>
-
-
+                  <a class="btn btn-inv btn-md btn-stroke pull-left" (click)="cancelWorkUpdate()"><span>Cancel</span></a>
+                  <button class="btn btn-md btn-dark pull-right" [disabled]="!updateWorkForm.form.valid" (click)="updateWorkData()"><span>Update  Info</span></button>
                 </div>
               </div>
             </form>

@@ -6,7 +6,6 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
     styleUrls: ['./work-schedule.component.css']
 })
 export class WorkScheduleComponent implements OnInit {
-
     events: any[];
     header: any;
     start: any;
@@ -19,6 +18,7 @@ export class WorkScheduleComponent implements OnInit {
     startTime: any;
     endTime: any
     times: any;
+    repeatDay: string;
     constructor(private cd: ChangeDetectorRef) {
         this.minDate = new Date();
         this.calendarminDate = new Date();
@@ -69,6 +69,30 @@ export class WorkScheduleComponent implements OnInit {
             //console.log(new Date(t.getFullYear(), t.getMonth() + 1, 0, 23, 59, 59));
             this.event = new MyEvent();
             this.event.start = event.date.format();
+            switch(this.start.getDay()){
+                case 0:
+                this.repeatDay = 'Sunday\'s';
+                break;
+                case 1:
+                this.repeatDay = 'Monday\'s';
+                break;
+                case 2:
+                this.repeatDay = 'Tuesday\'s';
+                break;
+                case 3:
+                this.repeatDay = 'Wednesday\'s';
+                break;
+                case 4:
+                this.repeatDay = 'Thursday\'s';
+                break;
+                case 5:
+                this.repeatDay = 'Friday\'s';
+                break;
+                default:
+                this.repeatDay = 'Saturday\'s';
+                break;
+
+            }
             this.dialogVisible = true;
             //trigger detection manually as somehow only moving the mouse quickly after click triggers the automatic detection
             this.cd.detectChanges();

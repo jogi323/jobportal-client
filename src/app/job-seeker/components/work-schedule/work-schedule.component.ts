@@ -16,13 +16,13 @@ export class WorkScheduleComponent implements OnInit {
     minDate: any;
     minDateAlert: boolean;
     calendarminDate: any;
-    startTime:any;
-    endTime:any
-    times:any;
+    startTime: any;
+    endTime: any
+    times: any;
     constructor(private cd: ChangeDetectorRef) {
         this.minDate = new Date();
         this.calendarminDate = new Date();
-        this.times = ['12:00','12:30','13:00','13:30','14:00'];
+        this.times = ['12:00', '12:30', '13:00', '13:30', '14:00'];
     }
 
     ngOnInit() {
@@ -41,7 +41,7 @@ export class WorkScheduleComponent implements OnInit {
         this.header = {
             left: 'prev,next today',
             center: 'title',
-            right:''
+            right: ''
             // right: 'month,agendaWeek,agendaDay'
         };
         //this.minDate = '';
@@ -77,7 +77,7 @@ export class WorkScheduleComponent implements OnInit {
 
     handleEventClick(e) {
         console.log("handle event click");
-        if (e.calEvent.start.format()<this.minDate) {
+        if (e.calEvent.start.format() < this.minDate) {
             alert('outdated event');
         }
         else {
@@ -104,13 +104,13 @@ export class WorkScheduleComponent implements OnInit {
     }
 
     saveEvent() {
-        if(!this.event.end){
-            this.event.end = this.event.start + 'T' + this.endTime;
-        }
-        else{
-            this.event.end = this.event.end + 'T' + this.endTime;
-        }
-        this.event.start = this.event.start + 'T' + this.startTime;
+        // if(!this.event.end){
+        //     this.event.end = this.event.start + 'T' + this.endTime;
+        // }
+        // else{
+        //     this.event.end = this.event.end + 'T' + this.endTime;
+        // }
+        // this.event.start = this.event.start + 'T' + this.startTime;
 
         if (this.event.id) {
             let index: number = this.findEventIndexById(this.event.id);
@@ -123,15 +123,33 @@ export class WorkScheduleComponent implements OnInit {
             this.event.id = this.idGen++;
             if (this.event.allWeek) {
                 this.event.end = this.start.setDate(this.start.getDate() + 7);
+                this.events.push(this.event);
+                this.event = null;
             }
             if (this.event.allMonth) {
-                // var lastDay = new Date(t.getFullYear(), t.getMonth() + 1, 0, 23, 59, 59));
-                var start = this.start.getDate();
-                var last = (new Date(this.start.getFullYear(), this.start.getMonth() + 1, 0, 23, 59, 59)).getDate();
-                this.event.end = this.start.setDate(this.start.getDate() + (last - start) + 1);
+                let startDate = new Date(this.event.start);
+                let start = startDate.getDate();
+                let last = (new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0, 23, 59, 59)).getDate();
+                this.events.push(this.event);
+                let a = this.event;
+                let eventsArray = [];
+                while (start <= last) {
+                    start = start + 7;
+                    var date;
+                    var event = new MyEvent();
+                    event.title = a.title;
+                    date = new Date(startDate.setDate(startDate.getDate() + 7));
+                    event.start = date;
+                    this.events.push(event);
+                }
+                this.event = null;
             }
-            this.events.push(this.event);
-            this.event = null;
+            else {
+                this.events.push(this.event);
+                this.event = null;
+            }
+            //this.events.push(this.event);
+
         }
 
 
@@ -161,8 +179,8 @@ export class WorkScheduleComponent implements OnInit {
 export class MyEvent {
     id: number;
     title: string;
-    start: string;
-    end: string;
+    start: any;
+    end: any;
     allDay: boolean;
     allWeek: boolean;
     allMonth: boolean;

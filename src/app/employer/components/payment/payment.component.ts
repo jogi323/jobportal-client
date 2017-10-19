@@ -49,9 +49,9 @@ export class PaymentComponent implements OnInit {
       this.cardType = "Discover";
 
     // Diners
-    re = new RegExp("^36");
-    if (String(number).match(re) != null)
-      this.cardType = "Diners";
+    // re = new RegExp("^36");
+    // if (String(number).match(re) != null)
+    //   this.cardType = "Diners";
 
     // Diners - Carte Blanche
     re = new RegExp("^30[0-5]");

@@ -7,7 +7,7 @@
             <h3><i class="fa fa-user" aria-hidden="true"></i> Personal</h3>
           </div>
           <!-- view Profile -->
-          <div class="form-box-pad" *ngIf="!isUserDataEdit">
+          <div class="form-box-pad profile-minheight" *ngIf="!isUserDataEdit">
             <form>
               <div class="row">
                 <div class="col-md-6">
@@ -57,7 +57,7 @@
               </div>
               <div class="clear"></div>
               <div class="container-fluid">
-                <div class="row">
+                <div class="row edit-profile-button">
                   <a class="btn btn-inv btn-md btn-stroke pull-right" (click)="editUserData()"><span>Edit Profile</span></a>
                 </div>
               </div>
@@ -231,7 +231,7 @@
           </div>
 
           <!-- edit work information -->
-          <div class="form-box-pad" *ngIf="isWorkDataEdit">
+          <div class="form-box-pad profile-minheight" *ngIf="isWorkDataEdit">
             <form name="updateJobseekerWork" #updateJobseekerWork='ngForm' novalidate>
               <div class="row">
                 <div class="col-lg-12">
@@ -336,7 +336,7 @@
                 </div>
               </div>
               <div class="container-fluid">
-                <div class="row">
+                <div class="row edit-work-button">
                   <a class="btn btn-inv btn-md btn-stroke pull-left" (click)="cancelWorkUpdate()"><span>Cancel</span></a>
                   <button class="btn btn-md btn-dark pull-right" [disabled]="!updateJobseekerWork.form.valid" (click)="updateWorkData()"><span>Update  Info</span></button>
                 </div>

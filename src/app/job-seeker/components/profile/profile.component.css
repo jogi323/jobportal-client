@@ -14,8 +14,14 @@
     font-weight: normal;
 }
 .profile-minheight{
-    min-height: 561px !important;
+    min-height: 667px !important;
 }
 .workinfo-paddingTop {
-    padding-top: 48%;
+    padding-top: 62.7%;
+}
+.row.edit-profile-button {
+    margin-top: 15%;
+}
+.row.edit-work-button {
+    margin-top: 34%;
 }

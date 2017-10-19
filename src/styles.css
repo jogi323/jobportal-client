@@ -37,3 +37,6 @@ input.ng-dirty.ng-invalid, input.ng-touched.ng-invalid {
 input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="tel"], input[type="number"], input[type="date"], input[type="search"], select, textarea {
     margin-bottom: 10px !important;
 }
+a:hover{
+    cursor: pointer;
+}

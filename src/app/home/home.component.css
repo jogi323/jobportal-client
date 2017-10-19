@@ -31,8 +31,10 @@ input[type="text"], input[type="password"], input[type="email"], input[type="url
 .gallery-head { padding-bottom: 10px; border-bottom: 2px solid #ff5500;}
 #myCarousel { margin-bottom: 60px;}
 .slider-section { padding-top: 0px !important; }
-.carousel-inner>.item>a>img, .carousel-inner>.item>img { height:500px !important;}
-
+.carousel-inner>.item>a>img, .carousel-inner>.item>img { height:auto !important;}
+@media only screen and (max-width: 768px) {
+    .carousel-inner>.item>a>img, .carousel-inner>.item>img { height:auto !important;}
+}
 @media only screen and (min-width: 768px) {
     .gallery-main .col-sm-4 {
         width: 32.3333% !important;

@@ -36,3 +36,6 @@ input.ng-tns-c8-0.ui-inputtext.ui-widget.ui-state-default.ui-corner-all {
     background-color: white;
     padding: 0px 42px;
 }
+input#calc_shipping_state, input#calc_shipping_postcode, select#calc_shipping_country {
+    background-color: white;
+}

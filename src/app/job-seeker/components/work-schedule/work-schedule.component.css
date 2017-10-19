@@ -2,3 +2,6 @@
     margin-top: 0px !important;
     margin-bottom: 0px !important
 }
+.col-md-8.col-md-offset-2.calendar {
+    margin-bottom: 5%;
+}

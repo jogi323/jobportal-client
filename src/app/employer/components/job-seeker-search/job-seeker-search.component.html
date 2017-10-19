@@ -8,7 +8,7 @@
 									<abbr class="required" title="required">*</abbr>
 								</label>
 								<p class="form-row form-row-wide ">
-									<p-calendar [(ngModel)]="value" dateFormat="yy-mm-dd" dataType="string" [minDate] = 'minDate'></p-calendar>
+									<p-calendar [(ngModel)]="value" dateFormat="dd-mm-yy" dataType="string"></p-calendar>
 								</p>
 						</div>
 				<div class="col-sm-10 col-sm-offset-1">
@@ -22,7 +22,7 @@
 						</p>
 				</div>
 				<div class="col-sm-10 col-sm-offset-1">
-						<label for="billing_address_1" class="pull-left">HoursGuarnteed
+						<label for="billing_address_1" class="pull-left">Hours Guaranteed
 							<abbr class="required" title="required">*</abbr>
 						</label>
 					<p class="form-row form-row-wide">
@@ -34,11 +34,11 @@
 								<abbr class="required" title="required">*</abbr>
 							</label>
 					<p class="form-row form-row-wide">
-						<input type="text" class="input-text" value placeholder="Pay Reuested" name="calc_shipping_postcode" id="calc_shipping_postcode">
+						<input type="text" class="input-text" value placeholder="Pay Requested" name="calc_shipping_postcode" id="calc_shipping_postcode">
 					</p>
 				</div>
 				<div class="col-sm-10 col-sm-offset-1">
-						<label for="billing_address_1" class="pull-left">Distance
+						<label for="billing_address_1" class="pull-left">Distance (in miles)
 								<abbr class="required" title="required">*</abbr>
 							</label>
 							<p class="form-row form-row-wide ">

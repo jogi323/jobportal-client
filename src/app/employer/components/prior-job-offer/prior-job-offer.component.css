@@ -7,3 +7,6 @@
 .prior_job_table thead tr th{
     padding:15px 25px;
 }
+.shop_table td.product-name{
+    width: auto !important;
+}

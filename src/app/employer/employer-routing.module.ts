@@ -20,7 +20,7 @@ const routes: Routes = [
       {path:'search', component:JobSeekerSearchComponent},
       {path:'update', component:UpdateProfileComponent},
       // {path:'profile', component:ViewProfileComponent},
-      {path:'history', component:TransactionHistoryComponent},
+      {path:'transactionhistory', component:TransactionHistoryComponent},
       {path:'joboffers', component:PriorJobOfferComponent},
       {path:'payment', component:PaymentComponent},
       {path:'profile', component:ProfileComponent},

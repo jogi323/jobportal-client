@@ -1,146 +1,238 @@
 [
     {
-    "key": "AN",
-    "name": "Andaman and Nicobar Islands"
+        "name": "Alabama",
+        "key": "AL"
     },
     {
-    "key": "AP",
-    "name": "Andhra Pradesh"
+        "name": "Alaska",
+        "key": "AK"
     },
     {
-    "key": "AR",
-    "name": "Arunachal Pradesh"
+        "name": "American Samoa",
+        "key": "AS"
     },
     {
-    "key": "AS",
-    "name": "Assam"
+        "name": "Arizona",
+        "key": "AZ"
     },
     {
-    "key": "BR",
-    "name": "Bihar"
+        "name": "Arkansas",
+        "key": "AR"
     },
     {
-    "key": "CG",
-    "name": "Chandigarh"
+        "name": "California",
+        "key": "CA"
     },
     {
-    "key": "CH",
-    "name": "Chhattisgarh"
+        "name": "Colorado",
+        "key": "CO"
     },
     {
-    "key": "DH",
-    "name": "Dadra and Nagar Haveli"
+        "name": "Connecticut",
+        "key": "CT"
     },
     {
-    "key": "DD",
-    "name": "Daman and Diu"
+        "name": "Delaware",
+        "key": "DE"
     },
     {
-    "key": "DL",
-    "name": "Delhi"
+        "name": "District Of Columbia",
+        "key": "DC"
     },
     {
-    "key": "GA",
-    "name": "Goa"
+        "name": "Federated States Of Micronesia",
+        "key": "FM"
     },
     {
-    "key": "GJ",
-    "name": "Gujarat"
+        "name": "Florida",
+        "key": "FL"
     },
     {
-    "key": "HR",
-    "name": "Haryana"
+        "name": "Georgia",
+        "key": "GA"
     },
     {
-    "key": "HP",
-    "name": "Himachal Pradesh"
+        "name": "Guam",
+        "key": "GU"
     },
     {
-    "key": "JK",
-    "name": "Jammu and Kashmir"
+        "name": "Hawaii",
+        "key": "HI"
     },
     {
-    "key": "JH",
-    "name": "Jharkhand"
+        "name": "Idaho",
+        "key": "ID"
     },
     {
-    "key": "KA",
-    "name": "Karnataka"
+        "name": "Illinois",
+        "key": "IL"
     },
     {
-    "key": "KL",
-    "name": "Kerala"
+        "name": "Indiana",
+        "key": "IN"
     },
     {
-    "key": "LD",
-    "name": "Lakshadweep"
+        "name": "Iowa",
+        "key": "IA"
     },
     {
-    "key": "MP",
-    "name": "Madhya Pradesh"
+        "name": "Kansas",
+        "key": "KS"
     },
     {
-    "key": "MH",
-    "name": "Maharashtra"
+        "name": "Kentucky",
+        "key": "KY"
     },
     {
-    "key": "MN",
-    "name": "Manipur"
+        "name": "Louisiana",
+        "key": "LA"
     },
     {
-    "key": "ML",
-    "name": "Meghalaya"
+        "name": "Maine",
+        "key": "ME"
     },
     {
-    "key": "MZ",
-    "name": "Mizoram"
+        "name": "Marshall Islands",
+        "key": "MH"
     },
     {
-    "key": "NL",
-    "name": "Nagaland"
+        "name": "Maryland",
+        "key": "MD"
     },
     {
-    "key": "OR",
-    "name": "Odisha"
+        "name": "Massachusetts",
+        "key": "MA"
     },
     {
-    "key": "PY",
-    "name": "Puducherry"
+        "name": "Michigan",
+        "key": "MI"
     },
     {
-    "key": "PB",
-    "name": "Punjab"
+        "name": "Minnesota",
+        "key": "MN"
     },
     {
-    "key": "RJ",
-    "name": "Rajasthan"
+        "name": "Mississippi",
+        "key": "MS"
     },
     {
-    "key": "SK",
-    "name": "Sikkim"
+        "name": "Missouri",
+        "key": "MO"
     },
     {
-    "key": "TN",
-    "name": "Tamil Nadu"
+        "name": "Montana",
+        "key": "MT"
     },
     {
-    "key": "TS",
-    "name": "Telangana"
+        "name": "Nebraska",
+        "key": "NE"
     },
     {
-    "key": "TR",
-    "name": "Tripura"
+        "name": "Nevada",
+        "key": "NV"
     },
     {
-    "key": "UK",
-    "name": "Uttar Pradesh"
+        "name": "New Hampshire",
+        "key": "NH"
     },
     {
-    "key": "UP",
-    "name": "Uttarakhand"
+        "name": "New Jersey",
+        "key": "NJ"
     },
     {
-    "key": "WB",
-    "name": "West Bengal"
+        "name": "New Mexico",
+        "key": "NM"
+    },
+    {
+        "name": "New York",
+        "key": "NY"
+    },
+    {
+        "name": "North Carolina",
+        "key": "NC"
+    },
+    {
+        "name": "North Dakota",
+        "key": "ND"
+    },
+    {
+        "name": "Northern Mariana Islands",
+        "key": "MP"
+    },
+    {
+        "name": "Ohio",
+        "key": "OH"
+    },
+    {
+        "name": "Oklahoma",
+        "key": "OK"
+    },
+    {
+        "name": "Oregon",
+        "key": "OR"
+    },
+    {
+        "name": "Palau",
+        "key": "PW"
+    },
+    {
+        "name": "Pennsylvania",
+        "key": "PA"
+    },
+    {
+        "name": "Puerto Rico",
+        "key": "PR"
+    },
+    {
+        "name": "Rhode Island",
+        "key": "RI"
+    },
+    {
+        "name": "South Carolina",
+        "key": "SC"
+    },
+    {
+        "name": "South Dakota",
+        "key": "SD"
+    },
+    {
+        "name": "Tennessee",
+        "key": "TN"
+    },
+    {
+        "name": "Texas",
+        "key": "TX"
+    },
+    {
+        "name": "Utah",
+        "key": "UT"
+    },
+    {
+        "name": "Vermont",
+        "key": "VT"
+    },
+    {
+        "name": "Virgin Islands",
+        "key": "VI"
+    },
+    {
+        "name": "Virginia",
+        "key": "VA"
+    },
+    {
+        "name": "Washington",
+        "key": "WA"
+    },
+    {
+        "name": "West Virginia",
+        "key": "WV"
+    },
+    {
+        "name": "Wisconsin",
+        "key": "WI"
+    },
+    {
+        "name": "Wyoming",
+        "key": "WY"
     }
-    ]
+]

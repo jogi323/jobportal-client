@@ -36,14 +36,14 @@
           <form name="employeeRegisterForm" #employeeRegisterForm='ngForm' novalidate>
             <div class="form-group">
               <label for="username">Refered By</label>
-              <select name="reference" id="select" class="form-control" [(ngModel)]="employee.reference" #reference="ngModel" required>
+              <select name="reference" id="select" class="form-control" [(ngModel)]="employee.Referred_By" #reference="ngModel" required>
                         <option value="">Select One…</option>
-                        <option value="AF">Mailing</option>
-                        <option value="AX">Deental Meeting/Convection</option>
-                        <option value="AL">Internet Search</option>
-                        <option value="AF">Facebook</option>
-                        <option value="AX">Friend</option>
-                        <option value="AL">Other</option>
+                        <option value="Mailing">Mailing</option>
+                        <option value="Deental Meeting/Convection">Deental Meeting/Convection</option>
+                        <option value="Internet Search">Internet Search</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="Friend">Friend</option>
+                        <option value="Other">Other</option>
                     </select>
               <div *ngIf="reference.errors && (reference.dirty || reference.touched)" class="error">
                 <div [hidden]="!reference.errors.required">Please select reference from options</div>
@@ -53,7 +53,7 @@
             <div class="row form-group">
               <div class="pull-left col-lg-6 form-group">
                 <label for="username">First Name</label>
-                <input name="FirstName" type="text" placeholder="FirstName" class="form-control" [(ngModel)]="employee.FirstName" #FirstName="ngModel"
+                <input name="FirstName" type="text" placeholder="FirstName" class="form-control" [(ngModel)]="employee.Firstname" #FirstName="ngModel"
                   required>
                 <div *ngIf="FirstName.errors && (FirstName.dirty || FirstName.touched)" class="error">
                   <div [hidden]="!FirstName.errors.required">Please Enter Firstname</div>
@@ -61,7 +61,7 @@
               </div>
               <div class="pull-right col-lg-6 form-group">
                 <label for="username">Last Name</label>
-                <input name="LastName" type="text" placeholder="LastName" class="form-control" [(ngModel)]="employee.LastName" #LastName="ngModel"
+                <input name="LastName" type="text" placeholder="LastName" class="form-control" [(ngModel)]="employee.Lastname" #LastName="ngModel"
                   required>
                 <div *ngIf="LastName.errors && (LastName.dirty || LastName.touched)" class="error">
                   <div [hidden]="!LastName.errors.required">Please Enter Lastname</div>
@@ -71,7 +71,7 @@
 
             <div class="form-group">
               <label for="email">Email address:</label>
-              <input name="email" type="email" placeholder="Email address" class="form-control" [(ngModel)]="employee.email" #email="ngModel"
+              <input name="email" type="email" placeholder="Email address" class="form-control" [(ngModel)]="employee.Email_Address" #email="ngModel"
                 pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
               <div *ngIf="email.errors && (email.dirty || email.touched)" class="error">
                 <div [hidden]="!email.errors.required">Please Enter Email-Id</div>
@@ -81,7 +81,7 @@
 
             <div class="form-group">
               <label for="pwd">Password:</label>
-              <input name="password" id="password" type="password" placeholder="Password " class="form-control" [(ngModel)]="employee.password"
+              <input name="password" id="password" type="password" placeholder="Password " class="form-control" [(ngModel)]="employee.Password"
                 minlength="8" #password="ngModel" required>
               <div *ngIf="password.errors && (password.dirty || password.touched)" class="error">
                 <div [hidden]="!password.errors.required">Please Enter password</div>
@@ -101,7 +101,7 @@
 
             <div class="container-fluid">
               <div class="row">
-                <button class="btn btn-md btn-dark pull-right" [disabled]="!employeeRegisterForm.form.valid"><span>Register</span></button>
+                <button class="btn btn-md btn-dark pull-right" [disabled]="!employeeRegisterForm.form.valid" (click)='registerUser()'><span>Register</span></button>
               </div>
             </div>
 

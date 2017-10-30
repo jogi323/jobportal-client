@@ -6,13 +6,16 @@ import { ChangePasswordComponent } from './shared/components/change-password/cha
 import { ContactUsComponent } from './shared/components/contact-us/contact-us.component';
 import { RegisterComponent } from './register/register.component';
 
+import { AuthGuardService } from './shared/services/auth-guard.service';
+import { NoAuthGuardService } from './shared/services/no-auth-guard.service';
+
 const routes: Routes = [
-    { path:'', component:HomeComponent },
-    { path:'employer', loadChildren:'./employer/employer.module#EmployerModule' },
-    { path:'jobseeker', loadChildren:'./job-seeker/job-seeker.module#JobSeekerModule' },
-    { path:'changepassword', component:ChangePasswordComponent },
-    { path:'register', component:RegisterComponent },
-    { path:'contactus', component:ContactUsComponent },
+    { path:'', component:HomeComponent,canActivate:[NoAuthGuardService] },
+    { path:'employer', loadChildren:'./employer/employer.module#EmployerModule',canActivate:[AuthGuardService] },
+    { path:'jobseeker', loadChildren:'./job-seeker/job-seeker.module#JobSeekerModule',canActivate:[AuthGuardService] },
+    { path:'changepassword', component:ChangePasswordComponent,canActivate:[NoAuthGuardService] },
+    { path:'register', component:RegisterComponent ,canActivate:[NoAuthGuardService]},
+    { path:'contactus', component:ContactUsComponent ,canActivate:[NoAuthGuardService] },
     { path:'**', redirectTo:'' },
 ];
 

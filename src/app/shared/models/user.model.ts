@@ -27,4 +27,6 @@ export  class User {
     Years_in_Practice: number;
     Contact_Person?: String;
     Contact_Phone_Nr?: number;
+    token?:string
+    role?:string
 }

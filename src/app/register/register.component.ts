@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { UserService } from '../shared/services/user.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-register',
@@ -7,39 +11,68 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  employee:employeeRegister;
-  selectedUserType:boolean=false;
+  employee: employeeRegister;
+  selectedUserType: boolean = false;
 
-  userType:string = '';
-  
-  constructor() { 
+  userType: string = '';
+
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private notificationsService: NotificationsService
+  ) {
     this.employee = {
-      reference: '',
-      FirstName: '',
-      LastName: '',
-      email: '',
+      Referred_By: '',
+      Firstname: '',
+      Lastname: '',
+      Email_Address: '',
       Password: '',
-      check: true
+      checkbox: false,
+      userType: 'employer',
+      Date_Submitted: new Date()
     }
   }
 
   ngOnInit() {
   }
 
-  selectedUser(userType){
+  selectedUser(userType) {
     this.userType = userType;
     this.selectedUserType = true;
   }
-  goBack(){
+  goBack() {
     this.selectedUserType = false;
+  }
+
+  registerUser() {
+    this.employee.userType = this.userType;
+    this.userService.registerUser(this.employee).subscribe(
+      res => {
+          this.router.navigate(['']);
+          this.notificationsService.success('Success',
+            res.message,
+            {
+              timeOut: 5000,
+              showProgressBar: true,
+              pauseOnHover: false,
+              clickToClose: false,
+              maxLength: 100
+            }
+          )
+      },
+      err => {
+        console.log(err);
+      });
   }
 
 }
 export interface employeeRegister {
-  reference: String;
-  FirstName: String;
-  LastName: String;
-  email: String;
+  Referred_By: String;
+  Firstname: String;
+  Lastname: String;
   Password: String;
-  check: boolean;
+  Email_Address: String;
+  checkbox: boolean;
+  userType: String;
+  Date_Submitted: Date;
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-job-seeker',
@@ -8,13 +7,10 @@ import { Router, ActivatedRoute} from '@angular/router';
 })
 export class JobSeekerComponent implements OnInit {
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor() { }
 
   ngOnInit() {
-    this.activatedRoute.parent.url.subscribe((urlPath) => {
-      const url = urlPath[urlPath.length - 1].path;
-      localStorage.setItem('url',url);
-  })
+    
   }
 
 }

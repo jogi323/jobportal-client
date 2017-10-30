@@ -14,7 +14,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 const routes: Routes = [
   {
     path:'', 
-    component:EmployerComponent, 
+    component:EmployerComponent,
     children:[
       {path:'', component:DashboardComponent},
       {path:'search', component:JobSeekerSearchComponent},

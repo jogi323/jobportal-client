@@ -10,7 +10,8 @@
         <ul class="top-bar-acc pull-right">
           <!-- <li class="top-bar-link"><a >My Wishlist</a></li> -->
           <li class="top-bar-link" [routerLink]="['contactus']" routerLinkActive="active"><a >Contact Us</a></li>
-          <li class="top-bar-link"><a (click)=showConfirm()>Login</a></li>                 
+          <li class="top-bar-link" *ngIf='!isLoggedIn'><a (click)=showConfirm()>Login</a></li>
+          <li class="top-bar-link" *ngIf='!isLoggedIn'><a (click)=navigateToRegister()>Register</a></li>                 
         </ul>
 
       </div>
@@ -87,7 +88,7 @@
             </div> <!-- end collapse -->
           </div> <!-- end col -->
 
-          <div class="flex-child flex-right nav-right hidden-sm hidden-xs">
+          <div *ngIf = 'isLoggedIn' class="flex-child flex-right nav-right hidden-sm hidden-xs">
               <ul>
                 <li class="nav-cart">
                   
@@ -109,10 +110,11 @@
                       </div>
 
                       <div class="nav-cart-actions mt-20">
-                        <a class="btn btn-md btn-dark" [routerLink]="['jobseeker/profile']" routerLinkActive="active"><span>View Profile</span></a>
+                        <a *ngIf= 'showJobseekerNav' class="btn btn-md btn-dark" [routerLink]="['jobseeker/profile']" routerLinkActive="active"><span>View Profile</span></a>
+                         <a *ngIf="showEmployerNav" class="btn btn-md btn-dark" [routerLink]="['employer/profile']" routerLinkActive="active"><span>View Profile</span></a>
 
                         <a class="btn btn-md btn-dark mt-10" [routerLink]="['changepassword']" routerLinkActive="active"><span>Change Password</span></a>
-                        <a class="btn btn-md btn-color mt-10"><span>Log Out</span></a>
+                        <a class="btn btn-md btn-color mt-10" (click)='logoutUser()'><span>Log Out</span></a>
                       </div>
                     </div>
                   </li>

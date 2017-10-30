@@ -1,26 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogComponent, DialogService } from "ng2-bootstrap-modal";
+import { NotificationsService } from 'angular2-notifications';
+
+import { UserService } from '../shared/services/user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent  extends DialogComponent<ConfirmModel, boolean> implements OnInit, ConfirmModel {
+export class LoginComponent extends DialogComponent<ConfirmModel, boolean> implements OnInit, ConfirmModel {
   user: LoginFormData;
   forgotPasswordData: ForgetFormData;
   title: string;
   message: string;
   isLogin: boolean = true;
-  constructor(dialogService: DialogService, private router:Router) {
+  constructor(
+    dialogService: DialogService,
+    private router: Router,
+    private userService: UserService,
+    private notificationsService: NotificationsService
+  ) {
     super(dialogService);
-    this.user  = {
-      userName: '',
-      password: ''
+    this.user = {
+      Email_Address: '',
+      Password: ''
     }
     this.forgotPasswordData = {
-      email:''
+      email: ''
     }
   }
   confirm() {
@@ -30,35 +38,52 @@ export class LoginComponent  extends DialogComponent<ConfirmModel, boolean> impl
     this.close();
   }
 
-  forgotPassword(){
+  forgotPassword() {
     this.isLogin = false;
   }
 
-  login(){
-    console.log(this.user);
+  login() {
+    this.userService.attemptAuth(this.user).subscribe(
+      res => {
+          this.router.navigate([res.userType]);
+          this.close();
+      },
+      err => {
+          this.close();
+        this.notificationsService.error(
+            err.title,
+            err.error.message,
+            {
+              timeOut: 5000,
+              showProgressBar: true,
+              pauseOnHover: false,
+              clickToClose: false,
+              maxLength: 50
+            }
+          )
+      });
   }
 
-  reset(){
-    console.log(this.forgotPasswordData);
+  reset() {
   }
 
-  navigateToRegister(){
+  navigateToRegister() {
     this.close();
     this.router.navigate(['register']);
   }
 
-  ngOnInit(){
-    
+  ngOnInit() {
+
   }
 }
 
 export interface ConfirmModel {
-  title:string;
-  message:string;
+  title: string;
+  message: string;
 }
 export interface LoginFormData {
-   userName : String;
-   password: String;
+  Email_Address: String;
+  Password: String;
 }
 export interface ForgetFormData {
   email: String;

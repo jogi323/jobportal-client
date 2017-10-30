@@ -13,17 +13,17 @@
         <form name="loginForm" #loginForm = 'ngForm' novalidate>
           <div class="form-group">
             <label for="username">Username</label>
-            <input name="userName" type="email" placeholder="Enter your username" class="form-control" [(ngModel)]="user.userName" #userName="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
-            <div  *ngIf="userName.errors && (userName.dirty || userName.touched)" class="error">
-              <div [hidden]="!userName.errors.required">Please Enter username</div>
-              <div [hidden]="!userName.errors.pattern">Please Enter proper username correctly</div>
+            <input name="Email_Address" type="email" placeholder="Enter your username" class="form-control" [(ngModel)]="user.Email_Address" #Email_Address="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+            <div  *ngIf="Email_Address.errors && (Email_Address.dirty || Email_Address.touched)" class="error">
+              <div [hidden]="!Email_Address.errors.required">Please Enter username</div>
+              <div [hidden]="!Email_Address.errors.pattern">Please Enter proper username correctly</div>
             </div>
           </div>
     
     
           <div class="form-group">
             <label for="pwd">Password:</label>
-            <input name="password" type="password" placeholder="Password " class="form-control"  [(ngModel)]="user.password" #password="ngModel" minlength="8" required>
+            <input name="password" type="password" placeholder="Password " class="form-control"  [(ngModel)]="user.Password" #password="ngModel" minlength="8" required>
             <div  *ngIf="password.errors && (password.dirty || password.touched)" class="error">
               <div [hidden]="!password.errors.required">Please Enter password</div>
               <div [hidden]="!password.errors.minlength">Password length should be more than 8 </div>

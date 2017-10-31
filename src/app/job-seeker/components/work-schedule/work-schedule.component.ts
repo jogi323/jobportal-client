@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { ApiService } from '../../../shared/services/api.service';
 
 @Component({
     selector: 'app-work-schedule',
@@ -7,6 +8,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 })
 export class WorkScheduleComponent implements OnInit {
     events: any[];
+    eventToStore: any;
     header: any;
     start: any;
     event: MyEvent;
@@ -19,10 +21,17 @@ export class WorkScheduleComponent implements OnInit {
     endTime: any
     times: any;
     repeatDay: string;
-    constructor(private cd: ChangeDetectorRef) {
+    constructor(private cd: ChangeDetectorRef, public apiservice: ApiService) {
         this.minDate = new Date();
         this.calendarminDate = new Date();
         this.times = ['12:00', '12:30', '13:00', '13:30', '14:00'];
+        this.eventToStore = [{
+            Date: null,
+            Time_Start: '',
+            Time_Finish: '',
+            Hours_Guaranteed: null,
+            Date_Submitted: null
+        }];
     }
 
     ngOnInit() {
@@ -69,28 +78,28 @@ export class WorkScheduleComponent implements OnInit {
             //console.log(new Date(t.getFullYear(), t.getMonth() + 1, 0, 23, 59, 59));
             this.event = new MyEvent();
             this.event.start = event.date.format();
-            switch(this.start.getDay()){
+            switch (this.start.getDay()) {
                 case 0:
-                this.repeatDay = 'Sunday\'s';
-                break;
+                    this.repeatDay = 'Sunday\'s';
+                    break;
                 case 1:
-                this.repeatDay = 'Monday\'s';
-                break;
+                    this.repeatDay = 'Monday\'s';
+                    break;
                 case 2:
-                this.repeatDay = 'Tuesday\'s';
-                break;
+                    this.repeatDay = 'Tuesday\'s';
+                    break;
                 case 3:
-                this.repeatDay = 'Wednesday\'s';
-                break;
+                    this.repeatDay = 'Wednesday\'s';
+                    break;
                 case 4:
-                this.repeatDay = 'Thursday\'s';
-                break;
+                    this.repeatDay = 'Thursday\'s';
+                    break;
                 case 5:
-                this.repeatDay = 'Friday\'s';
-                break;
+                    this.repeatDay = 'Friday\'s';
+                    break;
                 default:
-                this.repeatDay = 'Saturday\'s';
-                break;
+                    this.repeatDay = 'Saturday\'s';
+                    break;
 
             }
             this.dialogVisible = true;
@@ -127,54 +136,126 @@ export class WorkScheduleComponent implements OnInit {
         }
     }
 
+    postEvent(data) {
+        this.apiservice.post('availability/save', data).subscribe(res => {
+            console.log(res);
+        },
+            err => {
+                console.log(err);
+            }
+        )
+        this.event = null;
+    }
+
     saveEvent() {
-        // if(!this.event.end){
-        //     this.event.end = this.event.start + 'T' + this.endTime;
-        // }
-        // else{
-        //     this.event.end = this.event.end + 'T' + this.endTime;
-        // }
-        // this.event.start = this.event.start + 'T' + this.startTime;
-
-        if (this.event.id) {
-            let index: number = this.findEventIndexById(this.event.id);
-            if (index >= 0) {
-                this.events[index] = this.event;
-            }
-        }
-        //new
-        else {
-            this.event.id = this.idGen++;
-            if (this.event.allWeek) {
-                this.event.end = this.start.setDate(this.start.getDate() + 7);
-                this.events.push(this.event);
-                this.event = null;
-            }
-            if (this.event.allMonth) {
-                let startDate = new Date(this.event.start);
-                let start = startDate.getDate();
-                let last = (new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0, 23, 59, 59)).getDate();
-                this.events.push(this.event);
-                let a = this.event;
-                let eventsArray = [];
-                while (start <= last) {
-                    start = start + 7;
-                    var date;
-                    var event = new MyEvent();
-                    event.title = a.title;
-                    date = new Date(startDate.setDate(startDate.getDate() + 7));
-                    event.start = date;
-                    this.events.push(event);
+        let startDate = new Date(this.event.start);
+        let startDay = startDate.getDate();
+        if (this.event.allMonth) {
+            let lastDay = (new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0, 23, 59, 59)).getDate();
+            let diff = startDay + (lastDay - startDay);
+            let b = 0;
+            for (let i = startDay; (i < diff); i+=7) {
+                if (b == 0) {
+                    let eventToSave = {
+                        Date: new Date(startDate.setDate(startDate.getDate() + 0)),
+                        Time_Start: this.startTime,
+                        Time_Finish: this.endTime,
+                        Date_Submitted: new Date(),
+                        Hours_Guaranteed: 4
+                    }
+                    this.eventToStore.push(eventToSave);
+                    b++;
                 }
-                this.event = null;
+                else {
+                    let eventToSave = {
+                        Date: new Date(startDate.setDate(startDate.getDate() + 7)),
+                        Time_Start: this.startTime,
+                        Time_Finish: this.endTime,
+                        Date_Submitted: new Date(),
+                        Hours_Guaranteed: 4
+                    }
+                    this.eventToStore.push(eventToSave);
+                }
+                //startDate = new Date(startDate.setDate(startDate.getDate() + 7));
             }
-            else {
-                this.events.push(this.event);
-                this.event = null;
-            }
-            //this.events.push(this.event);
-
+            this.postEvent(this.eventToStore);
         }
+        else if (this.event.allWeek) {
+            //let start = startDate;
+            let lastDay = startDate.getDate() + 7;
+            let diff = startDay + (lastDay - startDay);
+            let a = 0;
+            for (let i = startDay; i < (diff); i++) {
+                if(a == 0){
+                    let eventToSave = {
+                        Date: new Date(startDate.setDate(startDate.getDate() + 0)),
+                        Time_Start: this.startTime,
+                        Time_Finish: this.endTime,
+                        Date_Submitted: new Date(),
+                        Hours_Guaranteed: 4
+                    }
+                    this.eventToStore.push(eventToSave);
+                    a++;
+                }
+                else{
+                    let eventToSave = {
+                        Date: new Date(startDate.setDate(startDate.getDate() + 1)),
+                        Time_Start: this.startTime,
+                        Time_Finish: this.endTime,
+                        Date_Submitted: new Date(),
+                        Hours_Guaranteed: 4
+                    }
+                    this.eventToStore.push(eventToSave);
+                }
+                //startDate = new Date(startDate.setDate(startDate.getDate() + 1));
+            }
+            this.postEvent(this.eventToStore);
+        }
+        else {
+            this.eventToStore[0].Date = this.event.start;
+            this.eventToStore[0].Time_Start = this.startTime;
+            this.eventToStore[0].Time_Finish = this.endTime;
+            this.eventToStore[0].Hours_Guaranteed = 4;
+            this.eventToStore[0].Date_Submitted = new Date();
+            this.postEvent(this.eventToStore);
+        }
+        // if (this.event.id) {
+        //     let index: number = this.findEventIndexById(this.event.id);
+        //     if (index >= 0) {
+        //         this.events[index] = this.event;
+        //     }
+        // }
+        // else {
+        //     this.event.id = this.idGen++;
+        //     if (this.event.allWeek) {
+        //         this.event.end = this.start.setDate(this.start.getDate() + 7);
+        //         this.events.push(this.event);
+        //         this.event = null;
+        //     }
+        //     if (this.event.allMonth) {
+        //         let startDate = new Date(this.event.start);
+        //         let start = startDate.getDate();
+        //         let last = (new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0, 23, 59, 59)).getDate();
+        //         this.events.push(this.event);
+        //         let a = this.event;
+        //         let eventsArray = [];
+        //         while (start <= last) {
+        //             start = start + 7;
+        //             var date;
+        //             var event = new MyEvent();
+        //             event.title = a.title;
+        //             date = new Date(startDate.setDate(startDate.getDate() + 7));
+        //             event.start = date;
+        //             this.events.push(event);
+        //         }
+        //         this.event = null;
+        //     }
+        //     else {
+        //         this.events.push(this.event);
+        //         this.event = null;
+        //     }
+
+        //}
 
 
         this.dialogVisible = false;

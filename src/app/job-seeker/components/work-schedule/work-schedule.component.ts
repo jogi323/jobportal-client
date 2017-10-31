@@ -32,21 +32,28 @@ export class WorkScheduleComponent implements OnInit {
             Hours_Guaranteed: null,
             Date_Submitted: null
         }];
+        this.events = [{
+            id : null,
+            Date : null
+        }]
     }
 
     ngOnInit() {
         // this.eventService.getEvents().then(events => {this.events = events;});
-        this.events = [
-            {
-                "title": "All Day Event",
-                "start": "2017-10-01"
-            },
-            {
-                title: 'Meeting',
-                start: '2017-10-01T10:30:00',
-                end: '2017-10-01T12:30:00'
+        this.apiservice.get('availability/all').subscribe(res =>{
+            // this.events = res.data;
+            for(let index=0; index<res.data.length; index++){
+                let eventToshow = {
+                    id : res.data[index]._id,
+                    start : res.data[index].Date
+                }
+                this.events.push(eventToshow);
             }
-        ];
+        },
+        err =>{
+            console.log(err);
+        }
+    )
         this.header = {
             left: 'prev,next today',
             center: 'title',

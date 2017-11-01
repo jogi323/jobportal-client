@@ -34,8 +34,12 @@ export class UserService {
     if (this.jwtService.getToken()) {
       this.apiService.get('user/auth')
       .subscribe(
-        data => {this.setAuth(data)},
-        err => this.purgeAuth()
+        data => {
+          this.setAuth(data)
+        },
+        err => {
+          this.purgeAuth()
+        }
       );
     } else {
       // Remove any potential remnants of previous auth states
@@ -43,14 +47,12 @@ export class UserService {
     }
   }
 
-  setAuth(user) {
-    if(user.token){
+  setAuth(data) {
     // Save JWT sent from server in localstorage
-    this.jwtService.saveToken(user.token,user.user.userType);
+    this.jwtService.saveToken(data.token);
     // Set current user data into observable
-    this.currentUserSubject.next(user);
+    this.currentUserSubject.next(data.user);
     this.isAuthenticatedSubject.next(true);
-    }
   }
 
   purgeAuth() {
@@ -85,6 +87,36 @@ export class UserService {
 
   getCurrentUser(): any {
     return this.currentUserSubject.value;
+  }
+
+  updatePersonal(data){
+    let path = 'user/update/personal'
+    return this.apiService.put(path,data)
+    .map(
+      data => {
+        return data;
+      }
+    )
+  }
+
+  updateWork(data){
+    let path = 'user/update/work'
+    return this.apiService.put(path,data)
+    .map(
+      data => {
+        return data;
+      }
+    )
+  }
+
+  getData(id){
+    let path = 'user/getProfile/'+id
+    return this.apiService.get(path)
+    .map(
+      data => {
+        return data;
+      }
+    )
   }
 
 

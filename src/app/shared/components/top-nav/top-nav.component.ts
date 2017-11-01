@@ -3,7 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { DialogService } from 'ng2-bootstrap-modal';
 import { LoginComponent } from '../../../login/login.component';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../../shared/services/user.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-top-nav',
@@ -11,11 +12,12 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./top-nav.component.css']
 })
 export class TopNavComponent implements OnInit {
-
-  userType: String;
+  userType: String = '';
   isLoggedIn: Boolean = false;
   showJobseekerNav: boolean;
   showEmployerNav: boolean;
+  subscription:Subscription;
+  currentUser:any;
 
   constructor(
     private router: Router,
@@ -23,23 +25,22 @@ export class TopNavComponent implements OnInit {
     private dialogService: DialogService,
     private userService: UserService
   ) {
+    this.subscription = userService.currentUser.subscribe(user =>{
+      
+        this.isLoggedIn = true;
+        this.userType = user.userType;
+        this.currentUser = user;
+    })
+
   }
 
   ngOnInit() {
-    this.userService.isAuthenticated.subscribe(res => {
-      if (res === true) {
-        this.isLoggedIn = true;
-      }
-    })
-    this.userService.currentUser.subscribe(res => {
-      if (res.user && res.user.userType === 'jobseeker') {
-        this.showJobseekerNav = true;
-      } else if (res.user && res.user.userType === 'employer') {
-        this.showEmployerNav = true;
-      }
-    })
-  }
 
+
+  }
+  userProfile(){
+    this.router.navigate([this.userType+'/profile'])
+  }
   showConfirm() {
     let disposable = this.dialogService.addDialog(LoginComponent, {
 
@@ -53,11 +54,6 @@ export class TopNavComponent implements OnInit {
         else {
         }
       });
-    //We can close dialog calling disposable.unsubscribe();
-    //If dialog was not closed manually close it by timeout
-    // setTimeout(()=>{
-    //     disposable.unsubscribe();
-    // },10000);
   }
 
   navigateToRegister() {
@@ -67,8 +63,6 @@ export class TopNavComponent implements OnInit {
   logoutUser() {
     this.userService.purgeAuth();
     this.router.navigate(['']);
-    this.showJobseekerNav = false;
-    this.showEmployerNav = false;
     this.isLoggedIn = false;
   }
 }

@@ -13,7 +13,7 @@ const routes: Routes = [
     { path:'', component:HomeComponent,canActivate:[NoAuthGuardService] },
     { path:'employer', 
       loadChildren:'./employer/employer.module#EmployerModule',
-    //  canActivate:[AuthGuardService] 
+      canActivate:[AuthGuardService] 
     },
     { path:'jobseeker', loadChildren:'./job-seeker/job-seeker.module#JobSeekerModule',canActivate:[AuthGuardService] },
     { path:'changepassword', component:ChangePasswordComponent,canActivate:[NoAuthGuardService] },

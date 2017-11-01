@@ -17,7 +17,7 @@ export class NoAuthGuardService implements CanActivate {
   ): Observable<boolean> {
     return this.userService.isAuthenticated.take(1).map(bool => {
       if (bool) {
-         let role = this.userService.getCurrentUser().user.userType.toLocaleLowerCase();
+         let role = this.userService.getCurrentUser().userType.toLocaleLowerCase();
          this.router.navigate([role]);
         
         //this.router.navigate(['/dashboard']);

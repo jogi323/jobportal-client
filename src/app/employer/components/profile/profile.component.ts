@@ -2,6 +2,8 @@ import { Component, OnInit  } from '@angular/core';
 
 import { User } from '../../../shared/models/user.model';
 import { JsonLoaderService } from '../../../shared/services/json-loader.service';
+import { UserService } from '../../../shared/services/user.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-profile',
@@ -12,17 +14,168 @@ export class ProfileComponent implements OnInit {
   isUserDataEdit:Boolean= false;
   isWorkDataEdit:Boolean= false;
   user:User;
-  scriptsLoaded: Boolean = false;
+  geoLocation:any;
+  currentUser:any;
+  userType:string;
+  subscription:Subscription;
 
   statesList:any[];
   languagesList:any[];
   yearsList:any[];
   public options = {types: ['address'],componentRestrictions: { country: 'US' }}
   
+
+  // add_num  + address
+  // location +neighborhood 
+  // city : city
+  // state : state
+  // zip : zip
+  // country : country
   getAddress(event){
-    console.log(event);
-    console.log(this.shuffleGoogleMapsAddress(event))
+    // console.log(event)
+    // console.log(this.shuffleGoogleMapsAddress(event))
+    this.geoLocation = this.shuffleGoogleMapsAddress(event);
+    // this.user.Address_street = "this.geoLocation.addr"
+    let streetNumber = (this.geoLocation.addr_num) ? this.geoLocation.addr_num : '';
+    let streetName = (this.geoLocation.addr) ? this.geoLocation.addr : '';
+    let location = (this.geoLocation.location) ? this.geoLocation.location : '';
+    let neighborhood = (this.geoLocation.neighborhood) ? this.geoLocation.neighborhood : '';
+    let city = (this.geoLocation.city) ? this.geoLocation.city : '';
+    let state = (this.geoLocation.state) ? this.geoLocation.state : '';
+    let zip = (this.geoLocation.zip) ? this.geoLocation.zip : '';
+    this.user.Address_street = streetNumber + ', ' + streetName;
+    this.user.Address_Unit = location + ', ' + neighborhood
+    this.user.City = this.geoLocation.city;
+    this.user.State = this.geoLocation.state;
+    this.user.Zip_Code = this.geoLocation.zip;
+    this.user.locationLat = this.geoLocation.lat;;
+    this.user.locationLng = this.geoLocation.lng;;
   }
+  
+  specialityList = [
+    {"name":"General Dentistry"},
+    {"name":"Endodontist"},
+    {"name":"Orthodontist"},
+    {"name":"Oral Surgeon"},
+    {"name":"Pedodontist"},
+    {"name":"Periodontist"},
+  ]
+
+  constructor(
+    private jsonLoaderService:JsonLoaderService,
+    private userService: UserService
+  ) { 
+    this.user = {
+      Firstname : "",
+      Lastname : "",
+      Email_Address:"",
+      Address_street : "",
+      Address_Unit: "",
+      City : "",
+      State : "",
+      Zip_Code:undefined,
+      Practice_Name:"",
+      Speciality:"",
+      Practice_Phone:undefined,
+      Nr_of_Operations:undefined,
+      Nr_of_Staff:undefined,
+      Languages:"",
+      Dental_School:"",
+      Year_Graduated:undefined,
+      License_Nr:"",
+      Years_in_Practice:undefined,
+      Contact_Person:"",
+      Contact_Phone_Nr:undefined,
+      image:""
+    }
+
+    this.subscription = userService.currentUser.subscribe(user =>{
+      this.isUserDataEdit = user.personalInfo;
+      this.isWorkDataEdit = user.workInfo;
+      this.currentUser = user;
+      this.initUserData(user);
+    })
+  }
+  initUserData(user){
+    this.userService.getData(user.Email_Address).subscribe(
+      res =>{
+        console.log(res);
+        this.user = res.data;
+      },
+      err =>{
+
+      }
+    )
+  }
+
+  editUserData(){
+    this.isUserDataEdit = !this.isUserDataEdit;
+  }
+
+  cancelUpdate(){
+    this.isUserDataEdit = !this.isUserDataEdit;   
+  }
+  updateUserData(){
+    this.userService.updatePersonal(this.user).subscribe(
+      res =>{
+        console.log(res);
+        this.isUserDataEdit = !this.isUserDataEdit; 
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+
+  editWorkData(){
+    this.isWorkDataEdit = !this.isWorkDataEdit;
+  }
+
+  cancelWorkUpdate(){
+    this.isWorkDataEdit = !this.isWorkDataEdit;   
+  }
+
+  updateWorkData(user){
+    this.isWorkDataEdit = !this.isWorkDataEdit;    
+  }
+
+
+  ngOnInit() {
+
+    this.jsonLoaderService.getStates()
+                            .subscribe(data => {
+                              this.statesList = data;
+                            }, error => {
+                              console.log(error);
+                            });
+    this.jsonLoaderService.getLanguages()
+                            .subscribe(data => {
+                              this.languagesList = data;
+                            }, error => {
+                              console.log(error);
+                            });
+    this.jsonLoaderService.getYears()
+                            .subscribe(data => {
+                              this.yearsList = data;
+                            }, error => {
+                              console.log(error);
+                            });
+  }
+  changeListener($event) : void {
+    this.readThis($event.target);
+  }
+  
+  readThis(inputValue: any): void {
+    var file:File = inputValue.files[0];
+    var myReader:FileReader = new FileReader();
+  
+    myReader.onloadend = (e) => {
+      this.user.image = myReader.result;
+    }
+    myReader.readAsDataURL(file);
+  }
+
+
   public shuffleGoogleMapsAddress(selectedData: any) {
     let geo_lat = selectedData.geometry.location.lat();
     let geo_lng = selectedData.geometry.location.lng();
@@ -75,113 +228,5 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  specialityList = [
-    {"name":"General Dentistry"},
-    {"name":"Endodontist"},
-    {"name":"Orthodontist"},
-    {"name":"Oral Surgeon"},
-    {"name":"Pedodontist"},
-    {"name":"Periodontist"},
-  ]
-
-  constructor(
-    private jsonLoaderService:JsonLoaderService
-  ) { 
-    this.user = {
-      "_id":"1",
-      "Firstname" : "tyler",
-      "Lastname" : "durden",
-      "Email_Address":"slvrsmiles@gmail.com",
-      "Address_street" : "103, burgers road",
-      "Address_Unit": "New park Road",
-      "City" : "Alaska",
-      "State" : "Alaska",
-      "Zip_Code":100016,
-      "Practice_Name":"Surgeon",
-      "Speciality":"General Dentistry",
-      "Practice_Phone":253773,
-      "Nr_of_Operations":25,
-      "Nr_of_Staff":12,
-      "Languages":"English",
-      "Dental_School":"NRI medical College",
-      "Year_Graduated":2014,
-      "License_Nr":"A8SA43VFG454",
-      "Years_in_Practice":5,
-      "Contact_Person":"brad pit",
-      "Contact_Phone_Nr":7032672947,
-      "image":""
-    }
-
-
-
-  }
-
-  editUserData(){
-    this.isUserDataEdit = !this.isUserDataEdit;
-  }
-
-  cancelUpdate(){
-    this.isUserDataEdit = !this.isUserDataEdit;   
-  }
-  updateUserData(){
-    this.isUserDataEdit = !this.isUserDataEdit;
-    console.log(this.user);    
-  }
-
-  editWorkData(){
-    this.isWorkDataEdit = !this.isWorkDataEdit;
-  }
-
-  cancelWorkUpdate(){
-    this.isWorkDataEdit = !this.isWorkDataEdit;   
-  }
-
-  updateWorkData(user){
-    console.log(user)
-    this.isWorkDataEdit = !this.isWorkDataEdit;    
-  }
-
-
-  ngOnInit() {
-
-    this.jsonLoaderService.getStates()
-                            .subscribe(data => {
-                              this.statesList = data;
-                              console.log(data);
-                            }, error => {
-                              console.log(error);
-                            });
-    this.jsonLoaderService.getLanguages()
-                            .subscribe(data => {
-                              this.languagesList = data;
-                              console.log(data);
-                            }, error => {
-                              console.log(error);
-                            });
-    this.jsonLoaderService.getYears()
-                            .subscribe(data => {
-                              this.yearsList = data;
-                              console.log(data);
-                            }, error => {
-                              console.log(error);
-                            });
-
-      
-  
-  }
-  changeListener($event) : void {
-    this.readThis($event.target);
-  }
-  
-  readThis(inputValue: any): void {
-    var file:File = inputValue.files[0];
-    var myReader:FileReader = new FileReader();
-  
-    myReader.onloadend = (e) => {
-      this.user.image = myReader.result;
-      console.log(this.user.image);
-    }
-    myReader.readAsDataURL(file);
-  }
 
 }

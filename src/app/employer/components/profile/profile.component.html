@@ -80,7 +80,7 @@
                   <label for="User_Email_Address">Email
                       <abbr class="required" title="required">*</abbr>
                       </label>
-                  <input type="email" class="input-text" placeholder [(ngModel)]="user.Email_Address" value="" name="Email_Address" id="User_Email_Address">
+                  <input type="email" class="input-text" placeholder [(ngModel)]="user.Email_Address" value="" disabled name="Email_Address" id="User_Email_Address">
                 </div>
                 <div class="col-lg-6">
                   <input type="file" (change)="changeListener($event)" />
@@ -134,7 +134,7 @@
                 <div class="col-md-4">
                   <select name="User_State" [(ngModel)]="user.State" id="User_State" class="country_to_state country_select" title="State *">
                     <option value="" disabled selected>State</option>
-                    <option *ngFor="let state of statesList" [attr.value]="state.name">{{state.name}}</option>
+                    <option *ngFor="let state of statesList" [attr.value]="state.key">{{state.name}}</option>
                   </select>
                 </div>
                 <div class="col-md-4">

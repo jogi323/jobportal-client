@@ -1,5 +1,5 @@
 export  class User {
-    _id:String;
+    _id?:String;
     Firstname : String;
     Lastname : String;
     Email_Address: String;
@@ -8,11 +8,13 @@ export  class User {
     City : String;
     State : String;
     Zip_Code: number;
-    location_lat?: Number;
-    location_lng?: Number;
+    locationLat?:Number;
+    locationLng?: Number;
     Phone1?:number;
     Phone2?:number;
     Position?:String;
+    workInfo?: Boolean;
+    personalInfo?: Boolean;
     Experience?:number;
     Hourly_Pay?:number;
     Practice_Name: String;

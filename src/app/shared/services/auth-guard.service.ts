@@ -20,7 +20,7 @@ export class AuthGuardService implements CanActivate{
     //return this.userService.isAuthenticated.take(1);
     return this.userService.isAuthenticated.take(1).map(bool => {
       if (bool) {
-        let role = this.userService.getCurrentUser().user.userType.toLocaleLowerCase();
+        let role = this.userService.getCurrentUser().userType.toLocaleLowerCase();
         let currentUrl = state.url.toLowerCase().split('/')[1];
         
         if(role === currentUrl){

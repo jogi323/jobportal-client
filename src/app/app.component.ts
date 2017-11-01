@@ -13,11 +13,13 @@ export class AppComponent implements OnInit {
       timeOut: 5000,
       lastOnBottom: true,
   };
-  constructor(private userService: UserService){
-  }
 
+  constructor(private userService: UserService){
+
+  }
   ngOnInit(){
     this.userService.populate();
   }
+
 
 }

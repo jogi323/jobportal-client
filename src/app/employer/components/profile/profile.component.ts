@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 
 import { User } from '../../../shared/models/user.model';
 import { JsonLoaderService } from '../../../shared/services/json-loader.service';
@@ -12,11 +12,68 @@ export class ProfileComponent implements OnInit {
   isUserDataEdit:Boolean= false;
   isWorkDataEdit:Boolean= false;
   user:User;
+  scriptsLoaded: Boolean = false;
 
   statesList:any[];
   languagesList:any[];
   yearsList:any[];
-
+  public options = {types: ['address'],componentRestrictions: { country: 'US' }}
+  
+  getAddress(event){
+    console.log(event);
+    console.log(this.shuffleGoogleMapsAddress(event))
+  }
+  public shuffleGoogleMapsAddress(selectedData: any) {
+    let geo_lat = selectedData.geometry.location.lat();
+    let geo_lng = selectedData.geometry.location.lng();
+    if (selectedData.name) {
+      for (var i = 0; i < selectedData.address_components.length; i++) {
+        if (selectedData.address_components[i].types[0] == "country") {
+          var geo_country = selectedData.address_components[i].long_name;
+        }
+        if (selectedData.address_components[i].types[0] == "street_number") {
+          var geo_addr_num = selectedData.address_components[i].long_name;
+        }
+        if (selectedData.address_components[i].types[0] == "route") {
+          var geo_addr = selectedData.address_components[i].long_name;
+        }
+        if (selectedData.address_components[i].types[0] == "administrative_area_level_1") {
+          var geo_state = selectedData.address_components[i].short_name;
+        }
+        if (selectedData.address_components[i].types[0] == "neighborhood") {
+          var geo_neigh = selectedData.address_components[i].short_name;
+        }
+        if (selectedData.address_components[i].types[0] == "sublocality_level_2") {
+          var geo_loc2 = selectedData.address_components[i].short_name;
+        }
+        if (selectedData.address_components[i].types[0] == "sublocality_level_1") {
+          var geo_loc1 = selectedData.address_components[i].short_name;
+        }
+        if (selectedData.address_components[i].types[0] == "locality") {
+          var geo_city = selectedData.address_components[i].long_name;
+        }
+        if (selectedData.address_components[i].types[0] == "administrative_area_level_2") {
+          var geo_city_2 = selectedData.address_components[i].long_name;
+        }
+        if (selectedData.address_components[i].types[0] == "postal_code") {
+          var geo_zip = selectedData.address_components[i].long_name;
+        }
+      }
+      return {
+        lat: geo_lat,
+        lng: geo_lng,
+        neighborhood: geo_neigh,
+        location: geo_loc2,
+        country: geo_country,
+        addr_num: geo_addr_num,
+        addr: geo_addr,
+        state: geo_state,
+        city: geo_city,
+        city2: geo_city_2,
+        zip: geo_zip
+      }
+    }
+  }
 
   specialityList = [
     {"name":"General Dentistry"},
@@ -55,6 +112,8 @@ export class ProfileComponent implements OnInit {
       "image":""
     }
 
+
+
   }
 
   editUserData(){
@@ -64,7 +123,6 @@ export class ProfileComponent implements OnInit {
   cancelUpdate(){
     this.isUserDataEdit = !this.isUserDataEdit;   
   }
-
   updateUserData(){
     this.isUserDataEdit = !this.isUserDataEdit;
     console.log(this.user);    
@@ -85,7 +143,7 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit() {
-  
+
     this.jsonLoaderService.getStates()
                             .subscribe(data => {
                               this.statesList = data;

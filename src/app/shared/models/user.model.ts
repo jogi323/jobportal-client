@@ -8,6 +8,8 @@ export  class User {
     City : String;
     State : String;
     Zip_Code: number;
+    location_lat?: Number;
+    location_lng?: Number;
     Phone1?:number;
     Phone2?:number;
     Position?:String;

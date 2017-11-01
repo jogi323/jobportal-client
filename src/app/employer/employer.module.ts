@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import {CalendarModule} from 'primeng/primeng';
 
+import {GooglePlaceModule} from 'ng2-google-place-autocomplete';
 import { EmployerRoutingModule } from './employer-routing.module';
 import { EmployerComponent } from './employer.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -22,7 +23,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     RouterModule,
     FormsModule,
     EmployerRoutingModule,
-    CalendarModule
+    CalendarModule,
+    GooglePlaceModule
   ],
   declarations: [
     EmployerComponent, 

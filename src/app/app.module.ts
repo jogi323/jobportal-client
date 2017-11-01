@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import {GooglePlaceModule} from 'ng2-google-place-autocomplete';
 
 import { AppRoutingModule } from './app-routing';
 
@@ -43,6 +44,7 @@ import { NoAuthGuardService } from './shared/services/no-auth-guard.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpModule,
+    GooglePlaceModule,
     SimpleNotificationsModule.forRoot()
   ],
   providers: [ 

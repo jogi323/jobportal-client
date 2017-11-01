@@ -89,6 +89,33 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
+                    <input type="text" [(ngModel)] = "address" 
+                    name="address"
+                    [options]='options'
+                    (setAddress) = "getAddress($event)"
+                    (street_number) = 'street_number=$event'
+                    (street)= 'street=$event'
+                    (city)= 'city=$event'
+                    (state)='state=$event'
+                    (district)='district=$event'
+                    (country)='country=$event'
+                    (postal_code)='postal_code=$event'
+                    (lat)='lat=$event' 
+                    (lng)='lng=$event' 
+                    (adr_address)='adr_address=$event' 
+                    (name)='name=$event' 
+                    (place_id)='place_id=$event' 
+                    (types)='types=$event' 
+                    (url)='url=$event'  
+                    (utc_offset)='utc_offset=$event' 
+                    (vicinity)='vicinity=$event' 
+                    (photos)='photos=$event' 
+                    (airport)='airport=$event' 
+                    (CountryCodes)='CountryCodes=$event'
+                     id="autocomplete"
+                    ng2-google-place-autocomplete/>
+                </div>
+                <div class="col-md-12">
                   <label for="User_Address_street">Address
                   <abbr class="required" title="required">*</abbr>
                   </label>
@@ -325,5 +352,17 @@
 
       </div>
     </div>
+    
   </div>
 </section>
+<div>
+
+</div>
+
+<!-- add_num  + address
+      location +neighborhood 
+      city : city
+      state : state
+      zip : zip
+      country : country
+-->

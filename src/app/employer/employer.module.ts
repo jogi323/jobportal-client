@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import {CalendarModule} from 'primeng/primeng';
 
-import {GooglePlaceModule} from 'ng2-google-place-autocomplete';
+import { GooglePlaceModule } from 'ng2-google-place-autocomplete';
 import { EmployerRoutingModule } from './employer-routing.module';
 import { EmployerComponent } from './employer.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -14,6 +14,8 @@ import { PriorJobOfferComponent } from './components/prior-job-offer/prior-job-o
 import { PaymentComponent } from './components/payment/payment.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
+import { JsonLoaderService } from '../shared/services/json-loader.service';
+import { EmployerService } from '../shared/services/employer.service';
 
 @NgModule({
   imports: [
@@ -32,6 +34,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     PriorJobOfferComponent,
     PaymentComponent,
     ProfileComponent],
-  providers:[  ]
+  providers:[ 
+    JsonLoaderService,
+    EmployerService
+  ]
 })
 export class EmployerModule { }

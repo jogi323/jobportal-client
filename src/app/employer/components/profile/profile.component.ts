@@ -24,18 +24,8 @@ export class ProfileComponent implements OnInit {
   yearsList:any[];
   public options = {types: ['address'],componentRestrictions: { country: 'US' }}
   
-
-  // add_num  + address
-  // location +neighborhood 
-  // city : city
-  // state : state
-  // zip : zip
-  // country : country
   getAddress(event){
-    // console.log(event)
-    // console.log(this.shuffleGoogleMapsAddress(event))
     this.geoLocation = this.shuffleGoogleMapsAddress(event);
-    // this.user.Address_street = "this.geoLocation.addr"
     let streetNumber = (this.geoLocation.addr_num) ? this.geoLocation.addr_num : '';
     let streetName = (this.geoLocation.addr) ? this.geoLocation.addr : '';
     let location = (this.geoLocation.location) ? this.geoLocation.location : '';
@@ -48,9 +38,10 @@ export class ProfileComponent implements OnInit {
     this.user.City = this.geoLocation.city;
     this.user.State = this.geoLocation.state;
     this.user.Zip_Code = this.geoLocation.zip;
-    this.user.locationLat = this.geoLocation.lat;;
-    this.user.locationLng = this.geoLocation.lng;;
+    this.user.locationLat = this.geoLocation.lat;
+    this.user.locationLng = this.geoLocation.lng;
   }
+
   
   specialityList = [
     {"name":"General Dentistry"},
@@ -136,7 +127,15 @@ export class ProfileComponent implements OnInit {
   }
 
   updateWorkData(user){
-    this.isWorkDataEdit = !this.isWorkDataEdit;    
+    this.userService.updateWork(this.user).subscribe(
+      res =>{
+        console.log(res);
+        this.isWorkDataEdit = !this.isWorkDataEdit; 
+      },
+      err => {
+        console.log(err);
+      }
+    )   
   }
 
 

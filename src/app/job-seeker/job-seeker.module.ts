@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+import {GooglePlaceModule} from 'ng2-google-place-autocomplete';
 import {ScheduleModule, DialogModule, CalendarModule, ToggleButtonModule, DragDropModule, ButtonModule, InputTextareaModule, CheckboxModule, InputTextModule, SelectButtonModule} from 'primeng/primeng';
 import {AccordionModule} from 'primeng/primeng';     //accordion and accordion tab
 import {MenuItem} from 'primeng/primeng';            //api
@@ -21,7 +22,17 @@ import { ProfileComponent } from './components/profile/profile.component';
     RouterModule,
     FormsModule,
     JobSeekerRoutingModule,
-    ScheduleModule, DialogModule, CalendarModule, ToggleButtonModule, DragDropModule, ButtonModule, InputTextareaModule, CheckboxModule, InputTextModule, SelectButtonModule
+    ScheduleModule, 
+    GooglePlaceModule,
+    DialogModule, 
+    CalendarModule, 
+    ToggleButtonModule, 
+    DragDropModule, 
+    ButtonModule, 
+    InputTextareaModule, 
+    CheckboxModule, 
+    InputTextModule, 
+    SelectButtonModule
   ],
   declarations: [
     JobSeekerComponent, 

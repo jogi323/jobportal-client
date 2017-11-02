@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
       Email_Address: '',
       Password: '',
       checkbox: false,
-      userType: 'employer',
+      userType: '',
       Date_Submitted: new Date()
     }
   }

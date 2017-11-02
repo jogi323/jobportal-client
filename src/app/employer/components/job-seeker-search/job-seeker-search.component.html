@@ -3,55 +3,52 @@
 		<section class="page-title text-center bg-light searchjobseeker-section">
 			<h2 class="heading relative uppercase bottom-line full-grey mb-30">Search Job Seekers</h2>
 			<div class="row">
-					<div class="col-sm-10 col-sm-offset-1">
-							<label for="billing_address_1" class="pull-left">Date
-									<abbr class="required" title="required">*</abbr>
-								</label>
-								<p class="form-row form-row-wide ">
-									<p-calendar [(ngModel)]="value" dateFormat="dd-mm-yy" dataType="string"></p-calendar>
-								</p>
-						</div>
 				<div class="col-sm-10 col-sm-offset-1">
-					<label for="billing_address_1" class="pull-left">Position
-							<abbr class="required" title="required">*</abbr>
-						</label>
-						<p class="form-row form-row-wide ">
-							<select name="calc_shipping_country" id="calc_shipping_country" class="country_to_state" rel="calc_shipping_state">
-								<option *ngFor="let Position of Positions">{{Position.Position_Id}}</option>
-							</select>
-						</p>
-				</div>
-				<div class="col-sm-10 col-sm-offset-1">
-						<label for="billing_address_1" class="pull-left">Hours Guaranteed
-							<abbr class="required" title="required">*</abbr>
-						</label>
-					<p class="form-row form-row-wide">
-						<input type="text" class="input-text" value placeholder="No. of hours" name="calc_shipping_state" id="calc_shipping_state">
+					<label for="billing_address_1" class="pull-left">Date
+						<abbr class="required" title="required">*</abbr>
+					</label>
+					<p class="form-row form-row-wide ">
+						<p-calendar [(ngModel)]="filterJobseekers.Date" dataType="Date" (onSelect)="onDateChange($event)"></p-calendar>
 					</p>
 				</div>
 				<div class="col-sm-10 col-sm-offset-1">
-						<label for="billing_address_1" class="pull-left">Pay Requested
-								<abbr class="required" title="required">*</abbr>
-							</label>
+					<label for="billing_address_1" class="pull-left">Position
+						<abbr class="required" title="required">*</abbr>
+					</label>
+					<p class="form-row form-row-wide ">
+						<select name="calc_shipping_country" id="calc_shipping_country" class="country_to_state" rel="calc_shipping_state">
+							<option *ngFor="let position of positionList">{{position.name}}</option>
+						</select>
+					</p>
+				</div>
+				<div class="col-sm-10 col-sm-offset-1">
+					<label for="billing_address_1" class="pull-left">Hours Guaranteed
+					</label>
+					<p class="form-row form-row-wide">
+						<input type="number" class="input-text" value placeholder="No. of hours" [(ngModel)]="filterJobseekers.Hours_Guarnteed" name="Hours_Guarnteed" id="Hours_Guarnteed">
+					</p>
+				</div>
+				<div class="col-sm-10 col-sm-offset-1">
+					<label for="billing_address_1" class="pull-left">Pay Requested
+					</label>
 					<p class="form-row form-row-wide">
 						<input type="text" class="input-text" value placeholder="Pay Requested" name="calc_shipping_postcode" id="calc_shipping_postcode">
 					</p>
 				</div>
 				<div class="col-sm-10 col-sm-offset-1">
-						<label for="billing_address_1" class="pull-left">Distance (in miles)
-								<abbr class="required" title="required">*</abbr>
-							</label>
-							<p class="form-row form-row-wide ">
-								<select name="calc_shipping_country" id="calc_shipping_country" class="country_to_state" rel="calc_shipping_state">
-									<option value="VG">Select distance</option>
-									<option value="VI">10</option>
-									<option value="WF">20</option>
-									<option value="EH">30</option>
-									<option value="YE">40</option>
-									<option value="ZM">50</option>
-									<option value="ZW">60</option>
-								</select>
-							</p>
+					<label for="billing_address_1" class="pull-left">Distance (in miles)
+					</label>
+					<p class="form-row form-row-wide ">
+						<select name="calc_shipping_country" id="calc_shipping_country" class="country_to_state" rel="calc_shipping_state">
+							<option value="VG">Select distance</option>
+							<option value="VI">10</option>
+							<option value="WF">20</option>
+							<option value="EH">30</option>
+							<option value="YE">40</option>
+							<option value="ZM">50</option>
+							<option value="ZW">60</option>
+						</select>
+					</p>
 				</div>
 			</div>
 		</section>
@@ -72,18 +69,18 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr class="cart_item">
+								<tr class="cart_item" *ngFor="let jobseeker of jobseekers ">
 									<td class="product-thumbnail">
 										<a >
 											<img src="assets/img/Photos/user.png" alt="">
 										</a>
 									</td>
 									<td class="product-name">
-										<a ><b>Position Name</b></a>
+										<a ><b>{{jobseeker.JS_id.Position}}</b></a>
 										<ul>
 											<li>Available</li>
-											<li><b>From:</b> 8:00</li>
-											<li><b>To:</b> 1:00</li>
+											<li><b>From:</b> {{jobseeker.Time_Start}}</li>
+											<li><b>To:</b> {{jobseeker.Time_Finish}}</li>
 										</ul>
 									</td>
 									<td class="product-price">
@@ -91,11 +88,11 @@
 									</td>
 									<td class="product-quantity">
 										<div class="quantity buttons_added">
-											<input type="number" step="1" min="0" value="1" title="Qty" class="input-text qty text">
+											<input type="number" disabled step="1" min="0" value="{{jobseeker.Hours_Guaranteed}}" [(ngModel)]="jobseeker.Hours_Guaranteed" title="Qty" class="input-text qty text">
 										</div>
 									</td>
 									<td class="product-subtotal">
-										<span class="amount">53558</span>
+										<span class="amount">{{jobseeker.JS_id.Zip_Code}}</span>
 									</td>
 									<td class="product-remove">
 										<a class="remove" title="Remove this item">
@@ -103,45 +100,9 @@
 										</a>
 									</td>
 								</tr>
-								<tr class="cart_item">
-										<td class="product-thumbnail">
-											<a >
-												<img src="assets/img/Photos/user.png" alt="">
-											</a>
-										</td>
-										<td class="product-name">
-											<a >Position Name</a>
-											<ul>
-												<li>Available</li>
-												<li><b>From:</b> 8:00</li>
-												<li><b>To:</b> 1:00</li>
-											</ul>
-										</td>
-										<td class="product-price">
-											<span class="amount">$1250</span>
-										</td>
-										<td class="product-quantity">
-											<div class="quantity buttons_added">
-												<input type="number" step="1" min="0" value="1" title="Qty" class="input-text qty text">
-	
-											</div>
-										</td>
-										<td class="product-subtotal">
-											<span class="amount">53558</span>
-										</td>
-										<td class="product-remove">
-											<a class="remove" title="Remove this item">
-												<i class="ui-close"></i>
-											</a>
-										</td>
-									</tr>
-
 							</tbody>
 						</table>
 					</div>
-
-
-
 				</div>
 			</div>
 	</div>

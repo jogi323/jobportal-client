@@ -22,6 +22,7 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 
 //services
+import { HaversineService } from "ng2-haversine";
 import { ApiService } from './shared/services/api.service';
 import { JwtService } from './shared/services/jwt.service';
 import { UserService } from './shared/services/user.service';
@@ -53,7 +54,8 @@ import { NoAuthGuardService } from './shared/services/no-auth-guard.service';
     JwtService,
     UserService,
     AuthGuardService,
-    NoAuthGuardService
+    NoAuthGuardService,
+    HaversineService
   ],
   bootstrap: [AppComponent],
   entryComponents:[ LoginComponent ]

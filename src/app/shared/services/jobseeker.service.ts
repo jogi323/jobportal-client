@@ -7,20 +7,12 @@ import 'rxjs/add/operator/catch';
 import { ApiService } from './api.service';
 
 @Injectable()
-export class EmployerService {
+export class JobseekerService {
 
   constructor(
     private apiService: ApiService,
   ) { }
 
-  queryJobseekers(data){
-    let path = 'availability/query'
-    return this.apiService.post(path,data)
-    .map(
-      data => {
-        return data;
-      }
-    )
-  }
+
 
 }

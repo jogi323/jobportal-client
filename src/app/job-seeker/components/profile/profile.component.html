@@ -105,7 +105,35 @@
                   <img class="preview_image" src="{{user.image}}" height="220" width="160" *ngIf="user.image">
                 </div>
               </div>
+              
               <div class="row">
+                <div class="col-md-12">
+                    <input type="text" [(ngModel)] = "address" 
+                    name="address"
+                    [options]='options'
+                    (setAddress) = "getAddress($event)"
+                    (street_number) = 'street_number=$event'
+                    (street)= 'street=$event'
+                    (city)= 'city=$event'
+                    (state)='state=$event'
+                    (district)='district=$event'
+                    (country)='country=$event'
+                    (postal_code)='postal_code=$event'
+                    (lat)='lat=$event' 
+                    (lng)='lng=$event' 
+                    (adr_address)='adr_address=$event' 
+                    (name)='name=$event' 
+                    (place_id)='place_id=$event' 
+                    (types)='types=$event' 
+                    (url)='url=$event'  
+                    (utc_offset)='utc_offset=$event' 
+                    (vicinity)='vicinity=$event' 
+                    (photos)='photos=$event' 
+                    (airport)='airport=$event' 
+                    (CountryCodes)='CountryCodes=$event'
+                      id="autocomplete"
+                    ng2-google-place-autocomplete/>
+                </div>
                 <div class="col-md-12">
                   <label for="User_Address_street">Address
                     <abbr class="required" title="required">*</abbr>
@@ -131,7 +159,7 @@
                   <select name="User_State" [(ngModel)]="user.State" id="User_State" class="country_to_state country_select" title="State *"
                     #State='ngModel' required>
                     <option value="" disabled selected>State</option>
-                    <option *ngFor="let state of statesList" [attr.value]="state.name">{{state.name}}</option>
+                    <option *ngFor="let state of statesList" [attr.value]="state.key">{{state.name}}</option>
                   </select>
                   <div *ngIf="State.errors && (State.dirty || State.touched)" class="error">
                     <div [hidden]="!State.errors.required">This field is required</div>
@@ -243,7 +271,7 @@
                     <option value="" disabled selected>select</option>
                     <option *ngFor="let position of positionList" [attr.value]="position.name">{{position.name}}</option>
                   </select>
-                  <div *ngIf="Position.errors && (Position.dirty || SpeciaPositionlity.touched)" class="error">
+                  <div *ngIf="Position.errors && (Position.dirty || Position.touched)" class="error">
                     <div [hidden]="!Position.errors.required">This field is required</div>
                   </div>
                 </div>

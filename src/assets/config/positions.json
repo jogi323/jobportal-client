@@ -1,0 +1,17 @@
+[
+    {"name":"Dental Assistant", "key":"DS"},
+    {"name":"Registered Dental Assistant", "key":"RDA"},
+    {"name":"Registered Dental Assistant EF", "key":"RDAE"},
+    {"name":"Registered Dental Hygienist", "key":"RDH"},
+    {"name":"Registered Dental Hygienist EF", "key":"RDHE"},
+    {"name":"Receptionist", "key":"RE"},
+    {"name":"Front Office Assistant", "key":"FOA"},
+    {"name":"Office Manager", "key":"OM"},
+    {"name":"General Dentist", "key":"GD"},
+    {"name":"Orthodontist", "key":"OD"},
+    {"name":"Endodontist", "key":"ED"},
+    {"name":"Periodontist", "key":"PD"},
+    {"name":"Pedodontist", "key":"PED"},
+    {"name":"Oral Surgeon", "key":"OS"},
+    {"name":"Lab Technician", "key":"LT"}
+]

@@ -38,4 +38,13 @@ export class JsonLoaderService {
 
   }
 
+  public getPositions(): Observable<any> {
+    return this.http.get("../../../assets/config/positions.json")
+                    .map((res:any) => res.json())
+                    .catch((error: Response) => {
+                      return Observable.throw(error.json());
+                    });
+
+  }
+
 }

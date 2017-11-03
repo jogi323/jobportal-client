@@ -22,8 +22,11 @@
                 </div>
                 <div class="col-md-6">
                   <label for="username"><b>Photo:</b></label>
-                  <p>
-                    <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/17241-200.png" height="160" width="140" alt="">
+                  <p *ngIf = "!user.image">
+                    <img src="assets/img/Photos/noImage.png" height="160" width="140" alt="">
+                  </p>
+                  <p *ngIf = "user.image">
+                    <img src="{{user.image}}" height="160" width="140" alt="">
                   </p>
                 </div>
               </div>
@@ -84,7 +87,7 @@
                 </div>
                 <div class="col-lg-6">
                   <input type="file" (change)="changeListener($event)" />
-                  <img class="preview_image" src="{{user.image}}" height="220" width="160" *ngIf="user.image">
+                  <img class="preview_image" src="{{user.image}}" height="220" width="160" *ngIf="newImageUploaded">
                 </div>
               </div>
               <div class="row">
@@ -128,17 +131,28 @@
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <input type="text" class="input-text" placeholder="Town / City" [(ngModel)]="user.City" value="" name="City" id="USer+City">
-
+                  <input type="text" class="input-text" placeholder="Town / City" [(ngModel)]="user.City" value="" name="City" id="USer+City"
+                    #City='ngModel' required>
+                  <div *ngIf="City.errors && (City.dirty || City.touched)" class="error">
+                    <div [hidden]="!City.errors.required">This field is required</div>
+                  </div>
                 </div>
                 <div class="col-md-4">
-                  <select name="User_State" [(ngModel)]="user.State" id="User_State" class="country_to_state country_select" title="State *">
+                  <select name="User_State" [(ngModel)]="user.State" id="User_State" class="country_to_state country_select" title="State *"
+                    #State='ngModel' required>
                     <option value="" disabled selected>State</option>
                     <option *ngFor="let state of statesList" [attr.value]="state.key">{{state.name}}</option>
                   </select>
+                  <div *ngIf="State.errors && (State.dirty || State.touched)" class="error">
+                    <div [hidden]="!State.errors.required">This field is required</div>
+                  </div>
                 </div>
                 <div class="col-md-4">
-                  <input type="text" class="input-text" placeholder="Zip Code" value="{{user.Zip_Code}}" name="Zip_Code" id="User_Zip_Code">
+                  <input type="number" class="input-text" placeholder="Zip Code" [(ngModel)]="user.Zip_Code" name="Zip_Code" id="User_Zip_Code"
+                    #Zip_Code='ngModel' required>
+                  <div *ngIf="Zip_Code.errors && (Zip_Code.dirty || Zip_Code.touched)" class="error">
+                    <div [hidden]="!Zip_Code.errors.required">This field is required</div>
+                  </div>
                 </div>
               </div>
               <div class="container-fluid">
@@ -237,7 +251,7 @@
               <div class="row">
                 <div class="col-lg-6">
                   <label for="user_Practice_Phone">Practice Phone
-                  <!-- <abbr class="required" title="required">*</abbr> -->
+                   <abbr class="required" title="required">*</abbr> 
                   </label>
                   <input type="number" class="input-text" placeholder [(ngModel)]="user.Practice_Phone" value name="Practice_Phone" id="user_Practice_Phone"
                     #Practice_Phone='ngModel' required>
@@ -262,21 +276,21 @@
               <div class="row">
                 <div class="col-md-4">
                   <label for="User_Nr_of_Operations">No Of Operations
-                  <abbr class="required" title="required">*</abbr>
+                  <!--<abbr class="required" title="required">*</abbr>-->
                   </label>
-                  <input type="text" class="input-text" [(ngModel)]="user.Nr_of_Operations" placeholder="Nr_of_Operations" value name="Nr_of_Operations"
+                  <input type="number" class="input-text" [(ngModel)]="user.Nr_of_Operations" placeholder="Nr_of_Operations" value name="Nr_of_Operations"
                     id="User_Nr_of_Operations">
                 </div>
                 <div class="col-md-4">
                   <label for="User_Nr_of_Staff">Number of Staff
-                  <abbr class="required" title="required">*</abbr>
+                  <!--<abbr class="required" title="required">*</abbr>-->
                   </label>
-                  <input type="text" class="input-text" placeholder="Street address" [(ngModel)]="user.Nr_of_Staff" value name="Nr_of_Staff"
+                  <input type="number" class="input-text" placeholder="Street address" [(ngModel)]="user.Nr_of_Staff" value name="Nr_of_Staff"
                     id="User_Nr_of_Staff">
                 </div>
                 <div class="col-lg-4">
                   <label for="User_Languages">Languages
-                  <abbr class="required" title="required">*</abbr>
+                  <!--<abbr class="required" title="required">*</abbr>-->
                   </label>
                   <select name="Languages" id="Languages" [(ngModel)]="user.Languages" class="country_to_state country_select" title="Languages *">
                     <option value="" disabled selected>Select</option>
@@ -293,7 +307,7 @@
                 </div>
                 <div class="col-lg-6">
                   <label for="User_Year_Graduated">Year Graduated
-                  <abbr class="required" title="required">*</abbr>
+                  <!--<abbr class="required" title="required">*</abbr>-->
                   </label>
                   <select name="Year_Graduated" id="Year_Graduated" [(ngModel)]="user.Year_Graduated" class="country_to_state country_select"
                     title="Year Graduated *">
@@ -336,7 +350,6 @@
                   <div *ngIf="Contact_Phone_Nr.errors && (Contact_Phone_Nr.dirty || Contact_Phone_Nr.touched)" class="error">
                     <div [hidden]="!Contact_Phone_Nr.errors.required">This field is required</div>
                     <div [hidden]="!Contact_Phone_Nr.errors.pattern">Enter valid mobile number</div>
-
                   </div>
                 </div>
               </div>

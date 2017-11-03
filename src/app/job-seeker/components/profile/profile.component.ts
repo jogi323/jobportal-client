@@ -4,6 +4,7 @@ import { User } from '../../../shared/models/user.model';
 import { JsonLoaderService } from '../../../shared/services/json-loader.service';
 import { UserService } from '../../../shared/services/user.service';
 import { Subscription } from 'rxjs/Subscription';
+import { NotificationsService } from 'angular2-notifications';
 
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
@@ -27,6 +28,23 @@ export class ProfileComponent implements OnInit {
   yearsList:any[];
   positionList:any[];
   public options = {types: ['address'],componentRestrictions: { country: 'US' }}
+  alertOptions = {
+      timeOut: 5000,
+      showProgressBar: true,
+      pauseOnHover: false,
+      clickToClose: false,
+      maxLength: 50
+    };
+   licenseRequired: Boolean = false;
+   newImageUploaded: Boolean = false;
+   specialityList = [
+    {"name":"General Dentistry"},
+    {"name":"Endodontist"},
+    {"name":"Orthodontist"},
+    {"name":"Oral Surgeon"},
+    {"name":"Pedodontist"},
+    {"name":"Periodontist"},
+  ]
 
   getAddress(event){
     this.geoLocation = this.shuffleGoogleMapsAddress(event);
@@ -49,7 +67,9 @@ export class ProfileComponent implements OnInit {
   constructor(
     private jsonLoaderService:JsonLoaderService,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private notificationsService: NotificationsService
+
   ) { 
     this.user = {
       Firstname : "",
@@ -80,13 +100,13 @@ export class ProfileComponent implements OnInit {
       Contact_Phone_Nr:undefined,
       image:""
     }
-
+    
     this.subscription = userService.currentUser.subscribe(user =>{
       this.isUserDataEdit = user.personalInfo;
       this.isWorkDataEdit = user.workInfo;
       this.currentUser = user;
       this.initUserData(user);
-    })
+    });
   }
 
   initUserData(user){
@@ -109,14 +129,30 @@ export class ProfileComponent implements OnInit {
     this.isUserDataEdit = !this.isUserDataEdit;   
   }
 
+  onChange($event) {
+    if($event === 'Registered Dental Assistant' || $event === 'Registered Dental Assistant EF' || $event === 'Registered Dental Hygienist'|| $event === 'Registered Dental Hygienist EF'|| $event === 'General Dentist'|| $event === 'Orthodontist'|| $event === 'Endodontist'|| $event === 'Periodontist'|| $event === 'Pedodontist'|| $event === 'Oral Surgeon' ){
+      this.licenseRequired = true;
+    }else{
+      this.licenseRequired = false;
+    }
+  }
   updateUserData(user){
     this.userService.updatePersonal(this.user).subscribe(
       res =>{
         console.log(res);
+        this.notificationsService.success(
+            'Success',
+            res.message,
+            this.alertOptions
+          )
         this.isUserDataEdit = !this.isUserDataEdit; 
       },
       err => {
-        console.log(err);
+        this.notificationsService.error(
+            err.title,
+            err.error.message,
+            this.alertOptions
+          )
       }
     )    
   }
@@ -133,10 +169,19 @@ export class ProfileComponent implements OnInit {
     this.userService.updateWork(this.user).subscribe(
       res =>{
         console.log(res);
+        this.notificationsService.success(
+            'Success',
+            res.message,
+            this.alertOptions
+          )
         this.isWorkDataEdit = !this.isWorkDataEdit; 
       },
       err => {
-        console.log(err);
+        this.notificationsService.error(
+            err.title,
+            err.error.message,
+            this.alertOptions
+          )
       }
     )      
   }
@@ -168,7 +213,7 @@ export class ProfileComponent implements OnInit {
     this.jsonLoaderService.getPositions()
                             .subscribe(data => {
                               this.positionList = data;
-                              // console.log(data); 
+                              console.log(data); 
                             }, error => {
                               console.log(error);
                             });
@@ -177,6 +222,7 @@ export class ProfileComponent implements OnInit {
   
   }
   changeListener($event) : void {
+    this.newImageUploaded = true;
     this.readThis($event.target);
   }
   
@@ -186,7 +232,6 @@ export class ProfileComponent implements OnInit {
   
     myReader.onloadend = (e) => {
       this.user.image = myReader.result;
-      console.log(this.user.image);
     }
     myReader.readAsDataURL(file);
   }

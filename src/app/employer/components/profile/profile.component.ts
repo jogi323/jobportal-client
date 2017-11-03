@@ -4,6 +4,7 @@ import { User } from '../../../shared/models/user.model';
 import { JsonLoaderService } from '../../../shared/services/json-loader.service';
 import { UserService } from '../../../shared/services/user.service';
 import { Subscription } from 'rxjs/Subscription';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-profile',
@@ -22,6 +23,14 @@ export class ProfileComponent implements OnInit {
   statesList:any[];
   languagesList:any[];
   yearsList:any[];
+  alertOptions = {
+      timeOut: 5000,
+      showProgressBar: true,
+      pauseOnHover: false,
+      clickToClose: false,
+      maxLength: 50
+    };
+  newImageUploaded: Boolean = false;
   public options = {types: ['address'],componentRestrictions: { country: 'US' }}
   
   getAddress(event){
@@ -54,7 +63,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private jsonLoaderService:JsonLoaderService,
-    private userService: UserService
+    private userService: UserService,
+    private notificationsService: NotificationsService
   ) { 
     this.user = {
       Firstname : "",
@@ -110,10 +120,20 @@ export class ProfileComponent implements OnInit {
     this.userService.updatePersonal(this.user).subscribe(
       res =>{
         console.log(res);
+         this.notificationsService.success(
+            'Success',
+            res.message,
+            this.alertOptions
+          )
         this.isUserDataEdit = !this.isUserDataEdit; 
       },
       err => {
         console.log(err);
+        this.notificationsService.error(
+            err.title,
+            err.error.message,
+            this.alertOptions
+          )
       }
     )
   }
@@ -130,10 +150,20 @@ export class ProfileComponent implements OnInit {
     this.userService.updateWork(this.user).subscribe(
       res =>{
         console.log(res);
+         this.notificationsService.success(
+            'Success',
+            res.message,
+            this.alertOptions
+          )
         this.isWorkDataEdit = !this.isWorkDataEdit; 
       },
       err => {
         console.log(err);
+        this.notificationsService.error(
+            err.title,
+            err.error.message,
+            this.alertOptions
+          )
       }
     )   
   }
@@ -161,6 +191,7 @@ export class ProfileComponent implements OnInit {
                             });
   }
   changeListener($event) : void {
+    this.newImageUploaded = true;
     this.readThis($event.target);
   }
   

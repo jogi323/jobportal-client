@@ -14,8 +14,6 @@ import { Subscription } from 'rxjs/Subscription';
 export class TopNavComponent implements OnInit {
   userType: String = '';
   isLoggedIn: Boolean = false;
-  showJobseekerNav: boolean;
-  showEmployerNav: boolean;
   subscription:Subscription;
   currentUser:any;
 

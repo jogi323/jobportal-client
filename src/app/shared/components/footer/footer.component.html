@@ -1,106 +1,108 @@
-    
-          <!-- Footer Type-1 -->
-          <footer class="footer footer-type-1">
-            <div class="container">
-              <div class="footer-widgets">
-                <div class="row">
-    
-                  <div class="col-md-3 col-sm-12 col-xs-12">
-                    <div class="widget footer-about-us">
-                      <img class="logo" src="assets/img/logo/logo.jpg" alt="" class="logo">
-                    </div>
-                  </div> <!-- end about us -->
-    
-                  <!-- <div class="col-md-2 col-md-offset-1 col-sm-6 col-xs-12">
+<!-- Footer Type-1 -->
+<footer class="footer footer-type-1">
+  <div class="container">
+    <div class="footer-widgets">
+      <div class="row">
+
+        <div class="col-md-3 col-sm-12 col-xs-12">
+          <div class="widget footer-about-us">
+            <img class="logo" src="assets/img/logo/logo.jpg" alt="" class="logo">
+          </div>
+        </div>
+        <!-- end about us -->
+
+        <!-- <div class="col-md-2 col-md-offset-1 col-sm-6 col-xs-12">
                     <div class="widget footer-links">
                       <h5 class="widget-title bottom-line left-align grey">Update Profile</h5>
 
                     </div>
                   </div> -->
-                  <div class="col-md-2 col-sm-6 col-xs-12" *ngIf = 'showEmployerFooter'>
-                    <div class="widget footer-links">
-                      <h5 class="widget-title bottom-line left-align grey">
-                        <a [routerLink]="['employer/joboffers']" routerLinkActive="active">Prior Job Offers</a>
-                      </h5>
+        <div *ngIf = "userType === 'employer'">
+          <div class="col-md-2 col-sm-6 col-xs-12">
+            <div class="widget footer-links">
+              <h5 class="widget-title bottom-line left-align grey">
+                <a [routerLink]="['employer/joboffers']" routerLinkActive="active">Prior Job Offers</a>
+              </h5>
+            </div>
+          </div>
 
-                    </div>
-                  </div>
+          <div class="col-md-2 col-sm-6 col-xs-12">
+            <div class="widget footer-links">
+              <h5 class="widget-title bottom-line left-align grey">
+                <a [routerLink]="['employer/transactionhistory']" routerLinkActive="active">Transaction History</a>
+              </h5>
+            </div>
+          </div>
 
-                  <div class="col-md-2 col-sm-6 col-xs-12" *ngIf = 'showEmployerFooter'>
-                    <div class="widget footer-links">
-                      <h5 class="widget-title bottom-line left-align grey">
-                        <a [routerLink]="['employer/transactionhistory']" routerLinkActive="active">Transaction History</a>
-                      </h5>
+          <div class="col-md-2 col-sm-6 col-xs-12">
+            <div class="widget footer-links">
+              <h5 class="widget-title bottom-line left-align grey">
+                <a [routerLink]="['employer/profile']" routerLinkActive="active">View Profile</a>
+              </h5>
+            </div>
+          </div>
+        </div>
 
-                    </div>
-                  </div>
+        <div *ngIf = "userType === 'jobseeker'">
+        <div class="col-md-2 col-sm-6 col-xs-12" >
+          <div class="widget footer-links">
+            <h5 class="widget-title bottom-line left-align grey">
+              <a [routerLink]="['jobseeker/schedule']" routerLinkActive="active">Schedule</a>
+            </h5>
+          </div>
+        </div>
+          <div class="col-md-2 col-sm-6 col-xs-12" >
+            <div class="widget footer-links">
+              <h5 class="widget-title bottom-line left-align grey">
+                <a [routerLink]="['jobseeker/profile']" routerLinkActive="active">View Profile</a>
+              </h5>
+            </div>
+          </div>
 
-                  <div class="col-md-2 col-sm-6 col-xs-12" *ngIf = 'showJobseekerFooter'>
-                    <div class="widget footer-links">
-                      <h5 class="widget-title bottom-line left-align grey">
-                        <a [routerLink]="['jobseeker/schedule']" routerLinkActive="active">Schedule</a>
-                      </h5>
-                    </div>
-                  </div>
+          <div class="col-md-2 col-sm-6 col-xs-12" >
+            <div class="widget footer-links">
+              <h5 class="widget-title bottom-line left-align grey">
+                <a [routerLink]="['jobseeker/joboffers']" outerLinkActive="active">Offers</a>
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 col-sm-6 col-xs-12">
+          <div class="widget footer-links">
+            <h5 class="widget-title bottom-line left-align grey">
+              <a [routerLink]="['contactus']" routerLinkActive="active">Feedback</a>
+            </h5>
+          </div>
+        </div>
 
-                  <div class="col-md-2 col-sm-6 col-xs-12" *ngIf = 'showJobseekerFooter'>
-                    <div class="widget footer-links">
-                      <h5 class="widget-title bottom-line left-align grey">
-                      <a [routerLink]="['jobseeker/profile']" routerLinkActive="active">View Profile</a>
-                    </h5>
-                    </div>
-                  </div>
-                  
-                  <div class="col-md-2 col-sm-6 col-xs-12" *ngIf = 'showEmployerFooter'>
-                      <div class="widget footer-links">
-                        <h5 class="widget-title bottom-line left-align grey">
-                        <a [routerLink]="['employer/profile']" routerLinkActive="active">View Profile</a>
-                      </h5>
-                      </div>
-                    </div>
 
-                  <div class="col-md-2 col-sm-6 col-xs-12">
-                    <div class="widget footer-links">
-                      <h5 class="widget-title bottom-line left-align grey">
-                        <a [routerLink]="['contactus']" routerLinkActive="active">Feedback</a>
-                      </h5>
 
-                    </div>
-                  </div>
-    
-                  <div class="col-md-2 col-sm-6 col-xs-12" *ngIf = 'showJobseekerFooter'>
-                    <div class="widget footer-links">
-                      <h5 class="widget-title bottom-line left-align grey">
-                          <a [routerLink]="['jobseeker/joboffers']" outerLinkActive="active">Offers</a>
-                          
-                      </h5>
+      </div>
+    </div>
+  </div>
+  <!-- end container -->
 
-                    </div>
-                  </div>
-    
-                </div>
-              </div>    
-            </div> <!-- end container -->
-    
-            <div class="bottom-footer">
-              <div class="container">
-                <div class="row">
-    
-                  <div class="col-sm-6 copyright sm-text-center">
-                    <span>
+  <div class="bottom-footer">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-sm-6 copyright sm-text-center">
+          <span>
             &copy; 2017	all right reserved
                     </span>
-                  </div>
-    
-                  <!-- <div class="col-sm-6 col-xs-12 footer-payment-systems text-right sm-text-center mt-sml-10">
+        </div>
+
+        <!-- <div class="col-sm-6 col-xs-12 footer-payment-systems text-right sm-text-center mt-sml-10">
                     <i class="fa fa-cc-paypal"></i>
                     <i class="fa fa-cc-visa"></i>
                     <i class="fa fa-cc-mastercard"></i>
                     <i class="fa fa-cc-discover"></i>
                     <i class="fa fa-cc-amex"></i>
                   </div> -->
-    
-                </div>
-              </div>
-            </div> <!-- end bottom footer -->
-          </footer> <!-- end footer -->
+
+      </div>
+    </div>
+  </div>
+  <!-- end bottom footer -->
+</footer>
+<!-- end footer -->

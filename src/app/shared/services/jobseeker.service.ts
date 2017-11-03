@@ -1,18 +1,32 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from "@angular/http";
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-
 import { ApiService } from './api.service';
 
 @Injectable()
 export class JobseekerService {
+  events:any;
+  constructor(public apiservice : ApiService) { 
 
-  constructor(
-    private apiService: ApiService,
-  ) { }
+  }
 
+  getJobSchedules(){
+    const url = 'availability/all';
+    return this.apiservice.get(url).map( res =>{
+       return res
+    })
+  }
 
+  postJobSchedules(data){
+    const url = 'availability/save';
+    return this.apiservice.post(url, data).map( res => {
+      return res
+    })
+  }
+
+  deleteScheduledJob(id){
+    const url = 'availability/delete'+id;
+    return this.apiservice.delete(url).map( res => {
+      return res
+    })
+  }
 
 }

@@ -38,7 +38,7 @@ export class JobSeekerSearchComponent implements OnInit {
     newDate.setUTCMilliseconds(0);
     this.filterJobseekers = {
       Date : newDate,
-      Hours_Guarnteed : undefined
+      Hours_Guarnteed : null
     }
     this.employerLocation = {
       lat: undefined,
@@ -144,7 +144,7 @@ export class JobSeekerSearchComponent implements OnInit {
 
 interface FilterJobseekers{
   Date: Date;
-  Hours_Guarnteed: Number
+  Hours_Guarnteed: number,
 }
 
 interface Location{

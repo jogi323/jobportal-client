@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ApiService } from '../../../shared/services/api.service';
+import { JobseekerService } from '../../../shared/services/jobseeker.service';
 
 @Component({
     selector: 'app-work-schedule',
@@ -21,7 +22,7 @@ export class WorkScheduleComponent implements OnInit {
     endTime: any
     times: any;
     repeatDay: string;
-    constructor(private cd: ChangeDetectorRef, public apiservice: ApiService) {
+    constructor(private cd: ChangeDetectorRef, public apiservice: ApiService, public jobseekerservice : JobseekerService) {
         this.minDate = new Date();
         this.calendarminDate = new Date();
         this.times = ['12:00', '12:30', '13:00', '13:30', '14:00'];
@@ -40,7 +41,7 @@ export class WorkScheduleComponent implements OnInit {
 
     ngOnInit() {
         // this.eventService.getEvents().then(events => {this.events = events;});
-        this.apiservice.get('availability/all').subscribe(res =>{
+        this.jobseekerservice.getJobSchedules().subscribe(res =>{
             // this.events = res.data;
             for(let index=0; index<res.data.length; index++){
                 let eventToshow = {
@@ -144,8 +145,12 @@ export class WorkScheduleComponent implements OnInit {
     }
 
     postEvent(data) {
-        this.apiservice.post('availability/save', data).subscribe(res => {
+        this.jobseekerservice.postJobSchedules(data).subscribe(res => {
             console.log(res);
+            if(res){
+                this.events.push(this.eventToStore);
+                console.log(this.events);
+            }
         },
             err => {
                 console.log(err);
@@ -226,54 +231,13 @@ export class WorkScheduleComponent implements OnInit {
             this.eventToStore[0].Date_Submitted = new Date();
             this.postEvent(this.eventToStore);
         }
-        // if (this.event.id) {
-        //     let index: number = this.findEventIndexById(this.event.id);
-        //     if (index >= 0) {
-        //         this.events[index] = this.event;
-        //     }
-        // }
-        // else {
-        //     this.event.id = this.idGen++;
-        //     if (this.event.allWeek) {
-        //         this.event.end = this.start.setDate(this.start.getDate() + 7);
-        //         this.events.push(this.event);
-        //         this.event = null;
-        //     }
-        //     if (this.event.allMonth) {
-        //         let startDate = new Date(this.event.start);
-        //         let start = startDate.getDate();
-        //         let last = (new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0, 23, 59, 59)).getDate();
-        //         this.events.push(this.event);
-        //         let a = this.event;
-        //         let eventsArray = [];
-        //         while (start <= last) {
-        //             start = start + 7;
-        //             var date;
-        //             var event = new MyEvent();
-        //             event.title = a.title;
-        //             date = new Date(startDate.setDate(startDate.getDate() + 7));
-        //             event.start = date;
-        //             this.events.push(event);
-        //         }
-        //         this.event = null;
-        //     }
-        //     else {
-        //         this.events.push(this.event);
-        //         this.event = null;
-        //     }
-
-        //}
-
-
         this.dialogVisible = false;
     }
 
-    deleteEvent() {
-        let index: number = this.findEventIndexById(this.event.id);
-        if (index >= 0) {
-            this.events.splice(index, 1);
-        }
-        this.dialogVisible = false;
+    deleteEvent(id) {
+        this.jobseekerservice.deleteScheduledJob(id).subscribe( res => {
+            console.log(res);
+        })
     }
 
     findEventIndexById(id: number) {

@@ -16,6 +16,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 import { JsonLoaderService } from '../shared/services/json-loader.service';
 import { EmployerService } from '../shared/services/employer.service';
+import { SearchPipe } from '../shared/pipes/search.pipe';
 
 @NgModule({
   imports: [
@@ -33,7 +34,9 @@ import { EmployerService } from '../shared/services/employer.service';
     TransactionHistoryComponent,
     PriorJobOfferComponent,
     PaymentComponent,
-    ProfileComponent],
+    ProfileComponent,
+    SearchPipe
+  ],
   providers:[ 
     JsonLoaderService,
     EmployerService

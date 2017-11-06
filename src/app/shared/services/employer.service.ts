@@ -23,4 +23,18 @@ export class EmployerService {
     )
   }
 
+  makePayment(data){
+    const route = 'payments/pay';
+    return this.apiService.post(route,data).map( res =>{
+      return res
+    })
+  }
+
+  getTransactions(){
+    const route = 'payments/';
+    return this.apiService.get(route).map( res => {
+      return res;
+    })
+  }
+
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { JsonLoaderService } from '../../../shared/services/json-loader.service';
+import { EmployerService } from '../../../shared/services/employer.service';
 
 @Component({
   selector: 'app-payment',
@@ -12,13 +13,28 @@ export class PaymentComponent implements OnInit {
   statesList: any[];
   cardNumber:number;
   cardType:string;
+  payment:any;
   constructor(
-    private jsonLoaderService: JsonLoaderService
+    private jsonLoaderService: JsonLoaderService,
+    public employerservice : EmployerService
   ) { 
     this.cardNumber = null;
     this.cardType = '';
+    this.initializePayment();
    }
-
+   initializePayment(){
+    this.payment = {
+      Card_Nr : null,
+      Billing_Name : '',
+      Expiration_Month : null,
+      Expiration_Year : null,
+      City :'',
+      State : '',
+      Zip_Code : null,
+      Amount : 2000,
+      Position_id : ''
+    }
+   }
   ngOnInit() {
     this.jsonLoaderService.getStates()
       .subscribe(data => {
@@ -71,6 +87,16 @@ export class PaymentComponent implements OnInit {
     if(!this.cardType){
       this.cardType = "wrong number";
     }
+  }
+
+  //payment method
+  makePayment(){
+    this.employerservice.makePayment(this.payment).subscribe( res =>{
+      console.log(res);
+      if(res.message == 'Payment Sucessfull'){
+        this.initializePayment();
+      }
+    })
   }
 
 

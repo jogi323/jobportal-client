@@ -10,6 +10,7 @@ import {MenuItem} from 'primeng/primeng';            //api
 import 'fullcalendar';
 
 import { JobSeekerRoutingModule } from './job-seeker-routing.module';
+import { JobseekerService } from '../shared/services/jobseeker.service';
 import { JobSeekerComponent } from './job-seeker.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { WorkScheduleComponent } from './components/work-schedule/work-schedule.component';
@@ -40,6 +41,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     WorkScheduleComponent, 
     JobOffersComponent, 
     ProfileComponent
+  ],
+  providers : [
+    JobseekerService
   ]
 })
 export class JobSeekerModule { }

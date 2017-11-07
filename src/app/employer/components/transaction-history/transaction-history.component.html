@@ -16,24 +16,24 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr class="cart_item">
+                      <tr class="cart_item" *ngFor="let transaction of transactions">
                         <td class="product-name">
-                          <a >2324324</a>
+                          <a >{{transaction._id}}</a>
                         </td>
                         <td class="product-price">
-                          <span class="amount">Dental Assistant</span>
+                          <span class="amount">{{transaction.Position_id}}</span>
                         </td>
                         <td class="product-quantity">
-                          <span class="amount">$25</span>
+                          <span class="amount">{{transaction.Amount}}</span>
                         </td>
                         <td class="product-quantity">
                           <span class="amount">Success</span>
                         </td>
                         <td class="product-subtotal">
-                          <span class="amount">25/06/2017</span>
+                          <span class="amount">{{transaction.Date_Submitted | date:'dd/MM/yy'}}</span>
                         </td>
                       </tr>
-                      <tr class="cart_item">
+                      <!-- <tr class="cart_item">
                           <td class="product-name">
                             <a >2324324</a>
                           </td>
@@ -49,8 +49,7 @@
                           <td class="product-subtotal">
                             <span class="date">25/06/2017</span>
                           </td>
-                        </tr>
-
+                        </tr> -->
                     </tbody>
                   </table>
                 </div>

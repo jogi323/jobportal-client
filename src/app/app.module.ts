@@ -29,12 +29,15 @@ import { UserService } from './shared/services/user.service';
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { NoAuthGuardService } from './shared/services/no-auth-guard.service';
 
+// import { SearchPipe } from './shared/pipes/search.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
     RegisterComponent
+    // SearchPipe
   ],
   imports: [
     BrowserModule,

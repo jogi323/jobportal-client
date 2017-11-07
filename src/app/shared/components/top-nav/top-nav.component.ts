@@ -24,7 +24,11 @@ export class TopNavComponent implements OnInit {
     private userService: UserService
   ) {
     this.subscription = userService.currentUser.subscribe(user =>{
-        this.isLoggedIn = true;
+        if(user.userType !== undefined){
+          this.isLoggedIn = true;
+        }else {
+          this.isLoggedIn = false;
+        }
         this.userType = user.userType;
         this.currentUser = user;
     })

@@ -119,5 +119,13 @@ export class UserService {
     )
   }
 
-
+resetPassword (data) {
+  let path = 'user/resetpasswordlink';
+  return this.apiService.post(path,data).
+  map(
+    data => {
+      return data;
+    }
+  )
+}
 }

@@ -54,7 +54,7 @@
         <form name="forgotPasswordForm" #forgotPasswordForm = 'ngForm' novalidate>
           <div class="form-group">
             <label for="Email">Email</label>
-            <input type="email" placeholder="Registered Email" name="email" required #email="ngModel" [(ngModel)]="forgotPasswordData.email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+            <input type="email" placeholder="Registered Email" name="email" required #email="ngModel" [(ngModel)]="forgotPasswordData.Email_Address" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
             <div  *ngIf="email.errors && (email.dirty || email.touched)" class="error">
               <div [hidden]="!email.errors.required">Please Enter registered email-Id</div>
               <div [hidden]="!email.errors.pattern">Please Enter proper email-Id</div>

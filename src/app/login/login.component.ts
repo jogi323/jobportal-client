@@ -16,6 +16,13 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
   title: string;
   message: string;
   isLogin: boolean = true;
+  options = {
+    timeOut: 5000,
+    showProgressBar: true,
+    pauseOnHover: false,
+    clickToClose: false,
+    maxLength: 50
+  }
   constructor(
     dialogService: DialogService,
     private router: Router,
@@ -28,7 +35,7 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
       Password: ''
     }
     this.forgotPasswordData = {
-      email: ''
+      Email_Address: ''
     }
   }
   confirm() {
@@ -53,18 +60,33 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
         this.notificationsService.error(
             err.title,
             err.error.message,
-            {
-              timeOut: 5000,
-              showProgressBar: true,
-              pauseOnHover: false,
-              clickToClose: false,
-              maxLength: 50
-            }
+            this.options
           )
       });
   }
 
   reset() {
+    console.log(this.forgotPasswordData.Email_Address)
+    this.userService.resetPassword(this.forgotPasswordData).subscribe(
+      res => {
+          this.close();
+        this.notificationsService.success(
+          'Success',
+          res.message,
+          this.options
+        )
+        console.log(res);
+      },
+      err => {
+          this.close();
+        this.notificationsService.error(
+          err.title,
+          err.message,
+          this.options
+        )
+        console.log(err);
+      }
+    )
   }
 
   navigateToRegister() {
@@ -86,7 +108,7 @@ export interface LoginFormData {
   Password: String;
 }
 export interface ForgetFormData {
-  email: String;
+  Email_Address: String;
 }
 
 

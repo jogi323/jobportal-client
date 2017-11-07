@@ -39,7 +39,7 @@ export class JobSeekerSearchComponent implements OnInit {
     newDate.setUTCMilliseconds(0);
     this.filterJobseekers = {
       Date: newDate,
-      Hours_Guarnteed: null,
+      Hours_Guaranteed: null,
       Position : '',
       pay_request: null,
       distance: null
@@ -99,11 +99,12 @@ export class JobSeekerSearchComponent implements OnInit {
     this.filterJobseekers.Date = event;
     this.getJobseekers(this.filterJobseekers);
   }
-  onPositionChange(){
+  onHoursChange(){
+    console.log(this.filterJobseekers);
     this.getJobseekers(this.filterJobseekers);
   }
   filterData() {
-    if (this.filterJobseekers.Date || this.filterJobseekers.Hours_Guarnteed) {
+    if (this.filterJobseekers.Date || this.filterJobseekers.Hours_Guaranteed) {
       this.getJobseekers(this.filterJobseekers);
     } else {
 
@@ -160,7 +161,7 @@ export class JobSeekerSearchComponent implements OnInit {
 
 interface FilterJobseekers {
   Date: Date;
-  Hours_Guarnteed: number,
+  Hours_Guaranteed: number,
   Position: string,
   pay_request: any,
   distance: any 

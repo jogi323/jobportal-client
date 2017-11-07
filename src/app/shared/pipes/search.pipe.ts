@@ -5,7 +5,7 @@ export class SearchPipe implements PipeTransform {
     transform(value: any, args: any): any {
         let source: any = [];
         if (!value) return value;
-        if (args.Position != '' && args.pay_request != null && args.distance != null) {
+        if (args.Position != '' && (args.pay_request != null && args.pay_request != "") && (args.distance != null && args.distance !="")) {
             value.filter(eachValue => {
                 if (eachValue) {
                     if (eachValue.JS_id.Position == args.Position && eachValue.JS_id.Hourly_Pay == args.pay_request && eachValue.Distance == args.distance) {
@@ -15,7 +15,7 @@ export class SearchPipe implements PipeTransform {
             })
             return source;
         }
-        else if (args.Position == '' && args.pay_request == null && args.distance != null) {
+        else if (args.Position == '' && (args.pay_request == null || args.pay_request == "") && (args.distance != null && args.distance != "")) {
             value.filter(eachValue => {
                 if (eachValue) {
                     if (eachValue.Distance == args.distance) {
@@ -25,7 +25,7 @@ export class SearchPipe implements PipeTransform {
             })
             return source;
         }
-        else if (args.Position == '' && args.pay_request != null && args.distance == null) {
+        else if (args.Position == '' && (args.pay_request != null && args.pay_request !="") && (args.distance == null || args.distance == "")) {
             value.filter(eachValue => {
                 if (eachValue) {
                     if (eachValue.JS_id.Hourly_Pay == args.pay_request) {
@@ -35,7 +35,7 @@ export class SearchPipe implements PipeTransform {
             })
             return source;
         }
-        else if (args.Position != '' && args.pay_request == null && args.distance == null) {
+        else if (args.Position != '' && (args.pay_request == null || args.pay_request == "") && (args.distance == null || args.distance == "")) {
             value.filter(eachValue => {
                 if (eachValue) {
                     if (eachValue.JS_id.Position == args.Position) {
@@ -45,7 +45,7 @@ export class SearchPipe implements PipeTransform {
             })
             return source;
         }
-        else if (args.Position != '' && args.pay_request != null && args.distance == null) {
+        else if (args.Position != '' && (args.pay_request != null && args.pay_request != "") && (args.distance == null || args.distance == "")) {
             value.filter(eachValue => {
                 if (eachValue) {
                     if (eachValue.JS_id.Position == args.Position && eachValue.JS_id.Hourly_Pay == args.pay_request) {
@@ -55,7 +55,7 @@ export class SearchPipe implements PipeTransform {
             })
             return source;
         }
-        else if (args.Position != '' && args.pay_request == null && args.distance != null) {
+        else if (args.Position != '' && (args.pay_request == null || args.pay_request == "") && (args.distance != null && args.distance != "")) {
             value.filter(eachValue => {
                 if (eachValue) {
                     if (eachValue.JS_id.Position == args.Position && eachValue.Distance == args.distance) {
@@ -65,7 +65,7 @@ export class SearchPipe implements PipeTransform {
             })
             return source;
         }
-        else if (args.Position == '' && args.pay_request != null && args.distance != null) {
+        else if (args.Position == '' && (args.pay_request != null && args.pay_request != "") && (args.distance != null && args.distance != "")) {
             value.filter(eachValue => {
                 if (eachValue) {
                     if (eachValue.JS_id.Hourly_Pay == args.pay_request && eachValue.Distance == args.distance) {

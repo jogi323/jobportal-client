@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { ChangePasswordComponent } from './shared/components/change-password/change-password.component';
+import { ForgotPasswordComponent } from './shared/components/forgot-password/forgot-password.component';
 import { ContactUsComponent } from './shared/components/contact-us/contact-us.component';
 import { RegisterComponent } from './register/register.component';
 
@@ -16,11 +17,9 @@ const routes: Routes = [
       canActivate:[AuthGuardService] 
     },
     { path:'jobseeker', loadChildren:'./job-seeker/job-seeker.module#JobSeekerModule',canActivate:[AuthGuardService] },
-    { path:'changepassword', component:ChangePasswordComponent,canActivate:[NoAuthGuardService] },
-    { path:'register', 
-      component:RegisterComponent ,
-      canActivate:[NoAuthGuardService]
-    },
+    { path:'changepassword', component:ChangePasswordComponent,canActivate:[AuthGuardService] },
+    { path:'forgotpassword/:id', component:ForgotPasswordComponent,canActivate:[NoAuthGuardService] },
+    { path:'register',component:RegisterComponent ,canActivate:[NoAuthGuardService]},
     { path:'contactus', component:ContactUsComponent ,canActivate:[NoAuthGuardService] },
     { path:'**', redirectTo:'' },
 ];

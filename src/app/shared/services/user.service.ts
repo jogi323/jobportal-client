@@ -71,6 +71,9 @@ export class UserService {
       data => {
         this.setAuth(data);
         return data.user;
+      },
+      err =>{
+        return err;
       }
     )
   }
@@ -125,6 +128,19 @@ resetPassword (data) {
   map(
     data => {
       return data;
+    }
+  )
+}
+changePassword (data) {
+  let path = 'user/resetpassword';
+  return this.apiService.post(path,data).
+  map(
+    data => {
+      console.log(data)
+      return data;
+    },
+    err => {
+      return err;
     }
   )
 }

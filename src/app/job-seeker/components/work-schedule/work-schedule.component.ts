@@ -238,7 +238,7 @@ export class WorkScheduleComponent implements OnInit {
             this.postEvent(this.eventToStore);
         }
         else {
-            this.eventToStore[0].Date = this.event.start;
+            this.eventToStore[0].Date = new Date(this.event.start);
             this.eventToStore[0].Time_Start = this.startTime;
             this.eventToStore[0].Time_Finish = this.endTime;
             this.eventToStore[0].Hours_Guaranteed = 4;

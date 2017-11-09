@@ -112,16 +112,18 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  initUserData(user) {
-    this.userService.getData(user.Email_Address).subscribe(
-      res => {
-        console.log(res);
-        this.user = res.data;
-      },
-      err => {
+  initUserData(user){
+    if(user) {
+      this.userService.getData(user.Email_Address).subscribe(
+        res =>{
+          console.log(res);
+          this.user = res.data;
+        },
+        err =>{
 
-      }
-    )
+        }
+      )
+    }
   }
 
   editUserData() {

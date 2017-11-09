@@ -56,20 +56,19 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
           this.close();
       },
       err => {
-          this.close();
+        this.close();
         this.notificationsService.error(
             err.title,
-            err.error.message,
+            'err.error.message',
             this.options
           )
       });
   }
 
   reset() {
-    console.log(this.forgotPasswordData.Email_Address)
     this.userService.resetPassword(this.forgotPasswordData).subscribe(
       res => {
-          this.close();
+        this.close();
         this.notificationsService.success(
           'Success',
           res.message,

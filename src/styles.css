@@ -31,9 +31,11 @@ span.ng-tns-c5-0.ui-calendar {
     text-align: right;
 }
 input.ng-dirty.ng-invalid, input.ng-touched.ng-invalid {
-    border:1px solid red
+    border:1px solid red;
 }
-
+input.ng-dirty.ng-valid.mismatchError.ng-touched {
+    border-color: red;
+}
 input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="tel"], input[type="number"], input[type="date"], input[type="search"], select, textarea {
     margin-bottom: 10px !important;
 }

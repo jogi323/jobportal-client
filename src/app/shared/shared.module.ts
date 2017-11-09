@@ -9,6 +9,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 @NgModule({
   imports: [
@@ -21,14 +22,15 @@ import { ContactUsComponent } from './components/contact-us/contact-us.component
     FooterComponent,
     PageNotFoundComponent,
     ChangePasswordComponent,
-    ContactUsComponent
+    ContactUsComponent,
   ],
   declarations: [
     TopNavComponent, 
     FooterComponent, 
     PageNotFoundComponent,
     ChangePasswordComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    ForgotPasswordComponent,
   ]
 })
 export class SharedModule { }

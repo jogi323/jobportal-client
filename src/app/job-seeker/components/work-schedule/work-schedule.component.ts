@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ApiService } from '../../../shared/services/api.service';
 import { JobseekerService } from '../../../shared/services/jobseeker.service';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-work-schedule',
@@ -22,9 +23,9 @@ export class WorkScheduleComponent implements OnInit {
     endTime: any
     times: any;
     repeatDay: string;
-    constructor(private cd: ChangeDetectorRef, public apiservice: ApiService, public jobseekerservice : JobseekerService) {
+    constructor(private cd: ChangeDetectorRef, public apiservice: ApiService, public jobseekerservice: JobseekerService) {
         this.minDate = new Date();
-        this.calendarminDate = new Date();
+        this.calendarminDate = moment(this.minDate).format('MM/DD/YYYY');
         this.times = ['12:00', '12:30', '13:00', '13:30', '14:00'];
         this.eventToStore = [{
             Date: null,
@@ -34,27 +35,35 @@ export class WorkScheduleComponent implements OnInit {
             Date_Submitted: null
         }];
         this.events = [{
-            id : null,
-            Date : null
+            id: null,
+            Date: null
         }]
     }
 
-    ngOnInit() {
-        // this.eventService.getEvents().then(events => {this.events = events;});
-        this.jobseekerservice.getJobSchedules().subscribe(res =>{
+    JobSchedules() {
+        this.jobseekerservice.getJobSchedules().subscribe(res => {
+            this.events = [{
+                id: null,
+                Date: null
+            }]
             // this.events = res.data;
-            for(let index=0; index<res.data.length; index++){
+            for (let index = 0; index < res.data.length; index++) {
                 let eventToshow = {
-                    id : res.data[index]._id,
-                    start : res.data[index].Date
+                    id: res.data[index]._id,
+                    start: res.data[index].Date
                 }
                 this.events.push(eventToshow);
             }
         },
-        err =>{
-            console.log(err);
-        }
-    )
+            err => {
+                console.log(err);
+            }
+        )
+    }
+
+    ngOnInit() {
+        // this.eventService.getEvents().then(events => {this.events = events;});
+        this.JobSchedules();
         this.header = {
             left: 'prev,next today',
             center: 'title',
@@ -145,11 +154,15 @@ export class WorkScheduleComponent implements OnInit {
     }
 
     postEvent(data) {
+        if (data.length > 1) {
+            data.splice(0, 1);
+        }
         this.jobseekerservice.postJobSchedules(data).subscribe(res => {
             console.log(res);
-            if(res){
-                this.events.push(this.eventToStore);
-                console.log(this.events);
+            if (res) {
+                // this.events.push(data);
+                console.log(res);
+                this.JobSchedules();
             }
         },
             err => {
@@ -160,13 +173,14 @@ export class WorkScheduleComponent implements OnInit {
     }
 
     saveEvent() {
+        console.log("hai");
         let startDate = new Date(this.event.start);
         let startDay = startDate.getDate();
         if (this.event.allMonth) {
             let lastDay = (new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0, 23, 59, 59)).getDate();
             let diff = startDay + (lastDay - startDay);
             let b = 0;
-            for (let i = startDay; (i < diff); i+=7) {
+            for (let i = startDay; (i < diff); i += 7) {
                 if (b == 0) {
                     let eventToSave = {
                         Date: new Date(startDate.setDate(startDate.getDate() + 0)),
@@ -198,7 +212,7 @@ export class WorkScheduleComponent implements OnInit {
             let diff = startDay + (lastDay - startDay);
             let a = 0;
             for (let i = startDay; i < (diff); i++) {
-                if(a == 0){
+                if (a == 0) {
                     let eventToSave = {
                         Date: new Date(startDate.setDate(startDate.getDate() + 0)),
                         Time_Start: this.startTime,
@@ -209,7 +223,7 @@ export class WorkScheduleComponent implements OnInit {
                     this.eventToStore.push(eventToSave);
                     a++;
                 }
-                else{
+                else {
                     let eventToSave = {
                         Date: new Date(startDate.setDate(startDate.getDate() + 1)),
                         Time_Start: this.startTime,
@@ -219,7 +233,7 @@ export class WorkScheduleComponent implements OnInit {
                     }
                     this.eventToStore.push(eventToSave);
                 }
-                //startDate = new Date(startDate.setDate(startDate.getDate() + 1));
+                // startDate = new Date(startDate.setDate(startDate.getDate() + 1));
             }
             this.postEvent(this.eventToStore);
         }
@@ -235,7 +249,7 @@ export class WorkScheduleComponent implements OnInit {
     }
 
     deleteEvent(id) {
-        this.jobseekerservice.deleteScheduledJob(id).subscribe( res => {
+        this.jobseekerservice.deleteScheduledJob(id).subscribe(res => {
             console.log(res);
         })
     }

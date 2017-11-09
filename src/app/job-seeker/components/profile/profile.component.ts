@@ -1,4 +1,4 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../../shared/models/user.model';
 import { JsonLoaderService } from '../../../shared/services/json-loader.service';
@@ -14,39 +14,39 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  
-  isUserDataEdit:Boolean= false;
-  isWorkDataEdit:Boolean= false;
-  user:User;
-  geoLocation:any;
-  currentUser:any;
-  userType:string;
-  subscription:Subscription;
 
-  statesList:any[];
-  languagesList:any[];
-  yearsList:any[];
-  positionList:any[];
-  public options = {types: ['address'],componentRestrictions: { country: 'US' }}
+  isUserDataEdit: Boolean = false;
+  isWorkDataEdit: Boolean = false;
+  user: User;
+  geoLocation: any;
+  currentUser: any;
+  userType: string;
+  subscription: Subscription;
+
+  statesList: any[];
+  languagesList: any[];
+  yearsList: any[];
+  positionList: any[];
+  public options = { types: ['address'], componentRestrictions: { country: 'US' } }
   alertOptions = {
-      timeOut: 5000,
-      showProgressBar: true,
-      pauseOnHover: false,
-      clickToClose: false,
-      maxLength: 50
-    };
-   licenseRequired: Boolean = false;
-   newImageUploaded: Boolean = false;
-   specialityList = [
-    {"name":"General Dentistry"},
-    {"name":"Endodontist"},
-    {"name":"Orthodontist"},
-    {"name":"Oral Surgeon"},
-    {"name":"Pedodontist"},
-    {"name":"Periodontist"},
+    timeOut: 5000,
+    showProgressBar: true,
+    pauseOnHover: false,
+    clickToClose: false,
+    maxLength: 50
+  };
+  licenseRequired: Boolean = false;
+  newImageUploaded: Boolean = false;
+  specialityList = [
+    { "name": "General Dentistry" },
+    { "name": "Endodontist" },
+    { "name": "Orthodontist" },
+    { "name": "Oral Surgeon" },
+    { "name": "Pedodontist" },
+    { "name": "Periodontist" },
   ]
 
-  getAddress(event){
+  getAddress(event) {
     this.geoLocation = this.shuffleGoogleMapsAddress(event);
     let streetNumber = (this.geoLocation.addr_num) ? this.geoLocation.addr_num : '';
     let streetName = (this.geoLocation.addr) ? this.geoLocation.addr : '';
@@ -55,53 +55,56 @@ export class ProfileComponent implements OnInit {
     let city = (this.geoLocation.city) ? this.geoLocation.city : '';
     let state = (this.geoLocation.state) ? this.geoLocation.state : '';
     let zip = (this.geoLocation.zip) ? this.geoLocation.zip : '';
-    this.user.Address_street = streetNumber + ', ' + streetName;
-    this.user.Address_Unit = location + ', ' + neighborhood
-    this.user.City = this.geoLocation.city;
-    this.user.State = this.geoLocation.state;
-    this.user.Zip_Code = this.geoLocation.zip;
-    this.user.locationLat = this.geoLocation.lat;
-    this.user.locationLng = this.geoLocation.lng;
+    this.ngzone.run(() => {
+      this.user.Address_street = streetNumber + ', ' + streetName;
+      this.user.Address_Unit = location + ', ' + neighborhood
+      this.user.City = this.geoLocation.city;
+      this.user.State = this.geoLocation.state;
+      this.user.Zip_Code = this.geoLocation.zip;
+      this.user.locationLat = this.geoLocation.lat;
+      this.user.locationLng = this.geoLocation.lng;
+    })
   }
 
   constructor(
-    private jsonLoaderService:JsonLoaderService,
+    private jsonLoaderService: JsonLoaderService,
     private router: Router,
     private userService: UserService,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private ngzone: NgZone
 
-  ) { 
+  ) {
     this.user = {
-      Firstname : "",
-      Lastname : "",
-      Email_Address:"",
-      Address_street : "",
+      Firstname: "",
+      Lastname: "",
+      Email_Address: "",
+      Address_street: "",
       Address_Unit: "",
-      City : "",
-      Phone1:undefined,
-      Phone2:undefined,
-      State : "",
-      Zip_Code:undefined,
-      Hourly_Pay:undefined,
-      Travel_Distance:undefined,
-      Experience:undefined,
-      Position:"",
-      Practice_Name:"",
-      Speciality:"",
-      Practice_Phone:undefined,
-      Nr_of_Operations:undefined,
-      Nr_of_Staff:undefined,
-      Languages:"",
-      Dental_School:"",
-      Year_Graduated:undefined,
-      License_Nr:"",
-      Years_in_Practice:5,
-      Contact_Person:"",
-      Contact_Phone_Nr:undefined,
-      image:""
+      City: "",
+      Phone1: undefined,
+      Phone2: undefined,
+      State: "",
+      Zip_Code: undefined,
+      Hourly_Pay: undefined,
+      Travel_Distance: undefined,
+      Experience: undefined,
+      Position: "",
+      Practice_Name: "",
+      Speciality: "",
+      Practice_Phone: undefined,
+      Nr_of_Operations: undefined,
+      Nr_of_Staff: undefined,
+      Languages: "",
+      Dental_School: "",
+      Year_Graduated: undefined,
+      License_Nr: "",
+      Years_in_Practice: 5,
+      Contact_Person: "",
+      Contact_Phone_Nr: undefined,
+      image: ""
     }
-    
-    this.subscription = userService.currentUser.subscribe(user =>{
+
+    this.subscription = userService.currentUser.subscribe(user => {
       this.isUserDataEdit = user.personalInfo;
       this.isWorkDataEdit = user.workInfo;
       this.currentUser = user;
@@ -109,127 +112,127 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  initUserData(user){
+  initUserData(user) {
     this.userService.getData(user.Email_Address).subscribe(
-      res =>{
+      res => {
         console.log(res);
         this.user = res.data;
       },
-      err =>{
+      err => {
 
       }
     )
   }
 
-  editUserData(){
+  editUserData() {
     this.isUserDataEdit = !this.isUserDataEdit;
   }
 
-  cancelUpdate(){
-    this.isUserDataEdit = !this.isUserDataEdit;   
+  cancelUpdate() {
+    this.isUserDataEdit = !this.isUserDataEdit;
   }
 
   onChange($event) {
-    if($event === 'Registered Dental Assistant' || $event === 'Registered Dental Assistant EF' || $event === 'Registered Dental Hygienist'|| $event === 'Registered Dental Hygienist EF'|| $event === 'General Dentist'|| $event === 'Orthodontist'|| $event === 'Endodontist'|| $event === 'Periodontist'|| $event === 'Pedodontist'|| $event === 'Oral Surgeon' ){
+    if ($event === 'Registered Dental Assistant' || $event === 'Registered Dental Assistant EF' || $event === 'Registered Dental Hygienist' || $event === 'Registered Dental Hygienist EF' || $event === 'General Dentist' || $event === 'Orthodontist' || $event === 'Endodontist' || $event === 'Periodontist' || $event === 'Pedodontist' || $event === 'Oral Surgeon') {
       this.licenseRequired = true;
-    }else{
+    } else {
       this.licenseRequired = false;
     }
   }
-  updateUserData(user){
+  updateUserData(user) {
     this.userService.updatePersonal(this.user).subscribe(
-      res =>{
+      res => {
         console.log(res);
         this.notificationsService.success(
-            'Success',
-            res.message,
-            this.alertOptions
-          )
-        this.isUserDataEdit = !this.isUserDataEdit; 
+          'Success',
+          res.message,
+          this.alertOptions
+        )
+        this.isUserDataEdit = !this.isUserDataEdit;
       },
       err => {
         this.notificationsService.error(
-            err.title,
-            err.error.message,
-            this.alertOptions
-          )
+          err.title,
+          err.error.message,
+          this.alertOptions
+        )
       }
-    )    
+    )
   }
 
-  editWorkData(){
+  editWorkData() {
     this.isWorkDataEdit = !this.isWorkDataEdit;
   }
 
-  cancelWorkUpdate(){
-    this.isWorkDataEdit = !this.isWorkDataEdit;   
+  cancelWorkUpdate() {
+    this.isWorkDataEdit = !this.isWorkDataEdit;
   }
 
-  updateWorkData(user){
+  updateWorkData(user) {
     this.userService.updateWork(this.user).subscribe(
-      res =>{
+      res => {
         console.log(res);
         this.notificationsService.success(
-            'Success',
-            res.message,
-            this.alertOptions
-          )
-        this.isWorkDataEdit = !this.isWorkDataEdit; 
+          'Success',
+          res.message,
+          this.alertOptions
+        )
+        this.isWorkDataEdit = !this.isWorkDataEdit;
       },
       err => {
         this.notificationsService.error(
-            err.title,
-            err.error.message,
-            this.alertOptions
-          )
+          err.title,
+          err.error.message,
+          this.alertOptions
+        )
       }
-    )      
+    )
   }
 
 
   ngOnInit() {
-  
+
     this.jsonLoaderService.getStates()
-                            .subscribe(data => {
-                              this.statesList = data;
-                              // console.log(data);
-                            }, error => {
-                              console.log(error);
-                            });
+      .subscribe(data => {
+        this.statesList = data;
+        // console.log(data);
+      }, error => {
+        console.log(error);
+      });
     this.jsonLoaderService.getLanguages()
-                            .subscribe(data => {
-                              this.languagesList = data;
-                              // console.log(data);
-                            }, error => {
-                              console.log(error);
-                            });
+      .subscribe(data => {
+        this.languagesList = data;
+        // console.log(data);
+      }, error => {
+        console.log(error);
+      });
     this.jsonLoaderService.getYears()
-                            .subscribe(data => {
-                              this.yearsList = data;
-                              // console.log(data); 
-                            }, error => {
-                              console.log(error);
-                            });
+      .subscribe(data => {
+        this.yearsList = data;
+        // console.log(data); 
+      }, error => {
+        console.log(error);
+      });
     this.jsonLoaderService.getPositions()
-                            .subscribe(data => {
-                              this.positionList = data;
-                              console.log(data); 
-                            }, error => {
-                              console.log(error);
-                            });
+      .subscribe(data => {
+        this.positionList = data;
+        console.log(data);
+      }, error => {
+        console.log(error);
+      });
 
 
-  
+
   }
-  changeListener($event) : void {
+  changeListener($event): void {
     this.newImageUploaded = true;
     this.readThis($event.target);
   }
-  
+
   readThis(inputValue: any): void {
-    var file:File = inputValue.files[0];
-    var myReader:FileReader = new FileReader();
-  
+    var file: File = inputValue.files[0];
+    var myReader: FileReader = new FileReader();
+
     myReader.onloadend = (e) => {
       this.user.image = myReader.result;
     }

@@ -12,7 +12,6 @@ export class TransactionHistoryComponent implements OnInit {
   constructor(public employerService : EmployerService) { 
     this.employerService.getTransactions().subscribe( res =>{
       this.transactions = res.data;
-      console.log(res.data);
     })
   }
 

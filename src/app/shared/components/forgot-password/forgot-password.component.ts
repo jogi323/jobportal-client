@@ -46,7 +46,6 @@ export class ForgotPasswordComponent implements OnInit {
   }
   submit() {
     this.userService.changePassword(this.resetPassword).subscribe(res => {
-      console.log(res);
       this.notificationsService.success(
           'Success',
             res.message,
@@ -55,7 +54,6 @@ export class ForgotPasswordComponent implements OnInit {
       this.router.navigate(['']);
     },
     err => {
-      console.log(err)
       this.notificationsService.error(
             err.title,
             err.error.message,

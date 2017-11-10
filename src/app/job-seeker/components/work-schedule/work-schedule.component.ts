@@ -56,7 +56,6 @@ export class WorkScheduleComponent implements OnInit {
             }
         },
             err => {
-                console.log(err);
             }
         )
     }
@@ -86,13 +85,11 @@ export class WorkScheduleComponent implements OnInit {
         return [year, month, day].join('-');
     }
     handleDayClick(event) {
-        console.log(event);
         if (event.date.format() < this.minDate) {
             alert('please select from today onwards');
         }
         else {
             this.start = event.date._d;
-            //console.log(new Date(t.getFullYear(), t.getMonth() + 1, 0, 23, 59, 59));
             this.event = new MyEvent();
             this.event.start = event.date.format();
             switch (this.start.getDay()) {
@@ -126,7 +123,6 @@ export class WorkScheduleComponent implements OnInit {
     }
 
     handleEventClick(e) {
-        console.log("handle event click");
         if (e.calEvent.start.format() < this.minDate) {
             alert('outdated event');
         }
@@ -158,22 +154,18 @@ export class WorkScheduleComponent implements OnInit {
             data.splice(0, 1);
         }
         this.jobseekerservice.postJobSchedules(data).subscribe(res => {
-            console.log(res);
             if (res) {
                 // this.events.push(data);
-                console.log(res);
                 this.JobSchedules();
             }
         },
             err => {
-                console.log(err);
             }
         )
         this.event = null;
     }
 
     saveEvent() {
-        console.log("hai");
         let startDate = new Date(this.event.start);
         let startDay = startDate.getDate();
         if (this.event.allMonth) {
@@ -250,7 +242,6 @@ export class WorkScheduleComponent implements OnInit {
 
     deleteEvent(id) {
         this.jobseekerservice.deleteScheduledJob(id).subscribe(res => {
-            console.log(res);
         })
     }
 

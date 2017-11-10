@@ -136,7 +136,6 @@ changePassword (data) {
   return this.apiService.post(path,data).
   map(
     data => {
-      console.log(data)
       return data;
     },
     err => {

@@ -40,7 +40,6 @@ export class PaymentComponent implements OnInit {
       .subscribe(data => {
         this.statesList = data;
       }, error => {
-        console.log(error);
       });
   }
   GetCardType(number) {
@@ -92,7 +91,6 @@ export class PaymentComponent implements OnInit {
   //payment method
   makePayment(){
     this.employerservice.makePayment(this.payment).subscribe( res =>{
-      console.log(res);
       if(res.message == 'Payment Sucessfull'){
         this.initializePayment();
       }

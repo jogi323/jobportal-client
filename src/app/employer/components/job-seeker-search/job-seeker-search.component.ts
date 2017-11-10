@@ -90,7 +90,6 @@ export class JobSeekerSearchComponent implements OnInit {
       .subscribe(data => {
         this.positionList = data;
       }, error => {
-        console.log(error);
       });
   }
   onDateChange(event) {
@@ -102,7 +101,6 @@ export class JobSeekerSearchComponent implements OnInit {
     this.getJobseekers(this.filterJobseekers);
   }
   onHoursChange(){
-    console.log(this.filterJobseekers);
     this.getJobseekers(this.filterJobseekers);
   }
   filterData() {
@@ -115,15 +113,12 @@ export class JobSeekerSearchComponent implements OnInit {
 
   // get the initial list of job seekers with todays date as input
   getJobseekers(data) {
-    console.log(data);
     this.employerService.queryJobseekers(data).subscribe(
       res => {
-        console.log(res);
         this.jobseekers = res.data;
         this.calculateDistance(this.jobseekers)
       },
       err => {
-        console.log(err)
       }
     )
   }

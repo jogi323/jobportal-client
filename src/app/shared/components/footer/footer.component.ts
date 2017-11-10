@@ -17,7 +17,6 @@ export class FooterComponent implements OnInit {
     private userService: UserService
   ) {
     this.subscription = userService.currentUser.subscribe(user =>{
-      console.log(user)
         this.isLoggedIn = true;
         this.userType = user.userType;
         this.currentUser = user;

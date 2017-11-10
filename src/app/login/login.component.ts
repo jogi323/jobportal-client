@@ -59,7 +59,7 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
         this.close();
         this.notificationsService.error(
             err.title,
-            'err.error.message',
+            err.error.message,
             this.options
           )
       });
@@ -74,7 +74,6 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
           res.message,
           this.options
         )
-        console.log(res);
       },
       err => {
           this.close();
@@ -83,7 +82,6 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
           err.message,
           this.options
         )
-        console.log(err);
       }
     )
   }

@@ -113,7 +113,7 @@ export class ProfileComponent implements OnInit {
   }
 
   initUserData(user){
-    if(user) {
+    if(user.userType !== undefined) {
       this.userService.getData(user.Email_Address).subscribe(
         res =>{
           console.log(res);

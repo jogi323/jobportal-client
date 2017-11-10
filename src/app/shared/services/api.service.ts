@@ -54,7 +54,10 @@ export class ApiService {
       JSON.stringify(body),
       { headers: this.setHeaders() }
     )
-    .map((res: Response) => res.json())
+    .map((res: Response) => {
+      console.log(res);
+      res.json();
+    })
     .catch((error: Response) => {
       console.log(error);
       return Observable.throw(error.json());

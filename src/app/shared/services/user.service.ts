@@ -143,4 +143,18 @@ changePassword (data) {
     }
   )
 }
+
+activateUser(id) {
+  console.log(id)
+  let path = 'user/confirmation/' + id;
+  return this.apiService.get(path).
+  map(
+    data => {
+      return data;
+    },
+    err => {
+      return err;
+    }
+  )
+}
 }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { UserService } from '../shared/services/user.service';
 import { NotificationsService } from 'angular2-notifications';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -51,16 +52,15 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['']);
           this.notificationsService.success('Success',
             res.message,
-            {
-              timeOut: 5000,
-              showProgressBar: true,
-              pauseOnHover: false,
-              clickToClose: false,
-              maxLength: 100
-            }
+            environment.options
           )
       },
       err => {
+        this.notificationsService.error(
+          err.title,
+          err.error.message,
+          environment.options
+        )
       });
   }
 

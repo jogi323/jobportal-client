@@ -3,6 +3,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 
 import { UserService } from '../../services/user.service';
 import { NotificationsService } from 'angular2-notifications';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-forgot-password',
@@ -12,13 +13,7 @@ import { NotificationsService } from 'angular2-notifications';
 export class ForgotPasswordComponent implements OnInit {
   resetPassword: ForgotPasswordData;
   mismatched : boolean = false;
-  options = {
-    timeOut: 5000,
-    showProgressBar: true,
-    pauseOnHover: false,
-    clickToClose: false,
-    maxLength: 50
-  }
+  
   constructor(
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
@@ -49,7 +44,7 @@ export class ForgotPasswordComponent implements OnInit {
       this.notificationsService.success(
           'Success',
             res.message,
-            this.options
+            environment.options
       );
       this.router.navigate(['']);
     },
@@ -57,7 +52,7 @@ export class ForgotPasswordComponent implements OnInit {
       this.notificationsService.error(
             err.title,
             err.error.message,
-            this.options
+            environment.options
           )
     });
   }

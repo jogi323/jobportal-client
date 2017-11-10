@@ -6,6 +6,8 @@ import { UserService } from '../../../shared/services/user.service';
 import { Subscription } from 'rxjs/Subscription';
 import { EmployerService } from '../../../shared/services/employer.service';
 import { HaversineService, GeoCoord } from "ng2-haversine";
+import { NotificationsService } from 'angular2-notifications';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-job-seeker-search',
@@ -30,7 +32,9 @@ export class JobSeekerSearchComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private employerService: EmployerService,
-    private _haversineService: HaversineService
+    private _haversineService: HaversineService,
+    private notificationsService: NotificationsService
+
   ) {
     let newDate = new Date()
     newDate.setUTCHours(0);
@@ -63,7 +67,11 @@ export class JobSeekerSearchComponent implements OnInit {
           this.employerLocation.lng = res.data.locationLng
         },
         err => {
-
+          this.notificationsService.error(
+            err.title,
+            err.error.message,
+            environment.options
+          )
         }
       )
     }
@@ -119,6 +127,11 @@ export class JobSeekerSearchComponent implements OnInit {
         this.calculateDistance(this.jobseekers)
       },
       err => {
+        this.notificationsService.error(
+            err.title,
+            err.error.message,
+            environment.options
+          )
       }
     )
   }

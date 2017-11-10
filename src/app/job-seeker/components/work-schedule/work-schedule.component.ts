@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ApiService } from '../../../shared/services/api.service';
 import { JobseekerService } from '../../../shared/services/jobseeker.service';
 import * as moment from 'moment';
+import { NotificationsService } from 'angular2-notifications';
+import { environment } from '../../../../environments/environment';
 
 @Component({
     selector: 'app-work-schedule',
@@ -23,7 +25,7 @@ export class WorkScheduleComponent implements OnInit {
     endTime: any
     times: any;
     repeatDay: string;
-    constructor(private cd: ChangeDetectorRef, public apiservice: ApiService, public jobseekerservice: JobseekerService) {
+    constructor(private cd: ChangeDetectorRef, public apiservice: ApiService, public jobseekerservice: JobseekerService,private notificationsService: NotificationsService) {
         this.minDate = new Date();
         this.calendarminDate = moment(this.minDate).format('MM/DD/YYYY');
         this.times = ['12:00', '12:30', '13:00', '13:30', '14:00'];
@@ -56,6 +58,11 @@ export class WorkScheduleComponent implements OnInit {
             }
         },
             err => {
+                this.notificationsService.error(
+                    err.title,
+                    err.error.message,
+                    environment.options
+                )
             }
         )
     }
@@ -155,11 +162,20 @@ export class WorkScheduleComponent implements OnInit {
         }
         this.jobseekerservice.postJobSchedules(data).subscribe(res => {
             if (res) {
-                // this.events.push(data);
+                this.notificationsService.success(
+                    'Success',
+                    res.message,
+                    environment.options
+                )
                 this.JobSchedules();
             }
         },
             err => {
+                this.notificationsService.error(
+                    err.title,
+                    err.error.message,
+                    environment.options
+                )
             }
         )
         this.event = null;

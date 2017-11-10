@@ -4,6 +4,7 @@ import { DialogComponent, DialogService } from "ng2-bootstrap-modal";
 import { NotificationsService } from 'angular2-notifications';
 
 import { UserService } from '../shared/services/user.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -16,13 +17,7 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
   title: string;
   message: string;
   isLogin: boolean = true;
-  options = {
-    timeOut: 5000,
-    showProgressBar: true,
-    pauseOnHover: false,
-    clickToClose: false,
-    maxLength: 50
-  }
+  
   constructor(
     dialogService: DialogService,
     private router: Router,
@@ -60,7 +55,7 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
         this.notificationsService.error(
             err.title,
             err.error.message,
-            this.options
+            environment.options
           )
       });
   }
@@ -72,7 +67,7 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
         this.notificationsService.success(
           'Success',
           res.message,
-          this.options
+          environment.options
         )
       },
       err => {
@@ -80,7 +75,7 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
         this.notificationsService.error(
           err.title,
           err.message,
-          this.options
+          environment.options
         )
       }
     )

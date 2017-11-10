@@ -56,15 +56,17 @@ export class JobSeekerSearchComponent implements OnInit {
 
   // initialise employer data to use location lattitude and longitude
   initUserData(user) {
-    this.userService.getData(user.Email_Address).subscribe(
-      res => {
-        this.employerLocation.lat = res.data.locationLat
-        this.employerLocation.lng = res.data.locationLng
-      },
-      err => {
+    if(user) {
+      this.userService.getData(user.Email_Address).subscribe(
+        res => {
+          this.employerLocation.lat = res.data.locationLat
+          this.employerLocation.lng = res.data.locationLng
+        },
+        err => {
 
-      }
-    )
+        }
+      )
+    }
   }
 
   selectToHire(id, event) {

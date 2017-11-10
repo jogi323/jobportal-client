@@ -34,6 +34,7 @@ export class ProfileComponent implements OnInit {
   public options = {types: ['address'],componentRestrictions: { country: 'US' }}
   
   getAddress(event){
+    console.log(event);
     this.geoLocation = this.shuffleGoogleMapsAddress(event);
     let streetNumber = (this.geoLocation.addr_num) ? this.geoLocation.addr_num : '';
     let streetName = (this.geoLocation.addr) ? this.geoLocation.addr : '';
@@ -49,6 +50,7 @@ export class ProfileComponent implements OnInit {
     this.user.Zip_Code = this.geoLocation.zip;
     this.user.locationLat = this.geoLocation.lat;
     this.user.locationLng = this.geoLocation.lng;
+    console.log(this.user)
   }
 
   
@@ -98,15 +100,17 @@ export class ProfileComponent implements OnInit {
     })
   }
   initUserData(user){
-    this.userService.getData(user.Email_Address).subscribe(
-      res =>{
-        console.log(res);
-        this.user = res.data;
-      },
-      err =>{
+    if(user.userType !== undefined) {
+      this.userService.getData(user.Email_Address).subscribe(
+        res =>{
+          console.log(res);
+          this.user = res.data;
+        },
+        err =>{
 
-      }
-    )
+        }
+      )
+    }
   }
 
   editUserData(){

@@ -5,8 +5,7 @@ import { JsonLoaderService } from '../../../shared/services/json-loader.service'
 import { UserService } from '../../../shared/services/user.service';
 import { Subscription } from 'rxjs/Subscription';
 import { NotificationsService } from 'angular2-notifications';
-
-const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -28,13 +27,7 @@ export class ProfileComponent implements OnInit {
   yearsList: any[];
   positionList: any[];
   public options = { types: ['address'], componentRestrictions: { country: 'US' } }
-  alertOptions = {
-    timeOut: 5000,
-    showProgressBar: true,
-    pauseOnHover: false,
-    clickToClose: false,
-    maxLength: 50
-  };
+  
   licenseRequired: Boolean = false;
   newImageUploaded: Boolean = false;
   specialityList = [
@@ -113,14 +106,17 @@ export class ProfileComponent implements OnInit {
   }
 
   initUserData(user){
-    if(user) {
+    if(user.userType !== undefined) {
       this.userService.getData(user.Email_Address).subscribe(
         res =>{
-          console.log(res);
           this.user = res.data;
         },
         err =>{
-
+          this.notificationsService.error(
+            err.title,
+            err.error.message,
+            environment.options
+          )
         }
       )
     }
@@ -148,7 +144,7 @@ export class ProfileComponent implements OnInit {
         this.notificationsService.success(
           'Success',
           res.message,
-          this.alertOptions
+          environment.options
         )
         this.isUserDataEdit = !this.isUserDataEdit;
       },
@@ -156,7 +152,7 @@ export class ProfileComponent implements OnInit {
         this.notificationsService.error(
           err.title,
           err.error.message,
-          this.alertOptions
+          environment.options          
         )
       }
     )
@@ -177,7 +173,7 @@ export class ProfileComponent implements OnInit {
         this.notificationsService.success(
           'Success',
           res.message,
-          this.alertOptions
+          environment.options          
         )
         this.isWorkDataEdit = !this.isWorkDataEdit;
       },
@@ -185,7 +181,7 @@ export class ProfileComponent implements OnInit {
         this.notificationsService.error(
           err.title,
           err.error.message,
-          this.alertOptions
+          environment.options          
         )
       }
     )
@@ -218,7 +214,6 @@ export class ProfileComponent implements OnInit {
     this.jsonLoaderService.getPositions()
       .subscribe(data => {
         this.positionList = data;
-        console.log(data);
       }, error => {
         console.log(error);
       });

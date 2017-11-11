@@ -19,7 +19,6 @@ export class ContactUsComponent implements OnInit {
   ngOnInit() {
   }
   submit(){
-    console.log(this.data);
   }
 }
 export interface ContactusModel {

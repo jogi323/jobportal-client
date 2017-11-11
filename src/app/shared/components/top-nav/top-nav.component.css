@@ -1,3 +1,13 @@
 .logo{
     min-height: 60px;
 }
+.profile-status {
+    height: 18px;
+    font-size: 13px;
+    text-align: center;
+    color: red;
+    background: #2db5e2;
+}
+.profile-status span {
+    margin-right: 1%;
+}

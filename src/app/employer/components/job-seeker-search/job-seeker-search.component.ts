@@ -6,6 +6,8 @@ import { UserService } from '../../../shared/services/user.service';
 import { Subscription } from 'rxjs/Subscription';
 import { EmployerService } from '../../../shared/services/employer.service';
 import { HaversineService, GeoCoord } from "ng2-haversine";
+import { NotificationsService } from 'angular2-notifications';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-job-seeker-search',
@@ -30,7 +32,9 @@ export class JobSeekerSearchComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private employerService: EmployerService,
-    private _haversineService: HaversineService
+    private _haversineService: HaversineService,
+    private notificationsService: NotificationsService
+
   ) {
     let newDate = new Date()
     newDate.setUTCHours(0);
@@ -56,14 +60,18 @@ export class JobSeekerSearchComponent implements OnInit {
 
   // initialise employer data to use location lattitude and longitude
   initUserData(user) {
-    if(user) {
+    if(user.userType !== undefined) {
       this.userService.getData(user.Email_Address).subscribe(
         res => {
           this.employerLocation.lat = res.data.locationLat
           this.employerLocation.lng = res.data.locationLng
         },
         err => {
-
+          this.notificationsService.error(
+            err.title,
+            err.error.message,
+            environment.options
+          )
         }
       )
     }
@@ -92,7 +100,6 @@ export class JobSeekerSearchComponent implements OnInit {
       .subscribe(data => {
         this.positionList = data;
       }, error => {
-        console.log(error);
       });
   }
   onDateChange(event) {
@@ -104,7 +111,6 @@ export class JobSeekerSearchComponent implements OnInit {
     this.getJobseekers(this.filterJobseekers);
   }
   onHoursChange(){
-    console.log(this.filterJobseekers);
     this.getJobseekers(this.filterJobseekers);
   }
   filterData() {
@@ -117,15 +123,17 @@ export class JobSeekerSearchComponent implements OnInit {
 
   // get the initial list of job seekers with todays date as input
   getJobseekers(data) {
-    console.log(data);
     this.employerService.queryJobseekers(data).subscribe(
       res => {
-        console.log(res);
         this.jobseekers = res.data;
         this.calculateDistance(this.jobseekers)
       },
       err => {
-        console.log(err)
+        this.notificationsService.error(
+            err.title,
+            err.error.message,
+            environment.options
+          )
       }
     )
   }

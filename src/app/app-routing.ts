@@ -6,12 +6,14 @@ import { ChangePasswordComponent } from './shared/components/change-password/cha
 import { ForgotPasswordComponent } from './shared/components/forgot-password/forgot-password.component';
 import { ContactUsComponent } from './shared/components/contact-us/contact-us.component';
 import { RegisterComponent } from './register/register.component';
+import { ActivateUserComponent } from './activate-user/activate-user.component';
 
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { NoAuthGuardService } from './shared/services/no-auth-guard.service';
 
 const routes: Routes = [
     { path:'', component:HomeComponent,canActivate:[NoAuthGuardService] },
+    { path:'confirm/:id', component:ActivateUserComponent,canActivate:[NoAuthGuardService] },
     { path:'employer', 
       loadChildren:'./employer/employer.module#EmployerModule',
       canActivate:[AuthGuardService] 

@@ -28,6 +28,7 @@ import { JwtService } from './shared/services/jwt.service';
 import { UserService } from './shared/services/user.service';
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { NoAuthGuardService } from './shared/services/no-auth-guard.service';
+import { ActivateUserComponent } from './activate-user/activate-user.component';
 
 // import { SearchPipe } from './shared/pipes/search.pipe';
 
@@ -36,7 +37,8 @@ import { NoAuthGuardService } from './shared/services/no-auth-guard.service';
     AppComponent,
     LoginComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    ActivateUserComponent
     // SearchPipe
   ],
   imports: [

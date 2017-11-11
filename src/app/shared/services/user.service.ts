@@ -136,7 +136,20 @@ changePassword (data) {
   return this.apiService.post(path,data).
   map(
     data => {
-      console.log(data)
+      return data;
+    },
+    err => {
+      return err;
+    }
+  )
+}
+
+activateUser(id) {
+  console.log(id)
+  let path = 'user/confirmation/' + id;
+  return this.apiService.get(path).
+  map(
+    data => {
       return data;
     },
     err => {

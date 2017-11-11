@@ -16,6 +16,8 @@ export class TopNavComponent implements OnInit {
   isLoggedIn: Boolean = false;
   subscription:Subscription;
   currentUser:any;
+  currentUrl:String;
+  showProfileStatus: Boolean = false;
 
   constructor(
     private router: Router,
@@ -36,8 +38,12 @@ export class TopNavComponent implements OnInit {
   }
 
   ngOnInit() {
-
-
+    this.currentUrl = this.router.url;
+    if(this.currentUrl === '/') {
+      this.showProfileStatus = false;
+    }else{
+      this.showProfileStatus = true;
+    }
   }
   userProfile(){
     this.router.navigate([this.userType+'/profile'])
@@ -65,5 +71,9 @@ export class TopNavComponent implements OnInit {
     this.userService.purgeAuth();
     this.router.navigate(['']);
     this.isLoggedIn = false;
+  }
+
+  closeProfileStatus() {
+    console.log('clicked')
   }
 }

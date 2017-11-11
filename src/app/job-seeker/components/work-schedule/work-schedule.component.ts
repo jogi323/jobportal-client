@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ApiService } from '../../../shared/services/api.service';
 import { JobseekerService } from '../../../shared/services/jobseeker.service';
 import * as moment from 'moment';
+import { NotificationsService } from 'angular2-notifications';
+import { environment } from '../../../../environments/environment';
 
 @Component({
     selector: 'app-work-schedule',
@@ -23,7 +25,7 @@ export class WorkScheduleComponent implements OnInit {
     endTime: any
     times: any;
     repeatDay: string;
-    constructor(private cd: ChangeDetectorRef, public apiservice: ApiService, public jobseekerservice: JobseekerService) {
+    constructor(private cd: ChangeDetectorRef, public apiservice: ApiService, public jobseekerservice: JobseekerService,private notificationsService: NotificationsService) {
         this.minDate = new Date();
         this.calendarminDate = moment(this.minDate).format('MM/DD/YYYY');
         this.times = ['12:00', '12:30', '13:00', '13:30', '14:00'];
@@ -56,7 +58,11 @@ export class WorkScheduleComponent implements OnInit {
             }
         },
             err => {
-                console.log(err);
+                this.notificationsService.error(
+                    err.title,
+                    err.error.message,
+                    environment.options
+                )
             }
         )
     }
@@ -86,13 +92,11 @@ export class WorkScheduleComponent implements OnInit {
         return [year, month, day].join('-');
     }
     handleDayClick(event) {
-        console.log(event);
         if (event.date.format() < this.minDate) {
             alert('please select from today onwards');
         }
         else {
             this.start = event.date._d;
-            //console.log(new Date(t.getFullYear(), t.getMonth() + 1, 0, 23, 59, 59));
             this.event = new MyEvent();
             this.event.start = event.date.format();
             switch (this.start.getDay()) {
@@ -126,7 +130,6 @@ export class WorkScheduleComponent implements OnInit {
     }
 
     handleEventClick(e) {
-        console.log("handle event click");
         if (e.calEvent.start.format() < this.minDate) {
             alert('outdated event');
         }
@@ -158,22 +161,27 @@ export class WorkScheduleComponent implements OnInit {
             data.splice(0, 1);
         }
         this.jobseekerservice.postJobSchedules(data).subscribe(res => {
-            console.log(res);
             if (res) {
-                // this.events.push(data);
-                console.log(res);
+                this.notificationsService.success(
+                    'Success',
+                    res.message,
+                    environment.options
+                )
                 this.JobSchedules();
             }
         },
             err => {
-                console.log(err);
+                this.notificationsService.error(
+                    err.title,
+                    err.error.message,
+                    environment.options
+                )
             }
         )
         this.event = null;
     }
 
     saveEvent() {
-        console.log("hai");
         let startDate = new Date(this.event.start);
         let startDay = startDate.getDate();
         if (this.event.allMonth) {
@@ -250,7 +258,6 @@ export class WorkScheduleComponent implements OnInit {
 
     deleteEvent(id) {
         this.jobseekerservice.deleteScheduledJob(id).subscribe(res => {
-            console.log(res);
         })
     }
 

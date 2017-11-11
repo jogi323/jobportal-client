@@ -21,6 +21,7 @@ export class PaymentComponent implements OnInit {
     this.cardNumber = null;
     this.cardType = '';
     this.initializePayment();
+    console.log(this.employerservice.itemsToHire);
    }
    initializePayment(){
     this.payment = {

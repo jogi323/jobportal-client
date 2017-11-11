@@ -8,10 +8,12 @@ import { ApiService } from './api.service';
 
 @Injectable()
 export class EmployerService {
-
+  itemsToHire : any;
   constructor(
     private apiService: ApiService,
-  ) { }
+  ) { 
+    this.itemsToHire = [];
+  }
 
   queryJobseekers(data){
     let path = 'availability/query'
@@ -35,6 +37,14 @@ export class EmployerService {
     return this.apiService.get(route).map( res => {
       return res;
     })
+  }
+
+  setItemsToHire(id){
+    this.itemsToHire.push(id);
+  }
+
+  removeItemToHire(id){
+    this.itemsToHire.splice(id);
   }
 
 }

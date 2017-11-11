@@ -72,11 +72,13 @@ export class JobSeekerSearchComponent implements OnInit {
   selectToHire(id, event) {
     if (event.target.checked) {
       this.itemsToHire.push(id);
-      window.localStorage.setItem('itemsToHire',this.itemsToHire);
+      this.employerService.setItemsToHire(id);
+      //window.localStorage.setItem('itemsToHire',this.itemsToHire);
     }
     else if(!event.target.checked){
       this.itemsToHire.splice(id);
-      window.localStorage.setItem('itemsToHire',this.itemsToHire);      
+      this.employerService.removeItemToHire(id)
+      //window.localStorage.setItem('itemsToHire',this.itemsToHire);      
     }
   }
 

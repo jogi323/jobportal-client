@@ -86,4 +86,12 @@ export class EmployerService {
     })
   }
 
+  // get profile information
+  getProfile(email){
+    const route = 'user/getProfile/'+email;
+    return this.apiService.get(route).map( res =>{
+      return res;
+    })
+  }
+
 }

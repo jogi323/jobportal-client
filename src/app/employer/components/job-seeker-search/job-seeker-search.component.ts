@@ -21,7 +21,7 @@ export class JobSeekerSearchComponent implements OnInit {
   userType: string;
   subscription: Subscription;
   employerLocation: Location;
-  itemsToHire: any = [];
+  itemsToHire: any;
 
   filterJobseekers: FilterJobseekers
   positionList: any[];
@@ -56,6 +56,7 @@ export class JobSeekerSearchComponent implements OnInit {
       this.currentUser = user;
       this.initUserData(user);
     })
+    this.itemsToHire = this.employerService.itemsToHire;
   }
 
   // initialise employer data to use location lattitude and longitude
@@ -90,6 +91,21 @@ export class JobSeekerSearchComponent implements OnInit {
     }
   }
 
+  //sets checkbox value for selected candidates
+  getCheckboxValue(id){
+    let count =0;
+    for(let i=0; i<this.itemsToHire.length; i++){
+      if(this.itemsToHire[i]._id == id){
+        count ++;
+      }
+    }
+    if(count > 0){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 
   ngOnInit() {
     // this.tryHaversine(this.employerLocation);

@@ -21,7 +21,7 @@ export class PaymentComponent implements OnInit {
     this.cardNumber = null;
     this.cardType = '';
     this.initializePayment();
-    console.log(this.employerservice.itemsToHire);
+    //console.log(this.employerservice.itemsToHire);
    }
    initializePayment(){
     this.payment = {
@@ -94,9 +94,13 @@ export class PaymentComponent implements OnInit {
     this.employerservice.makePayment(this.payment).subscribe( res =>{
       if(res.message == 'Payment Sucessfull'){
         this.initializePayment();
+        this.releaseOffer();
       }
     })
   }
-
-
+  releaseOffer(){
+    this.employerservice.postOffer().subscribe( res =>{
+      console.log(res);
+    })
+  }
 }

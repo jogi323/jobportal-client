@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EmployerService } from '../../../shared/services/employer.service';
 
 @Component({
   selector: 'app-prior-job-offer',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PriorJobOfferComponent implements OnInit {
 
-  constructor() { }
+  constructor(private employerService : EmployerService) { }
 
   ngOnInit() {
+    this.employerService.getOffers().subscribe( res =>{
+      console.log(res);
+    })
   }
 
 }

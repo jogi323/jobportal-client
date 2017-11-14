@@ -6,8 +6,7 @@
         <h2 class="heading relative uppercase bottom-line full-grey mb-30">Billing Address</h2>
         <div class="row">
             <div class="col-md-12">
-              <input type="text" class="input-text" placeholder="Position" value name="billing_city" id="billing_city">
-              
+              <input type="text" class="input-text" placeholder="Name On Card" value name="billing_address_1" id="billing_address_1" [(ngModel)]="payment.Billing_Name">
             </div>
           <div class="col-md-12">
             <input type="text" class="input-text" placeholder="Street address" value name="billing_address_1" id="billing_address_1">

@@ -35,10 +35,10 @@
                   <label for="username"><b>Street Address:</b></label>
                   <p>{{user.Address_street}}</p>
                 </div>
-                <div class="col-md-12">
+                <!--<div class="col-md-12">
                   <label for="username"><b>Land Mark:</b></label>
                   <p class="">{{user.Address_Unit}}</p>
-                </div>
+                </div>-->
                 <div class="col-md-6">
                   <label for="username"><b>city/state:</b></label>
                   <p>{{user.City}}/{{user.State}}</p>
@@ -226,7 +226,7 @@
                   <p>{{user.Experience}}</p>
                 </div>
                 <div class="col-md-4">
-                  <label for="Travel_Distance"><b>Travel Distance:</b></label>
+                  <label for="Travel_Distance"><b>Distance Willing to travel:</b></label>
                   <p>{{user.Travel_Distance}}</p>
                 </div>
                 <div class="col-md-4">
@@ -360,7 +360,7 @@
                   </div>
                 </div>
                 <div class="col-lg-6">
-                  <label for="User_Travel_Distance">Travel Distance
+                  <label for="User_Travel_Distance">Distance Willing to travel
                   <abbr class="required" title="required">*</abbr>
                   </label>
                   <input type="number" class="input-text" [(ngModel)]="user.Travel_Distance" placeholder value name="Travel_Distance" id="User_Travel_Distance"

@@ -17,8 +17,8 @@
       </div>
     </div>
   </div> <!-- end top bar -->
-   <div class="profile-status" *ngIf = "showProfileStatus">
-     Profile not updated
+   <div class="profile-status" *ngIf = "isLoggedIn || (currentUser.personalInfo || currentUser.workInfo)">
+    Your <span *ngIf="currentUser.personalInfo">personal</span><span *ngIf="(currentUser.workInfo && currentUser.personalInfo)"> and  </span><span *ngIf="currentUser.workInfo">work</span> profile not updated
      <span class="pull-right" (click)="closeProfileStatus()"><i class="fa fa-times" aria-hidden="true"></i></span>
    </div>       
   <nav class="navbar navbar-static-top">
@@ -62,7 +62,7 @@
                   <a  [routerLink]="['jobseeker/schedule']" routerLinkActive="active">Change Password</a>
                 </li>
                 <li class="mobile-links hidden-lg hidden-md">
-                  <a >Log Out</a>
+                  <a (click)='logoutUser()'>Log Out</a>
                 </li>
 
               </ul> <!-- end menu -->
@@ -81,7 +81,7 @@
                 </li>
 
                 <li class="mobile-links hidden-lg hidden-md">
-                  <a >Log Out</a>
+                  <a (click)='logoutUser()' >Log Out</a>
                 </li>
               </ul> <!-- end menu -->
             </div> <!-- end collapse -->

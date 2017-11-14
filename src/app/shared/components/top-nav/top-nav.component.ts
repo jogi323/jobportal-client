@@ -26,6 +26,7 @@ export class TopNavComponent implements OnInit {
     private userService: UserService
   ) {
     this.subscription = userService.currentUser.subscribe(user =>{
+      console.log(user)
         if(user.userType !== undefined){
           this.isLoggedIn = true;
         }else {
@@ -38,12 +39,7 @@ export class TopNavComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currentUrl = this.router.url;
-    if(this.currentUrl === '/') {
-      this.showProfileStatus = false;
-    }else{
-      this.showProfileStatus = true;
-    }
+    
   }
   userProfile(){
     this.router.navigate([this.userType+'/profile'])

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { JsonLoaderService } from '../../../shared/services/json-loader.service';
 import { EmployerService } from '../../../shared/services/employer.service';
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-payment',
@@ -11,30 +12,33 @@ import { EmployerService } from '../../../shared/services/employer.service';
 export class PaymentComponent implements OnInit {
 
   statesList: any[];
-  cardNumber:number;
-  cardType:string;
-  payment:any;
+  cardNumber: number;
+  cardType: string;
+  payment: any;
   constructor(
     private jsonLoaderService: JsonLoaderService,
-    public employerservice : EmployerService
-  ) { 
+    public employerservice: EmployerService,
+    public userService: UserService
+  ) {
     this.cardNumber = null;
     this.cardType = '';
     this.initializePayment();
-   }
-   initializePayment(){
+    // this.getDefaultAddress();
+  }
+  initializePayment() {
     this.payment = {
-      Card_Nr : null,
-      Billing_Name : '',
-      Expiration_Month : null,
-      Expiration_Year : null,
-      City :'',
-      State : '',
-      Zip_Code : null,
-      Amount : 2000,
-      Position_id : ''
+      Card_Nr: null,
+      Billing_Name: '',
+      Expiration_Month: null,
+      Expiration_Year: null,
+      street:'',
+      City: '',
+      State: '',
+      Zip_Code: null,
+      Amount: 2000,
+      Position_id: ''
     }
-   }
+  }
   ngOnInit() {
     this.jsonLoaderService.getStates()
       .subscribe(data => {
@@ -48,7 +52,7 @@ export class PaymentComponent implements OnInit {
     if (String(number).match(re) != null)
       this.cardType = "Visa";
 
-    // Mastercard 
+    // Mastercard   
     // Updated for Mastercard 2017 BINs expansion
     if (/^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/.test(number))
       this.cardType = "Mastercard";
@@ -83,19 +87,43 @@ export class PaymentComponent implements OnInit {
     if (String(number).match(re) != null)
       this.cardType = "Visa Electron";
 
-    if(!this.cardType){
+    if (!this.cardType) {
       this.cardType = "wrong number";
     }
   }
 
   //payment method
-  makePayment(){
-    this.employerservice.makePayment(this.payment).subscribe( res =>{
-      if(res.message == 'Payment Sucessfull'){
+  makePayment() {
+    this.employerservice.makePayment(this.payment).subscribe(res => {
+      if (res.message == 'Payment Sucessfull') {
         this.initializePayment();
+        this.releaseOffer();
       }
     })
   }
-
-
+  releaseOffer() {
+    this.employerservice.postOffer().subscribe(res => {
+      console.log(res);
+    })
+  }
+  //default address function
+  useMyAddress(event) {
+    if(event.target.checked){
+      let user = this.userService.getCurrentUser();
+      this.userService.getData(user.Email_Address).subscribe( res =>{
+        if(res){
+          this.payment.street = res["data"].Address_street;
+          this.payment.City = res["data"].City;
+          this.payment.State = res["data"].State;
+          this.payment.Zip_Code = res["data"].Zip_Code;        
+        }
+      })
+    }
+    else if(!event.target.checked){
+      this.payment.street = '';
+      this.payment.City = '';
+      this.payment.State = '';
+      this.payment.Zip_Code = '';
+    }
+  }
 }

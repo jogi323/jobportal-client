@@ -42,6 +42,7 @@ export class ProfileComponent implements OnInit {
       this.user.Address_Unit = location + ', ' + neighborhood
       this.user.City = this.geoLocation.city;
       this.user.State = this.geoLocation.state;
+      console.log(this.user.State);
       this.user.Zip_Code = this.geoLocation.zip;
       this.user.locationLat = this.geoLocation.lat;
       this.user.locationLng = this.geoLocation.lng;

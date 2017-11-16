@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../shared/services/user.service';
 import { NotificationsService } from 'angular2-notifications';
 import { environment } from '../../environments/environment';
+import { LoaderService } from '../shared/services/loader.service';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private loaderService: LoaderService
   ) {
     this.employee = {
       Referred_By: '',
@@ -47,15 +49,18 @@ export class RegisterComponent implements OnInit {
 
   registerUser() {
     this.employee.userType = this.userType;
+    this.loaderService.display(true);
     this.userService.registerUser(this.employee).subscribe(
       res => {
           this.router.navigate(['']);
+          this.loaderService.display(false);
           this.notificationsService.success('Success',
             res.message,
             environment.options
           )
       },
       err => {
+        this.loaderService.display(false);        
         this.notificationsService.error(
           err.title,
           err.error.message,

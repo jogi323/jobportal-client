@@ -5,6 +5,7 @@ import { NotificationsService } from 'angular2-notifications';
 
 import { UserService } from '../shared/services/user.service';
 import { environment } from '../../environments/environment';
+import { LoaderService } from '../shared/services/loader.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
     dialogService: DialogService,
     private router: Router,
     private userService: UserService,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private loaderService: LoaderService
   ) {
     super(dialogService);
     this.user = {
@@ -45,6 +47,7 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
   }
 
   login() {
+    this.loaderService.display(true);
     this.userService.attemptAuth(this.user).subscribe(
       res => {
           this.router.navigate([res.userType+'/profile']);
@@ -56,14 +59,17 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
             err.title,
             err.error.message,
             environment.options
-          )
+          );
+         this.loaderService.display(false);          
       });
   }
 
   reset() {
+    this.loaderService.display(true); 
+    this.close();       
     this.userService.resetPassword(this.forgotPasswordData).subscribe(
       res => {
-        this.close();
+         this.loaderService.display(false);                  
         this.notificationsService.success(
           'Success',
           res.message,
@@ -71,12 +77,12 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
         )
       },
       err => {
-          this.close();
         this.notificationsService.error(
           err.title,
           err.message,
           environment.options
         )
+         this.loaderService.display(false);                  
       }
     )
   }

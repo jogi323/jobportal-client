@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { JsonLoaderService } from '../../../shared/services/json-loader.service';
 import { EmployerService } from '../../../shared/services/employer.service';
 import { UserService } from '../../../shared/services/user.service';
+import { LoaderService } from '../../../shared/services/loader.service';
 
 @Component({
   selector: 'app-payment',
@@ -18,7 +19,8 @@ export class PaymentComponent implements OnInit {
   constructor(
     private jsonLoaderService: JsonLoaderService,
     public employerservice: EmployerService,
-    public userService: UserService
+    public userService: UserService,
+    private loaderService: LoaderService
   ) {
     this.cardNumber = null;
     this.cardType = '';
@@ -94,11 +96,13 @@ export class PaymentComponent implements OnInit {
 
   //payment method
   makePayment() {
+    this.loaderService.display(true);          
     this.employerservice.makePayment(this.payment).subscribe(res => {
       if (res.message == 'Payment Sucessfull') {
         this.initializePayment();
         this.releaseOffer();
       }
+      this.loaderService.display(false);          
     })
   }
   releaseOffer() {

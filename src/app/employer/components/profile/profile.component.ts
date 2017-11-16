@@ -6,6 +6,7 @@ import { UserService } from '../../../shared/services/user.service';
 import { Subscription } from 'rxjs/Subscription';
 import { NotificationsService } from 'angular2-notifications';
 import { environment } from '../../../../environments/environment';
+import { LoaderService } from '../../../shared/services/loader.service';
 
 @Component({
   selector: 'app-profile',
@@ -63,7 +64,9 @@ export class ProfileComponent implements OnInit {
     private jsonLoaderService:JsonLoaderService,
     private userService: UserService,
     private notificationsService: NotificationsService,
-    private ngzone: NgZone
+    private ngzone: NgZone,
+    private loaderService: LoaderService
+
   ) { 
     this.user = {
       Firstname : "",
@@ -88,7 +91,6 @@ export class ProfileComponent implements OnInit {
       Contact_Phone_Nr:undefined,
       image:""
     }
-
     this.subscription = userService.currentUser.subscribe(user =>{
       this.isUserDataEdit = user.personalInfo;
       this.isWorkDataEdit = user.workInfo;
@@ -101,13 +103,15 @@ export class ProfileComponent implements OnInit {
       this.userService.getData(user.Email_Address).subscribe(
         res =>{
           this.user = res.data;
+          this.loaderService.display(false);          
         },
         err =>{
+          this.loaderService.display(false);          
           this.notificationsService.error(
             err.title,
             err.error.message,
             environment.options
-          )
+          );
         }
       )
     }
@@ -121,8 +125,10 @@ export class ProfileComponent implements OnInit {
     this.isUserDataEdit = !this.isUserDataEdit;   
   }
   updateUserData(){
+    this.loaderService.display(true);              
     this.userService.updatePersonal(this.user).subscribe(
       res =>{
+        this.loaderService.display(false);                      
          this.notificationsService.success(
             'Success',
             res.message,
@@ -131,6 +137,7 @@ export class ProfileComponent implements OnInit {
         this.isUserDataEdit = !this.isUserDataEdit; 
       },
       err => {
+        this.loaderService.display(false);                      
         this.notificationsService.error(
             err.title,
             err.error.message,
@@ -149,8 +156,10 @@ export class ProfileComponent implements OnInit {
   }
 
   updateWorkData(user){
+    this.loaderService.display(true);                          
     this.userService.updateWork(this.user).subscribe(
       res =>{
+        this.loaderService.display(false);                              
          this.notificationsService.success(
             'Success',
             res.message,
@@ -159,6 +168,7 @@ export class ProfileComponent implements OnInit {
         this.isWorkDataEdit = !this.isWorkDataEdit; 
       },
       err => {
+        this.loaderService.display(false);                              
         this.notificationsService.error(
             err.title,
             err.error.message,

@@ -4,6 +4,7 @@ import { JobseekerService } from '../../../shared/services/jobseeker.service';
 import * as moment from 'moment';
 import { NotificationsService } from 'angular2-notifications';
 import { environment } from '../../../../environments/environment';
+import { LoaderService } from '../../../shared/services/loader.service';
 
 @Component({
     selector: 'app-work-schedule',
@@ -25,7 +26,8 @@ export class WorkScheduleComponent implements OnInit {
     endTime: any
     times: any;
     repeatDay: string;
-    constructor(private cd: ChangeDetectorRef, public apiservice: ApiService, public jobseekerservice: JobseekerService,private notificationsService: NotificationsService) {
+    constructor(private cd: ChangeDetectorRef, public apiservice: ApiService, public jobseekerservice: JobseekerService,private notificationsService: NotificationsService,
+    private loaderService: LoaderService) {
         this.minDate = new Date();
         this.calendarminDate = moment(this.minDate).format('MM/DD/YYYY');
         this.times = ['12:00', '12:30', '13:00', '13:30', '14:00'];
@@ -43,6 +45,7 @@ export class WorkScheduleComponent implements OnInit {
     }
 
     JobSchedules() {
+        this.loaderService.display(true);          
         this.jobseekerservice.getJobSchedules().subscribe(res => {
             this.events = [{
                 id: null,
@@ -56,8 +59,10 @@ export class WorkScheduleComponent implements OnInit {
                 }
                 this.events.push(eventToshow);
             }
+        this.loaderService.display(false);                   
         },
             err => {
+                this.loaderService.display(false);                                   
                 this.notificationsService.error(
                     err.title,
                     err.error.message,
@@ -157,11 +162,13 @@ export class WorkScheduleComponent implements OnInit {
     }
 
     postEvent(data) {
+        this.loaderService.display(true);                  
         if (data.length > 1) {
             data.splice(0, 1);
         }
         this.jobseekerservice.postJobSchedules(data).subscribe(res => {
             if (res) {
+                this.loaderService.display(false);          
                 this.notificationsService.success(
                     'Success',
                     res.message,
@@ -171,6 +178,7 @@ export class WorkScheduleComponent implements OnInit {
             }
         },
             err => {
+                this.loaderService.display(false);                          
                 this.notificationsService.error(
                     err.title,
                     err.error.message,

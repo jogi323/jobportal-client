@@ -8,6 +8,7 @@ import { EmployerService } from '../../../shared/services/employer.service';
 import { HaversineService, GeoCoord } from "ng2-haversine";
 import { NotificationsService } from 'angular2-notifications';
 import { environment } from '../../../../environments/environment';
+import { LoaderService } from '../../../shared/services/loader.service';
 
 @Component({
   selector: 'app-job-seeker-search',
@@ -33,7 +34,8 @@ export class JobSeekerSearchComponent implements OnInit {
     private userService: UserService,
     private employerService: EmployerService,
     private _haversineService: HaversineService,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private loaderService: LoaderService
 
   ) {
     let newDate = new Date()
@@ -61,13 +63,16 @@ export class JobSeekerSearchComponent implements OnInit {
 
   // initialise employer data to use location lattitude and longitude
   initUserData(user) {
+    this.loaderService.display(true);          
     if(user.userType !== undefined) {
       this.userService.getData(user.Email_Address).subscribe(
         res => {
-          this.employerLocation.lat = res.data.locationLat
-          this.employerLocation.lng = res.data.locationLng
+          this.employerLocation.lat = res.data.locationLat;
+          this.employerLocation.lng = res.data.locationLng;
+          this.loaderService.display(false);          
         },
         err => {
+          this.loaderService.display(false);          
           this.notificationsService.error(
             err.title,
             err.error.message,
@@ -139,12 +144,15 @@ export class JobSeekerSearchComponent implements OnInit {
 
   // get the initial list of job seekers with todays date as input
   getJobseekers(data) {
+    this.loaderService.display(true);          
     this.employerService.queryJobseekers(data).subscribe(
       res => {
         this.jobseekers = res.data;
-        this.calculateDistance(this.jobseekers)
+        this.calculateDistance(this.jobseekers);
+        this.loaderService.display(false);          
       },
       err => {
+        this.loaderService.display(false);                  
         this.notificationsService.error(
             err.title,
             err.error.message,

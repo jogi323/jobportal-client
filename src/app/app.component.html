@@ -8,7 +8,9 @@
   <div class="content-wrapper oh">
   
   <!-- main content -->
-  <router-outlet></router-outlet>
+  <router-outlet>
+    <span *ngIf="showLoader" class="loading"></span>
+  </router-outlet>
 
 
   <app-footer></app-footer>

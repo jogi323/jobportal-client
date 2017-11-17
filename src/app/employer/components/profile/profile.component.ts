@@ -1,10 +1,12 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit, NgZone  } from '@angular/core';
 
 import { User } from '../../../shared/models/user.model';
 import { JsonLoaderService } from '../../../shared/services/json-loader.service';
 import { UserService } from '../../../shared/services/user.service';
 import { Subscription } from 'rxjs/Subscription';
 import { NotificationsService } from 'angular2-notifications';
+import { environment } from '../../../../environments/environment';
+import { LoaderService } from '../../../shared/services/loader.service';
 
 @Component({
   selector: 'app-profile',
@@ -23,18 +25,11 @@ export class ProfileComponent implements OnInit {
   statesList:any[];
   languagesList:any[];
   yearsList:any[];
-  alertOptions = {
-      timeOut: 5000,
-      showProgressBar: true,
-      pauseOnHover: false,
-      clickToClose: false,
-      maxLength: 50
-    };
+  
   newImageUploaded: Boolean = false;
   public options = {types: ['address'],componentRestrictions: { country: 'US' }}
   
   getAddress(event){
-    console.log(event);
     this.geoLocation = this.shuffleGoogleMapsAddress(event);
     let streetNumber = (this.geoLocation.addr_num) ? this.geoLocation.addr_num : '';
     let streetName = (this.geoLocation.addr) ? this.geoLocation.addr : '';
@@ -43,14 +38,16 @@ export class ProfileComponent implements OnInit {
     let city = (this.geoLocation.city) ? this.geoLocation.city : '';
     let state = (this.geoLocation.state) ? this.geoLocation.state : '';
     let zip = (this.geoLocation.zip) ? this.geoLocation.zip : '';
-    this.user.Address_street = streetNumber + ', ' + streetName;
-    this.user.Address_Unit = location + ', ' + neighborhood
-    this.user.City = this.geoLocation.city;
-    this.user.State = this.geoLocation.state;
-    this.user.Zip_Code = this.geoLocation.zip;
-    this.user.locationLat = this.geoLocation.lat;
-    this.user.locationLng = this.geoLocation.lng;
-    console.log(this.user)
+    this.ngzone.run(() => {
+      this.user.Address_street = streetNumber + ', ' + streetName;
+      this.user.Address_Unit = location + ', ' + neighborhood
+      this.user.City = this.geoLocation.city;
+      this.user.State = this.geoLocation.state;
+      console.log(this.user.State);
+      this.user.Zip_Code = this.geoLocation.zip;
+      this.user.locationLat = this.geoLocation.lat;
+      this.user.locationLng = this.geoLocation.lng;
+    })
   }
 
   
@@ -66,7 +63,10 @@ export class ProfileComponent implements OnInit {
   constructor(
     private jsonLoaderService:JsonLoaderService,
     private userService: UserService,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private ngzone: NgZone,
+    private loaderService: LoaderService
+
   ) { 
     this.user = {
       Firstname : "",
@@ -91,7 +91,6 @@ export class ProfileComponent implements OnInit {
       Contact_Phone_Nr:undefined,
       image:""
     }
-
     this.subscription = userService.currentUser.subscribe(user =>{
       this.isUserDataEdit = user.personalInfo;
       this.isWorkDataEdit = user.workInfo;
@@ -103,11 +102,16 @@ export class ProfileComponent implements OnInit {
     if(user.userType !== undefined) {
       this.userService.getData(user.Email_Address).subscribe(
         res =>{
-          console.log(res);
           this.user = res.data;
+          this.loaderService.display(false);          
         },
         err =>{
-
+          this.loaderService.display(false);          
+          this.notificationsService.error(
+            err.title,
+            err.error.message,
+            environment.options
+          );
         }
       )
     }
@@ -121,22 +125,23 @@ export class ProfileComponent implements OnInit {
     this.isUserDataEdit = !this.isUserDataEdit;   
   }
   updateUserData(){
+    this.loaderService.display(true);              
     this.userService.updatePersonal(this.user).subscribe(
       res =>{
-        console.log(res);
+        this.loaderService.display(false);                      
          this.notificationsService.success(
             'Success',
             res.message,
-            this.alertOptions
+            environment.options
           )
         this.isUserDataEdit = !this.isUserDataEdit; 
       },
       err => {
-        console.log(err);
+        this.loaderService.display(false);                      
         this.notificationsService.error(
             err.title,
             err.error.message,
-            this.alertOptions
+            environment.options
           )
       }
     )
@@ -151,22 +156,23 @@ export class ProfileComponent implements OnInit {
   }
 
   updateWorkData(user){
+    this.loaderService.display(true);                          
     this.userService.updateWork(this.user).subscribe(
       res =>{
-        console.log(res);
+        this.loaderService.display(false);                              
          this.notificationsService.success(
             'Success',
             res.message,
-            this.alertOptions
+            environment.options
           )
         this.isWorkDataEdit = !this.isWorkDataEdit; 
       },
       err => {
-        console.log(err);
+        this.loaderService.display(false);                              
         this.notificationsService.error(
             err.title,
             err.error.message,
-            this.alertOptions
+            environment.options
           )
       }
     )   

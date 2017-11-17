@@ -4,6 +4,8 @@ import { DialogComponent, DialogService } from "ng2-bootstrap-modal";
 import { NotificationsService } from 'angular2-notifications';
 
 import { UserService } from '../shared/services/user.service';
+import { environment } from '../../environments/environment';
+import { LoaderService } from '../shared/services/loader.service';
 
 @Component({
   selector: 'app-login',
@@ -16,18 +18,13 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
   title: string;
   message: string;
   isLogin: boolean = true;
-  options = {
-    timeOut: 5000,
-    showProgressBar: true,
-    pauseOnHover: false,
-    clickToClose: false,
-    maxLength: 50
-  }
+  
   constructor(
     dialogService: DialogService,
     private router: Router,
     private userService: UserService,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private loaderService: LoaderService
   ) {
     super(dialogService);
     this.user = {
@@ -50,6 +47,7 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
   }
 
   login() {
+    this.loaderService.display(true);
     this.userService.attemptAuth(this.user).subscribe(
       res => {
           this.router.navigate([res.userType+'/profile']);
@@ -59,31 +57,32 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
         this.close();
         this.notificationsService.error(
             err.title,
-            'err.error.message',
-            this.options
-          )
+            err.error.message,
+            environment.options
+          );
+         this.loaderService.display(false);          
       });
   }
 
   reset() {
+    this.loaderService.display(true); 
+    this.close();       
     this.userService.resetPassword(this.forgotPasswordData).subscribe(
       res => {
-        this.close();
+         this.loaderService.display(false);                  
         this.notificationsService.success(
           'Success',
           res.message,
-          this.options
+          environment.options
         )
-        console.log(res);
       },
       err => {
-          this.close();
         this.notificationsService.error(
           err.title,
           err.message,
-          this.options
+          environment.options
         )
-        console.log(err);
+         this.loaderService.display(false);                  
       }
     )
   }

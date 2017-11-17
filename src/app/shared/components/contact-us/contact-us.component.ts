@@ -14,12 +14,24 @@ export class ContactUsComponent implements OnInit {
       email:'',
       comments:'',
     }
+    window['verifyCallback'] = this.verifyCallback.bind(this);
   }
 
   ngOnInit() {
   }
+  displayRecaptcha(){
+    var doc = <HTMLDivElement>document.getElementById('signup-form');
+    var script = document.createElement('script');
+    script.innerHTML = '';
+    script.src = 'https://www.google.com/recaptcha/api.js';
+    script.async = true;
+    script.defer = true;
+    doc.appendChild(script);
+  }
   submit(){
-    console.log(this.data);
+  }
+  verifyCallback(response){
+    alert(response);
   }
 }
 export interface ContactusModel {

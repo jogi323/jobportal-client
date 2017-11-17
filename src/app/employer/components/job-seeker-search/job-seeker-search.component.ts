@@ -6,6 +6,9 @@ import { UserService } from '../../../shared/services/user.service';
 import { Subscription } from 'rxjs/Subscription';
 import { EmployerService } from '../../../shared/services/employer.service';
 import { HaversineService, GeoCoord } from "ng2-haversine";
+import { NotificationsService } from 'angular2-notifications';
+import { environment } from '../../../../environments/environment';
+import { LoaderService } from '../../../shared/services/loader.service';
 
 @Component({
   selector: 'app-job-seeker-search',
@@ -19,7 +22,7 @@ export class JobSeekerSearchComponent implements OnInit {
   userType: string;
   subscription: Subscription;
   employerLocation: Location;
-  itemsToHire: any = [];
+  itemsToHire: any;
 
   filterJobseekers: FilterJobseekers
   positionList: any[];
@@ -30,7 +33,10 @@ export class JobSeekerSearchComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private employerService: EmployerService,
-    private _haversineService: HaversineService
+    private _haversineService: HaversineService,
+    private notificationsService: NotificationsService,
+    private loaderService: LoaderService
+
   ) {
     let newDate = new Date()
     newDate.setUTCHours(0);
@@ -52,18 +58,26 @@ export class JobSeekerSearchComponent implements OnInit {
       this.currentUser = user;
       this.initUserData(user);
     })
+    this.itemsToHire = this.employerService.itemsToHire;
   }
 
   // initialise employer data to use location lattitude and longitude
   initUserData(user) {
-    if(user) {
+    this.loaderService.display(true);          
+    if(user.userType !== undefined) {
       this.userService.getData(user.Email_Address).subscribe(
         res => {
-          this.employerLocation.lat = res.data.locationLat
-          this.employerLocation.lng = res.data.locationLng
+          this.employerLocation.lat = res.data.locationLat;
+          this.employerLocation.lng = res.data.locationLng;
+          this.loaderService.display(false);          
         },
         err => {
-
+          this.loaderService.display(false);          
+          this.notificationsService.error(
+            err.title,
+            err.error.message,
+            environment.options
+          )
         }
       )
     }
@@ -72,14 +86,31 @@ export class JobSeekerSearchComponent implements OnInit {
   selectToHire(id, event) {
     if (event.target.checked) {
       this.itemsToHire.push(id);
-      window.localStorage.setItem('itemsToHire',this.itemsToHire);
+      this.employerService.setItemsToHire(id);
+      //window.localStorage.setItem('itemsToHire',this.itemsToHire);
     }
     else if(!event.target.checked){
       this.itemsToHire.splice(id);
-      window.localStorage.setItem('itemsToHire',this.itemsToHire);      
+      this.employerService.removeItemToHire(id)
+      //window.localStorage.setItem('itemsToHire',this.itemsToHire);      
     }
   }
 
+  //sets checkbox value for selected candidates
+  getCheckboxValue(id){
+    let count =0;
+    for(let i=0; i<this.itemsToHire.length; i++){
+      if(this.itemsToHire[i]._id == id){
+        count ++;
+      }
+    }
+    if(count > 0){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 
   ngOnInit() {
     // this.tryHaversine(this.employerLocation);
@@ -90,7 +121,6 @@ export class JobSeekerSearchComponent implements OnInit {
       .subscribe(data => {
         this.positionList = data;
       }, error => {
-        console.log(error);
       });
   }
   onDateChange(event) {
@@ -102,7 +132,6 @@ export class JobSeekerSearchComponent implements OnInit {
     this.getJobseekers(this.filterJobseekers);
   }
   onHoursChange(){
-    console.log(this.filterJobseekers);
     this.getJobseekers(this.filterJobseekers);
   }
   filterData() {
@@ -115,15 +144,20 @@ export class JobSeekerSearchComponent implements OnInit {
 
   // get the initial list of job seekers with todays date as input
   getJobseekers(data) {
-    console.log(data);
+    this.loaderService.display(true);          
     this.employerService.queryJobseekers(data).subscribe(
       res => {
-        console.log(res);
         this.jobseekers = res.data;
-        this.calculateDistance(this.jobseekers)
+        this.calculateDistance(this.jobseekers);
+        this.loaderService.display(false);          
       },
       err => {
-        console.log(err)
+        this.loaderService.display(false);                  
+        this.notificationsService.error(
+            err.title,
+            err.error.message,
+            environment.options
+          )
       }
     )
   }

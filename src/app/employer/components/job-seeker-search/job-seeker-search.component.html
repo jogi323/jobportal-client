@@ -25,7 +25,7 @@
 					<label for="billing_address_1" class="pull-left">Hours Guaranteed
 					</label>
 					<p class="form-row form-row-wide">
-						<input type="number" class="input-text" value placeholder="No. of hours" [(ngModel)]="filterJobseekers.Hours_Guaranteed" name="Hours_Guarnteed" id="Hours_Guarnteed" (ngModelChange)="onHoursChange()">
+						<input type="number" class="input-text" value placeholder="No. of hours you will guarantee" [(ngModel)]="filterJobseekers.Hours_Guaranteed" name="Hours_Guarnteed" id="Hours_Guarnteed" (ngModelChange)="onHoursChange()">
 					</p>
 				</div>
 				<div class="col-sm-10 col-sm-offset-1">
@@ -35,7 +35,7 @@
 						<input type="text" class="input-text" value placeholder="Pay Requested" name="calc_shipping_postcode" id="calc_shipping_postcode" [(ngModel)]="filterJobseekers.pay_request">
 					</p>
 				</div>
-				<div class="col-sm-10 col-sm-offset-1">
+				<!-- <div class="col-sm-10 col-sm-offset-1">
 					<label for="billing_address_1" class="pull-left">Distance (in miles)
 					</label>
 					<p class="form-row form-row-wide ">
@@ -49,7 +49,7 @@
 							<option value="ZW">60</option>
 						</select>
 					</p>
-				</div>
+				</div> -->
 			</div>
 		</section>
 	</div>
@@ -103,7 +103,7 @@
 									</td> -->
 									<td class="product-hire">
 										<a class="Hire" title="Hire this person">
-											<input type="checkbox" name="Hire" (change)="selectToHire(jobseeker._id,$event)">
+											<input type="checkbox" name="Hire" (change)="selectToHire(jobseeker,$event)">
 										</a>
 									</td>
 								</tr>

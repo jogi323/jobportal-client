@@ -1,6 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 
 import { UserService } from './shared/services/user.service';
+import { LoaderService } from './shared/services/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +14,11 @@ export class AppComponent implements OnInit {
       timeOut: 5000,
       lastOnBottom: true,
   };
-
-  constructor(private userService: UserService){
-
+  showLoader: boolean;
+  constructor(private userService: UserService,private loaderService: LoaderService){
+    this.loaderService.status.subscribe((val: boolean) => {
+            this.showLoader = val;
+    });
   }
   ngOnInit(){
     this.userService.populate();

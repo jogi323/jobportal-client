@@ -5,8 +5,8 @@ import { JsonLoaderService } from '../../../shared/services/json-loader.service'
 import { UserService } from '../../../shared/services/user.service';
 import { Subscription } from 'rxjs/Subscription';
 import { NotificationsService } from 'angular2-notifications';
-
-const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
+import { environment } from '../../../../environments/environment';
+import { LoaderService } from '../../../shared/services/loader.service';
 
 @Component({
   selector: 'app-profile',
@@ -28,13 +28,7 @@ export class ProfileComponent implements OnInit {
   yearsList: any[];
   positionList: any[];
   public options = { types: ['address'], componentRestrictions: { country: 'US' } }
-  alertOptions = {
-    timeOut: 5000,
-    showProgressBar: true,
-    pauseOnHover: false,
-    clickToClose: false,
-    maxLength: 50
-  };
+  
   licenseRequired: Boolean = false;
   newImageUploaded: Boolean = false;
   specialityList = [
@@ -71,7 +65,8 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private notificationsService: NotificationsService,
-    private ngzone: NgZone
+    private ngzone: NgZone,
+    private loaderService: LoaderService
 
   ) {
     this.user = {
@@ -113,14 +108,20 @@ export class ProfileComponent implements OnInit {
   }
 
   initUserData(user){
-    if(user) {
+    if(user.userType !== undefined) {
       this.userService.getData(user.Email_Address).subscribe(
         res =>{
-          console.log(res);
           this.user = res.data;
+          this.loaderService.display(false);          
+
         },
         err =>{
-
+          this.loaderService.display(false);          
+          this.notificationsService.error(
+            err.title,
+            err.error.message,
+            environment.options
+          )
         }
       )
     }
@@ -142,21 +143,23 @@ export class ProfileComponent implements OnInit {
     }
   }
   updateUserData(user) {
+    this.loaderService.display(true);              
     this.userService.updatePersonal(this.user).subscribe(
       res => {
-        console.log(res);
+        this.loaderService.display(false);              
         this.notificationsService.success(
           'Success',
           res.message,
-          this.alertOptions
+          environment.options
         )
         this.isUserDataEdit = !this.isUserDataEdit;
       },
       err => {
+        this.loaderService.display(false);
         this.notificationsService.error(
           err.title,
           err.error.message,
-          this.alertOptions
+          environment.options          
         )
       }
     )
@@ -170,22 +173,24 @@ export class ProfileComponent implements OnInit {
     this.isWorkDataEdit = !this.isWorkDataEdit;
   }
 
-  updateWorkData(user) {
+  updateWorkData(user) {  
+    this.loaderService.display(true); 
     this.userService.updateWork(this.user).subscribe(
       res => {
-        console.log(res);
+        this.loaderService.display(false); 
         this.notificationsService.success(
           'Success',
           res.message,
-          this.alertOptions
+          environment.options          
         )
         this.isWorkDataEdit = !this.isWorkDataEdit;
       },
       err => {
+        this.loaderService.display(false); 
         this.notificationsService.error(
           err.title,
           err.error.message,
-          this.alertOptions
+          environment.options          
         )
       }
     )
@@ -218,7 +223,6 @@ export class ProfileComponent implements OnInit {
     this.jsonLoaderService.getPositions()
       .subscribe(data => {
         this.positionList = data;
-        console.log(data);
       }, error => {
         console.log(error);
       });

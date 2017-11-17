@@ -6,11 +6,10 @@
         <h2 class="heading relative uppercase bottom-line full-grey mb-30">Billing Address</h2>
         <div class="row">
             <div class="col-md-12">
-              <input type="text" class="input-text" placeholder="Position" value name="billing_city" id="billing_city">
-              
+              <input type="text" class="input-text" placeholder="Name On Card" value name="billing_address_1" id="billing_address_1" [(ngModel)]="payment.Billing_Name">
             </div>
           <div class="col-md-12">
-            <input type="text" class="input-text" placeholder="Street address" value name="billing_address_1" id="billing_address_1">
+            <input type="text" class="input-text" placeholder="Street address" value name="billing_address_1" id="billing_address_1" [(ngModel)]="payment.street">
             <input type="text" class="input-text" placeholder="Apartment, suite, unit etc. (optional)" value name="billing_address_2" id="billing_address_2">
           </div>
           <div class="col-md-4">
@@ -20,7 +19,7 @@
           <div class="col-md-4">
               <select name="User_State"  id="User_State" class="country_to_state country_select" title="State *" [(ngModel)]="payment.State">
                 <option value="" disabled selected>State</option>
-                <option *ngFor="let state of statesList" [attr.value]="state.name">{{state.name}}</option>
+                <option *ngFor="let state of statesList" [attr.value]="state.key">{{state.name}}</option>
               </select>
           </div>
           <div class="col-md-4">
@@ -28,7 +27,7 @@
           </div>
         </div>
         <div class="checkbox">
-          <input type="checkbox" class="input-checkbox" name="checkbox" id="checkbox2" value="2">
+          <input type="checkbox" class="input-checkbox" name="checkbox" id="checkbox2" value="2" (change)="useMyAddress($event)">
           <span>Use My Address</span>
         </div>
 

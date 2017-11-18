@@ -24,18 +24,21 @@ export class WorkScheduleComponent implements OnInit {
     calendarminDate: any;
     startTime: any;
     endTime: any
-    times: any;
+    startTimes: any;
+    endTimes: any;    
     repeatDay: string;
     constructor(private cd: ChangeDetectorRef, public apiservice: ApiService, public jobseekerservice: JobseekerService, private notificationsService: NotificationsService,
         private loaderService: LoaderService) {
         this.minDate = new Date();
         this.calendarminDate = moment(this.minDate).format('MM/DD/YYYY');
-        this.times = ['12:00', '12:30', '13:00', '13:30', '14:00'];
+        this.startTimes = ['00:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00', '13:00', '14:00', '15:00', '16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00','24:00'];
+        this.endTimes = ['00:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00', '13:00', '14:00', '15:00', '16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00','24:00'];        
         this.events = [{
             id: null,
             Date: null
         }]
         this.eventsToStoreInitialize();
+        this.JobSchedules();        
     }
     // Initialize events to store scope
     eventsToStoreInitialize() {
@@ -46,6 +49,11 @@ export class WorkScheduleComponent implements OnInit {
             Hours_Guaranteed: null,
             Date_Submitted: null
         }];
+    }
+    // set end time function
+    setEndTime(startTime){
+        this.endTimes = this.startTimes.slice(this.startTimes.indexOf(startTime)+1);
+        // console.log(this.endTime.substr(0,2)-this.startTime.substr(0,2));
     }
     JobSchedules() {
         this.loaderService.display(true);
@@ -78,7 +86,6 @@ export class WorkScheduleComponent implements OnInit {
 
     ngOnInit() {
         // this.eventService.getEvents().then(events => {this.events = events;});
-        this.JobSchedules();
         this.header = {
             left: 'prev,next today',
             center: 'title',
@@ -208,7 +215,7 @@ export class WorkScheduleComponent implements OnInit {
                         Time_Start: this.startTime,
                         Time_Finish: this.endTime,
                         Date_Submitted: new Date(),
-                        Hours_Guaranteed: 4
+                        Hours_Guaranteed: this.endTime.substr(0,2)-this.startTime.substr(0,2)
                     }
                     this.eventToStore.push(eventToSave);
                     b++;
@@ -219,7 +226,7 @@ export class WorkScheduleComponent implements OnInit {
                         Time_Start: this.startTime,
                         Time_Finish: this.endTime,
                         Date_Submitted: new Date(),
-                        Hours_Guaranteed: 4
+                        Hours_Guaranteed: this.endTime.substr(0,2)-this.startTime.substr(0,2)
                     }
                     this.eventToStore.push(eventToSave);
                 }
@@ -239,7 +246,7 @@ export class WorkScheduleComponent implements OnInit {
                         Time_Start: this.startTime,
                         Time_Finish: this.endTime,
                         Date_Submitted: new Date(),
-                        Hours_Guaranteed: 4
+                        Hours_Guaranteed: this.endTime.substr(0,2)-this.startTime.substr(0,2)
                     }
                     this.eventToStore.push(eventToSave);
                     a++;
@@ -250,7 +257,7 @@ export class WorkScheduleComponent implements OnInit {
                         Time_Start: this.startTime,
                         Time_Finish: this.endTime,
                         Date_Submitted: new Date(),
-                        Hours_Guaranteed: 4
+                        Hours_Guaranteed: this.endTime.substr(0,2)-this.startTime.substr(0,2)
                     }
                     this.eventToStore.push(eventToSave);
                 }
@@ -262,7 +269,7 @@ export class WorkScheduleComponent implements OnInit {
             this.eventToStore[0].Date = new Date(this.event.start);
             this.eventToStore[0].Time_Start = this.startTime;
             this.eventToStore[0].Time_Finish = this.endTime;
-            this.eventToStore[0].Hours_Guaranteed = 4;
+            this.eventToStore[0].Hours_Guaranteed = this.endTime.substr(0,2)-this.startTime.substr(0,2);
             this.eventToStore[0].Date_Submitted = new Date();
             this.postEvent(this.eventToStore);
         }

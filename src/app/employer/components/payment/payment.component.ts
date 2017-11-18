@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { JsonLoaderService } from '../../../shared/services/json-loader.service';
 import { EmployerService } from '../../../shared/services/employer.service';
@@ -23,20 +24,21 @@ export class PaymentComponent implements OnInit {
     public employerservice: EmployerService,
     public userService: UserService,
     private loaderService: LoaderService,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private route: Router
   ) {
     this.cardNumber = null;
     this.cardType = '';
     this.initializePayment();
     // this.getDefaultAddress();
-    this.loaderService.display(true);              
+    this.loaderService.display(true);
     this.jsonLoaderService.getStates()
       .subscribe(data => {
         this.statesList = data;
-    this.loaderService.display(false);                  
+        this.loaderService.display(false);
       }, error => {
-    this.loaderService.display(false);          
-        
+        this.loaderService.display(false);
+
       });
   }
   initializePayment() {
@@ -45,7 +47,7 @@ export class PaymentComponent implements OnInit {
       Billing_Name: '',
       Expiration_Month: null,
       Expiration_Year: null,
-      street:'',
+      street: '',
       City: '',
       State: '',
       Zip_Code: null,
@@ -61,7 +63,7 @@ export class PaymentComponent implements OnInit {
     // this.loaderService.display(false);                  
     //   }, error => {
     // this.loaderService.display(false);          
-        
+
     //   });
   }
   GetCardType(number) {
@@ -112,46 +114,54 @@ export class PaymentComponent implements OnInit {
 
   //payment method
   makePayment() {
-    this.loaderService.display(true);          
+    this.loaderService.display(true);
     this.employerservice.makePayment(this.payment).subscribe(res => {
       if (res.message == 'Payment Sucessfull') {
+        console.log("payment done");
         this.initializePayment();
         this.releaseOffer();
+        console.log("payment done1");        
       }
       this.loaderService.display(false);
       this.notificationsService.success(
         'Sucess',
         res.message,
         environment.options
-      )          
+      )
     },
-    err => {
-      this.loaderService.display(false);
-      this.notificationsService.success(
-        err.tittle,
-        err.error.message,
-        environment.options
-      ) 
-    })
+      err => {
+        this.loaderService.display(false);
+        this.notificationsService.success(
+          err.tittle,
+          err.error.message,
+          environment.options
+        )
+      })
   }
   releaseOffer() {
+    console.log("offers release");
     this.employerservice.postOffer().subscribe(res => {
+      console.log(res);
+      this.route.navigate(['/employer/search']);
+      this.employerservice.itemsToHire = [];      
+    },err=>{
+      console.log(err);
     })
   }
   //default address function
   useMyAddress(event) {
-    if(event.target.checked){
+    if (event.target.checked) {
       let user = this.userService.getCurrentUser();
-      this.userService.getData(user.Email_Address).subscribe( res =>{
-        if(res){
+      this.userService.getData(user.Email_Address).subscribe(res => {
+        if (res) {
           this.payment.street = res["data"].Address_street;
           this.payment.City = res["data"].City;
           this.payment.State = res["data"].State;
-          this.payment.Zip_Code = res["data"].Zip_Code;        
+          this.payment.Zip_Code = res["data"].Zip_Code;
         }
       })
     }
-    else if(!event.target.checked){
+    else if (!event.target.checked) {
       this.payment.street = '';
       this.payment.City = '';
       this.payment.State = '';

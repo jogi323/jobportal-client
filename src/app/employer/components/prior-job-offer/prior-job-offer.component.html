@@ -24,19 +24,19 @@
                           </a>
                         </td>-->
                         <td class="col-lg-2">
-                          A8D9D99D                     
+                          {{offer.positionId}}                    
                         </td>
                         <td class="col-lg-2">
-                          Dental Assistant
+                          {{offer.JS_id.Position}}
                         </td>
                         <td class="col-lg-2">
-                          Hired                         
+                          {{offer.Status}}                        
                         </td>
                         <td class="col-lg-2">
-                          25/07/2017
+                          {{offer.Date_Submitted | date: 'dd/MM/yyyy'}}
                         </td>
                         <td class="col-lg-2">
-                          $2500
+                          ${{offer.JS_id.Hourly_Pay}}
                         </td>
                       </tr>
   

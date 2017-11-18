@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnInit, HostListener } from '@angular/core';
 
 import { UserService } from './shared/services/user.service';
 import { LoaderService } from './shared/services/loader.service';
@@ -19,6 +19,10 @@ export class AppComponent implements OnInit {
     this.loaderService.status.subscribe((val: boolean) => {
             this.showLoader = val;
     });
+  }
+  @HostListener('window:beforeunload')
+  doSomething() {
+    this.userService.purgeAuth();
   }
   ngOnInit(){
     this.userService.populate();

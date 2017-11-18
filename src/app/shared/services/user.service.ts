@@ -145,7 +145,6 @@ changePassword (data) {
 }
 
 activateUser(id) {
-  console.log(id)
   let path = 'user/confirmation/' + id;
   return this.apiService.get(path).
   map(
@@ -156,5 +155,12 @@ activateUser(id) {
       return err;
     }
   )
+}
+
+contactus(data){
+  let url = 'user/contactus';
+  return this.apiService.post(url,data).map(res => {
+    return res;
+  });
 }
 }

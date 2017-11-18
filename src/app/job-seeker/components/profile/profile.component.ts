@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { NotificationsService } from 'angular2-notifications';
 import { environment } from '../../../../environments/environment';
 import { LoaderService } from '../../../shared/services/loader.service';
+import { JobseekerService } from '../../../shared/services/jobseeker.service';
 
 @Component({
   selector: 'app-profile',
@@ -31,6 +32,11 @@ export class ProfileComponent implements OnInit {
   
   licenseRequired: Boolean = false;
   newImageUploaded: Boolean = false;
+  showOtpInput: Boolean = false;
+  showVerifyOtp: Boolean = false;
+  showOtpbutton: Boolean = false;
+  phone1Verified: Boolean = false;
+  otp: Number;
   specialityList = [
     { "name": "General Dentistry" },
     { "name": "Endodontist" },
@@ -66,7 +72,8 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private notificationsService: NotificationsService,
     private ngzone: NgZone,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private jobseekerService: JobseekerService
 
   ) {
     this.user = {
@@ -98,7 +105,8 @@ export class ProfileComponent implements OnInit {
       Contact_Phone_Nr: undefined,
       image: ""
     }
-
+    this.otp = null;
+    this.loaderService.display(true);          
     this.subscription = userService.currentUser.subscribe(user => {
       this.isUserDataEdit = user.personalInfo;
       this.isWorkDataEdit = user.workInfo;
@@ -202,34 +210,73 @@ export class ProfileComponent implements OnInit {
     this.jsonLoaderService.getStates()
       .subscribe(data => {
         this.statesList = data;
-        // console.log(data);
       }, error => {
-        console.log(error);
       });
     this.jsonLoaderService.getLanguages()
       .subscribe(data => {
         this.languagesList = data;
-        // console.log(data);
       }, error => {
-        console.log(error);
       });
     this.jsonLoaderService.getYears()
       .subscribe(data => {
         this.yearsList = data;
-        // console.log(data); 
       }, error => {
-        console.log(error);
       });
     this.jsonLoaderService.getPositions()
       .subscribe(data => {
         this.positionList = data;
       }, error => {
-        console.log(error);
       });
-
-
-
   }
+
+  sendOtp() {
+    var payload = {number : this.user.Phone1};
+    this.loaderService.display(true);     
+    this.jobseekerService.sendOtp(this.currentUser.Email_Address,payload).subscribe(res => {
+      this.showOtpInput = true;
+      this.showVerifyOtp = true;
+      this.loaderService.display(false); 
+      this.notificationsService.success(
+        'Success',
+        res.message,
+        environment.options
+      )
+
+    },
+    err => {
+       this.loaderService.display(false); 
+        this.notificationsService.error(
+          err.title,
+          err.error.message,
+          environment.options          
+        )
+    })
+  }
+
+verifyOtp() {
+ this.loaderService.display(false); 
+  var payload = {otp : this.otp};
+  this.jobseekerService.verifyOtp(this.currentUser.Email_Address,payload).subscribe(res => {
+    this.loaderService.display(false); 
+    this.showVerifyOtp = false;
+    this.showOtpInput = false;
+    this.otp = null;  
+    this.phone1Verified = true;  
+    this.notificationsService.success(
+      'Success',
+      res.message,
+      environment.options
+    )
+  },
+  err => {
+    this.loaderService.display(false);     
+    this.notificationsService.error(
+      err.title,
+      err.error.message
+    )
+  })
+}
+
   changeListener($event): void {
     this.newImageUploaded = true;
     this.readThis($event.target);

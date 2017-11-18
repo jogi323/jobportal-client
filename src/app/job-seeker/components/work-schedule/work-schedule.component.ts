@@ -26,11 +26,19 @@ export class WorkScheduleComponent implements OnInit {
     endTime: any
     times: any;
     repeatDay: string;
-    constructor(private cd: ChangeDetectorRef, public apiservice: ApiService, public jobseekerservice: JobseekerService,private notificationsService: NotificationsService,
-    private loaderService: LoaderService) {
+    constructor(private cd: ChangeDetectorRef, public apiservice: ApiService, public jobseekerservice: JobseekerService, private notificationsService: NotificationsService,
+        private loaderService: LoaderService) {
         this.minDate = new Date();
         this.calendarminDate = moment(this.minDate).format('MM/DD/YYYY');
         this.times = ['12:00', '12:30', '13:00', '13:30', '14:00'];
+        this.events = [{
+            id: null,
+            Date: null
+        }]
+        this.eventsToStoreInitialize();
+    }
+    // Initialize events to store scope
+    eventsToStoreInitialize() {
         this.eventToStore = [{
             Date: null,
             Time_Start: '',
@@ -38,14 +46,9 @@ export class WorkScheduleComponent implements OnInit {
             Hours_Guaranteed: null,
             Date_Submitted: null
         }];
-        this.events = [{
-            id: null,
-            Date: null
-        }]
     }
-
     JobSchedules() {
-        this.loaderService.display(true);          
+        this.loaderService.display(true);
         this.jobseekerservice.getJobSchedules().subscribe(res => {
             this.events = [{
                 id: null,
@@ -55,14 +58,15 @@ export class WorkScheduleComponent implements OnInit {
             for (let index = 0; index < res.data.length; index++) {
                 let eventToshow = {
                     id: res.data[index]._id,
-                    start: res.data[index].Date
+                    start: this.formatDate(res.data[index].Date),
+                    title: 'Available Time\n' + res.data[index].Time_Start + '-' + res.data[index].Time_Finish
                 }
                 this.events.push(eventToshow);
             }
-        this.loaderService.display(false);                   
+            this.loaderService.display(false);
         },
             err => {
-                this.loaderService.display(false);                                   
+                this.loaderService.display(false);
                 this.notificationsService.error(
                     err.title,
                     err.error.message,
@@ -82,11 +86,11 @@ export class WorkScheduleComponent implements OnInit {
             // right: 'month,agendaWeek,agendaDay'
         };
         //this.minDate = '';
-        this.minDate = this.formatDate();
+        this.minDate = this.formatDate(new Date());
     }
 
-    formatDate() {
-        var d = new Date(),
+    formatDate(date) {
+        var d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
             year = d.getFullYear();
@@ -162,13 +166,13 @@ export class WorkScheduleComponent implements OnInit {
     }
 
     postEvent(data) {
-        this.loaderService.display(true);                  
+        this.loaderService.display(true);
         if (data.length > 1) {
             data.splice(0, 1);
         }
         this.jobseekerservice.postJobSchedules(data).subscribe(res => {
             if (res) {
-                this.loaderService.display(false);          
+                this.loaderService.display(false);
                 this.notificationsService.success(
                     'Success',
                     res.message,
@@ -178,7 +182,7 @@ export class WorkScheduleComponent implements OnInit {
             }
         },
             err => {
-                this.loaderService.display(false);                          
+                this.loaderService.display(false);
                 this.notificationsService.error(
                     err.title,
                     err.error.message,
@@ -187,6 +191,7 @@ export class WorkScheduleComponent implements OnInit {
             }
         )
         this.event = null;
+        this.eventsToStoreInitialize();
     }
 
     saveEvent() {

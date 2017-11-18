@@ -50,8 +50,8 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
     this.loaderService.display(true);
     this.userService.attemptAuth(this.user).subscribe(
       res => {
+          this.close();        
           this.router.navigate([res.userType+'/profile']);
-          this.close();
       },
       err => {
         this.close();

@@ -21,13 +21,10 @@ export class ActivateUserComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
-        console.log(this.id)
         this.id = params['id'];
       });
-        console.log(this.id)
       
       if(this.id) {
-        console.log(this.id)
         this.userService.activateUser(this.id).subscribe(
           res=> {
             this.notificationsService.success(

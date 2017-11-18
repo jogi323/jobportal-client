@@ -43,7 +43,6 @@ export class ProfileComponent implements OnInit {
       this.user.Address_Unit = location + ', ' + neighborhood
       this.user.City = this.geoLocation.city;
       this.user.State = this.geoLocation.state;
-      console.log(this.user.State);
       this.user.Zip_Code = this.geoLocation.zip;
       this.user.locationLat = this.geoLocation.lat;
       this.user.locationLng = this.geoLocation.lng;
@@ -122,7 +121,8 @@ export class ProfileComponent implements OnInit {
   }
 
   cancelUpdate(){
-    this.isUserDataEdit = !this.isUserDataEdit;   
+    this.initUserData(this.currentUser);
+    this.isUserDataEdit = !this.isUserDataEdit;  
   }
   updateUserData(){
     this.loaderService.display(true);              
@@ -152,6 +152,7 @@ export class ProfileComponent implements OnInit {
   }
 
   cancelWorkUpdate(){
+    this.initUserData(this.currentUser);
     this.isWorkDataEdit = !this.isWorkDataEdit;   
   }
 
@@ -185,19 +186,16 @@ export class ProfileComponent implements OnInit {
                             .subscribe(data => {
                               this.statesList = data;
                             }, error => {
-                              console.log(error);
                             });
     this.jsonLoaderService.getLanguages()
                             .subscribe(data => {
                               this.languagesList = data;
                             }, error => {
-                              console.log(error);
                             });
     this.jsonLoaderService.getYears()
                             .subscribe(data => {
                               this.yearsList = data;
                             }, error => {
-                              console.log(error);
                             });
   }
   changeListener($event) : void {

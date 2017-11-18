@@ -8,6 +8,7 @@ import { TransactionHistoryComponent } from './components/transaction-history/tr
 import { PriorJobOfferComponent } from './components/prior-job-offer/prior-job-offer.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ChangePasswordComponent } from '../shared/components/change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
       {path:'joboffers', component:PriorJobOfferComponent},
       {path:'payment', component:PaymentComponent},
       {path:'profile', component:ProfileComponent},
+      {path:'changepassword',component:ChangePasswordComponent}
     ]
   }
 ];

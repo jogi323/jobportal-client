@@ -279,14 +279,13 @@
                   <!--<abbr class="required" title="required">*</abbr>-->
                   </label>
                   <input type="number" class="input-text" [(ngModel)]="user.Nr_of_Operations" placeholder="Nr_of_Operations" value name="Nr_of_Operatories"
-                    id="User_Nr_of_Operations">
+                    id="User_Nr_of_Operations" min="0">
                 </div>
                 <div class="col-md-4">
                   <label for="User_Nr_of_Staff">Number of Staff
                   <!--<abbr class="required" title="required">*</abbr>-->
                   </label>
-                  <input type="number" class="input-text" placeholder="No. of Staff" [(ngModel)]="user.Nr_of_Staff" value name="Nr_of_Staff"
-                    id="User_Nr_of_Staff">
+                  <input type="number" class="input-text" placeholder="No. of Staff" [(ngModel)]="user.Nr_of_Staff" value name="Nr_of_Staff"  id="User_Nr_of_Staff" min="0">
                 </div>
                 <div class="col-lg-4">
                   <label for="User_Languages">Languages
@@ -327,7 +326,7 @@
                   <label for="User_Years_in_Practice">Years in practice
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                  <input type="text" class="input-text" [(ngModel)]="user.Years_in_Practice" placeholder value name="Years_in_Practice" id="User_Years_in_Practice">
+                  <input type="number" class="input-text" [(ngModel)]="user.Years_in_Practice" placeholder value name="Years_in_Practice" id="User_Years_in_Practice" min="0">
                 </div>
               </div>
               <div class="row">

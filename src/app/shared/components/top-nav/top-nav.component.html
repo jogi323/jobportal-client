@@ -17,7 +17,7 @@
       </div>
     </div>
   </div> <!-- end top bar -->
-   <div class="profile-status" *ngIf = "isLoggedIn || (currentUser.personalInfo || currentUser.workInfo)">
+   <div class="profile-status" *ngIf = "isLoggedIn && (currentUser.personalInfo || currentUser.workInfo) && showProfileStatus">
     Your <span *ngIf="currentUser.personalInfo">personal</span><span *ngIf="(currentUser.workInfo && currentUser.personalInfo)"> and </span><span *ngIf="currentUser.workInfo">work</span>profile not updated
      <span class="pull-right" (click)="closeProfileStatus()"><i class="fa fa-times" aria-hidden="true"></i></span>
    </div>       
@@ -73,9 +73,9 @@
                 <li>
                   <a [routerLink]="['employer/joboffers']" routerLinkActive="active">Job Offers</a>
                 </li>
-                <li>
+                <!--<li>
                   <a [routerLink]="['employer/payment']" routerLinkActive="active">Payment</a>
-                </li>
+                </li>-->
                 <li>
                   <a [routerLink]="['employer/transactionhistory']" routerLinkActive="active">Transaction History</a>
                 </li>
@@ -110,7 +110,8 @@
 
                       <div class="nav-cart-actions mt-20">
                         <a  class="btn btn-md btn-dark" (click)="userProfile()"><span>View Profile</span></a>
-                        <a class="btn btn-md btn-dark mt-10" [routerLink]="['changepassword']" routerLinkActive="active"><span>Change Password</span></a>
+                        <a *ngIf="userType == 'employer'" class="btn btn-md btn-dark mt-10" [routerLink]="['employer/changepassword']" routerLinkActive="active"><span>Change Password</span></a>
+                        <a *ngIf="userType == 'jobseeker'" class="btn btn-md btn-dark mt-10" [routerLink]="['jobseeker/changepassword']" routerLinkActive="active"><span>Change Password</span></a>                        
                         <a class="btn btn-md btn-color mt-10" (click)='logoutUser()'><span>Log Out</span></a>
                       </div>
                     </div>

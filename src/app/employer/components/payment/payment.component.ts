@@ -29,6 +29,15 @@ export class PaymentComponent implements OnInit {
     this.cardType = '';
     this.initializePayment();
     // this.getDefaultAddress();
+    this.loaderService.display(true);              
+    this.jsonLoaderService.getStates()
+      .subscribe(data => {
+        this.statesList = data;
+    this.loaderService.display(false);                  
+      }, error => {
+    this.loaderService.display(false);          
+        
+      });
   }
   initializePayment() {
     this.payment = {
@@ -45,15 +54,15 @@ export class PaymentComponent implements OnInit {
     }
   }
   ngOnInit() {
-    this.loaderService.display(true);              
-    this.jsonLoaderService.getStates()
-      .subscribe(data => {
-        this.statesList = data;
-    this.loaderService.display(false);                  
-      }, error => {
-    this.loaderService.display(false);          
+    // this.loaderService.display(true);              
+    // this.jsonLoaderService.getStates()
+    //   .subscribe(data => {
+    //     this.statesList = data;
+    // this.loaderService.display(false);                  
+    //   }, error => {
+    // this.loaderService.display(false);          
         
-      });
+    //   });
   }
   GetCardType(number) {
     // visa

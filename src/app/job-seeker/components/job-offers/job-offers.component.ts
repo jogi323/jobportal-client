@@ -15,13 +15,24 @@ export class JobOffersComponent implements OnInit {
     private notificationsService: NotificationsService,
     private loaderService: LoaderService,
     private jobseekerService: JobseekerService
-  ) { }
+  ) { 
+    this.loaderService.display(true);
+    this.jobseekerService.getOffers().subscribe(res => {
+      this.offers = res.data;
+      this.loaderService.display(false);
+    },
+    err => {
+      this.loaderService.display(false);
+      this.notificationsService.error(
+        err.title,
+        err.error.message,
+        environment.options
+      )      
+    });
+  }
 
   ngOnInit() {
-    this.jobseekerService.getOffers().subscribe(res => {
-      console.log(res);
-      this.offers = res.data;
-    });
+    
   }
 
 }

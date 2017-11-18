@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import {CalendarModule} from 'primeng/primeng';
+import { SharedModule } from '../shared/shared.module';
 
 import { GooglePlaceModule } from 'ng2-google-place-autocomplete';
 import { EmployerRoutingModule } from './employer-routing.module';
@@ -25,7 +26,8 @@ import { SearchPipe } from '../shared/pipes/search.pipe';
     FormsModule,
     EmployerRoutingModule,
     CalendarModule,
-    GooglePlaceModule
+    GooglePlaceModule,
+    SharedModule
   ],
   declarations: [
     EmployerComponent, 

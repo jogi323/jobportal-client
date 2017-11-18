@@ -16,6 +16,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { WorkScheduleComponent } from './components/work-schedule/work-schedule.component';
 import { JobOffersComponent } from './components/job-offers/job-offers.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { SharedModule } from '../shared/shared.module';
+
 
 @NgModule({
   imports: [
@@ -33,14 +35,15 @@ import { ProfileComponent } from './components/profile/profile.component';
     InputTextareaModule, 
     CheckboxModule, 
     InputTextModule, 
-    SelectButtonModule
+    SelectButtonModule,
+    SharedModule
   ],
   declarations: [
     JobSeekerComponent, 
     DashboardComponent, 
     WorkScheduleComponent, 
     JobOffersComponent, 
-    ProfileComponent
+    ProfileComponent,
   ],
   providers : [
     JobseekerService

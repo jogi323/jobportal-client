@@ -5,6 +5,7 @@ import { DialogService } from 'ng2-bootstrap-modal';
 import { LoginComponent } from '../../../login/login.component';
 import { UserService } from '../../../shared/services/user.service';
 import { Subscription } from 'rxjs/Subscription';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-top-nav',
@@ -17,16 +18,16 @@ export class TopNavComponent implements OnInit {
   subscription:Subscription;
   currentUser:any;
   currentUrl:String;
-  showProfileStatus: Boolean = false;
+  showProfileStatus: Boolean = true;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private dialogService: DialogService,
-    private userService: UserService
+    private userService: UserService,
+    private loaderService:LoaderService
   ) {
     this.subscription = userService.currentUser.subscribe(user =>{
-      console.log(user)
         if(user.userType !== undefined){
           this.isLoggedIn = true;
         }else {
@@ -65,11 +66,12 @@ export class TopNavComponent implements OnInit {
 
   logoutUser() {
     this.userService.purgeAuth();
+    this.loaderService.display(false);
     this.router.navigate(['']);
     this.isLoggedIn = false;
   }
 
   closeProfileStatus() {
-    console.log('clicked')
+    this.showProfileStatus = false;
   }
 }

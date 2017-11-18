@@ -4,6 +4,8 @@ import { JsonLoaderService } from '../../../shared/services/json-loader.service'
 import { EmployerService } from '../../../shared/services/employer.service';
 import { UserService } from '../../../shared/services/user.service';
 import { LoaderService } from '../../../shared/services/loader.service';
+import { NotificationsService } from 'angular2-notifications';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-payment',
@@ -20,7 +22,8 @@ export class PaymentComponent implements OnInit {
     private jsonLoaderService: JsonLoaderService,
     public employerservice: EmployerService,
     public userService: UserService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private notificationsService: NotificationsService
   ) {
     this.cardNumber = null;
     this.cardType = '';
@@ -42,10 +45,14 @@ export class PaymentComponent implements OnInit {
     }
   }
   ngOnInit() {
+    this.loaderService.display(true);              
     this.jsonLoaderService.getStates()
       .subscribe(data => {
         this.statesList = data;
+    this.loaderService.display(false);                  
       }, error => {
+    this.loaderService.display(false);          
+        
       });
   }
   GetCardType(number) {
@@ -102,12 +109,24 @@ export class PaymentComponent implements OnInit {
         this.initializePayment();
         this.releaseOffer();
       }
-      this.loaderService.display(false);          
+      this.loaderService.display(false);
+      this.notificationsService.success(
+        'Sucess',
+        res.message,
+        environment.options
+      )          
+    },
+    err => {
+      this.loaderService.display(false);
+      this.notificationsService.success(
+        err.tittle,
+        err.error.message,
+        environment.options
+      ) 
     })
   }
   releaseOffer() {
     this.employerservice.postOffer().subscribe(res => {
-      console.log(res);
     })
   }
   //default address function

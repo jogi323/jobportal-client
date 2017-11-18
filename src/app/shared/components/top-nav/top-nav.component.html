@@ -17,7 +17,7 @@
       </div>
     </div>
   </div> <!-- end top bar -->
-   <div class="profile-status" *ngIf = "isLoggedIn || (currentUser.personalInfo || currentUser.workInfo)">
+   <div class="profile-status" *ngIf = "isLoggedIn && (currentUser.personalInfo || currentUser.workInfo) && showProfileStatus">
     Your <span *ngIf="currentUser.personalInfo">personal</span><span *ngIf="(currentUser.workInfo && currentUser.personalInfo)"> and </span><span *ngIf="currentUser.workInfo">work</span>profile not updated
      <span class="pull-right" (click)="closeProfileStatus()"><i class="fa fa-times" aria-hidden="true"></i></span>
    </div>       

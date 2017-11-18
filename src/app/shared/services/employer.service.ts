@@ -33,7 +33,7 @@ export class EmployerService {
   }
 
   getTransactions() {
-    const route = 'payments/';
+    const route = 'payments/history';
     return this.apiService.get(route).map(res => {
       return res;
     })
@@ -67,7 +67,6 @@ export class EmployerService {
     else{
       this.itemsToHire.splice(id,1);
     }
-    console.log(this.itemsToHire);
   }
 
   //post offer method

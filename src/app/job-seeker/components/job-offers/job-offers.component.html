@@ -1,94 +1,53 @@
-			<!-- Cart -->
-			<section class="section-wrap shopping-cart">
-          <div class="container relative">
-            <div class="row">
-                <h2 class="heading relative uppercase bottom-line full-grey mb-30">Prior Job Offers</h2>          
-              <div class="col-md-12">
-                <div class="table-wrap mb-30">
-                  <table class="shop_table job_offers_table cart table">
-                    <thead>
-                      <tr>
-                        <!-- <th class="product-name" colspan="2">Position Id</th> -->
-                        <th class="product-price">Position</th>
-                        <th class="product-quantity">Status</th>
-                        <th class="product-subtotal" colspan="2">Date</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr class="cart_item">
-                        <!-- <td class="product-thumbnail">
-                          <a href="#">
-                            <img src="img/shop/shop_item_3.jpg" alt="">
-                          </a>
-                        </td>
-                        <td class="product-name">
-                          <a href="#">A8D9D99D</a>
-                          <ul>
-                            <li>Texture: Yes</li>
-                            <li>Color: White</li>
-                          </ul>
-                        </td> -->
-                        <td class="product-price">
-                          <span class="amount">Dental Assistant</span>
-                        </td>
-                        <td class="product-quantity">
-                          <div class="quantity buttons_added">
-                            Not Accepted
-                          </div>
-                        </td>
-                        <td class="product-subtotal">
-                          <span class="amount">25/07/2017</span>
-                        </td>
-                        <td class="product-remove">
-                          <a href="#" class="remove" title="Remove this item">
-                            <i class="ui-close"></i>
-                          </a>
-                        </td>
-                      </tr>
-  
-                      <tr class="cart_item">
-                        <!-- <td class="product-thumbnail">
-                          <a href="#">
-                            <img src="img/shop/shop_item_7.jpg" alt="">
-                          </a>
-                        </td>
-                        <td class="product-name">
-                          <a href="#">A22S7HH8</a>
-                          <ul>
-                            
-                          </ul>
-                        </td> -->
-                        <td class="product-price">
-                          <span class="amount">Registered Dental Assistant</span>
-                        </td>
-                        <td class="product-quantity">
-                          <div class="quantity buttons_added">
-                            Accepted
-                          </div>
-                        </td>
-                        <td class="product-subtotal">
-                          <span class="amount">28/07/2017</span>
-                        </td>
-                        <td class="product-remove">
-                          <a href="#" class="remove" title="Remove this item">
-                            <i class="ui-close"></i>
-                          </a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-  
-  
-              </div>
-              <!-- end col -->
-            </div>
-            <!-- end row -->
-  
+<!-- Cart -->
+<section class="section-wrap shopping-cart">
+  <div class="container relative">
+    <div class="row">
+      <h2 class="heading relative uppercase bottom-line full-grey mb-30">Prior Job Offers</h2>
+      <div class="col-md-12">
+        <div class="table-wrap mb-30">
+          <table class="shop_table job_offers_table cart table">
+            <thead>
+              <tr>
+                <!-- <th class="product-name" colspan="2">Position Id</th> -->
+                <th class="product-price">Position</th>
+                <th class="product-quantity">Status</th>
+                <th class="product-subtotal" colspan="2">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="cart_item" *ngFor="let offer of offers">
+                <td class="product-price">
+                  <span class="amount">{{offer.position}}</span>
+                </td>
+                <td class="product-quantity">
+                  <div class="quantity buttons_added">
+                    {{offer.Status}}
+                  </div>
+                </td>
+                <td class="product-subtotal">
+                  <span class="amount">{{offer.Date_Submitted | date: 'dd/MM/yyyy'}}</span>
+                </td>
+                <td class="product-remove">
+                  <a href="#" class="remove" title="Remove this item">
+                    <i class="ui-close"></i>
+                  </a>
+                </td>
+              </tr>
 
-  
-          </div>
-          <!-- end container -->
-        </section>
-        <!-- end cart -->
-  
+
+            </tbody>
+          </table>
+        </div>
+
+
+      </div>
+      <!-- end col -->
+    </div>
+    <!-- end row -->
+
+
+
+  </div>
+  <!-- end container -->
+</section>
+<!-- end cart -->

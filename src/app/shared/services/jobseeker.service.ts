@@ -42,4 +42,12 @@ export class JobseekerService {
     });
   }
 
+   //get offer method
+  getOffers(){
+    const route = 'offers/jobseeker';
+    return this.apiservice.get(route).map( res =>{
+      return res;
+    })
+  }
+
 }

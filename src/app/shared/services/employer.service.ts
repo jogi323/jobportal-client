@@ -79,7 +79,7 @@ export class EmployerService {
 
   //get offer method
   getOffers(){
-    const route = 'offers/all';
+    const route = 'offers/employer';
     return this.apiService.get(route).map( res =>{
       return res;
     })

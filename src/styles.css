@@ -30,7 +30,7 @@ span.ng-tns-c5-0.ui-calendar {
     color: red;
     text-align: right;
 }
-input.ng-dirty.ng-invalid, input.ng-touched.ng-invalid {
+input.ng-dirty.ng-invalid, input.ng-touched.ng-invalid,textarea.ng-dirty.ng-invalid, textarea.ng-touched.ng-invalid {
     border:1px solid red;
 }
 input.ng-dirty.ng-valid.mismatchError.ng-touched {

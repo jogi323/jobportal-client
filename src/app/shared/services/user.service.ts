@@ -156,4 +156,11 @@ activateUser(id) {
     }
   )
 }
+
+contactus(data){
+  let url = 'user/contactus';
+  return this.apiService.post(url,data).map(res => {
+    return res;
+  });
+}
 }

@@ -260,7 +260,7 @@ verifyOtp() {
     this.loaderService.display(false); 
     this.showVerifyOtp = false;
     this.showOtpInput = false;
-    this.showOtpbutton = false;  
+    this.otp = null;  
     this.phone1Verified = true;  
     this.notificationsService.success(
       'Success',

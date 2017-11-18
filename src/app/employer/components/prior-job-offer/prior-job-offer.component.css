@@ -4,7 +4,7 @@
     color:#FFF
 }
 
-.prior_job_table thead tr th{
+.prior_job_table thead tr th,tbody td{
     padding:15px 25px;
 }
 .shop_table td.product-name{

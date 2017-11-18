@@ -11,6 +11,7 @@
                         <th class="product-name" >Transaction Id</th>
                         <th class="product-price">Position</th>
                         <th class="product-price">Amount</th>
+                        <th class="product-price">Hours guaranteed</th>
                         <th class="product-quantity">Transcation Status</th>
                         <th class="product-subtotal" colspan="2">Date</th>
                       </tr>
@@ -27,7 +28,10 @@
                           <span class="amount">{{transaction.Amount}}</span>
                         </td>
                         <td class="product-quantity">
-                          <span class="amount">Success</span>
+                          <span class="amount">{{transaction.Hours_Guaranteed}}</span>
+                        </td>
+                        <td class="product-quantity">
+                          <span class="amount">{{transaction.Status}}</span>
                         </td>
                         <td class="product-subtotal">
                           <span class="amount">{{transaction.Date_Submitted | date:'dd/MM/yy'}}</span>

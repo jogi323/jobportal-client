@@ -12,6 +12,7 @@ export class PriorJobOfferComponent implements OnInit {
 
   ngOnInit() {
     this.employerService.getOffers().subscribe( res =>{
+      console.log(res);
     })
   }
 

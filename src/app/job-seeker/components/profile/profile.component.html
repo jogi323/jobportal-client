@@ -11,10 +11,10 @@
             <form>
               <div class="row">
                 <div class="col-md-6">
-                  <label for="Firstname"><b>Username:</b></label>
-                  <p>{{user.Email_Address}}</p>
+                  <label for="Firstname"><b>Firstname:</b></label>
+                  <p>{{user.Firstname}}</p>
 
-                  <label for="Lastname"><b>Full Name:</b></label>
+                  <label for="Lastname"><b>Lastname:</b></label>
                   <p>{{user.Lastname}}</p>
 
                   <label for="email"><b>Email:</b></label>
@@ -334,7 +334,7 @@
                 </div>
                 <div class="col-lg-6">
                   <label for="User_Year_Graduated">Year Graduated
-                  <abbr class="required" title="required">*</abbr>
+                  <!--<abbr class="required" title="required">*</abbr>-->
                   </label>
                   <select name="Year_Graduated" id="Year_Graduated" [(ngModel)]="user.Year_Graduated" class="country_to_state country_select"
                     title="Year Graduated *">

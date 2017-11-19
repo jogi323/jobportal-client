@@ -15,7 +15,7 @@ const routes: Routes = [
     path:'', 
     component:EmployerComponent,
     children:[
-      {path:'', component:DashboardComponent},
+      {path:'', component:ProfileComponent},
       {path:'search', component:JobSeekerSearchComponent},
       // {path:'profile', component:ViewProfileComponent},
       {path:'transactionhistory', component:TransactionHistoryComponent},

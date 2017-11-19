@@ -122,7 +122,7 @@ export class UserService {
     )
   }
 
-resetPassword (data) {
+forgotPassword (data) {
   let path = 'user/resetpasswordlink';
   return this.apiService.post(path,data).
   map(
@@ -160,6 +160,12 @@ activateUser(id) {
 contactus(data){
   let url = 'user/contactus';
   return this.apiService.post(url,data).map(res => {
+    return res;
+  });
+}
+resetPassword(data){
+  let url = "user/changepassword";
+  return this.apiService.put(url,data).map(res => {
     return res;
   });
 }

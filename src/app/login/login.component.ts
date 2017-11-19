@@ -67,7 +67,7 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
   reset() {
     this.loaderService.display(true); 
     this.close();       
-    this.userService.resetPassword(this.forgotPasswordData).subscribe(
+    this.userService.forgotPassword(this.forgotPasswordData).subscribe(
       res => {
          this.loaderService.display(false);                  
         this.notificationsService.success(

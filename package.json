@@ -26,6 +26,7 @@
     "core-js": "^2.4.1",
     "fullcalendar": "^3.5.1",
     "jquery": "^3.2.1",
+    "moment": "^2.19.2",
     "ng2-bootstrap-modal": "^1.0.1",
     "ng2-google-place-autocomplete": "^1.4.2",
     "ng2-haversine": "^0.1.1",

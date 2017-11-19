@@ -24,23 +24,23 @@
     <div class="ui-grid-row" *ngIf="!event.allDay">
       <div class="ui-grid-col-6">
         <label for="end">Start Time</label>
-        <select class="form-control" [(ngModel)]="startTime">
-          <option *ngFor="let time of times" [ngValue]="time">{{time}}</option>
+        <select class="form-control" [(ngModel)]="startTime" (ngModelChange)="setEndTime(startTime)">
+          <option *ngFor="let time of startTimes" [ngValue]="time">{{time}}</option>
         </select>
       </div>
       <div class="ui-grid-col-6">
           <label for="end">End Time</label>
           <select class="form-control" [(ngModel)]="endTime">
-            <option *ngFor="let time of times" [ngValue]="time">{{time}}</option>
+            <option *ngFor="let time of endTimes" [ngValue]="time">{{time}}</option>
           </select>
       </div>
     </div>
-    <div class="ui-grid-row">
+    <!-- <div class="ui-grid-row">
       <div class="ui-grid-col-4"><label for="allday">All Day</label></div>
       <div class="ui-grid-col-8">
         <p-checkbox [(ngModel)]="event.allDay" binary="checkbox"></p-checkbox>
       </div>
-    </div>
+    </div> -->
     <div class="ui-grid-row">
       <div class="ui-grid-col-4"><label for="allweek">All Week</label></div>
       <div class="ui-grid-col-8">

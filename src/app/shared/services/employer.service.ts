@@ -74,6 +74,7 @@ export class EmployerService {
     const route = 'offers/save';
     console.log(this.itemsToHire)
     return this.apiService.post(route, this.itemsToHire).map( res => {
+      console.log(res);
       return res;
     })
   }

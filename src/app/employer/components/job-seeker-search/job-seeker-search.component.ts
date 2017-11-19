@@ -128,7 +128,7 @@ export class JobSeekerSearchComponent implements OnInit {
     event.setUTCMinutes(0);
     event.setUTCSeconds(0);
     event.setUTCMilliseconds(0);
-    this.filterJobseekers.Date = event;
+    this.filterJobseekers.Date = new Date(event.setDate(event.getDate()+1));
     this.getJobseekers(this.filterJobseekers);
   }
   onHoursChange(){

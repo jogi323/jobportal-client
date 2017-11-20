@@ -13,7 +13,7 @@ const routes: Routes = [
     path:'', 
     component:JobSeekerComponent, 
     children:[
-      {path:'', redirectTo:'dashboard'},
+      {path:'', redirectTo:'profile'},
       {path:'dashboard', component:DashboardComponent},
       {path:'schedule', component:WorkScheduleComponent},
       // {path:'update', component:UpdateProfileComponent},

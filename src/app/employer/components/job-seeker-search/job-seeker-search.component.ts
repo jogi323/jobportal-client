@@ -43,13 +43,7 @@ export class JobSeekerSearchComponent implements OnInit {
     newDate.setUTCMinutes(0);
     newDate.setUTCSeconds(0);
     newDate.setUTCMilliseconds(0);
-    this.filterJobseekers = {
-      Date: newDate,
-      Hours_Guaranteed: null,
-      Position : '',
-      pay_request: null,
-      distance: null
-    }
+    this.initializeFilterJobseeker();
     this.employerLocation = {
       lat: undefined,
       lng: undefined
@@ -60,19 +54,35 @@ export class JobSeekerSearchComponent implements OnInit {
     })
     this.itemsToHire = this.employerService.itemsToHire;
   }
-
+  // Initialize Filter getJobseekers
+  initializeFilterJobseeker() {
+    let date = new Date();
+    date.setUTCHours(0);
+    date.setUTCMinutes(0);
+    date.setUTCSeconds(0);
+    date.setUTCMilliseconds(0);
+    this.filterJobseekers = {
+      Date: date,
+      Hours_Guaranteed: null,
+      Position: '',
+      pay_request: null,
+      distance: null
+    }
+    this.getJobseekers(this.filterJobseekers);
+    console.log(this.filterJobseekers);
+  }
   // initialise employer data to use location lattitude and longitude
   initUserData(user) {
-    this.loaderService.display(true);          
-    if(user.userType !== undefined) {
+    this.loaderService.display(true);
+    if (user.userType !== undefined) {
       this.userService.getData(user.Email_Address).subscribe(
         res => {
           this.employerLocation.lat = res.data.locationLat;
           this.employerLocation.lng = res.data.locationLng;
-          this.loaderService.display(false);          
+          this.loaderService.display(false);
         },
         err => {
-          this.loaderService.display(false);          
+          this.loaderService.display(false);
           this.notificationsService.error(
             err.title,
             err.error.message,
@@ -89,7 +99,7 @@ export class JobSeekerSearchComponent implements OnInit {
       this.employerService.setItemsToHire(id);
       //window.localStorage.setItem('itemsToHire',this.itemsToHire);
     }
-    else if(!event.target.checked){
+    else if (!event.target.checked) {
       this.itemsToHire.splice(id);
       this.employerService.removeItemToHire(id)
       //window.localStorage.setItem('itemsToHire',this.itemsToHire);      
@@ -97,17 +107,17 @@ export class JobSeekerSearchComponent implements OnInit {
   }
 
   //sets checkbox value for selected candidates
-  getCheckboxValue(id){
-    let count =0;
-    for(let i=0; i<this.itemsToHire.length; i++){
-      if(this.itemsToHire[i]._id == id){
-        count ++;
+  getCheckboxValue(id) {
+    let count = 0;
+    for (let i = 0; i < this.itemsToHire.length; i++) {
+      if (this.itemsToHire[i]._id == id) {
+        count++;
       }
     }
-    if(count > 0){
+    if (count > 0) {
       return true;
     }
-    else{
+    else {
       return false;
     }
   }
@@ -128,10 +138,11 @@ export class JobSeekerSearchComponent implements OnInit {
     event.setUTCMinutes(0);
     event.setUTCSeconds(0);
     event.setUTCMilliseconds(0);
-    this.filterJobseekers.Date = new Date(event.setDate(event.getDate()+1));
+    this.filterJobseekers.Date = new Date(event.setDate(event.getDate() + 1));
     this.getJobseekers(this.filterJobseekers);
+    console.log(this.filterJobseekers);
   }
-  onHoursChange(){
+  onHoursChange() {
     this.getJobseekers(this.filterJobseekers);
   }
   filterData() {
@@ -144,20 +155,20 @@ export class JobSeekerSearchComponent implements OnInit {
 
   // get the initial list of job seekers with todays date as input
   getJobseekers(data) {
-    this.loaderService.display(true);          
+    this.loaderService.display(true);
     this.employerService.queryJobseekers(data).subscribe(
       res => {
         this.jobseekers = res.data;
         this.calculateDistance(this.jobseekers);
-        this.loaderService.display(false);          
+        this.loaderService.display(false);
       },
       err => {
-        this.loaderService.display(false);                  
+        this.loaderService.display(false);
         this.notificationsService.error(
-            err.title,
-            err.error.message,
-            environment.options
-          )
+          err.title,
+          err.error.message,
+          environment.options
+        )
       }
     )
   }
@@ -200,7 +211,7 @@ interface FilterJobseekers {
   Hours_Guaranteed: number,
   Position: string,
   pay_request: any,
-  distance: any 
+  distance: any
 }
 
 interface Location {

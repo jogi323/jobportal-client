@@ -33,14 +33,14 @@ export class UserService {
     // If JWT detected, attempt to get & store user's info
     if (this.jwtService.getToken()) {
       this.apiService.get('user/auth')
-      .subscribe(
+        .subscribe(
         data => {
           this.setAuth(data)
         },
         err => {
           this.purgeAuth()
         }
-      );
+        );
     } else {
       // Remove any potential remnants of previous auth states
       this.purgeAuth();
@@ -62,111 +62,152 @@ export class UserService {
     this.currentUserSubject.next(new User());
     // Set auth status to false
     this.isAuthenticatedSubject.next(false);
-  } 
+  }
 
-   attemptAuth(credentials): Observable<any> {
+  attemptAuth(credentials): Observable<any> {
     const route = 'user/auth'
     return this.apiService.post(route, credentials)
-    .map(
+      .map(
       data => {
         this.setAuth(data);
         return data.user;
       },
-      err =>{
+      err => {
         return err;
       }
-    )
+      )
   }
-  
+
   registerUser(details): Observable<any> {
     const route = 'user/save'
     return this.apiService.post(route, details)
-    .map(
+      .map(
       data => {
         return data;
       }
-    )
+      )
   }
 
   getCurrentUser(): any {
     return this.currentUserSubject.value;
   }
 
-  updatePersonal(data){
+  updatePersonal(data) {
     let path = 'user/update/personal'
-    return this.apiService.put(path,data)
-    .map(
+    return this.apiService.put(path, data)
+      .map(
       data => {
         return data;
       }
-    )
+      )
   }
 
-  updateWork(data){
+  updateWork(data) {
     let path = 'user/update/work'
-    return this.apiService.put(path,data)
-    .map(
+    return this.apiService.put(path, data)
+      .map(
       data => {
         return data;
       }
-    )
+      )
   }
 
-  getData(id){
-    let path = 'user/getProfile/'+id
+  getData(id) {
+    let path = 'user/getProfile/' + id
     return this.apiService.get(path)
-    .map(
+      .map(
       data => {
         return data;
       }
-    )
+      )
   }
 
-forgotPassword (data) {
-  let path = 'user/resetpasswordlink';
-  return this.apiService.post(path,data).
-  map(
-    data => {
-      return data;
-    }
-  )
-}
-changePassword (data) {
-  let path = 'user/resetpassword';
-  return this.apiService.post(path,data).
-  map(
-    data => {
-      return data;
-    },
-    err => {
-      return err;
-    }
-  )
-}
+  forgotPassword(data) {
+    let path = 'user/resetpasswordlink';
+    return this.apiService.post(path, data).
+      map(
+      data => {
+        return data;
+      }
+      )
+  }
+  changePassword(data) {
+    let path = 'user/resetpassword';
+    return this.apiService.post(path, data).
+      map(
+      data => {
+        return data;
+      },
+      err => {
+        return err;
+      }
+      )
+  }
 
-activateUser(id) {
-  let path = 'user/confirmation/' + id;
-  return this.apiService.get(path).
-  map(
-    data => {
-      return data;
-    },
-    err => {
-      return err;
-    }
-  )
-}
+  activateUser(id) {
+    let path = 'user/confirmation/' + id;
+    return this.apiService.get(path).
+      map(
+      data => {
+        return data;
+      },
+      err => {
+        return err;
+      }
+      )
+  }
 
-contactus(data){
-  let url = 'user/contactus';
-  return this.apiService.post(url,data).map(res => {
-    return res;
-  });
-}
-resetPassword(data){
-  let url = "user/changepassword";
-  return this.apiService.put(url,data).map(res => {
-    return res;
-  });
-}
+  contactus(data) {
+    let url = 'user/contactus';
+    return this.apiService.post(url, data).map(res => {
+      return res;
+    });
+  }
+  resetPassword(data) {
+    let url = "user/changepassword";
+    return this.apiService.put(url, data).map(res => {
+      return res;
+    },err => {
+      return err;
+    });
+  }
+
+  acceptOffer(id) {
+    let url = 'offers/accept/' + id;
+    return this.apiService.get(url).map(res => {
+      return res;
+    });
+  }
+
+  rejectOffer(id) {
+    let url = 'offers/reject/' + id;
+    return this.apiService.get(url).map(res => {
+      return res;
+    });
+  }
+  acceptJobseeker(id) {
+    let url = 'offers/acceptjs/' + id;
+    return this.apiService.get(url).map(res => {
+      return res;
+    });
+  }
+  rejectJobseeker(id) {
+    let url = 'offers/rejectjs/' + id;
+    return this.apiService.get(url).map(res => {
+      return res;
+    });
+  }
+
+  readyToWork(id) {
+    let url = 'offers/rtw/' + id;
+    return this.apiService.get(url).map(res => {
+      return res;
+    });
+  }
+  notReadyToWork(id) {
+    let url = 'offers/nrtw/' + id;
+    return this.apiService.get(url).map(res => {
+      return res;
+    });
+  }
 }

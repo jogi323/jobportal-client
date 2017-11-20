@@ -1,0 +1,20 @@
+.response {
+    position: relative;
+    width: 90%;
+    left: 5%;
+    margin-top: 5%;
+    background: #00394E;
+}
+.dummy{
+    height: 230px;
+}
+.content {
+    color: white;
+}
+.home-botton {
+    position: relative;
+    left: 48%;
+}
+.home-botton:hover span{
+    color: white;
+}

@@ -8,6 +8,13 @@ import { ContactUsComponent } from './shared/components/contact-us/contact-us.co
 import { RegisterComponent } from './register/register.component';
 import { ActivateUserComponent } from './activate-user/activate-user.component';
 
+//offers related routes
+import { AcceptOfferComponent } from './offers/accept-offer/accept-offer.component';
+import { DeclineOfferComponent } from './offers/decline-offer/decline-offer.component';
+import { AcceptJobseekerComponent } from './offers/accept-jobseeker/accept-jobseeker.component';
+import { RejectJobseekerComponent } from './offers/reject-jobseeker/reject-jobseeker.component';
+import { JobseekerRtwComponent } from './offers/jobseeker-rtw/jobseeker-rtw.component';
+import { JobseekerNrtwComponent } from './offers/jobseeker-nrtw/jobseeker-nrtw.component';
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { NoAuthGuardService } from './shared/services/no-auth-guard.service';
 
@@ -23,6 +30,12 @@ const routes: Routes = [
     { path:'forgotpassword/:id', component:ForgotPasswordComponent,canActivate:[NoAuthGuardService] },
     { path:'register',component:RegisterComponent ,canActivate:[NoAuthGuardService]},
     { path:'contactus', component:ContactUsComponent ,canActivate:[NoAuthGuardService] },
+    { path:'acceptoffer/:id', component:AcceptOfferComponent },
+    { path:'rejectoffer/:id', component:DeclineOfferComponent },
+    { path:'acceptjobseeker/:id', component:AcceptJobseekerComponent },
+    { path:'rejectjobseeker/:id', component:RejectJobseekerComponent },
+    { path:'jobseekerrtw/:id', component:JobseekerRtwComponent },
+    { path:'jobseekernrtw/:id', component:JobseekerNrtwComponent },    
     { path:'**', redirectTo:'' },
 ];
 

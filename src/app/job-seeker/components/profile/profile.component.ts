@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
   yearsList: any[];
   positionList: any[];
   public options = { types: ['address'], componentRestrictions: { country: 'US' } }
-  
+
   licenseRequired: Boolean = false;
   newImageUploaded: Boolean = false;
   showOtpInput: Boolean = false;
@@ -106,7 +106,7 @@ export class ProfileComponent implements OnInit {
       image: ""
     }
     this.otp = null;
-    this.loaderService.display(true);          
+    this.loaderService.display(true);
     this.subscription = userService.currentUser.subscribe(user => {
       this.isUserDataEdit = user.personalInfo;
       this.isWorkDataEdit = user.workInfo;
@@ -115,16 +115,16 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  initUserData(user){
-    if(user.userType !== undefined) {
+  initUserData(user) {
+    if (user.userType !== undefined) {
       this.userService.getData(user.Email_Address).subscribe(
-        res =>{
+        res => {
           this.user = res.data;
-          this.loaderService.display(false);          
+          this.loaderService.display(false);
 
         },
-        err =>{
-          this.loaderService.display(false);          
+        err => {
+          this.loaderService.display(false);
           this.notificationsService.error(
             err.title,
             err.error.message,
@@ -151,10 +151,10 @@ export class ProfileComponent implements OnInit {
     }
   }
   updateUserData(user) {
-    this.loaderService.display(true);              
+    this.loaderService.display(true);
     this.userService.updatePersonal(this.user).subscribe(
       res => {
-        this.loaderService.display(false);              
+        this.loaderService.display(false);
         this.notificationsService.success(
           'Success',
           res.message,
@@ -167,7 +167,7 @@ export class ProfileComponent implements OnInit {
         this.notificationsService.error(
           err.title,
           err.error.message,
-          environment.options          
+          environment.options
         )
       }
     )
@@ -181,24 +181,24 @@ export class ProfileComponent implements OnInit {
     this.isWorkDataEdit = !this.isWorkDataEdit;
   }
 
-  updateWorkData(user) {  
-    this.loaderService.display(true); 
+  updateWorkData(user) {
+    this.loaderService.display(true);
     this.userService.updateWork(this.user).subscribe(
       res => {
-        this.loaderService.display(false); 
+        this.loaderService.display(false);
         this.notificationsService.success(
           'Success',
           res.message,
-          environment.options          
+          environment.options
         )
         this.isWorkDataEdit = !this.isWorkDataEdit;
       },
       err => {
-        this.loaderService.display(false); 
+        this.loaderService.display(false);
         this.notificationsService.error(
           err.title,
           err.error.message,
-          environment.options          
+          environment.options
         )
       }
     )
@@ -230,12 +230,12 @@ export class ProfileComponent implements OnInit {
   }
 
   sendOtp() {
-    var payload = {number : this.user.Phone1};
-    this.loaderService.display(true);     
-    this.jobseekerService.sendOtp(this.currentUser.Email_Address,payload).subscribe(res => {
+    var payload = { number: this.user.Phone1 };
+    this.loaderService.display(true);
+    this.jobseekerService.sendOtp(this.currentUser.Email_Address, payload).subscribe(res => {
       this.showOtpInput = true;
       this.showVerifyOtp = true;
-      this.loaderService.display(false); 
+      this.loaderService.display(false);
       this.notificationsService.success(
         'Success',
         res.message,
@@ -243,39 +243,48 @@ export class ProfileComponent implements OnInit {
       )
 
     },
-    err => {
-       this.loaderService.display(false); 
+      err => {
+        this.loaderService.display(false);
         this.notificationsService.error(
           err.title,
           err.error.message,
-          environment.options          
+          environment.options
         )
-    })
+      })
   }
 
-verifyOtp() {
- this.loaderService.display(false); 
-  var payload = {otp : this.otp};
-  this.jobseekerService.verifyOtp(this.currentUser.Email_Address,payload).subscribe(res => {
-    this.loaderService.display(false); 
-    this.showVerifyOtp = false;
-    this.showOtpInput = false;
-    this.otp = null;  
-    this.phone1Verified = true;  
-    this.notificationsService.success(
-      'Success',
-      res.message,
-      environment.options
-    )
-  },
-  err => {
-    this.loaderService.display(false);     
-    this.notificationsService.error(
-      err.title,
-      err.error.message
-    )
-  })
-}
+  verifyOtp() {
+    if (this.otp === null) {
+      this.notificationsService.error(
+        'Failed',
+        'Invalid OTP',
+        environment.options
+      )
+    } else {
+      this.loaderService.display(false);
+      var payload = { otp: this.otp };
+      this.jobseekerService.verifyOtp(this.currentUser.Email_Address, payload).subscribe(res => {
+        this.loaderService.display(false);
+        this.showVerifyOtp = false;
+        this.showOtpInput = false;
+        this.otp = null;
+        this.phone1Verified = true;
+        this.notificationsService.success(
+          'Success',
+          res.message,
+          environment.options
+        )
+      },
+        err => {
+          this.loaderService.display(false);
+          this.notificationsService.error(
+            err.title,
+            err.error.message,
+            environment.options
+          )
+        })
+    }
+  }
 
   changeListener($event): void {
     this.newImageUploaded = true;

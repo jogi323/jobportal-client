@@ -1,0 +1,12 @@
+<div class="response success" *ngIf = "success">
+  <p class="text-center content">{{success}}</p>
+  <p class="pull-right" [routerLink]="['']">Go back to home</p>
+</div>
+<div class="response error" *ngIf = "error">
+  <p class="text-center content">{{error.title}}</p>
+</div>
+  <button class="btn btn-inv btn-md btn-stroke home-botton" [routerLink]="['']"><span>Home</span></button>  
+
+<div class="dummy">
+   
+</div>

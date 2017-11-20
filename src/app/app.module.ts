@@ -31,6 +31,12 @@ import { NoAuthGuardService } from './shared/services/no-auth-guard.service';
 import { LoaderService } from './shared/services/loader.service';
 
 import { ActivateUserComponent } from './activate-user/activate-user.component';
+import { AcceptOfferComponent } from './offers/accept-offer/accept-offer.component';
+import { DeclineOfferComponent } from './offers/decline-offer/decline-offer.component';
+import { AcceptJobseekerComponent } from './offers/accept-jobseeker/accept-jobseeker.component';
+import { RejectJobseekerComponent } from './offers/reject-jobseeker/reject-jobseeker.component';
+import { JobseekerRtwComponent } from './offers/jobseeker-rtw/jobseeker-rtw.component';
+import { JobseekerNrtwComponent } from './offers/jobseeker-nrtw/jobseeker-nrtw.component';
 
 // import { SearchPipe } from './shared/pipes/search.pipe';
 
@@ -40,7 +46,13 @@ import { ActivateUserComponent } from './activate-user/activate-user.component';
     LoginComponent,
     HomeComponent,
     RegisterComponent,
-    ActivateUserComponent
+    ActivateUserComponent,
+    AcceptOfferComponent,
+    DeclineOfferComponent,
+    AcceptJobseekerComponent,
+    RejectJobseekerComponent,
+    JobseekerRtwComponent,
+    JobseekerNrtwComponent
     // SearchPipe
   ],
   imports: [

@@ -75,8 +75,8 @@
                                 <div class="col-lg-6">
 
                                     <label for="User_Firstname">First Name
-                  <abbr class="required" title="required">*</abbr>
-                  </label>
+                                    <abbr class="required" title="required">*</abbr>
+                                    </label>
                                     <input type="text" class="input-text" placeholder [(ngModel)]="user.Firstname" value="" name="Firstname" id="User_Firstname"
                                         #Firstname='ngModel' required>
                                     <div *ngIf="Firstname.errors && (Firstname.dirty || Firstname.touched)" class="error">
@@ -84,8 +84,8 @@
                                     </div>
 
                                     <label for="User_Lastname">Last Name
-                  <abbr class="required" title="required">*</abbr>
-                  </label>
+                                    <abbr class="required" title="required">*</abbr>
+                                    </label>
                                     <input type="text" class="input-text" placeholder [(ngModel)]="user.Lastname" value="" name="Lastname" id="User_Lastname"
                                         #Lastname='ngModel' required>
                                     <div *ngIf="Lastname.errors && (Lastname.dirty || Lastname.touched)" class="error">
@@ -93,8 +93,8 @@
                                     </div>
 
                                     <label for="User_Email_Address">Email
-                      <abbr class="required" title="required">*</abbr>
-                      </label>
+                                    <abbr class="required" title="required">*</abbr>
+                                    </label>
                                     <input type="email" class="input-text" placeholder [(ngModel)]="user.Email_Address" value="" name="Email_Address" id="User_Email_Address"
                                         #Email_Address="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" readonly
                                         required>
@@ -105,7 +105,9 @@
 
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="file" (change)="changeListener($event)" />
+                                    <!--<input type="file" (change)="changeListener($event)" />-->
+                                        <input type="file" id="files" class="hidden" (change)="changeListener($event)"/>
+                                        <label for="files" class="file">Upload Image</label>
                                     <img class="preview_image" src="{{user.image}}" height="220" width="160" *ngIf="newImageUploaded">
                                 </div>
                             </div>
@@ -122,8 +124,8 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label for="User_Address_street">Address
-                    <abbr class="required" title="required">*</abbr>
-                  </label>
+                                        <abbr class="required" title="required">*</abbr>
+                                    </label>
                                     <input type="text" class="input-text" placeholder="Street address" [(ngModel)]="user.Address_street" value="" name="Address_street"
                                         id="User_Address_street" #Address_street='ngModel' required>
                                     <div *ngIf="Address_street.errors && (Address_street.dirty || Address_street.touched)" class="error">
@@ -144,9 +146,9 @@
                                 <div class="col-md-4">
                                     <select name="User_State" [(ngModel)]="user.State" id="User_State" class="country_to_state country_select" title="State *"
                                         #State='ngModel' required>
-                    <option value="" disabled selected>State</option>
-                    <option *ngFor="let state of statesList" [attr.value]="state.key">{{state.name}}</option>
-                  </select>
+                                        <option value="" disabled selected>State</option>
+                                        <option *ngFor="let state of statesList" [attr.value]="state.key">{{state.name}}</option>
+                                    </select>
                                     <div *ngIf="State.errors && (State.dirty || State.touched)" class="error">
                                         <div [hidden]="!State.errors.required">This field is required</div>
                                     </div>

@@ -41,3 +41,8 @@
     border-bottom: 2px solid black !important;
     background: none;
 }
+.file {
+    border: 1px solid #ccc;
+    padding: 5px;
+    background: #ccc;
+}

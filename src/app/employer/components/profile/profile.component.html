@@ -87,7 +87,8 @@
                                         id="User_Email_Address">
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="file" (change)="changeListener($event)" />
+                                    <input type="file" id="files" class="hidden" (change)="changeListener($event)"/>
+                                        <label for="files" class="file">Upload Image</label>
                                     <img class="preview_image" src="{{user.image}}" height="220" width="160" *ngIf="newImageUploaded">
                                 </div>
                             </div>

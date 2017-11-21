@@ -1,49 +1,48 @@
 <div class="container-fluid">
-	<div class="col-lg-3">
-		<section class="page-title text-center bg-light searchjobseeker-section">
-			<h2 class="heading relative uppercase bottom-line full-grey mb-30">Search Job Seekers</h2>
-			<div class="row">
-				<div class="col-sm-10 col-sm-offset-1">
-					<label for="billing_address_1" class="pull-left">Date
+    <div class="col-lg-3">
+        <section class="page-title text-center bg-light searchjobseeker-section">
+            <h2 class="heading relative uppercase bottom-line full-grey mb-30">Search Job Seekers</h2>
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <label for="billing_address_1" class="pull-left">Date
 						<abbr class="required" title="required">*</abbr>
 					</label>
-					<p class="form-row form-row-wide ">
-						<p-calendar [(ngModel)]="filterJobseekers.Date" dataType="Date" (onSelect)="onDateChange($event)"></p-calendar>
-					</p>
-				</div>
-				<div class="col-sm-10 col-sm-offset-1">
-					<label for="billing_address_1" class="pull-left">Position
+                    <p class="form-row form-row-wide ">
+                        <p-calendar [(ngModel)]="filterJobseekers.Date" dataType="Date" (onSelect)="onDateChange($event)"></p-calendar>
+                    </p>
+                </div>
+                <div class="col-sm-10 col-sm-offset-1">
+                    <label for="billing_address_1" class="pull-left">Position
 						<abbr class="required" title="required">*</abbr>
 					</label>
-					<p class="form-row form-row-wide ">
-						<select name="calc_shipping_country" id="calc_shipping_country" class="country_to_state" rel="calc_shipping_state" [(ngModel)]="filterJobseekers.Position">
-							<option *ngFor="let position of positionList">{{position.name}}</option>
+                    <p class="form-row form-row-wide ">
+                        <select name="calc_shipping_country" id="calc_shipping_country" class="country_to_state" rel="calc_shipping_state" [(ngModel)]="filterJobseekers.Position">
+							<option *ngFor="let position of positionList">{{position?.name}}</option>
 						</select>
-					</p>
-				</div>
-				<div class="col-sm-10 col-sm-offset-1">
-					<label for="billing_address_1" class="pull-left">Hours Guaranteed
+                    </p>
+                </div>
+                <div class="col-sm-10 col-sm-offset-1">
+                    <label for="billing_address_1" class="pull-left">Hours Guaranteed
 					</label>
-					<p class="form-row form-row-wide">
-						<input type="text" class="input-text" placeholder="No. of hours you will guarantee" 
-						[(ngModel)]="filterJobseekers.Hours_Guaranteed" name="Hours_Guarnteed" id="Hours_Guarnteed" (ngModelChange)="onHoursChange()">
-					</p>
-				</div>
-				<div class="col-sm-10 col-sm-offset-1">
-					<label for="billing_address_1" class="pull-left">Pay Requested
+                    <p class="form-row form-row-wide">
+                        <input type="text" class="input-text" placeholder="No. of hours you will guarantee" [(ngModel)]="filterJobseekers.Hours_Guaranteed" name="Hours_Guarnteed" id="Hours_Guarnteed" (ngModelChange)="onHoursChange()">
+                    </p>
+                </div>
+                <div class="col-sm-10 col-sm-offset-1">
+                    <label for="billing_address_1" class="pull-left">Pay Requested
 					</label>
-					<p class="form-row form-row-wide">
-						<input type="text" class="input-text" value placeholder="Pay Requested" name="calc_shipping_postcode" id="calc_shipping_postcode" [(ngModel)]="filterJobseekers.pay_request">
-					</p>
-				</div>
-					<div class="col-sm-10 col-sm-offset-1">
-						<span class="pull-right">
+                    <p class="form-row form-row-wide">
+                        <input type="text" class="input-text" value placeholder="Pay Requested" name="calc_shipping_postcode" id="calc_shipping_postcode" [(ngModel)]="filterJobseekers.pay_request">
+                    </p>
+                </div>
+                <div class="col-sm-10 col-sm-offset-1">
+                    <span class="pull-right">
 							<a (click)="initializeFilterJobseeker()">
 								Reset Filter
 							</a>
 						</span>
-				</div>
-				<!-- <div class="col-sm-10 col-sm-offset-1">
+                </div>
+                <!-- <div class="col-sm-10 col-sm-offset-1">
 					<label for="billing_address_1" class="pull-left">Distance (in miles)
 					</label>
 					<p class="form-row form-row-wide ">
@@ -58,67 +57,67 @@
 						</select>
 					</p>
 				</div> -->
-			</div>
-		</section>
-	</div>
-	<div class="col-lg-9 jobseeeker-section">
-			<h2 class="heading relative uppercase bottom-line full-grey mb-30">Job Seekers</h2>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="table-wrap mb-30">
-						<table class="shop_table cart table">
-							<thead>
-								<tr>
-									<th class="product-name">Image</th>
-									<th class="product-name" >Position</th>
-									<th class="product-price">Hourly Rate</th>
-									<th class="product-quantity">Experience (yrs)</th>
-									<th class="product-subtotal">Zip Code</th>
-									<th class="product-Hire"><button class="btn btn-success" routerLink="/employer/payment" [disabled]="!itemsToHire.length"><span>Hire</span></button></th>
-									
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="cart_item" *ngFor="let jobseeker of jobseekers | search:filterJobseekers">
-									<td class="product-thumbnail">
-										<a >
-											<img src="assets/img/Photos/user.png" alt="">
-										</a>
-									</td>
-									<td class="product-name">
-										<a ><b>{{jobseeker.JS_id.Position}}</b></a>
-										<ul>
-											<li>Available</li>
-											<li><b>From:</b> {{jobseeker.Time_Start}}</li>
-											<li><b>To:</b> {{jobseeker.Time_Finish}}</li>
-										</ul>
-									</td>
-									<td class="product-price">
-										<span>${{jobseeker.JS_id.Hourly_Pay}}</span>
-									</td>
-									<td class="product-quantity">
-										<div class="quantity buttons_added">
-											<input type="number" disabled step="1" min="0" value="{{jobseeker.Hours_Guaranteed}}" [(ngModel)]="jobseeker.Hours_Guaranteed" title="Qty" class="input-text qty text">
-										</div>
-									</td>
-									<td class="product-subtotal">
-										<span class="amount">{{jobseeker.JS_id.Zip_Code}}</span>
-									</td>
-									<!-- <td class="product-remove">
+            </div>
+        </section>
+    </div>
+    <div class="col-lg-9 jobseeeker-section">
+        <h2 class="heading relative uppercase bottom-line full-grey mb-30">Job Seekers</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-wrap mb-30">
+                    <table class="shop_table cart table">
+                        <thead>
+                            <tr>
+                                <th class="product-name">Image</th>
+                                <th class="product-name">Position</th>
+                                <th class="product-price">Hourly Rate</th>
+                                <th class="product-quantity">Experience (yrs)</th>
+                                <th class="product-subtotal">Zip Code</th>
+                                <th class="product-Hire"><button class="btn btn-success" routerLink="/employer/payment" [disabled]="!itemsToHire.length"><span>Hire</span></button></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cart_item" *ngFor="let jobseeker of jobseekers | search:filterJobseekers">
+                                <td class="product-thumbnail">
+                                    <a>
+                                        <img src="assets/img/Photos/user.png" alt="">
+                                    </a>
+                                </td>
+                                <td class="product-name">
+                                    <a><b>{{jobseeker?.JS_id.Position}}</b></a>
+                                    <ul>
+                                        <li>Available</li>
+                                        <li><b>From:</b> {{jobseeker?.Time_Start}}</li>
+                                        <li><b>To:</b> {{jobseeker?.Time_Finish}}</li>
+                                    </ul>
+                                </td>
+                                <td class="product-price">
+                                    <span>${{jobseeker?.JS_id.Hourly_Pay}}</span>
+                                </td>
+                                <td class="product-quantity">
+                                    <div class="quantity buttons_added">
+                                        <input type="number" disabled step="1" min="0" value="{{jobseeker.JS_id.Experience}}" [(ngModel)]="jobseeker.JS_id.Experience" title="Qty" class="input-text qty text">
+                                    </div>
+                                </td>
+                                <td class="product-subtotal">
+                                    <span class="amount">{{jobseeker?.JS_id.Zip_Code}}</span>
+                                </td>
+                                <!-- <td class="product-remove">
 										<a class="remove" title="Remove this item">
 											<i class="ui-close"></i>
 										</a>
 									</td> -->
-									<td class="product-hire">
-										<a class="Hire" title="Hire this person">
-											<input type="checkbox" name="Hire" (change)="selectToHire(jobseeker,$event)">
-										</a>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-	</div>
+                                <td class="product-hire">
+                                    <a class="Hire" title="Hire this person">
+                                        <input type="checkbox" name="Hire" (change)="selectToHire(jobseeker,$event)">
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -15,7 +15,8 @@ import { JobseekerService } from '../../../shared/services/jobseeker.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
+  userInfoUpdated: Boolean = true;
+  workInfoUpdated: Boolean = true;
   isUserDataEdit: Boolean = false;
   isWorkDataEdit: Boolean = false;
   user: User;
@@ -120,6 +121,9 @@ export class ProfileComponent implements OnInit {
       this.userService.getData(user.Email_Address).subscribe(
         res => {
           this.user = res.data;
+          this.userInfoUpdated = res.data.personalInfo;
+          this.workInfoUpdated = res.data.workInfo;
+          console.log(this.user);
           this.loaderService.display(false);
 
         },
@@ -160,7 +164,9 @@ export class ProfileComponent implements OnInit {
           res.message,
           environment.options
         )
+        this.userInfoUpdated = false;
         this.isUserDataEdit = !this.isUserDataEdit;
+        this.removeNotification();
       },
       err => {
         this.loaderService.display(false);
@@ -192,6 +198,8 @@ export class ProfileComponent implements OnInit {
           environment.options
         )
         this.isWorkDataEdit = !this.isWorkDataEdit;
+        this.workInfoUpdated = false;
+        this.removeNotification();
       },
       err => {
         this.loaderService.display(false);
@@ -204,9 +212,14 @@ export class ProfileComponent implements OnInit {
     )
   }
 
-
+  removeNotification() {
+    if (!this.userInfoUpdated && !this.workInfoUpdated) {
+      setTimeout(() => {
+        this.notificationsService.remove();
+      },5000);
+    }
+  }
   ngOnInit() {
-
     this.jsonLoaderService.getStates()
       .subscribe(data => {
         this.statesList = data;

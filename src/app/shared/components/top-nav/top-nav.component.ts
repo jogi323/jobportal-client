@@ -6,6 +6,7 @@ import { LoginComponent } from '../../../login/login.component';
 import { UserService } from '../../../shared/services/user.service';
 import { Subscription } from 'rxjs/Subscription';
 import { LoaderService } from '../../services/loader.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-top-nav',
@@ -19,13 +20,20 @@ export class TopNavComponent implements OnInit {
   currentUser:any;
   currentUrl:String;
   showProfileStatus: Boolean = true;
-
+  public optionsBottom = {
+    position: ["bottom", "left"],
+    timeOut: 0,
+    lastOnBottom: true,
+    showProgressBar:false,
+    clickToClose:false
+}
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private dialogService: DialogService,
     private userService: UserService,
-    private loaderService:LoaderService
+    private loaderService:LoaderService,
+    private notificationsService: NotificationsService,
   ) {
     this.subscription = userService.currentUser.subscribe(user =>{
         if(user.userType !== undefined){
@@ -35,12 +43,22 @@ export class TopNavComponent implements OnInit {
         }
         this.userType = user.userType;
         this.currentUser = user;
+        this.showNotification(user)
     })
 
   }
-
+  showNotification(user){
+    if((user.personalInfo || user.workInfo) && user){
+      this.notificationsService.info(
+        '',
+        'Your personal and/or work profiles are not updated',
+        this.optionsBottom        
+        // environment.options
+      )
+    } 
+  }
   ngOnInit() {
-    
+    console.log("initialized");
   }
   userProfile(){
     this.router.navigate([this.userType+'/profile'])

@@ -20,7 +20,13 @@ export class AppComponent implements OnInit {
             this.showLoader = val;
     });
   }
-
+  public optionsBottom = {
+    position: ["bottom", "left"],
+    timeOut: 0,
+    lastOnBottom: true,
+    showProgressBar:false,
+    clickToClose:false
+}
   ngOnInit(){
     this.userService.populate();
   }

@@ -1,20 +1,43 @@
-.response {
-    position: relative;
-    width: 90%;
-    left: 5%;
-    margin-top: 5%;
-    background: #00394E;
-}
-.dummy{
+.dummy {
     height: 230px;
 }
-.content {
-    color: white;
+
+.mail-row {
+    border: 2px solid green;
+    padding: 30px;
+    margin-top: 20px;
+    background-color: #e6ffe6;
 }
-.home-botton {
-    position: relative;
-    left: 48%;
+
+.mail-icon i {
+    font-size: 100px;
+    line-height: 100px;
+    margin: 0px auto;
+    display: table;
+    color: green;
 }
-.home-botton:hover span{
-    color: white;
+
+.mail-btn button {
+    margin: 0px auto;
+    display: table;
+    margin-top: 20px
+}
+
+.mail-btn h5 {
+    padding-top: 15px;
+}
+
+.mail-fail-row {
+    border: 2px solid red;
+    padding: 30px;
+    margin-top: 20px;
+    background-color: #fff0e6
+}
+
+.mail-icon-sad i {
+    font-size: 100px;
+    line-height: 100px;
+    margin: 0px auto;
+    display: table;
+    color: #F35C00;
 }

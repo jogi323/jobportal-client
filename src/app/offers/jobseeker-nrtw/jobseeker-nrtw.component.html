@@ -1,12 +1,24 @@
-<div class="response success" *ngIf = "success">
-  <p class="text-center content">{{success}}</p>
-  <p class="pull-right" [routerLink]="['']">Go back to home</p>
-</div>
-<div class="response error" *ngIf = "error">
-  <p class="text-center content">{{error.title}}</p>
-</div>
-  <button class="btn btn-inv btn-md btn-stroke home-botton" [routerLink]="['']"><span>Home</span></button>  
+<div class="container">
+    <div class="col-sm-12 mail-reject-row" *ngIf="success">
+        <div class="col-sm-2 mail-icon-meh">
+            <i class="fa fa-meh-o" aria-hidden="true"></i>
+        </div>
+        <div class="col-sm-10 mail-btn">
+            <h5>{{success}}</h5>
 
+            <a class="btn btn-md btn-color mt-10" [routerLink]="['']"><span>Go To Home</span></a>
+        </div>
+    </div>
+    <div class=" col-sm-12 mail-fail-row " *ngIf="error ">
+        <div class="col-sm-2 mail-icon-sad ">
+            <i class="fa fa-frown-o " aria-hidden="true "></i>
+        </div>
+        <div class="col-sm-10 mail-btn ">
+            <h5>{{error.title}}</h5>
+            <a class="btn btn-md btn-color mt-10 " [routerLink]="[ '']"><span>Go To Home</span></a>
+        </div>
+    </div>
+</div>
 <div class="dummy">
-   
+
 </div>

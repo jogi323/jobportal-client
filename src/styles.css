@@ -1,44 +1,123 @@
 /* You can add global styles to this file, and also import other style files */
+
 .checkbox input[type="text"] {
     height: 29px !important;
     margin-bottom: 0px !important;
     padding: 3.5px;
 }
+
 a:hover.btn.btn-md.btn-dark {
     background-color: white !important;
     color: #00394E;
     border: 1px solid #00394E;
 }
-.btn:hover span{
+
+.btn:hover span {
     color: #00394E !important;
 }
-.navigation.scrolling .navbar-nav > li > a{
+
+.navigation.scrolling .navbar-nav>li>a {
     color: #fff;
 }
-.navigation.scrolling .nav-cart-inner a{
+
+.navigation.scrolling .nav-cart-inner a {
     color: #fff !important;
 }
-input.ng-tns-c5-0.ui-inputtext.ui-widget.ui-state-default.ui-corner-all{
+
+input.ng-tns-c5-0.ui-inputtext.ui-widget.ui-state-default.ui-corner-all {
     margin-bottom: 0px !important;
     background-color: #fff !important;
     /* padding: 0 40px !important; */
 }
+
 span.ng-tns-c5-0.ui-calendar {
     width: 100%;
-}   
+}
+
 .error {
     color: red;
     text-align: right;
 }
-input.ng-dirty.ng-invalid, input.ng-touched.ng-invalid,textarea.ng-dirty.ng-invalid, textarea.ng-touched.ng-invalid {
-    border:1px solid red;
+
+input.ng-dirty.ng-invalid,
+input.ng-touched.ng-invalid,
+textarea.ng-dirty.ng-invalid,
+textarea.ng-touched.ng-invalid {
+    border: 1px solid red;
 }
+
 input.ng-dirty.ng-valid.mismatchError.ng-touched {
     border-color: red;
 }
-input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="tel"], input[type="number"], input[type="date"], input[type="search"], select, textarea {
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+input[type="search"],
+select,
+textarea {
     margin-bottom: 10px !important;
 }
-a:hover{
+
+a:hover {
     cursor: pointer;
+}
+
+.mail-row {
+    border: 2px solid green;
+    padding: 30px;
+    margin-top: 20px;
+    background-color: #e6ffe6;
+}
+
+.mail-icon i {
+    font-size: 100px;
+    line-height: 100px;
+    margin: 0px auto;
+    display: table;
+    color: green;
+}
+
+.mail-btn button {
+    margin: 0px auto;
+    display: table;
+    margin-top: 20px
+}
+
+.mail-btn h5 {
+    padding-top: 15px;
+}
+
+.mail-fail-row {
+    border: 2px solid red;
+    padding: 30px;
+    margin-top: 20px;
+    background-color: #fff0e6
+}
+
+.mail-reject-row {
+    border: 2px solid orange;
+    padding: 30px;
+    margin-top: 20px;
+    background-color: #ffffcc
+}
+
+.mail-icon-sad i {
+    font-size: 100px;
+    line-height: 100px;
+    margin: 0px auto;
+    display: table;
+    color: red;
+}
+
+.mail-icon-meh i {
+    font-size: 100px;
+    line-height: 100px;
+    margin: 0px auto;
+    display: table;
+    color: orange;
 }

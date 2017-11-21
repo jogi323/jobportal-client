@@ -24,7 +24,7 @@ export  class User {
     Nr_of_Operations: number;
     Nr_of_Staff: number;
     Travel_Distance?:number;
-    Languages: String;
+    Languages: any[];
     Dental_School: String;
     Year_Graduated: number;
     License_Nr: String;

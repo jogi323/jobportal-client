@@ -121,3 +121,22 @@ a:hover {
     display: table;
     color: orange;
 }
+.language button.btn-default {
+    color: #333 !important;
+    background-color: #fff !important;
+    border: 1px solid #ccc !important;
+    width: 100px !important;
+    text-align: justify;
+}
+.language .dropdown-menu {
+    background-color: #fff !important;
+    width: 50px !important;
+    border: 1px solid #ccc !important;
+}
+.language .dropdown-menu li a:hover {
+    color:black !important;
+}
+.language button.btn-default::after {
+    background: transparent !important;
+    color: white !important;
+}

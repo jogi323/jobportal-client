@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
 import {GooglePlaceModule} from 'ng2-google-place-autocomplete';
 import {ScheduleModule, DialogModule, CalendarModule, ToggleButtonModule, DragDropModule, ButtonModule, InputTextareaModule, CheckboxModule, InputTextModule, SelectButtonModule} from 'primeng/primeng';
@@ -36,7 +37,8 @@ import { SharedModule } from '../shared/shared.module';
     CheckboxModule, 
     InputTextModule, 
     SelectButtonModule,
-    SharedModule
+    SharedModule,
+    MultiselectDropdownModule
   ],
   declarations: [
     JobSeekerComponent, 

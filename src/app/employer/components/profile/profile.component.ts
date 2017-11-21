@@ -81,7 +81,7 @@ export class ProfileComponent implements OnInit {
       Practice_Phone:undefined,
       Nr_of_Operations:undefined,
       Nr_of_Staff:undefined,
-      Languages:"",
+      Languages:[],
       Dental_School:"",
       Year_Graduated:undefined,
       License_Nr:"",
@@ -179,7 +179,9 @@ export class ProfileComponent implements OnInit {
     )   
   }
 
-
+onLanguageChange($event) {
+    
+  }
   ngOnInit() {
 
     this.jsonLoaderService.getStates()
@@ -189,7 +191,7 @@ export class ProfileComponent implements OnInit {
                             });
     this.jsonLoaderService.getLanguages()
                             .subscribe(data => {
-                              this.languagesList = data;
+                              this.languagesList = data.map(m => ({id:m.name,name:m.name}));;
                             }, error => {
                             });
     this.jsonLoaderService.getYears()

@@ -53,7 +53,19 @@ export class WorkScheduleComponent implements OnInit {
     // set end time function
     setEndTime(startTime){
         this.endTimes = this.startTimes.slice(this.startTimes.indexOf(startTime)+1);
+        this.endTime = this.endTimes[0];
         // console.log(this.endTime.substr(0,2)-this.startTime.substr(0,2));
+    }
+    // Repeat day or week 
+    setWeek(event){
+        if(event){
+            this.event.allMonth = false;            
+        }
+    }
+    setMonth(event){
+        if(event){
+            this.event.allWeek = false;                        
+        }
     }
     JobSchedules() {
         this.loaderService.display(true);

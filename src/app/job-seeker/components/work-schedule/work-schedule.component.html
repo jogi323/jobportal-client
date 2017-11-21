@@ -1,5 +1,5 @@
 <div class="col-md-8 col-md-offset-2 calendar" ><p-schedule [events]="events" [header]="header" [defaultDate]="calendarminDate" [eventLimit]="4" [editable]="true" (onDayClick)="handleDayClick($event)"
-  (onEventClick)="handleEventClick($event)"></p-schedule>
+ ></p-schedule>
 </div>
 
 <p-dialog header="Availability Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="false" [contentStyle]="{'overflow':'visible'}"
@@ -44,19 +44,19 @@
     <div class="ui-grid-row">
       <div class="ui-grid-col-4"><label for="allweek">All Week</label></div>
       <div class="ui-grid-col-8">
-        <p-checkbox [(ngModel)]="event.allWeek" binary="checkbox"></p-checkbox>
+        <p-checkbox [(ngModel)]="event.allWeek" binary="checkbox" (ngModelChange)="setWeek($event)"></p-checkbox>
       </div>
     </div>
     <div class="ui-grid-row">
       <div class="ui-grid-col-4"><label for="allmonth">Repeat All {{repeatDay}}</label></div>
       <div class="ui-grid-col-8">
-        <p-checkbox [(ngModel)]="event.allMonth" binary="checkbox"></p-checkbox>
+        <p-checkbox [(ngModel)]="event.allMonth" binary="checkbox" (ngModelChange)="setMonth($event)"></p-checkbox>
       </div>
     </div>
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button type="button" pButton icon="fa-close" (click)="deleteEvent(event.id)" label="Delete" [disabled]="!event?.id"></button>
+      <!-- <button type="button" pButton icon="fa-close" (click)="deleteEvent(event.id)" label="Delete" [disabled]="!event?.id"></button> -->
       <button type="button" pButton icon="fa-check" (click)="saveEvent()" label="Save" [disabled]="!event?.start"></button>
     </div>
   </p-footer>

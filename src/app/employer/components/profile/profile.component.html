@@ -67,51 +67,63 @@
                                     <label for="User_Firstname">First Name
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                                    <input type="text" class="input-text" placeholder [(ngModel)]="user.Firstname" value="" name="Firstname" #Firstname='ngModel' required>
+                                    <input type="text" class="input-text" placeholder [(ngModel)]="user.Firstname" value="" name="Firstname" #Firstname='ngModel'
+                                        required>
                                     <div *ngIf="Firstname.errors && (Firstname.dirty || Firstname.touched)" class="error">
                                         <div [hidden]="!Firstname.errors.required">Please Enter Firstname</div>
                                     </div>
                                     <label for="User_Lastname">Last Name
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                                    <input type="text" class="input-text" placeholder [(ngModel)]="user.Lastname" value="" name="Lastname" id="User_Lastname" #Lastname='ngModel' required>
+                                    <input type="text" class="input-text" placeholder [(ngModel)]="user.Lastname" value="" name="Lastname" id="User_Lastname"
+                                        #Lastname='ngModel' required>
                                     <div *ngIf="Lastname.errors && (Lastname.dirty || Lastname.touched)" class="error">
                                         <div [hidden]="!Lastname.errors.required">Please Enter Lastname</div>
                                     </div>
                                     <label for="User_Email_Address">Email
                       <abbr class="required" title="required">*</abbr>
                       </label>
-                                    <input type="email" class="input-text" placeholder [(ngModel)]="user.Email_Address" value="" disabled name="Email_Address" id="User_Email_Address">
+                                    <input type="email" class="input-text" placeholder [(ngModel)]="user.Email_Address" value="" disabled name="Email_Address"
+                                        id="User_Email_Address">
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="file" (change)="changeListener($event)" />
+                                    <input type="file" id="files" class="hidden" (change)="changeListener($event)"/>
+                                        <label for="files" class="file">Upload Image</label>
                                     <img class="preview_image" src="{{user.image}}" height="220" width="160" *ngIf="newImageUploaded">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input type="text" [(ngModel)]="address" name="address" [options]='options' (setAddress)="getAddress($event)" (street_number)='street_number=$event' (street)='street=$event' (city)='city=$event' (state)='state=$event' (district)='district=$event' (country)='country=$event'
-                                        (postal_code)='postal_code=$event' (lat)='lat=$event' (lng)='lng=$event' (adr_address)='adr_address=$event' (name)='name=$event' (place_id)='place_id=$event' (types)='types=$event' (url)='url=$event' (utc_offset)='utc_offset=$event'
-                                        (vicinity)='vicinity=$event' (photos)='photos=$event' (airport)='airport=$event' (CountryCodes)='CountryCodes=$event' id="autocomplete" ng2-google-place-autocomplete/>
+                                    <input type="text" [(ngModel)]="address" name="address" [options]='options' (setAddress)="getAddress($event)" (street_number)='street_number=$event'
+                                        (street)='street=$event' (city)='city=$event' (state)='state=$event' (district)='district=$event'
+                                        (country)='country=$event' (postal_code)='postal_code=$event' (lat)='lat=$event' (lng)='lng=$event'
+                                        (adr_address)='adr_address=$event' (name)='name=$event' (place_id)='place_id=$event'
+                                        (types)='types=$event' (url)='url=$event' (utc_offset)='utc_offset=$event' (vicinity)='vicinity=$event'
+                                        (photos)='photos=$event' (airport)='airport=$event' (CountryCodes)='CountryCodes=$event'
+                                        id="autocomplete" ng2-google-place-autocomplete/>
                                 </div>
                                 <div class="col-md-12">
                                     <label for="User_Address_street">Address
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                                    <input type="text" class="input-text" placeholder="Street address" [(ngModel)]="user.Address_street" value="" name="Address_street" id="User_Address_street">
-                                    <input type="text" class="input-text" placeholder="Apartment, suite, unit etc. (optional)" [(ngModel)]="user.Address_Unit" value="" name="Address_Unit" id="User_Address_Unit" #Address_Unit='ngModel' required>
+                                    <input type="text" class="input-text" placeholder="Street address" [(ngModel)]="user.Address_street" value="" name="Address_street"
+                                        id="User_Address_street">
+                                    <input type="text" class="input-text" placeholder="Apartment, suite, unit etc. (optional)" [(ngModel)]="user.Address_Unit"
+                                        value="" name="Address_Unit" id="User_Address_Unit" #Address_Unit='ngModel' required>
                                     <div *ngIf="Address_Unit.errors && (Address_Unit.dirty || Address_Unit.touched)" class="error">
                                         <div [hidden]="!Address_Unit.errors.required">This field is required</div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="text" class="input-text" placeholder="Town / City" [(ngModel)]="user.City" value="" name="City" id="USer+City" #City='ngModel' required>
+                                    <input type="text" class="input-text" placeholder="Town / City" [(ngModel)]="user.City" value="" name="City" id="USer+City"
+                                        #City='ngModel' required>
                                     <div *ngIf="City.errors && (City.dirty || City.touched)" class="error">
                                         <div [hidden]="!City.errors.required">This field is required</div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <select name="User_State" [(ngModel)]="user.State" id="User_State" class="country_to_state country_select" title="State *" #State='ngModel' required>
+                                    <select name="User_State" [(ngModel)]="user.State" id="User_State" class="country_to_state country_select" title="State *"
+                                        #State='ngModel' required>
                     <option value="" disabled selected>State</option>
                     <option *ngFor="let state of statesList" [attr.value]="state.key">{{state.name}}</option>
                   </select>
@@ -120,7 +132,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="number" class="input-text" placeholder="Zip Code" [(ngModel)]="user.Zip_Code" name="Zip_Code" id="User_Zip_Code" #Zip_Code='ngModel' required>
+                                    <input type="number" class="input-text" placeholder="Zip Code" [(ngModel)]="user.Zip_Code" name="Zip_Code" id="User_Zip_Code"
+                                        #Zip_Code='ngModel' required>
                                     <div *ngIf="Zip_Code.errors && (Zip_Code.dirty || Zip_Code.touched)" class="error">
                                         <div [hidden]="!Zip_Code.errors.required">This field is required</div>
                                     </div>
@@ -224,7 +237,8 @@
                                     <label for="user_Practice_Phone">Practice Phone
                    <abbr class="required" title="required">*</abbr> 
                   </label>
-                                    <input type="number" class="input-text" placeholder [(ngModel)]="user.Practice_Phone" value name="Practice_Phone" id="user_Practice_Phone" #Practice_Phone='ngModel' required>
+                                    <input type="number" class="input-text" placeholder [(ngModel)]="user.Practice_Phone" value name="Practice_Phone" id="user_Practice_Phone"
+                                        #Practice_Phone='ngModel' required>
                                     <div *ngIf="Practice_Phone.errors && (Practice_Phone.dirty || Practice_Phone.touched)" class="error">
                                         <div [hidden]="!Practice_Phone.errors.required">This field is required</div>
                                     </div>
@@ -233,7 +247,8 @@
                                     <label for="User_Speciality">Speciality
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                                    <select name="Speciality" [(ngModel)]="user.Speciality" id="Speciality" class="country_to_state country_select" title="Speciality *" #Speciality='ngModel' required>
+                                    <select name="Speciality" [(ngModel)]="user.Speciality" id="Speciality" class="country_to_state country_select" title="Speciality *"
+                                        #Speciality='ngModel' required>
                     <option value="" disabled selected>select</option>
                     <option *ngFor="let speciality of specialityList" [attr.value]="speciality.name">{{speciality.name}}</option>
                   </select>
@@ -247,22 +262,25 @@
                                     <label for="User_Nr_of_Operations">No Of Operatories
                   <!--<abbr class="required" title="required">*</abbr>-->
                   </label>
-                                    <input type="number" class="input-text" [(ngModel)]="user.Nr_of_Operations" placeholder="Operatories No" value name="Nr_of_Operatories" id="User_Nr_of_Operations" min="0">
+                                    <input type="number" class="input-text" [(ngModel)]="user.Nr_of_Operations" placeholder="Operatories No" value name="Nr_of_Operatories"
+                                        id="User_Nr_of_Operations" min="0">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="User_Nr_of_Staff">Number of Staff
                   <!--<abbr class="required" title="required">*</abbr>-->
                   </label>
-                                    <input type="number" class="input-text" placeholder="No. of Staff" [(ngModel)]="user.Nr_of_Staff" value name="Nr_of_Staff" id="User_Nr_of_Staff" min="0">
+                                    <input type="number" class="input-text" placeholder="No. of Staff" [(ngModel)]="user.Nr_of_Staff" value name="Nr_of_Staff"
+                                        id="User_Nr_of_Staff" min="0">
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="User_Languages">Languages
-                  <!--<abbr class="required" title="required">*</abbr>-->
-                  </label>
-                                    <select name="Languages" id="Languages" [(ngModel)]="user.Languages" class="country_to_state country_select" title="Languages *">
-                    <option value="" disabled selected>Select</option>
-                    <option *ngFor="let language of languagesList" [attr.value]="language.name">{{language.name}}</option>
-                  </select>
+                                    <!--<abbr class="required" title="required">*</abbr>-->
+                                    </label>
+                                    <!--<select name="Languages" id="Languages" [(ngModel)]="user.Languages" class="country_to_state country_select" title="Languages *">
+                                        <option value="" disabled selected>Select</option>
+                                        <option *ngFor="let language of languagesList" [attr.value]="language.name">{{language.name}}</option>
+                                    </select>-->
+                                    <ss-multiselect-dropdown [options]="languagesList" name="languages" class="language" [(ngModel)]="user.Languages" (ngModelChange)="onLanguageChange($event)"></ss-multiselect-dropdown>
                                 </div>
                             </div>
                             <div class="row">
@@ -276,7 +294,8 @@
                                     <label for="User_Year_Graduated">Year Graduated
                   <!--<abbr class="required" title="required">*</abbr>-->
                   </label>
-                                    <select name="Year_Graduated" id="Year_Graduated" [(ngModel)]="user.Year_Graduated" class="country_to_state country_select" title="Year Graduated *">
+                                    <select name="Year_Graduated" id="Year_Graduated" [(ngModel)]="user.Year_Graduated" class="country_to_state country_select"
+                                        title="Year Graduated *">
                     <option value="" disabled selected>Year</option>
                     <option *ngFor="let year of yearsList" [attr.value]="year.year">{{year.year}}</option>
                   </select>
@@ -293,7 +312,8 @@
                                     <label for="User_Years_in_Practice">Years in practice
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                                    <input type="number" class="input-text" [(ngModel)]="user.Years_in_Practice" placeholder value name="Years_in_Practice" id="User_Years_in_Practice" min="0">
+                                    <input type="number" class="input-text" [(ngModel)]="user.Years_in_Practice" placeholder value name="Years_in_Practice" id="User_Years_in_Practice"
+                                        min="0">
                                 </div>
                             </div>
                             <div class="row">
@@ -301,7 +321,8 @@
                                     <label for="User_Contact_Person">Contact person
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                                    <input type="text" class="input-text" [(ngModel)]="user.Contact_Person" placeholder value name="Contact_Person" id="User_Contact_Person" #Contact_Person='ngModel' required>
+                                    <input type="text" class="input-text" [(ngModel)]="user.Contact_Person" placeholder value name="Contact_Person" id="User_Contact_Person"
+                                        #Contact_Person='ngModel' required>
                                     <div *ngIf="Contact_Person.errors && (Contact_Person.dirty || Contact_Person.touched)" class="error">
                                         <div [hidden]="!Contact_Person.errors.required">This field is required</div>
                                     </div>
@@ -310,7 +331,8 @@
                                     <label for="User_Contact_Phone_Nr">Contact phone number
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                                    <input type="number" class="input-text" [(ngModel)]="user.Contact_Phone_Nr" placeholder value name="Contact_Phone_Nr" id="User_Contact_Phone_Nr" #Contact_Phone_Nr='ngModel' pattern="[0-9]{10}" required>
+                                    <input type="number" class="input-text" [(ngModel)]="user.Contact_Phone_Nr" placeholder value name="Contact_Phone_Nr" id="User_Contact_Phone_Nr"
+                                        #Contact_Phone_Nr='ngModel' pattern="[0-9]{10}" required>
                                     <div *ngIf="Contact_Phone_Nr.errors && (Contact_Phone_Nr.dirty || Contact_Phone_Nr.touched)" class="error">
                                         <div [hidden]="!Contact_Phone_Nr.errors.required">This field is required</div>
                                         <div [hidden]="!Contact_Phone_Nr.errors.pattern">Enter valid mobile number</div>

@@ -220,7 +220,7 @@ export class WorkScheduleComponent implements OnInit {
             let lastDay = (new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0, 23, 59, 59)).getDate();
             let diff = startDay + (lastDay - startDay);
             let b = 0;
-            for (let i = startDay; (i < diff); i += 7) {
+            for (let i = startDay; (i <= diff); i += 7) {
                 if (b == 0) {
                     let eventToSave = {
                         Date: new Date(startDate.setDate(startDate.getDate() + 0)),

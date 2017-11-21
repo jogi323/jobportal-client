@@ -16,52 +16,52 @@ import { NotificationsService } from 'angular2-notifications';
 export class TopNavComponent implements OnInit {
   userType: String = '';
   isLoggedIn: Boolean = false;
-  subscription:Subscription;
-  currentUser:any;
-  currentUrl:String;
+  subscription: Subscription;
+  currentUser: any;
+  currentUrl: String;
   showProfileStatus: Boolean = true;
   public optionsBottom = {
     position: ["bottom", "left"],
     timeOut: 0,
     lastOnBottom: true,
-    showProgressBar:false,
-    clickToClose:false
-}
+    showProgressBar: false,
+    clickToClose: false
+  }
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private dialogService: DialogService,
     private userService: UserService,
-    private loaderService:LoaderService,
+    private loaderService: LoaderService,
     private notificationsService: NotificationsService,
   ) {
-    this.subscription = userService.currentUser.subscribe(user =>{
-        if(user.userType !== undefined){
-          this.isLoggedIn = true;
-        }else {
-          this.isLoggedIn = false;
-        }
-        this.userType = user.userType;
-        this.currentUser = user;
-        this.showNotification(user)
+    this.subscription = userService.currentUser.subscribe(user => {
+      if (user.userType !== undefined) {
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
+      this.userType = user.userType;
+      this.currentUser = user;
+      this.showNotification(user)
     })
 
   }
-  showNotification(user){
-    if((user.personalInfo || user.workInfo) && user){
+  showNotification(user) {
+    if ((user.personalInfo || user.workInfo) && user) {
       this.notificationsService.info(
         '',
         'Your personal and/or work profiles are not updated',
-        this.optionsBottom        
+        this.optionsBottom
         // environment.options
       )
-    } 
+    }
   }
   ngOnInit() {
     console.log("initialized");
   }
-  userProfile(){
-    this.router.navigate([this.userType+'/profile'])
+  userProfile() {
+    this.router.navigate([this.userType + '/profile'])
   }
   showConfirm() {
     let disposable = this.dialogService.addDialog(LoginComponent, {
@@ -87,6 +87,10 @@ export class TopNavComponent implements OnInit {
     this.loaderService.display(false);
     this.router.navigate(['']);
     this.isLoggedIn = false;
+    this.removeNotification();
+  }
+  removeNotification() {
+    this.notificationsService.remove();
   }
 
   closeProfileStatus() {

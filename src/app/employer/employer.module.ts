@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import {CalendarModule} from 'primeng/primeng';
 import { SharedModule } from '../shared/shared.module';
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
 import { GooglePlaceModule } from 'ng2-google-place-autocomplete';
 import { EmployerRoutingModule } from './employer-routing.module';
@@ -27,7 +28,8 @@ import { SearchPipe } from '../shared/pipes/search.pipe';
     EmployerRoutingModule,
     CalendarModule,
     GooglePlaceModule,
-    SharedModule
+    SharedModule,
+    MultiselectDropdownModule
   ],
   declarations: [
     EmployerComponent, 

@@ -8,6 +8,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { environment } from '../../../../environments/environment';
 import { LoaderService } from '../../../shared/services/loader.service';
 import { JobseekerService } from '../../../shared/services/jobseeker.service';
+import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
 
 @Component({
   selector: 'app-profile',
@@ -96,7 +97,7 @@ export class ProfileComponent implements OnInit {
       Practice_Phone: undefined,
       Nr_of_Operations: undefined,
       Nr_of_Staff: undefined,
-      Languages: "",
+      Languages: [],
       Dental_School: "",
       Year_Graduated: undefined,
       License_Nr: "",
@@ -142,7 +143,9 @@ export class ProfileComponent implements OnInit {
   cancelUpdate() {
     this.isUserDataEdit = !this.isUserDataEdit;
   }
-
+  onLanguageChange($event) {
+    
+  }
   onChange($event) {
     if ($event === 'Registered Dental Assistant' || $event === 'Registered Dental Assistant EF' || $event === 'Registered Dental Hygienist' || $event === 'Registered Dental Hygienist EF' || $event === 'General Dentist' || $event === 'Orthodontist' || $event === 'Endodontist' || $event === 'Periodontist' || $event === 'Pedodontist' || $event === 'Oral Surgeon') {
       this.licenseRequired = true;
@@ -214,7 +217,7 @@ export class ProfileComponent implements OnInit {
       });
     this.jsonLoaderService.getLanguages()
       .subscribe(data => {
-        this.languagesList = data;
+        this.languagesList = data.map(m => ({id:m.name,name:m.name}));
       }, error => {
       });
     this.jsonLoaderService.getYears()

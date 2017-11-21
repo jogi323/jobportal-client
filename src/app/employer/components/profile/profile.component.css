@@ -1,27 +1,47 @@
-.forms-container-heading{
-    background-color:#00394E !important;
-    margin:0px;
-    padding:8px 15px;
+.forms-container-heading {
+    background-color: #00394E !important;
+    margin: 0px;
+    padding: 8px 15px;
 }
+
 .forms-container-heading h3 {
-    color:#fff;
+    color: #fff;
 }
-.preview_image{
-    margin:20px 30px; 
+
+.preview_image {
+    margin: 20px 30px;
 }
+
 .forms-container-heading h3 {
     margin-bottom: 0px;
     font-weight: normal;
 }
-.row.padding-top{
+
+.row.padding-top {
     padding-top: 17.9%;
 }
-.form-box-pad{
+
+.form-box-pad {
     min-height: 630px !important;
 }
-.work-info-padding{
-    margin-top:15%;
+
+.work-info-padding {
+    margin-top: 15%;
 }
-.button-level{
+
+.button-level {
     margin-top: 7%;
+}
+
+.uploadImage {
+    background-color: #fff;
+    border: 2px solid #00394E;
+    /* Green */
+    border: none;
+    color: 00394E;
+    padding: 5px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }

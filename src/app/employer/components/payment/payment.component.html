@@ -1,65 +1,69 @@
 <!-- Cart -->
 <section class="section-wrap shopping-cart">
-  <div class="container relative">
-    <div class="row">
-      <form name="paymentForm" #paymentForm = "ngForm" novalidate>
-      <div class="col-md-6 shipping-calculator-form">
-        <h2 class="heading relative uppercase bottom-line full-grey mb-30">Billing Address</h2>
+    <div class="container relative">
         <div class="row">
-            <div class="col-md-12">
-              <input type="text" class="input-text" placeholder="Billing name" value name="billingName" id="billing_address_1" [(ngModel)]="payment.Billing_Name" required>
-            </div>
-          <div class="col-md-12">
-            <input type="text" class="input-text" placeholder="Street address" value name="billing_address_1" id="billing_address_1" [(ngModel)]="payment.street" required>
-            <input type="text" class="input-text" placeholder="Apartment, suite, unit etc. (optional)" value name="billing_address_2" id="billing_address_2" required>
-          </div>
-          <div class="col-md-4">
-            <input type="text" class="input-text" placeholder="Town / City" value name="billing_city" id="billing_city" [(ngModel)]="payment.City" required>
-            
-          </div>
-          <div class="col-md-4">
-              <select name="User_State"  id="User_State" class="country_to_state country_select" title="State *" [(ngModel)]="payment.State" required>
+            <form name="paymentForm" #paymentForm="ngForm" novalidate>
+                <div class="col-md-6 shipping-calculator-form">
+                    <h2 class="heading relative uppercase bottom-line full-grey mb-30">Billing Address</h2>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="text" class="input-text" placeholder="Billing name" value name="billingName" id="billing_address_1" [(ngModel)]="payment.Billing_Name" required>
+                        </div>
+                        <div class="col-md-12">
+                            <input type="text" class="input-text" placeholder="Street address" value name="billing_address_1" id="billing_address_1" [(ngModel)]="payment.street" required>
+                            <input type="text" class="input-text" placeholder="Apartment, suite, unit etc. (optional)" value name="billing_address_2" id="billing_address_2" required>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="input-text" placeholder="Town / City" value name="billing_city" id="billing_city" [(ngModel)]="payment.City" required>
+
+                        </div>
+                        <div class="col-md-4">
+                            <select name="User_State" id="User_State" class="country_to_state country_select" title="State *" [(ngModel)]="payment.State" required>
                 <option value="" disabled selected>State</option>
                 <option *ngFor="let state of statesList" [attr.value]="state.key">{{state.name}}</option>
               </select>
-          </div>
-          <div class="col-md-4">
-            <input type="number" class="input-text" placeholder="Postcode" value name="billing_postcode" id="billing_postcode" [(ngModel)]="payment.Zip_Code" required>
-          </div>
-        </div>
-        <div class="checkbox">
-          <input type="checkbox" class="input-checkbox" name="checkbox" id="checkbox2" value="2" (change)="useMyAddress($event)" required>
-          <span>Use My Address</span>
-        </div>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="number" class="input-text" placeholder="Postcode" value name="billing_postcode" id="billing_postcode" [(ngModel)]="payment.Zip_Code" required>
+                        </div>
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" class="input-checkbox" name="checkbox" id="checkbox2" value="2" (change)="useMyAddress($event)" required>
+                        <span>Use My Address</span>
+                    </div>
 
-      </div>
-      <!-- end col shipping calculator -->
-      <div class="col-md-6 shipping-calculator-form">
-          <h2 class="heading relative uppercase bottom-line full-grey mb-30">Card Details</h2>
-
-          <div class="row">
-              <div class="col-md-12">
-                <input type="text" class="input-text" placeholder="Name On Card" value name="nameOnCard" id="billing_address_1" [(ngModel)]="payment.Billing_Name" required>
-              </div>
-              <div class="col-md-12">
-                <div class="col-sm-6 col-xs-12 footer-payment-systems text-right sm-text-center mt-sml-10 pull-right">
-                  <!--<i class="fa fa-cc-paypal"></i>-->
-                  <i class="fa fa-cc-visa" [ngClass]="{active: cardType=='Visa'}"></i>
-                  <i class="fa fa-cc-mastercard" [ngClass]="{active: cardType=='Mastercard'}"></i>
-                  <i class="fa fa-cc-discover" [ngClass]="{active: cardType=='Discover'}"></i>
-                  <i class="fa fa-cc-amex" [ngClass]="{active: cardType=='AMEX'}"></i>
                 </div>
-              </div>
-              <div class="col-md-12">
-                  <input type="number" class="input-text" placeholder="Card number" value name="cardNumber" id="cardNumber" [(ngModel)]="payment.Card_Nr"  (change)="GetCardType(payment.Card_Nr)" required>
-                  {{cardType}}
-              </div>
-              <div class="col-md-3">
-                Expiry Date
-              </div>
-              <div class="col-md-5">
-                <div class="col-xs-6">
-                    <select name="billing_country" id="billing_country" class="country_to_state country_select pull-left" title="Country *" [(ngModel)]="payment.Expiration_Month" required>
+                <!-- end col shipping calculator -->
+                <div class="col-md-6 shipping-calculator-form">
+                    <h2 class="heading relative uppercase bottom-line full-grey mb-30">Card Details</h2>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="text" class="input-text" placeholder="Name On Card" value name="nameOnCard" id="billing_address_1" [(ngModel)]="payment.Billing_Name" required>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-sm-6 col-xs-12 footer-payment-systems text-right sm-text-center mt-sml-10 pull-right">
+                                <!--<i class="fa fa-cc-paypal"></i>-->
+                                <i class="fa fa-cc-visa" [ngClass]="{active: cardType=='Visa'}"></i>
+                                <i class="fa fa-cc-mastercard" [ngClass]="{active: cardType=='Mastercard'}"></i>
+                                <i class="fa fa-cc-discover" [ngClass]="{active: cardType=='Discover'}"></i>
+                                <i class="fa fa-cc-amex" [ngClass]="{active: cardType=='AMEX'}"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <input type="number" class="input-text" placeholder="Card number" value name="cardNumber" id="cardNumber" [(ngModel)]="payment.Card_Nr" (ngModelChange)="payment.Card_Nr = $event + ''" (change)="GetCardType(payment.Card_Nr)" #cardNumber minlength="16"
+                                required>
+                            <div *ngIf="cardNumber.errors && (cardNumber.dirty || cardNumber.touched)" class="error">
+                                <div [hidden]="!cardNumber.errors.required">Card number is required</div>
+                                <div [hidden]="!cardNumber.errors.minlength">Card number should be 16 digits</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            Expiry Date
+                        </div>
+                        <div class="col-md-5">
+                            <div class="col-xs-6">
+                                <select name="billing_country" id="billing_country" class="country_to_state country_select pull-left" title="Country *" [(ngModel)]="payment.Expiration_Month" required>
                         <option value="YE">MM</option>
                         <option value=1>01</option>
                         <option value=2>02</option>
@@ -68,43 +72,39 @@
                         <option value=9>09</option><option value=10>10</option><option value=11>11</option>
                         <option value=12>12</option>
                     </select>
-                </div>
-                <div class="col-xs-6">
-                    <select name="billing_country" placeholder="MM" id="billing_country" class="country_to_state country_select pll-right" title="Country *" [(ngModel)]="payment.Expiration_Year" required>
+                            </div>
+                            <div class="col-xs-6">
+                                <select name="billing_country" placeholder="MM" id="billing_country" class="country_to_state country_select pll-right" title="Country *" [(ngModel)]="payment.Expiration_Year" required>
                         <option value="YE">YY</option>
                         <option value=17>17</option>
                         <option value=18>18</option><option value=19>19</option><option value=20>20</option>
                         <option value=21>21</option><option value=22>22</option><option value=23>23</option>
                       </select>
-                  </div>
+                            </div>
 
-              </div>
-              
-              <div class="col-md-2">
-                  Cvv*
-              </div>
-              <div class="col-md-2">
-                <input type="number" class="input-text" placeholder="Cvv" [(ngModel)] = "cvv" name="cvv" id="billing_postcode" required>
-              </div>
-          </div>
-          <div class="col-md-6 col-md-offset-6">
-              <div class="actions">
-                <button class="btn btn-md btn-dark pull-right" (click)="makePayment()" [disabled] = "!paymentForm.form.valid"><span>Proceed to Payment</span></button>
-              </div>
-            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            Cvv*
+                        </div>
+                        <div class="col-md-2">
+                            <input type="number" class="input-text" placeholder="Cvv" [(ngModel)]="cvv" name="cvv" id="billing_postcode" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-md-offset-6">
+                        <div class="actions">
+                            <button class="btn btn-md btn-dark pull-right" (click)="makePayment()" [disabled]="!paymentForm.form.valid"><span>Proceed to Payment</span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end col cart totals -->
+            </form>
         </div>
+        <!-- end row -->
 
-      <!-- end col cart totals -->
-      </form>
+
     </div>
-    <!-- end row -->
-
-
-  </div>
-  <!-- end container -->
+    <!-- end container -->
 </section>
 <!-- end cart -->
-
-
-
-

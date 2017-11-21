@@ -1,78 +1,76 @@
-
-
 <div class="modal-dialog">
-  <div class="modal-content">
-     <div class="modal-header">
-       <button type="button" class="close" (click)="close()" >&times;</button>
-       <h4 class="modal-title" *ngIf="isLogin">LOGIN</h4>
-       <h4 class="modal-title" *ngIf="!isLogin">Reset Password</h4>
-     </div>
-     <!-- <div class="modal-body"> -->
-      <div *ngIf="isLogin" class="form-box-pad">
-        <p>If you have an account, sign in with your e-mail address.</p>
-        <form name="loginForm" #loginForm = 'ngForm' novalidate>
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input name="Email_Address" type="email" placeholder="Enter your username" class="form-control" [(ngModel)]="user.Email_Address" #Email_Address="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
-            <div  *ngIf="Email_Address.errors && (Email_Address.dirty || Email_Address.touched)" class="error">
-              <div [hidden]="!Email_Address.errors.required">Please Enter username</div>
-              <div [hidden]="!Email_Address.errors.pattern">Please Enter proper username correctly</div>
-            </div>
-          </div>
-    
-    
-          <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input name="password" type="password" placeholder="Password " class="form-control"  [(ngModel)]="user.Password">
-            <!--<div  *ngIf="password.errors && (password.dirty || password.touched)" class="error">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" (click)="close()">&times;</button>
+            <h4 class="modal-title" *ngIf="isLogin">LOGIN</h4>
+            <h4 class="modal-title" *ngIf="!isLogin">Reset Password</h4>
+        </div>
+        <!-- <div class="modal-body"> -->
+        <div *ngIf="isLogin" class="form-box-pad">
+            <p>If you have an account, sign in with your e-mail address.</p>
+            <form name="loginForm" #loginForm='ngForm' novalidate>
+                <div class="form-group">
+                    <label for="username">Email Address</label>
+                    <input name="Email_Address" type="email" placeholder="Enter your username" class="form-control" [(ngModel)]="user.Email_Address" #Email_Address="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+                    <div *ngIf="Email_Address.errors && (Email_Address.dirty || Email_Address.touched)" class="error">
+                        <div [hidden]="!Email_Address.errors.required">Please Enter username</div>
+                        <div [hidden]="!Email_Address.errors.pattern">Please Enter proper username correctly</div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input name="password" type="password" placeholder="Password " class="form-control" [(ngModel)]="user.Password">
+                    <!--<div  *ngIf="password.errors && (password.dirty || password.touched)" class="error">
               <div [hidden]="!password.errors.required">Please Enter password</div>
               <div [hidden]="!password.errors.minlength">Password length should be more than 8 </div>
             </div>-->
-          </div>
-    
-          <div class="checkbox">
-            <input type="checkbox" class="input-checkbox" name="checkbox" id="checkbox2" value="2">
-            <span class="remember">Remember Me</span>
-          </div>
-          
-          <div class="container-fluid">
-            <div class="row">
-              <button  class="btn btn-md btn-dark pull-left" [disabled]="!loginForm.form.valid" (click)="login()"><span>Login</span></button>
-              <button class="btn btn-inv btn-md btn-stroke pull-right" (click)="forgotPassword()"><span>Forgot Password?</span></button>
-            </div>
-            
-          </div>
-          <span class="register">Not yet registered?<a (click)="navigateToRegister()">Click to register.</a></span>
-          
-        </form>
-    
-      </div>
+                </div>
 
-      <!-- <div class="modal-body"> -->
-      <div *ngIf="!isLogin" class="form-box-pad">
-        <p>Enter your registered e-mail address.</p>
-        <form name="forgotPasswordForm" #forgotPasswordForm = 'ngForm' novalidate>
-          <div class="form-group">
-            <label for="Email">Email</label>
-            <input type="email" placeholder="Registered Email" name="email" required #email="ngModel" [(ngModel)]="forgotPasswordData.Email_Address" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
-            <div  *ngIf="email.errors && (email.dirty || email.touched)" class="error">
-              <div [hidden]="!email.errors.required">Please Enter registered email-Id</div>
-              <div [hidden]="!email.errors.pattern">Please Enter proper email-Id</div>
-            </div>
-          </div>
-          <div class="container-fluid">
-            <div class="row">
-                <button class="btn btn-inv btn-md btn-stroke pull-right" [disabled]="!forgotPasswordForm.form.valid" (click)='reset()'><span>Reset Password</span></button>
-            </div>
-          </div>
-    
-        </form>
-    
-      </div>
-     <!-- </div> -->
-     <!-- <div class="modal-footer">
+                <div class="checkbox">
+                    <input type="checkbox" class="input-checkbox" name="checkbox" id="checkbox2" value="2">
+                    <span class="remember">Remember Me</span>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <button class="btn btn-md btn-dark pull-left" [disabled]="!loginForm.form.valid" (click)="login()"><span>Login</span></button>
+                        <button class="btn btn-inv btn-md btn-stroke pull-right" (click)="forgotPassword()"><span>Forgot Password?</span></button>
+                    </div>
+
+                </div>
+                <span class="register">Not yet registered?<a (click)="navigateToRegister()">Click to register.</a></span>
+
+            </form>
+
+        </div>
+
+        <!-- <div class="modal-body"> -->
+        <div *ngIf="!isLogin" class="form-box-pad">
+            <p>Enter your registered e-mail address.</p>
+            <form name="forgotPasswordForm" #forgotPasswordForm='ngForm' novalidate>
+                <div class="form-group">
+                    <label for="Email">Email</label>
+                    <input type="email" placeholder="Registered Email" name="email" required #email="ngModel" [(ngModel)]="forgotPasswordData.Email_Address" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                    <div *ngIf="email.errors && (email.dirty || email.touched)" class="error">
+                        <div [hidden]="!email.errors.required">Please Enter registered email-Id</div>
+                        <div [hidden]="!email.errors.pattern">Please Enter proper email-Id</div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <button class="btn btn-inv btn-md btn-stroke pull-right" [disabled]="!forgotPasswordForm.form.valid" (click)='reset()'><span>Reset Password</span></button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+        <!-- </div> -->
+        <!-- <div class="modal-footer">
        <button type="button" class="btn btn-primary" (click)="confirm()">OK</button>
        <button type="button" class="btn btn-default" (click)="close()" >Cancel</button>
      </div> -->
-   </div>
+    </div>
 </div>

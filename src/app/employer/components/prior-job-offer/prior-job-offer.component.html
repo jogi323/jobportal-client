@@ -1,115 +1,59 @@
-			<!-- Cart -->
-			<section class="section-wrap shopping-cart">
-          <div class="container relative">
-            <div class="row">
-                <h2 class="heading relative uppercase bottom-line full-grey mb-30">Prior Job Offers Hired</h2>          
-              <div class="col-md-12">
+<!-- Cart -->
+<section class="section-wrap shopping-cart">
+    <div class="container relative">
+        <div class="row">
+            <h2 class="heading relative uppercase bottom-line full-grey mb-30">Job Seekers hired</h2>
+            <div class="col-md-12">
                 <div class="table-wrap mb-30">
-                  <table class="shop_table prior_job_table cart table">
-                    <thead>
-                      <tr>
-                        <!--<th class="product-name" >Image</th>-->
-                        <th class="col-lg-2" >Position Id</th>
-                        <th class="col-lg-2">Position</th>
-                        <th class="col-lg-2">Hired</th>
-                        <th class="col-lg-2">Date</th>
-                        <th class="col-lg-2">Hourly Pay</th>                        
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr  *ngFor="let offer of offers">
-                        <!--<td class="product-thumbnail">
+                    <table class="shop_table prior_job_table cart table">
+                        <thead>
+                            <tr>
+                                <!--<th class="product-name" >Image</th>-->
+                                <th class="col-lg-2">Position Id</th>
+                                <th class="col-lg-2">Position</th>
+                                <!-- <th class="col-lg-2">Hired</th> -->
+                                <th class="col-lg-2">Date</th>
+                                <th class="col-lg-2">Hourly Pay</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let offer of offers">
+                                <!--<td class="product-thumbnail">
                           <a>
                             <img src="assets/img/Photos/user.png" alt="" height="75px">
                           </a>
                         </td>-->
-                        <td class="col-lg-2">
-                          {{offer.positionId}}                    
-                        </td>
-                        <td class="col-lg-2">
-                          {{offer.JS_id.Position}}
-                        </td>
-                        <td class="col-lg-2">
+                                <td class="col-lg-2">
+                                    {{offer.positionId}}
+                                </td>
+                                <td class="col-lg-2">
+                                    {{offer.JS_id.Position}}
+                                </td>
+                                <!-- <td class="col-lg-2">
                           {{offer.Status}}                        
-                        </td>
-                        <td class="col-lg-2">
-                          {{offer.Date_Submitted | date: 'dd/MM/yyyy'}}
-                        </td>
-                        <td class="col-lg-2">
-                          ${{offer.JS_id.Hourly_Pay}}
-                        </td>
-                      </tr>
-  
-                      <!--<tr class="cart_item">
-                        <td class="product-thumbnail">
-                          <a >
-                            <img src="assets/img/Photos/user.png" alt="" height="75px">
-                          </a>
-                        </td>
-                        <td class="product-name">
-                          <a>A22S7HH8</a>
-                          <ul>
-                          </ul>
-                        </td>
-                        <td class="product-price">
-                          <span class="amount">Brad Pit</span>
-                        </td>
-                        <td class="product-quantity">
-                          <div class="quantity buttons_added">
-                            Hired
-                          </div>
-                        </td>
-                        <td class="product-subtotal">
-                          <span class="amount">28/07/2017</span>
-                        </td>
-                        <td class="product-remove">
-                          <a  class="remove" title="Remove this item">
-                            <i class="ui-close"></i>
-                          </a>
-                        </td>
-                      </tr>-->
-                      <!--<tr class="cart_item">
-                        <td class="product-thumbnail">
-                          <a>
-                            <img src="assets/img/Photos/user.png" alt="" height="75px">
-                          </a>
-                        </td>
-                        <td class="product-name">
-                          <a>A18S5HH8</a>
-                          <ul>
-                          </ul>
-                        </td>
-                        <td class="product-price">
-                          <span class="amount">Virat Kohli</span>
-                        </td>
-                        <td class="product-quantity">
-                          <div class="quantity buttons_added">
-                            Searched
-                          </div>
-                        </td>
-                        <td class="product-subtotal">
-                          <span class="amount">05/01/2017</span>
-                        </td>
-                        <td class="product-remove">
-                          <a class="remove" title="Remove this item">
-                            <i class="ui-close"></i>
-                          </a>
-                        </td>
-                      </tr>-->
-                    </tbody>
-                  </table>
-                </div>
-  
-  
-              </div>
-              <!-- end col -->
-            </div>
-            <!-- end row -->
-  
+                        </td> -->
+                                <td class="col-lg-2">
+                                    {{offer.Date_Submitted | date: 'dd/MM/yyyy'}}
+                                </td>
+                                <td class="col-lg-2">
+                                    ${{offer.JS_id.Hourly_Pay}}
+                                </td>
+                            </tr>
 
-  
-          </div>
-          <!-- end container -->
-        </section>
-        <!-- end cart -->
-  
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+
+
+
+    </div>
+    <!-- end container -->
+</section>
+<!-- end cart -->

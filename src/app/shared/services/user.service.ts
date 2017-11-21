@@ -69,8 +69,13 @@ export class UserService {
     return this.apiService.post(route, credentials)
       .map(
       data => {
-        this.setAuth(data);
-        return data.user;
+        console.log(data);
+          if(data.user){
+            this.setAuth(data);
+            return data.user;
+          }else{
+            return data;
+          }
       },
       err => {
         return err;

@@ -109,7 +109,7 @@ export class WorkScheduleComponent implements OnInit {
     }
     handleDayClick(event) {
         if (event.date.format() < this.minDate) {
-            alert('please select from today onwards');
+            alert('Please select a future date');
         }
         else {
             this.start = event.date._d;

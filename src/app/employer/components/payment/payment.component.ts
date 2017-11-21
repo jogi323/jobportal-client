@@ -122,16 +122,10 @@ export class PaymentComponent implements OnInit {
         this.releaseOffer();
         console.log("payment done1");        
       }
-      this.loaderService.display(false);
-      this.notificationsService.success(
-        'Sucess',
-        res.message,
-        environment.options
-      )
     },
       err => {
         this.loaderService.display(false);
-        this.notificationsService.success(
+        this.notificationsService.error(
           err.tittle,
           err.error.message,
           environment.options
@@ -141,11 +135,21 @@ export class PaymentComponent implements OnInit {
   releaseOffer() {
     console.log("offers release");
     this.employerservice.postOffer().subscribe(res => {
-      console.log(res);
+      this.loaderService.display(false);
+      this.notificationsService.success(
+        'Sucess',
+        res.message,
+        environment.options
+      )
       this.route.navigate(['/employer/search']);
       this.employerservice.itemsToHire = [];      
     },err=>{
-      console.log(err);
+      this.loaderService.display(false);
+        this.notificationsService.error(
+          err.tittle,
+          err.error.message,
+          environment.options
+        )
     })
   }
   //default address function

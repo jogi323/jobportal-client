@@ -52,7 +52,8 @@ export class PaymentComponent implements OnInit {
       State: '',
       Zip_Code: null,
       Amount: 2000,
-      Position_id: ''
+      Position_id: '',
+      cvv: ''
     }
   }
   ngOnInit() {
@@ -117,10 +118,8 @@ export class PaymentComponent implements OnInit {
     this.loaderService.display(true);
     this.employerservice.makePayment(this.payment).subscribe(res => {
       if (res.message == 'Payment Sucessfull') {
-        console.log("payment done");
         this.initializePayment();
         this.releaseOffer();
-        console.log("payment done1");        
       }
     },
       err => {
@@ -133,7 +132,6 @@ export class PaymentComponent implements OnInit {
       })
   }
   releaseOffer() {
-    console.log("offers release");
     this.employerservice.postOffer().subscribe(res => {
       this.loaderService.display(false);
       this.notificationsService.success(

@@ -124,7 +124,6 @@ export class ProfileComponent implements OnInit {
           this.user = res.data;
           this.userInfoUpdated = res.data.personalInfo;
           this.workInfoUpdated = res.data.workInfo;
-          console.log(this.user);
           this.loaderService.display(false);
 
         },

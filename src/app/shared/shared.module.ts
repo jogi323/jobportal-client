@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ReCaptchaModule } from 'angular2-recaptcha';
 
 
 import { TopNavComponent } from './components/top-nav/top-nav.component';
@@ -15,7 +16,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    ReCaptchaModule
   ],
   exports: [
     TopNavComponent,

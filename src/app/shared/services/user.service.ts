@@ -69,7 +69,6 @@ export class UserService {
     return this.apiService.post(route, credentials)
       .map(
       data => {
-        console.log(data);
           if(data.user){
             this.setAuth(data);
             return data.user;

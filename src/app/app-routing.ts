@@ -29,7 +29,7 @@ const routes: Routes = [
     { path:'changepassword', component:ChangePasswordComponent,canActivate:[AuthGuardService] },
     { path:'forgotpassword/:id', component:ForgotPasswordComponent,canActivate:[NoAuthGuardService] },
     { path:'register',component:RegisterComponent ,canActivate:[NoAuthGuardService]},
-    { path:'contactus', component:ContactUsComponent ,canActivate:[NoAuthGuardService] },
+    { path:'contactus', component:ContactUsComponent },
     { path:'acceptoffer/:id', component:AcceptOfferComponent },
     { path:'rejectoffer/:id', component:DeclineOfferComponent },
     { path:'acceptjobseeker/:id', component:AcceptJobseekerComponent },

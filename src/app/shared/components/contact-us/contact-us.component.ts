@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { NotificationsService } from 'angular2-notifications';
 import { environment } from '../../../../environments/environment';
 import { LoaderService} from '../../services/loader.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contact-us',
@@ -11,10 +12,13 @@ import { LoaderService} from '../../services/loader.service';
 })
 export class ContactUsComponent implements OnInit {
   data:ContactusModel;
+  captchaVerified: Boolean = false;
   constructor(
     private userService: UserService,
     private notificationsService: NotificationsService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private router: Router,
+    private ngZone: NgZone
   ) { 
     this.data = {
       FirstName:'',
@@ -23,19 +27,17 @@ export class ContactUsComponent implements OnInit {
       Comments:'',
       Date_Submitted: null
     }
-    window['verifyCallback'] = this.verifyCallback.bind(this);
+    
   }
-
+ 
   ngOnInit() {
   }
-  displayRecaptcha(){
-    var doc = <HTMLDivElement>document.getElementById('signup-form');
-    var script = document.createElement('script');
-    script.innerHTML = '';
-    script.src = 'https://www.google.com/recaptcha/api.js';
-    script.async = true;
-    script.defer = true;
-    doc.appendChild(script);
+   handleCorrectCaptcha(response){
+    if(response) {
+      this.ngZone.run(()=>{
+      this.captchaVerified = true;        
+      })
+    }
   }
   submit(form){
     this.data.Date_Submitted = new Date();
@@ -48,6 +50,7 @@ export class ContactUsComponent implements OnInit {
           res.message,
           environment.options
         )
+        this.router.navigate(['']);
       },
       err => {
         this.loaderService.display(false);
@@ -58,9 +61,7 @@ export class ContactUsComponent implements OnInit {
         )
       });
   }
-  verifyCallback(response){
-    alert(response);
-  }
+ 
 }
 export interface ContactusModel {
   FirstName: String;

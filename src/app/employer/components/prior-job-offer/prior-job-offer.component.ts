@@ -14,7 +14,6 @@ export class PriorJobOfferComponent implements OnInit {
   constructor(private employerService : EmployerService,private notificationsService: NotificationsService,    private loaderService: LoaderService) {
       this.loaderService.display(true);
     this.employerService.getOffers().subscribe( res =>{
-      console.log(res);
       this.offers = res.data;
       this.loaderService.display(false);
     },

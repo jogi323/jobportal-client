@@ -46,7 +46,6 @@ export class ChangePasswordComponent implements OnInit {
       newPassword: this.changePassword.newPassword
     };
     this.userServie.resetPassword(payload).subscribe(res => {
-      console.log(res);
       this.loaderService.display(false);
       this.notificationsService.success(
         'Success',

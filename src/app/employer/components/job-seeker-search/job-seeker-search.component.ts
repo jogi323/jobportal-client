@@ -69,7 +69,6 @@ export class JobSeekerSearchComponent implements OnInit {
       distance: null
     }
     this.getJobseekers(this.filterJobseekers);
-    console.log(this.filterJobseekers);
   }
   // initialise employer data to use location lattitude and longitude
   initUserData(user) {
@@ -140,7 +139,6 @@ export class JobSeekerSearchComponent implements OnInit {
     event.setUTCMilliseconds(0);
     this.filterJobseekers.Date = new Date(event.setDate(event.getDate() + 1));
     this.getJobseekers(this.filterJobseekers);
-    console.log(this.filterJobseekers);
   }
   onHoursChange() {
     this.getJobseekers(this.filterJobseekers);

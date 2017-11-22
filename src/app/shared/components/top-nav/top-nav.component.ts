@@ -58,7 +58,6 @@ export class TopNavComponent implements OnInit {
     }
   }
   ngOnInit() {
-    console.log("initialized");
   }
   userProfile() {
     this.router.navigate([this.userType + '/profile'])

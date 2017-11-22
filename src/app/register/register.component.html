@@ -38,7 +38,7 @@
                             <select name="reference" id="select" class="form-control" [(ngModel)]="employee.Referred_By" #reference="ngModel" required>
                         <option value="">Select One…</option>
                         <option value="Mailing">Mailer</option>
-                        <option value="Deental Meeting/Convection">Dental Meeting/Convection</option>
+                        <option value="Deental Meeting/Convection">Dental Meeting/Convention</option>
                         <option value="Internet Search">Internet Search</option>
                         <option value="Facebook">Facebook</option>
                         <option value="Friend">Friend</option>
@@ -87,7 +87,7 @@
                         <div class="form-group">
 
                             <input type="checkbox" [(ngModel)]="employee.checkbox" name="checkbox" #checkbox="ngModel" required>
-                            <span class="remember">Agree to Privacy Policy / Terms and Conditions</span>
+                            <span class="remember">I Agree to Privacy Policy / Terms and Conditions</span>
                             <div *ngIf="checkbox.errors && (checkbox.dirty || checkbox.touched)" class="error">
                                 <div [hidden]="!checkbox.errors.required">I Agree to Privacy Policy / Terms and Conditions
                                 </div>

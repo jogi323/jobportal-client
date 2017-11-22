@@ -14,6 +14,8 @@ import { LoaderService } from '../../../shared/services/loader.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  userInfoUpdated: Boolean = true;
+  workInfoUpdated: Boolean = true;
   isUserDataEdit:Boolean= false;
   isWorkDataEdit:Boolean= false;
   user:User;
@@ -102,7 +104,9 @@ export class ProfileComponent implements OnInit {
       this.userService.getData(user.Email_Address).subscribe(
         res =>{
           this.user = res.data;
-          this.loaderService.display(false);          
+          this.loaderService.display(false);  
+          this.userInfoUpdated = res.data.personalInfo;
+          this.workInfoUpdated = res.data.workInfo;        
         },
         err =>{
           this.loaderService.display(false);          
@@ -135,6 +139,8 @@ export class ProfileComponent implements OnInit {
             environment.options
           )
         this.isUserDataEdit = !this.isUserDataEdit; 
+        this.userInfoUpdated = false;
+        this.removeNotification();        
       },
       err => {
         this.loaderService.display(false);                      
@@ -167,6 +173,8 @@ export class ProfileComponent implements OnInit {
             environment.options
           )
         this.isWorkDataEdit = !this.isWorkDataEdit; 
+        this.workInfoUpdated = false;
+        this.removeNotification();
       },
       err => {
         this.loaderService.display(false);                              
@@ -181,6 +189,13 @@ export class ProfileComponent implements OnInit {
 
 onLanguageChange($event) {
     
+  }
+  removeNotification() {
+    if (!this.userInfoUpdated && !this.workInfoUpdated) {
+      setTimeout(() => {
+        this.notificationsService.remove();
+      },5000);
+    }
   }
   ngOnInit() {
 

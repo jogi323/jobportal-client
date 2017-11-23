@@ -51,8 +51,9 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
     this.userService.attemptAuth(this.user).subscribe(
       res => {
         if(res.userType){
-          this.close();        
-          this.router.navigate([res.userType+'/profile']);
+          this.close();   
+          this.loaderService.display(false);                  
+          this.router.navigate([res.userType+'']);
         }else{
           this.loaderService.display(false);   
           this.close();               

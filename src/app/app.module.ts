@@ -29,6 +29,7 @@ import { UserService } from './shared/services/user.service';
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { NoAuthGuardService } from './shared/services/no-auth-guard.service';
 import { LoaderService } from './shared/services/loader.service';
+import { PaginationService } from './shared/services/pagination.service';
 
 import { ActivateUserComponent } from './activate-user/activate-user.component';
 import { AcceptOfferComponent } from './offers/accept-offer/accept-offer.component';
@@ -75,7 +76,8 @@ import { JobseekerNrtwComponent } from './offers/jobseeker-nrtw/jobseeker-nrtw.c
     AuthGuardService,
     NoAuthGuardService,
     HaversineService,
-    LoaderService
+    LoaderService,
+    PaginationService
   ],
   bootstrap: [AppComponent],
   entryComponents:[ LoginComponent ]

@@ -92,6 +92,7 @@ export class ProfileComponent implements OnInit {
       Contact_Phone_Nr:undefined,
       image:""
     }
+    this.loaderService.display(true);      
     this.subscription = userService.currentUser.subscribe(user =>{
       this.isUserDataEdit = user.personalInfo;
       this.isWorkDataEdit = user.workInfo;

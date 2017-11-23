@@ -3,6 +3,9 @@ import { LocalDataSource } from 'ng2-smart-table';
 
 import { AdminService } from '../../../shared/services/admin.service';
 // import { Position } from '../../../shared/models/position.model';
+import { LoaderService } from '../../../shared/services/loader.service';
+import { NotificationsService } from 'angular2-notifications';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-manage-positions',
@@ -12,28 +15,53 @@ import { AdminService } from '../../../shared/services/admin.service';
 export class ManagePositionsComponent implements OnInit {
 
   source: LocalDataSource;
-  Position:any;
+  Position: any;
 
   constructor(
     private adminService: AdminService,
-  ) { }
+    private loaderService: LoaderService,
+        private notificationsService: NotificationsService,
+
+  ) { 
+    this.loaderService.display(true);
+    this.adminService.getPositions().subscribe(
+      res => {
+        this.loaderService.display(false);
+        this.source = new LocalDataSource(res.data)
+      }, err => {
+        this.loaderService.display(false);
+      }
+    )
+  }
 
   onSaveConfirm(event) {
-
+    this.loaderService.display(true);
     const data = {
       _id: event.newData._id,
-      Position_Name : event.newData.Position_Name,
+      Position_Name: event.newData.Position_Name,
       Date_Submitted: new Date()
     }
     if (window.confirm('Are you sure you want to save?')) {
       this.adminService.updatePosition(data).subscribe(
         res => {
-          console.log(res)
+          console.log(res);
+          this.loaderService.display(false);
+          this.notificationsService.success(
+            'Success',
+            res.message,
+            environment.options
+          );
           // event.newData['name'] += event.newData.name;
           event.confirm.resolve(event.newData);
         },
         err => {
-          console.log(err)
+          console.log(err);
+          this.loaderService.display(false);
+          this.notificationsService.error(
+            err.title,
+            err.error.message,
+            environment.options
+          );
         }
       )
 
@@ -43,43 +71,43 @@ export class ManagePositionsComponent implements OnInit {
   }
 
   onCreateConfirm(event) {
+    this.loaderService.display(true);
+
     console.log(event)
     const data = {
-      Position_Name : event.newData.Position_Name,
+      Position_Name: event.newData.Position_Name,
       Date_Submitted: new Date()
     }
     if (window.confirm('Are you sure you want to create?')) {
       this.adminService.savePosition(data).subscribe(
         res => {
           console.log(res)
+          this.loaderService.display(false);
+
           // event.newData['name'] += event.newData.name;
           event.confirm.resolve(event.newData);
         },
         err => {
           console.log(err)
+          this.loaderService.display(false);
+
         }
       )
-      
+
     } else {
       event.confirm.reject();
     }
   }
   ngOnInit() {
-    this.adminService.getPositions().subscribe(
-      res => {
-        this.source = new LocalDataSource(res.data)
-      },err => {
-
-      }
-    )
+    
   }
 
   settings = {
     columns: {
       _id: {
         title: 'Position Id',
-        width:'30%',
-        editable:false,  
+        width: '30%',
+        editable: false,
         filter: false,
       },
       Position_Name: {
@@ -88,23 +116,23 @@ export class ManagePositionsComponent implements OnInit {
       }
     },
     actions: {
-      edit:true,
-      delete:false,
-      position:'right'
+      edit: true,
+      delete: false,
+      position: 'right'
     },
-    add:{
-      confirmCreate:true
+    add: {
+      confirmCreate: true
     },
-    edit:{
-      confirmSave:true
+    edit: {
+      confirmSave: true
     },
     // hideSubHeader: true,
     noDataMessage: "No data Found",
     mode: 'inline',
-    pager : {
-      display : true,
-      perPage:10
+    pager: {
+      display: true,
+      perPage: 10
     }
   };
-  
+
 }

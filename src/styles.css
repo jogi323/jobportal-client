@@ -140,3 +140,10 @@ a:hover {
     background: transparent !important;
     color: white !important;
 }
+.pagination {
+    margin-top: 10px;
+}
+.static-page>a {
+    width: 50px !important;
+    /*padding: 2px !important;*/
+}

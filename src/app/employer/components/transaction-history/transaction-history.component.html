@@ -1,75 +1,76 @@
-			<!-- Cart -->
-			<section class="section-wrap shopping-cart">
-          <div class="container relative">
-            <div class="row">
-                <h2 class="heading relative uppercase bottom-line full-grey mb-30">Transaction History</h2>        
-              <div class="col-md-12">
-                <div class="table-wrap mb-30">
-                  <table class="shop_table transaction_table cart table">
-                    <thead>
-                      <tr>
-                        <th class="product-name" >Transaction Id</th>
-                        <th class="product-price">Position</th>
-                        <th class="product-price">Amount</th>
-                        <th class="product-price">Hours guaranteed</th>
-                        <th class="product-quantity">Transcation Status</th>
-                        <th class="product-subtotal" colspan="2">Date</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr class="cart_item" *ngFor="let transaction of transactions">
-                        <td class="product-name">
-                          <a >{{transaction._id}}</a>
-                        </td>
-                        <td class="product-price">
-                          <span class="amount">{{transaction.Position_id}}</span>
-                        </td>
-                        <td class="product-quantity">
-                          <span class="amount">{{transaction.Amount}}</span>
-                        </td>
-                        <td class="product-quantity">
-                          <span class="amount">{{transaction.Hours_Guaranteed}}</span>
-                        </td>
-                        <td class="product-quantity">
-                          <span class="amount">{{transaction.Status}}</span>
-                        </td>
-                        <td class="product-subtotal">
-                          <span class="amount">{{transaction.Date_Submitted | date:'dd/MM/yy'}}</span>
-                        </td>
-                      </tr>
-                      <!-- <tr class="cart_item">
-                          <td class="product-name">
-                            <a >2324324</a>
-                          </td>
-                          <td class="product-price">
-                            <span class="position">Registered Dental Assistant</span>
-                          </td>
-                          <td class="product-quantity">
-                            <span class="amount">$15</span>
-                          </td>
-                          <td class="product-quantity">
-                            <span class="status">In Process</span>
-                          </td>
-                          <td class="product-subtotal">
-                            <span class="date">25/06/2017</span>
-                          </td>
-                        </tr> -->
-                    </tbody>
-                  </table>
-                </div>
-  
+<!-- Cart -->
+<section class="section-wrap shopping-cart">
+  <div class="container relative">
+    <div class="row">
+      <h2 class="heading relative uppercase bottom-line full-grey mb-30">Transaction History</h2>
+      <div class="col-md-12">
+        <div class="table-wrap mb-30">
+          <table class="shop_table transaction_table cart table">
+            <thead>
+              <tr>
+                <th class="product-name">Transaction Id</th>
+                <th class="product-price">Position</th>
+                <th class="product-price">Amount</th>
+                <th class="product-price">Hours guaranteed</th>
+                <th class="product-quantity">Transcation Status</th>
+                <th class="product-subtotal" colspan="2">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="cart_item" *ngFor="let transaction of transactions">
+                <td class="product-name">
+                  <a>{{transaction._id}}</a>
+                </td>
+                <td class="product-price">
+                  <span class="amount">{{transaction.Position_id}}</span>
+                </td>
+                <td class="product-quantity">
+                  <span class="amount">{{transaction.Amount}}</span>
+                </td>
+                <td class="product-quantity">
+                  <span class="amount">{{transaction.Hours_Guaranteed}}</span>
+                </td>
+                <td class="product-quantity">
+                  <span class="amount">{{transaction.Status}}</span>
+                </td>
+                <td class="product-subtotal">
+                  <span class="amount">{{transaction.Date_Submitted | date:'dd/MM/yy'}}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- pager -->
+          <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+            <li [ngClass]="{disabled:pager.currentPage === 1}" class="static-page">
+              <a (click)="setPage(1)">First</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}" class="static-page">
+              <a (click)="setPage(pager.currentPage - 1)">Prev</a>
+            </li>
+            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+              <a (click)="setPage(page)">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="static-page">
+              <a (click)="setPage(pager.currentPage + 1)">Next</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="static-page">
+              <a (click)="setPage(pager.totalPages)">Last</a>
+            </li>
+          </ul>
+        </div>
 
-  
-              </div>
-              <!-- end col -->
-            </div>
-            <!-- end row -->
-  
 
-            <!-- end row -->
-  
-  
-          </div>
-          <!-- end container -->
-        </section>
-        <!-- end cart -->
+
+      </div>
+      <!-- end col -->
+    </div>
+    <!-- end row -->
+
+
+    <!-- end row -->
+
+
+  </div>
+  <!-- end container -->
+</section>
+<!-- end cart -->

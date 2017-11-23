@@ -11,7 +11,7 @@ import { ChangePasswordComponent } from '../shared/components/change-password/ch
 const routes: Routes = [
   {
     path:'', 
-    component:JobSeekerComponent, 
+    component:JobSeekerComponent,
     children:[
       {path:'', redirectTo:'profile'},
       {path:'dashboard', component:DashboardComponent},

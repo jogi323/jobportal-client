@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { LocalDataSource } from 'ng2-smart-table';
 
 import { AdminService } from '../../../shared/services/admin.service';
+import { LoaderService } from '../../../shared/services/loader.service';
 
 @Component({
   selector: 'app-manage-users',
@@ -10,25 +11,32 @@ import { AdminService } from '../../../shared/services/admin.service';
   styleUrls: ['./manage-users.component.css']
 })
 export class ManageUsersComponent implements OnInit {
-  usersList :any;
+  usersList: any;
   source: LocalDataSource;
 
   constructor(
     private adminService: AdminService,
     private router: Router,
-  ) { }
-  onCustom(event) {
-    this.router.navigate(['admin/viewuser'], { queryParams: {id:event.data._id} });
-  }
-  ngOnInit() {
+    private loaderService: LoaderService
+  ) {
+    this.loaderService.display(true);
+
     this.adminService.getAllUsers().subscribe(
       res => {
+        this.loaderService.display(false);
         this.source = new LocalDataSource(res.data)
       },
       err => {
+        this.loaderService.display(false);
         console.log(err);
       }
-    )
+    );
+  }
+  onCustom(event) {
+    this.router.navigate(['admin/viewuser'], { queryParams: { id: event.data._id } });
+  }
+  ngOnInit() {
+
   }
   settings = {
     columns: {
@@ -55,10 +63,10 @@ export class ManageUsersComponent implements OnInit {
       }
     },
     actions: {
-      add:false,
-      edit:false,
-      delete:false,
-      position:'right',
+      add: false,
+      edit: false,
+      delete: false,
+      position: 'right',
       custom: [
         {
           name: 'view',

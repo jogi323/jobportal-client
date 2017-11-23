@@ -4,7 +4,6 @@
         <div class="container">
             <div class="top-bar-links flex-parent">
                 <ul class="top-bar-currency-language">
-
                 </ul>
 
                 <ul class="top-bar-acc pull-right" *ngIf='!isLoggedIn'>
@@ -17,11 +16,7 @@
             </div>
         </div>
     </div>
-    <!-- end top bar -->
-    <!-- <div class="profile-status" *ngIf="isLoggedIn && (currentUser.personalInfo || currentUser.workInfo) && showProfileStatus">
-        Your <span *ngIf="currentUser.personalInfo">personal</span><span *ngIf="(currentUser.workInfo && currentUser.personalInfo)"> and </span><span *ngIf="currentUser.workInfo">work</span>profile not updated
-        <span class="pull-right" (click)="closeProfileStatus()"><i class="fa fa-times" aria-hidden="true"></i></span>
-    </div> -->
+
     <nav class="navbar navbar-static-top">
         <div class="navigation" id="sticky-nav">
             <div class="container relative">
@@ -76,13 +71,21 @@
                                 <li>
                                     <a [routerLink]="['employer/joboffers']" routerLinkActive="active">Job Offers</a>
                                 </li>
-                                <!--<li>
-                  <a [routerLink]="['employer/payment']" routerLinkActive="active">Payment</a>
-                </li>-->
                                 <li>
                                     <a [routerLink]="['employer/transactionhistory']" routerLinkActive="active">Transaction History</a>
                                 </li>
 
+                                <li class="mobile-links hidden-lg hidden-md">
+                                    <a (click)='logoutUser()'>Log Out</a>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav" *ngIf="userType == 'admin'">
+                                <li>
+                                    <a [routerLink]="['admin/positions']" routerLinkActive="active">Manage Positions</a>
+                                </li>
+                                <li>
+                                    <a [routerLink]="['admin/users']" routerLinkActive="active">Manage Users</a>
+                                </li>
                                 <li class="mobile-links hidden-lg hidden-md">
                                     <a (click)='logoutUser()'>Log Out</a>
                                 </li>
@@ -100,8 +103,8 @@
                                 <div class="nav-cart-outer">
                                     <div class="nav-cart-inner">
                                         <a>
-                          My Account
-                        </a>
+                                        My Account
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="nav-cart-container">
@@ -118,6 +121,7 @@
                                         <a class="btn btn-md btn-dark" (click)="userProfile()"><span>View Profile</span></a>
                                         <a *ngIf="userType == 'employer'" class="btn btn-md btn-dark mt-10" [routerLink]="['employer/changepassword']" routerLinkActive="active"><span>Change Password</span></a>
                                         <a *ngIf="userType == 'jobseeker'" class="btn btn-md btn-dark mt-10" [routerLink]="['jobseeker/changepassword']" routerLinkActive="active"><span>Change Password</span></a>
+                                        <a *ngIf="userType == 'admin'" class="btn btn-md btn-dark mt-10" [routerLink]="['admin/changepassword']" routerLinkActive="active"><span>Change Password</span></a>
                                         <a class="btn btn-md btn-color mt-10" (click)='logoutUser()'><span>Log Out</span></a>
                                     </div>
                                 </div>

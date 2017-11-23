@@ -1,0 +1,211 @@
+<section class="section-wrap">
+    <div class="container">
+        <div class="row">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#personal">Personal/Work Info</a></li>
+                <li><a data-toggle="tab" href="#offers">Offers History</a></li>
+                <li><a data-toggle="tab" href="#transcation" *ngIf="userData?.userType === 'employer'">Transaction History</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="personal" class="tab-pane fade in active">
+                    <div class="order-review-wrap ecommerce-checkout-review-order" id="order_review">
+                        <h2 class="heading uppercase bottom-line full-grey">User Information</h2>
+                        <div class="col-lg-6">
+                            <table class="table shop_table ecommerce-checkout-review-order-table">
+                                <tbody>
+                                    <tr>
+                                        <th><strong>Full Name</strong></th>
+                                        <td>
+                                            <span>{{userData?.Firstname}} {{userData?.Lastname}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Email Address</strong></th>
+                                        <td>
+                                            <span>{{userData?.Email_Address}} </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Contact Number</strong></th>
+                                        <td>
+                                            <span>{{userData?.Phone1}} </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Zip Code</strong></th>
+                                        <td>
+                                            <span>{{userData?.Zip_Code}} </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>User Type</strong></th>
+                                        <td>
+                                            <span>{{userData?.UserType}} </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Email Address</strong></th>
+                                        <td>
+                                            <span>{{userData?.Email_Address}} </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Email Address</strong></th>
+                                        <td>
+                                            <span>{{userData?.Email_Address}} </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-lg-6">
+                            <table class="table shop_table ecommerce-checkout-review-order-table">
+                                <tbody>
+                                    <tr>
+                                        <th>Business Suit<span class="count"> x 1</span></th>
+                                        <td>
+                                            <span class="amount">$599.00</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>California Dress<span class="count"> x 1</span></th>
+                                        <td>
+                                            <span class="amount">$1299.00</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="cart-subtotal">
+                                        <th>Cart Subtotal</th>
+                                        <td>
+                                            <span class="amount">$1799.00</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="shipping">
+                                        <th>Shipping</th>
+                                        <td>
+                                            <span>Free Shipping</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="order-total">
+                                        <th><strong>Order Total</strong></th>
+                                        <td>
+                                            <strong><span class="amount">$1799.00</span></strong>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="offers" class="tab-pane fade">
+                    <div class="order-review-wrap ecommerce-checkout-review-order" id="order_review">
+                        <h2 class="heading uppercase bottom-line full-grey">Offers History</h2>
+                        <div class="col-md-12">
+                            <table class="table shop_table ecommerce-checkout-review-order-table">
+                                <tbody>
+                                    <tr>
+                                        <th><strong>Full Name</strong></th>
+                                        <td>
+                                            <span>{{userData?.Firstname}} {{userData?.Lastname}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Email Address</strong></th>
+                                        <td>
+                                            <span>{{userData?.Email_Address}} </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Contact Number</strong></th>
+                                        <td>
+                                            <span>{{userData?.Phone1}} </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Zip Code</strong></th>
+                                        <td>
+                                            <span>{{userData?.Zip_Code}} </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>User Type</strong></th>
+                                        <td>
+                                            <span>{{userData?.UserType}} </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Email Address</strong></th>
+                                        <td>
+                                            <span>{{userData?.Email_Address}} </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Email Address</strong></th>
+                                        <td>
+                                            <span>{{userData?.Email_Address}} </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="transcation" class="tab-pane fade" *ngIf="userData?.userType === 'employer'">
+                    <div class="order-review-wrap ecommerce-checkout-review-order" id="order_review">
+                        <h2 class="heading uppercase bottom-line full-grey">Transaction History</h2>
+                        <div class="col-md-12">
+                            <table class="table shop_table ecommerce-checkout-review-order-table">
+                                <tbody>
+                                    <tr>
+                                        <th><strong>Full Name</strong></th>
+                                        <td>
+                                            <span>{{userData?.Firstname}} {{userData?.Lastname}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Email Address</strong></th>
+                                        <td>
+                                            <span>{{userData?.Email_Address}} </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Contact Number</strong></th>
+                                        <td>
+                                            <span>{{userData?.Phone1}} </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Zip Code</strong></th>
+                                        <td>
+                                            <span>{{userData?.Zip_Code}} </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>User Type</strong></th>
+                                        <td>
+                                            <span>{{userData?.UserType}} </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Email Address</strong></th>
+                                        <td>
+                                            <span>{{userData?.Email_Address}} </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Email Address</strong></th>
+                                        <td>
+                                            <span>{{userData?.Email_Address}} </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>

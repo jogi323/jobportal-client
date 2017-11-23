@@ -21,8 +21,14 @@ import { NoAuthGuardService } from './shared/services/no-auth-guard.service';
 const routes: Routes = [
     { path:'', component:HomeComponent,canActivate:[NoAuthGuardService] },
     { path:'confirm/:id', component:ActivateUserComponent,canActivate:[NoAuthGuardService] },
-    { path:'employer', 
+    { 
+      path:'employer', 
       loadChildren:'./employer/employer.module#EmployerModule',
+      canActivate:[AuthGuardService] 
+    },
+    { 
+      path:'admin', 
+      loadChildren:'./admin/admin.module#AdminModule',
       canActivate:[AuthGuardService] 
     },
     { path:'jobseeker', loadChildren:'./job-seeker/job-seeker.module#JobSeekerModule',canActivate:[AuthGuardService] },

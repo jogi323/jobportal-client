@@ -48,7 +48,7 @@ export class TopNavComponent implements OnInit {
 
   }
   showNotification(user) {
-    if ((user.personalInfo || user.workInfo) && user) {
+    if ((user.personalInfo || user.workInfo) && user && user.userType != 'admin') {
       this.notificationsService.info(
         '',
         'Your personal and/or work profiles are not updated',

@@ -143,7 +143,7 @@
                                         <th class="col-lg-4">Status</th>
                                     </tr>
                                 </thead>
-                                <tbody *ngFor="let offer of userData.Offers_id">
+                                <tbody *ngFor="let offer of offerPagedIntems">
                                     <tr>
                                         <td>
                                             <span class="col-lg-4">{{offer?.Position}}</span>
@@ -158,21 +158,21 @@
                                 </tbody>
                             </table>
                             <!-- pager -->
-                            <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-                                <li [ngClass]="{disabled:pager.currentPage === 1}" class="static-page">
-                                    <a (click)="setPage(1)">First</a>
+                            <ul *ngIf="offersPager.pages && offersPager.pages.length" class="pagination">
+                                <li [ngClass]="{disabled:offersPager.currentPage === 1}" class="static-page">
+                                    <a (click)="offerPageSet(1)">First</a>
                                 </li>
-                                <li [ngClass]="{disabled:pager.currentPage === 1}" class="static-page">
-                                    <a (click)="setPage(pager.currentPage - 1)">Prev</a>
+                                <li [ngClass]="{disabled:offersPager.currentPage === 1}" class="static-page">
+                                    <a (click)="offerPageSet(offersPager.currentPage - 1)">Prev</a>
                                 </li>
-                                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-                                    <a (click)="setPage(page)">{{page}}</a>
+                                <li *ngFor="let page of offersPager.pages" [ngClass]="{active:offersPager.currentPage === page}">
+                                    <a (click)="offerPageSet(page)">{{page}}</a>
                                 </li>
-                                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="static-page">
-                                    <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                                <li [ngClass]="{disabled:offersPager.currentPage === offersPager.totalPages}" class="static-page">
+                                    <a (click)="offerPageSet(offersPager.currentPage + 1)">Next</a>
                                 </li>
-                                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="static-page">
-                                    <a (click)="setPage(pager.totalPages)">Last</a>
+                                <li [ngClass]="{disabled:offersPager.currentPage === offersPager.totalPages}" class="static-page">
+                                    <a (click)="offerPageSet(offersPager.totalPages)">Last</a>
                                 </li>
                             </ul>
                         </div>
@@ -190,7 +190,7 @@
                                         <th class="col-lg-4">Status</th>
                                     </tr>
                                 </thead>
-                                <tbody *ngFor="let transcation of userData.Payments_id">
+                                <tbody *ngFor="let transcation of pagedItems">
                                     <tr>
                                         <td>
                                             <span class="col-lg-4">{{transcation?.Billing_Name}}</span>

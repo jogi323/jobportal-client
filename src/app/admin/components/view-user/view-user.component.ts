@@ -20,12 +20,14 @@ export class ViewUserComponent implements OnInit {
   currentUser: any;
   // array of all items to be paged
   private allItems: any[];
-
+  allOfferItems: any[];
   // pager object
   pager: any = {};
-
+  offersPager: any = {};
   // paged items
   pagedItems: any[];
+  offerPagedIntems: any[];
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -48,7 +50,7 @@ export class ViewUserComponent implements OnInit {
             this.userData = res.data;
             // set items to json response
             this.allItems = res.data.Payments_id;
-
+            this.allOfferItems = res.data.Offers_id;
             // initialize to page 1
             this.setPage(1);
             this.loaderService.display(false);
@@ -68,9 +70,19 @@ export class ViewUserComponent implements OnInit {
 
     // get pager object from service
     this.pager = this.paginationService.getPager(this.allItems.length, page);
-
     // get current page of items
     this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    console.log(this.pagedItems)
+  }
+  offerPageSet(page: number){
+    if (page < 1 || page > this.pager.totalPages) {
+      return;
+    }
+
+    // get pager object from service
+    this.offersPager = this.paginationService.getPager(this.allOfferItems.length,page)
+    // get current page of items
+    this.offerPagedIntems = this.allOfferItems.slice(this.offersPager.startIndex, this.offersPager.endIndex + 1);    
     console.log(this.pagedItems)
   }
   ngOnInit() {

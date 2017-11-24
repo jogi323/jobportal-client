@@ -17,7 +17,7 @@
 					</label>
                     <p class="form-row form-row-wide ">
                         <select name="calc_shipping_country" id="calc_shipping_country" class="country_to_state" rel="calc_shipping_state" [(ngModel)]="filterJobseekers.Position">
-							<option *ngFor="let position of positionList">{{position?.Position_Name}}</option>
+							<option *ngFor="let position of positionList" [value]="position._id">{{position?.Position_Name}}</option>
 						</select>
                     </p>
                 </div>

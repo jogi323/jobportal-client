@@ -8,7 +8,7 @@ export class SearchPipe implements PipeTransform {
         if (args.Position != '' && (args.pay_request != null && args.pay_request != "") && (args.distance != null && args.distance !="")) {
             value.filter(eachValue => {
                 if (eachValue) {
-                    if (eachValue.JS_id.Position == args.Position && eachValue.JS_id.Hourly_Pay == args.pay_request && eachValue.Distance == args.distance) {
+                    if (eachValue.JS_id.Position._id == args.Position && eachValue.JS_id.Hourly_Pay == args.pay_request && eachValue.Distance == args.distance) {
                         source.push(eachValue);
                     }
                 }
@@ -38,7 +38,7 @@ export class SearchPipe implements PipeTransform {
         else if (args.Position != '' && (args.pay_request == null || args.pay_request == "") && (args.distance == null || args.distance == "")) {
             value.filter(eachValue => {
                 if (eachValue) {
-                    if (eachValue.JS_id.Position == args.Position) {
+                    if (eachValue.JS_id.Position._id == args.Position) {
                         source.push(eachValue);
                     }
                 }
@@ -48,7 +48,7 @@ export class SearchPipe implements PipeTransform {
         else if (args.Position != '' && (args.pay_request != null && args.pay_request != "") && (args.distance == null || args.distance == "")) {
             value.filter(eachValue => {
                 if (eachValue) {
-                    if (eachValue.JS_id.Position == args.Position && eachValue.JS_id.Hourly_Pay == args.pay_request) {
+                    if (eachValue.JS_id.Position._id == args.Position && eachValue.JS_id.Hourly_Pay == args.pay_request) {
                         source.push(eachValue);
                     }
                 }
@@ -58,7 +58,7 @@ export class SearchPipe implements PipeTransform {
         else if (args.Position != '' && (args.pay_request == null || args.pay_request == "") && (args.distance != null && args.distance != "")) {
             value.filter(eachValue => {
                 if (eachValue) {
-                    if (eachValue.JS_id.Position == args.Position && eachValue.Distance == args.distance) {
+                    if (eachValue.JS_id.Position._id == args.Position && eachValue.Distance == args.distance) {
                         source.push(eachValue);
                     }
                 }

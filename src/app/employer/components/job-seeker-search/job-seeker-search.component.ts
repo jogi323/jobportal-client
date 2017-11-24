@@ -53,6 +53,7 @@ export class JobSeekerSearchComponent implements OnInit {
       this.initUserData(user);
     })
     this.itemsToHire = this.employerService.itemsToHire;
+    this.jobseekers = [];
   }
   // Initialize Filter getJobseekers
   initializeFilterJobseeker() {
@@ -128,6 +129,7 @@ export class JobSeekerSearchComponent implements OnInit {
     this.userService.getPositions().subscribe(
       res => {
         this.positionList = res.data;
+        console.log(this.positionList);
       }
     )
     
@@ -156,8 +158,9 @@ export class JobSeekerSearchComponent implements OnInit {
     this.loaderService.display(true);
     this.employerService.queryJobseekers(data).subscribe(
       res => {
-        this.jobseekers = res.data;
-        this.calculateDistance(this.jobseekers);
+        // this.jobseekers = res.data;
+        this.jobseekers = [];
+        this.calculateDistance(res.data);
         this.loaderService.display(false);
       },
       err => {
@@ -179,12 +182,30 @@ export class JobSeekerSearchComponent implements OnInit {
           lat: jobseeker.JS_id.locationLat,
           lng: jobseeker.JS_id.locationLng
         }
-        jobseeker.Distance = this.tryHaversine(this.employerLocation, jobseekerLocation)
+        jobseeker.Distance = this.tryHaversine(this.employerLocation, jobseekerLocation);
+        if (jobseeker.Distance <= jobseeker.JS_id.Travel_Distance) {
+          if(this.jobseekers.length>0){
+            let count = 0;
+            for (let i = 0; i < this.jobseekers.length; i++) {
+              if (this.jobseekers[i]._id == jobseeker._id) {
+                count++;
+              }
+            }
+            if (count == 0) {
+              this.jobseekers.push(jobseeker);
+              console.log(this.jobseekers);
+            }
+          }
+          else{
+            this.jobseekers.push(jobseeker);  
+            console.log(this.jobseekers);          
+          }
+        }
       } else {
         jobseeker.Distance = 'undefined'
       }
     });
-    this.jobseekers = jobseekers
+    // this.jobseekers = jobseekers
   }
 
   //api for distance calculation

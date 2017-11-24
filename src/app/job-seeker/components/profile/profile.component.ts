@@ -226,22 +226,23 @@ export class ProfileComponent implements OnInit {
       .subscribe(data => {
         this.statesList = data;
       }, error => {
-      });
+    });
     this.jsonLoaderService.getLanguages()
       .subscribe(data => {
         this.languagesList = data.map(m => ({id:m.name,name:m.name}));
       }, error => {
-      });
+    });
     this.jsonLoaderService.getYears()
       .subscribe(data => {
         this.yearsList = data;
       }, error => {
-      });
-    this.jsonLoaderService.getPositions()
-      .subscribe(data => {
-        this.positionList = data;
-      }, error => {
-      });
+    });
+    this.userService.getPositions().subscribe(
+      res => {
+        this.positionList = res.data;
+      }
+    )
+    
   }
 
   sendOtp() {

@@ -24,6 +24,9 @@ export class ManagePositionsComponent implements OnInit {
 
   ) { 
     this.loaderService.display(true);
+    this.initPositions();
+  }
+  initPositions(){
     this.adminService.getPositions().subscribe(
       res => {
         this.loaderService.display(false);
@@ -33,7 +36,6 @@ export class ManagePositionsComponent implements OnInit {
       }
     )
   }
-
   onSaveConfirm(event) {
     this.loaderService.display(true);
     const data = {
@@ -44,7 +46,6 @@ export class ManagePositionsComponent implements OnInit {
     if (window.confirm('Are you sure you want to save?')) {
       this.adminService.updatePosition(data).subscribe(
         res => {
-          console.log(res);
           this.loaderService.display(false);
           this.notificationsService.success(
             'Success',
@@ -52,7 +53,7 @@ export class ManagePositionsComponent implements OnInit {
             environment.options
           );
           // event.newData['name'] += event.newData.name;
-          event.confirm.resolve(event.newData);
+          // event.confirm.resolve(event.newData);
         },
         err => {
           console.log(err);
@@ -81,11 +82,8 @@ export class ManagePositionsComponent implements OnInit {
     if (window.confirm('Are you sure you want to create?')) {
       this.adminService.savePosition(data).subscribe(
         res => {
-          console.log(res)
+          this.initPositions();
           this.loaderService.display(false);
-
-          // event.newData['name'] += event.newData.name;
-          event.confirm.resolve(event.newData);
         },
         err => {
           console.log(err)

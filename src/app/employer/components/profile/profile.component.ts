@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
   currentUser:any;
   userType:string;
   subscription:Subscription;
-
+  specialityList : any[];
   statesList:any[];
   languagesList:any[];
   yearsList:any[];
@@ -50,16 +50,6 @@ export class ProfileComponent implements OnInit {
       this.user.locationLng = this.geoLocation.lng;
     })
   }
-
-  
-  specialityList = [
-    {"name":"General Dentistry"},
-    {"name":"Endodontist"},
-    {"name":"Orthodontist"},
-    {"name":"Oral Surgeon"},
-    {"name":"Pedodontist"},
-    {"name":"Periodontist"},
-  ]
 
   constructor(
     private jsonLoaderService:JsonLoaderService,
@@ -199,7 +189,13 @@ onLanguageChange($event) {
     }
   }
   ngOnInit() {
+    this.userService.getPositions().subscribe(
+      res => {
+        this.specialityList = res.data;
+      },err => {
 
+      }
+    )
     this.jsonLoaderService.getStates()
                             .subscribe(data => {
                               this.statesList = data;

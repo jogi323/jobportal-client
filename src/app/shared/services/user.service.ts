@@ -214,4 +214,12 @@ export class UserService {
       return res;
     });
   }
+
+  getPositions() {
+    let path = 'positions/all'
+    return this.apiService.get(path)
+      .map(data => {
+          return data;
+        })
+  }
 }

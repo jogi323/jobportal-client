@@ -126,12 +126,12 @@ export class JobSeekerSearchComponent implements OnInit {
     // this.tryHaversine(this.employerLocation);
     this.minDate = new Date();
     this.getJobseekers(this.filterJobseekers);
-
-    this.jsonLoaderService.getPositions()
-      .subscribe(data => {
-        this.positionList = data;
-      }, error => {
-      });
+    this.userService.getPositions().subscribe(
+      res => {
+        this.positionList = res.data;
+      }
+    )
+    
   }
   onDateChange(event) {
     event.setUTCHours(0);

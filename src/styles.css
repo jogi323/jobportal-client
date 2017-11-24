@@ -121,6 +121,7 @@ a:hover {
     display: table;
     color: orange;
 }
+
 .language button.btn-default {
     color: #333 !important;
     background-color: #fff !important;
@@ -128,22 +129,83 @@ a:hover {
     width: 100px !important;
     text-align: justify;
 }
+
 .language .dropdown-menu {
     background-color: #fff !important;
     width: 50px !important;
     border: 1px solid #ccc !important;
 }
+
 .language .dropdown-menu li a:hover {
-    color:black !important;
+    color: black !important;
 }
+
 .language button.btn-default::after {
     background: transparent !important;
     color: white !important;
 }
+
 .pagination {
     margin-top: 10px;
 }
+
 .static-page>a {
     width: 50px !important;
     /*padding: 2px !important;*/
 }
+
+.smarttable_main table thead tr:first-child {
+    background: #003A51;
+}
+
+.smarttable_main table thead tr:first-child th {
+    color: #fff;
+    padding: 12px 20px !important;
+}
+
+.smarttable_main table thead tr:first-child th a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.smarttable_main table input {
+    font-size: 14px;
+    border-radius: 0px;
+}
+
+.smarttable_main table td.ng2-smart-actions a {
+    font-size: 14px;
+    padding-right: 5px;
+}
+
+.smarttable_main table tbody tr:nth-child(even) {
+    background-color: rgba(0, 58, 81, 0.1);
+}
+
+.smarttable_main table tbody tr td {
+    color: rgba(0, 58, 81, 0.8);
+}
+
+.smarttable_main .ng2-smart-pagination-nav .pagination li span,
+.smarttable_main .ng2-smart-pagination-nav .pagination li a {
+    padding: 6px 12px;
+    line-height: 20px;
+    height: auto;
+}
+
+.smarttable_main .ng2-smart-pagination-nav .pagination li a.page-link {
+    padding: 6px 0px !important;
+}
+
+.smarttable_main .ng2-smart-pagination-nav .pagination li a.page-link span {
+    border: none;
+}
+
+
+/* 
+.smarttable_main table,
+.smarttable_main table th,
+.smarttable_main table th td {
+    border: 1px solid black;
+    border-collapse: collapse;
+} */

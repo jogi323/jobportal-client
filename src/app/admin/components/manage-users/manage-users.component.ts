@@ -23,8 +23,15 @@ export class ManageUsersComponent implements OnInit {
 
     this.adminService.getAllUsers().subscribe(
       res => {
+        console.log(res);
+        res.data.forEach(user => {
+          if(user.Position){
+            user.Position_Name = user.Position.Position_Name
+          }
+        });
+        this.usersList = res.data
         this.loaderService.display(false);
-        this.source = new LocalDataSource(res.data)
+        this.source = new LocalDataSource(this.usersList)
       },
       err => {
         this.loaderService.display(false);
@@ -43,7 +50,7 @@ export class ManageUsersComponent implements OnInit {
       Email_Address: {
         title: 'Email Address'
       },
-      Position: {
+      Position_Name: {
         title: 'Position'
       },
       State: {

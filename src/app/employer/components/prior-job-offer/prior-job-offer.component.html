@@ -24,16 +24,16 @@
                           </a>
                         </td>-->
                                 <td class="col-lg-2">
-                                    {{offer.positionId}}
+                                    {{offer.Position_id._id}}
                                 </td>
                                 <td class="col-lg-2">
-                                    {{offer.JS_id.Position}}
+                                    {{offer.Position_id.Position_Name}}
                                 </td>
                                 <!-- <td class="col-lg-2">
                           {{offer.Status}}                        
                         </td> -->
                                 <td class="col-lg-2">
-                                    {{offer.Date_Submitted | date: 'dd/MM/yyyy'}}
+                                    {{offer.Availability_id.Date | date: 'dd/MM/yyyy'}}
                                 </td>
                                 <td class="col-lg-2">
                                     ${{offer.JS_id.Hourly_Pay}}

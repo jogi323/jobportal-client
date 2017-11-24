@@ -23,11 +23,17 @@ export class ProfileComponent implements OnInit {
   currentUser:any;
   userType:string;
   subscription:Subscription;
-  specialityList : any[];
   statesList:any[];
   languagesList:any[];
   yearsList:any[];
-  
+  specialityList = [
+    { "name": "General Dentistry" },
+    { "name": "Endodontist" },
+    { "name": "Orthodontist" },
+    { "name": "Oral Surgeon" },
+    { "name": "Pedodontist" },
+    { "name": "Periodontist" },
+  ]
   newImageUploaded: Boolean = false;
   public options = {types: ['address'],componentRestrictions: { country: 'US' }}
   
@@ -84,8 +90,8 @@ export class ProfileComponent implements OnInit {
     }
     this.loaderService.display(true);      
     this.subscription = userService.currentUser.subscribe(user =>{
-      this.isUserDataEdit = user.personalInfo;
-      this.isWorkDataEdit = user.workInfo;
+      this.isUserDataEdit = !user.personalInfo;
+      this.isWorkDataEdit = !user.workInfo;
       this.currentUser = user;
       this.initUserData(user);
     })
@@ -189,13 +195,7 @@ onLanguageChange($event) {
     }
   }
   ngOnInit() {
-    this.userService.getPositions().subscribe(
-      res => {
-        this.specialityList = res.data;
-      },err => {
-
-      }
-    )
+    
     this.jsonLoaderService.getStates()
                             .subscribe(data => {
                               this.statesList = data;

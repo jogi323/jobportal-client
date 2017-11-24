@@ -70,9 +70,14 @@ export class EmployerService {
   }
 
   //post offer method
-  postOffer(){
+  postOffer(paymentId){
     const route = 'offers/save';
-    return this.apiService.post(route, this.itemsToHire).map( res => {
+    var data = {
+      paymentId : paymentId,
+      availabilities: this.itemsToHire
+    }
+    console.log(data)
+    return this.apiService.post(route, data).map( res => {
       return res;
     })
   }

@@ -45,24 +45,35 @@ export class ViewUserComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.userId = params['id']
       if (this.userId) {
-        this.adminService.getAllUserDetails(this.userId).subscribe(
-          res => {
-            this.userData = res.data;
-            // set items to json response
-            this.allItems = res.data.Payments_id;
-            this.allOfferItems = res.data.Offers_id;
-            // initialize to page 1
-            this.setPage(1);
-            this.offerPageSet(1);
-            this.loaderService.display(false);
-            console.log(res)
-          }, err => {
-            console.log(err)
-            this.loaderService.display(false);
-          }
-        )
+        this.initUserData();
       }
     });
+  }
+  initUserData(){
+    this.adminService.getAllUserDetails(this.userId).subscribe(
+      res => {
+        this.userData = res.data;
+        // set items to json response
+        this.allItems = res.data.Payments_id;
+        this.allOfferItems = res.data.Offers_id;
+        // initialize to page 1
+        this.setPage(1);
+        this.offerPageSet(1);
+        this.loaderService.display(false);
+        console.log(res)
+      }, err => {
+        console.log(err)
+        this.loaderService.display(false);
+      }
+    )
+  }
+  onChangeStatus(){
+    this.adminService.changeUserStatus(this.userId).subscribe(
+      res => {
+        this.userData.Status = !this.userData.Status
+        // this.initUserData();
+      }
+    )
   }
   setPage(page: number) {
     if (page < 1 || page > this.pager.totalPages) {

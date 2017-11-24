@@ -25,6 +25,7 @@ export class TransactionHistoryComponent implements OnInit {
   ) {
     this.loaderService.display(true);
     this.employerService.getTransactions().subscribe(res => {
+      console.log(res)
       this.transactions = res.data;
       console.log(this.transactions)
       // set items to json response

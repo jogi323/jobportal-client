@@ -118,8 +118,9 @@ export class PaymentComponent implements OnInit {
     this.loaderService.display(true);
     this.employerservice.makePayment(this.payment).subscribe(res => {
       if (res.message == 'Payment Sucessfull') {
+        console.log(res);
         this.initializePayment();
-        this.releaseOffer();
+        this.releaseOffer(res.data._id);
       }
     },
       err => {
@@ -131,8 +132,8 @@ export class PaymentComponent implements OnInit {
         )
       })
   }
-  releaseOffer() {
-    this.employerservice.postOffer().subscribe(res => {
+  releaseOffer(paymentId) {
+    this.employerservice.postOffer(paymentId).subscribe(res => {
       this.loaderService.display(false);
       this.notificationsService.success(
         'Sucess',

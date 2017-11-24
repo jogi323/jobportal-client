@@ -12,7 +12,6 @@
                     <div class="order-review-wrap ecommerce-checkout-review-order" id="order_review">
                         <h2 class="heading uppercase bottom-line full-grey">User Information</h2>
                         <div class="col-lg-6">
-                            <h5 class="heading uppercase bottom-line full-grey">Personal Information</h5>
                             <table class="table shop_table ecommerce-checkout-review-order-table">
                                 <tbody>
                                     <tr>
@@ -25,6 +24,16 @@
                                         <th><strong>Email Address</strong></th>
                                         <td>
                                             <span>{{userData?.Email_Address}} </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th><strong>Status</strong></th>
+                                        <td>
+                                            <span *ngIf="userData?.Status">Active</span>
+                                            <button *ngIf="userData?.Status" class="statusBtnAct" (click)="onChangeStatus()">Deactivate</button>
+                                            <span *ngIf="!userData?.Status">Inactive</span>
+                                            <button *ngIf="!userData?.Status" class="statusBtnInact" (click)="onChangeStatus()">Activate</button>
+
                                         </td>
                                     </tr>
                                     <tr>
@@ -61,7 +70,6 @@
                             </table>
                         </div>
                         <div class="col-lg-6">
-                            <h5 class="heading uppercase bottom-line full-grey">Work Information</h5>
                             <table class="table shop_table ecommerce-checkout-review-order-table">
                                 <tbody *ngIf="userData.userType === 'employer'">
                                     <tr>

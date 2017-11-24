@@ -68,6 +68,8 @@ export class ManagePositionsComponent implements OnInit {
 
     } else {
       event.confirm.reject();
+      this.loaderService.display(false);
+      
     }
   }
 
@@ -94,6 +96,8 @@ export class ManagePositionsComponent implements OnInit {
 
     } else {
       event.confirm.reject();
+      this.loaderService.display(false);
+      
     }
   }
   ngOnInit() {

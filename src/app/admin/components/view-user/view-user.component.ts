@@ -53,6 +53,7 @@ export class ViewUserComponent implements OnInit {
             this.allOfferItems = res.data.Offers_id;
             // initialize to page 1
             this.setPage(1);
+            this.offerPageSet(1);
             this.loaderService.display(false);
             console.log(res)
           }, err => {

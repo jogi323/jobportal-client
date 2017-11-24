@@ -77,8 +77,7 @@
                                     <label for="User_Firstname">First Name
                                     <abbr class="required" title="required">*</abbr>
                                     </label>
-                                    <input type="text" class="input-text" placeholder [(ngModel)]="user.Firstname" value="" name="Firstname" id="User_Firstname"
-                                        #Firstname='ngModel' required>
+                                    <input type="text" class="input-text" placeholder [(ngModel)]="user.Firstname" value="" name="Firstname" id="User_Firstname" #Firstname='ngModel' required>
                                     <div *ngIf="Firstname.errors && (Firstname.dirty || Firstname.touched)" class="error">
                                         <div [hidden]="!Firstname.errors.required">Please Enter Firstname</div>
                                     </div>
@@ -86,8 +85,7 @@
                                     <label for="User_Lastname">Last Name
                                     <abbr class="required" title="required">*</abbr>
                                     </label>
-                                    <input type="text" class="input-text" placeholder [(ngModel)]="user.Lastname" value="" name="Lastname" id="User_Lastname"
-                                        #Lastname='ngModel' required>
+                                    <input type="text" class="input-text" placeholder [(ngModel)]="user.Lastname" value="" name="Lastname" id="User_Lastname" #Lastname='ngModel' required>
                                     <div *ngIf="Lastname.errors && (Lastname.dirty || Lastname.touched)" class="error">
                                         <div [hidden]="!Lastname.errors.required">Please Enter Lastname</div>
                                     </div>
@@ -95,9 +93,7 @@
                                     <label for="User_Email_Address">Email
                                     <abbr class="required" title="required">*</abbr>
                                     </label>
-                                    <input type="email" class="input-text" placeholder [(ngModel)]="user.Email_Address" value="" name="Email_Address" id="User_Email_Address"
-                                        #Email_Address="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" readonly
-                                        required>
+                                    <input type="email" class="input-text" placeholder [(ngModel)]="user.Email_Address" value="" name="Email_Address" id="User_Email_Address" #Email_Address="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" readonly required>
                                     <div *ngIf="Email_Address.errors && (Email_Address.dirty || Email_Address.touched)" class="error">
                                         <div [hidden]="!Email_Address.errors.required">Please Enter Email-Id</div>
                                         <div [hidden]="!Email_Address.errors.pattern">Please Enter proper email-Id</div>
@@ -106,46 +102,38 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <!--<input type="file" (change)="changeListener($event)" />-->
-                                        <input type="file" id="files" class="hidden" (change)="changeListener($event)"/>
-                                        <label for="files" class="file">Upload Image</label>
+                                    <input type="file" id="files" class="hidden" (change)="changeListener($event)" />
+                                    <label for="files" class="file">Upload Image</label>
                                     <img class="preview_image" src="{{user.image}}" height="220" width="160" *ngIf="newImageUploaded">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input type="text" [(ngModel)]="address" name="address" [options]='options' (setAddress)="getAddress($event)" (street_number)='street_number=$event'
-                                        (street)='street=$event' (city)='city=$event' (state)='state=$event' (district)='district=$event'
-                                        (country)='country=$event' (postal_code)='postal_code=$event' (lat)='lat=$event' (lng)='lng=$event'
-                                        (adr_address)='adr_address=$event' (name)='name=$event' (place_id)='place_id=$event'
-                                        (types)='types=$event' (url)='url=$event' (utc_offset)='utc_offset=$event' (vicinity)='vicinity=$event'
-                                        (photos)='photos=$event' (airport)='airport=$event' (CountryCodes)='CountryCodes=$event'
-                                        id="autocomplete" ng2-google-place-autocomplete/>
+                                    <input type="text" [(ngModel)]="address" name="address" [options]='options' (setAddress)="getAddress($event)" (street_number)='street_number=$event' (street)='street=$event' (city)='city=$event' (state)='state=$event' (district)='district=$event' (country)='country=$event'
+                                        (postal_code)='postal_code=$event' (lat)='lat=$event' (lng)='lng=$event' (adr_address)='adr_address=$event' (name)='name=$event' (place_id)='place_id=$event' (types)='types=$event' (url)='url=$event' (utc_offset)='utc_offset=$event'
+                                        (vicinity)='vicinity=$event' (photos)='photos=$event' (airport)='airport=$event' (CountryCodes)='CountryCodes=$event' id="autocomplete" ng2-google-place-autocomplete/>
                                 </div>
                                 <div class="col-md-12">
                                     <label for="User_Address_street">Address
                                         <abbr class="required" title="required">*</abbr>
                                     </label>
-                                    <input type="text" class="input-text" placeholder="Street address" [(ngModel)]="user.Address_street" value="" name="Address_street"
-                                        id="User_Address_street" #Address_street='ngModel' required>
+                                    <input type="text" class="input-text" placeholder="Street address" [(ngModel)]="user.Address_street" value="" name="Address_street" id="User_Address_street" #Address_street='ngModel' required>
                                     <div *ngIf="Address_street.errors && (Address_street.dirty || Address_street.touched)" class="error">
                                         <div [hidden]="!Address_street.errors.required">This field is required</div>
                                     </div>
 
-                                    <input type="text" class="input-text" placeholder="Apartment, suite, unit etc. (optional)" [(ngModel)]="user.Address_Unit"
-                                        value="" name="Address_Unit" id="User_Address_Unit">
+                                    <input type="text" class="input-text" placeholder="Apartment, suite, unit etc. (optional)" [(ngModel)]="user.Address_Unit" value="" name="Address_Unit" id="User_Address_Unit">
                                 </div>
 
                                 <div class="col-md-4">
-                                    <input type="text" class="input-text" placeholder="Town / City" [(ngModel)]="user.City" value="" name="City" id="USer+City"
-                                        #City='ngModel' required>
+                                    <input type="text" class="input-text" placeholder="Town / City" [(ngModel)]="user.City" value="" name="City" id="USer+City" #City='ngModel' required>
                                     <div *ngIf="City.errors && (City.dirty || City.touched)" class="error">
                                         <div [hidden]="!City.errors.required">This field is required</div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <select name="User_State" [(ngModel)]="user.State" id="User_State" class="country_to_state country_select" title="State *"
-                                        #State='ngModel' required>
+                                    <select name="User_State" [(ngModel)]="user.State" id="User_State" class="country_to_state country_select" title="State *" #State='ngModel' required>
                                         <option value="" disabled selected>State</option>
                                         <option *ngFor="let state of statesList" [attr.value]="state.key">{{state.name}}</option>
                                     </select>
@@ -154,8 +142,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="number" class="input-text" placeholder="Zip Code" [(ngModel)]="user.Zip_Code" name="Zip_Code" id="User_Zip_Code"
-                                        #Zip_Code='ngModel' required>
+                                    <input type="number" class="input-text" placeholder="Zip Code" [(ngModel)]="user.Zip_Code" name="Zip_Code" id="User_Zip_Code" #Zip_Code='ngModel' required>
                                     <div *ngIf="Zip_Code.errors && (Zip_Code.dirty || Zip_Code.touched)" class="error">
                                         <div [hidden]="!Zip_Code.errors.required">This field is required</div>
                                     </div>
@@ -166,8 +153,7 @@
                                     <label for="User_Phone1">Cell Phone
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                                    <input type="number" class="input-text" placeholder [(ngModel)]="user.Phone1" value="" name="Phone1" id="User_Phone1" #Phone1='ngModel'
-                                        pattern="[0-9]{10}" required>
+                                    <input type="number" class="input-text" placeholder [(ngModel)]="user.Phone1" value="" name="Phone1" id="User_Phone1" #Phone1='ngModel' pattern="[0-9]{10}" required>
                                     <div *ngIf="Phone1.errors && (Phone1.dirty || Phone1.touched)" class="error">
                                         <div [hidden]="!Phone1.errors.required">This field is required</div>
                                         <div [hidden]="!Phone1.errors.pattern">Enter valid mobile number</div>
@@ -178,8 +164,7 @@
                                 </div>
                                 <div class="col-lg-8 optSection" *ngIf="showOtpInput">
                                     <div class="col-lg-6">
-                                        <input class="optInput" type="number" name="otp" min="0" maxlength="4" placeholder="Enter otp" [(ngModel)]="otp" minlength="4"
-                                            required>
+                                        <input class="optInput" type="number" name="otp" min="0" maxlength="4" placeholder="Enter otp" [(ngModel)]="otp" minlength="4" required>
                                         <a (click)="sendOtp()">Resend OTP</a>
                                     </div>
                                     <div class="col-lg-6">
@@ -265,10 +250,9 @@
                                     <label for="User_Position">Position
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                                    <select name="Position" [(ngModel)]="user.Position" id="Position" class="country_to_state country_select" title="Position *"
-                                        (ngModelChange)="onChange($event)" #Position='ngModel' required>
+                                    <select name="Position" [(ngModel)]="user.Position" id="Position" class="country_to_state country_select" title="Position *" (ngModelChange)="onChange($event)" #Position='ngModel' required>
                     <option value="" disabled selected>select</option>
-                    <option *ngFor="let position of positionList" [attr.value]="position.name">{{position.name}}</option>
+                    <option *ngFor="let position of positionList" [attr.value]="position._id">{{position.Position_Name}}</option>
                   </select>
                                     <div *ngIf="Position.errors && (Position.dirty || Position.touched)" class="error">
                                         <div [hidden]="!Position.errors.required">This field is required</div>
@@ -280,8 +264,7 @@
                                     <label for="user_Practice_Phone">Practice Phone
                   <!-- <abbr class="required" title="required">*</abbr> -->
                   </label>
-                                    <input type="number" class="input-text" placeholder [(ngModel)]="user.Practice_Phone" value name="Practice_Phone" id="user_Practice_Phone"
-                                        pattern="[0-9]{10}" #Practice_Phone='ngModel'>
+                                    <input type="number" class="input-text" placeholder [(ngModel)]="user.Practice_Phone" value name="Practice_Phone" id="user_Practice_Phone" pattern="[0-9]{10}" #Practice_Phone='ngModel'>
                                     <div *ngIf="Practice_Phone.errors && (Practice_Phone.dirty || Practice_Phone.touched)" class="error">
                                         <div [hidden]="!Practice_Phone.errors.pattern">Enter valid mobile number</div>
                                     </div>
@@ -301,8 +284,7 @@
                                     <label for="UserExperiences">Experience
                                     <abbr class="required" title="required">*</abbr>
                                     </label>
-                                    <input type="number" class="input-text" [(ngModel)]="user.Experience" placeholder="Experience" value name="Experience" id="UserExperience"
-                                        min="0" #Experience='ngModel' required>
+                                    <input type="number" class="input-text" [(ngModel)]="user.Experience" placeholder="Experience" value name="Experience" id="UserExperience" min="0" #Experience='ngModel' required>
 
                                     <div *ngIf="Experience.errors && (Experience.dirty || Experience.touched)" class="error">
                                         <div [hidden]="!Experience.errors.required">This field is required</div>
@@ -312,8 +294,7 @@
                                     <label for="UserHourly_Pay">Hourly Pay
                                     <abbr class="required" title="required">*</abbr>
                                     </label>
-                                    <input type="number" class="input-text" placeholder="Hourly Pay" [(ngModel)]="user.Hourly_Pay" value name="Hourly_Pay" id="UserHourly_Pay"
-                                        min="0" #Hourly_Pay='ngModel' required>
+                                    <input type="number" class="input-text" placeholder="Hourly Pay" [(ngModel)]="user.Hourly_Pay" value name="Hourly_Pay" id="UserHourly_Pay" min="0" #Hourly_Pay='ngModel' required>
 
                                     <div *ngIf="Hourly_Pay.errors && (Hourly_Pay.dirty || Hourly_Pay.touched)" class="error">
                                         <div [hidden]="!Hourly_Pay.errors.required">This field is required</div>
@@ -342,8 +323,7 @@
                                     <label for="User_Year_Graduated">Year Graduated
                   <!--<abbr class="required" title="required">*</abbr>-->
                   </label>
-                                    <select name="Year_Graduated" id="Year_Graduated" [(ngModel)]="user.Year_Graduated" class="country_to_state country_select"
-                                        title="Year Graduated *">
+                                    <select name="Year_Graduated" id="Year_Graduated" [(ngModel)]="user.Year_Graduated" class="country_to_state country_select" title="Year Graduated *">
                     <option value="" disabled selected>Year</option>
                     <option *ngFor="let year of yearsList" [attr.value]="year.year">{{year.year}}</option>
                   </select>
@@ -354,8 +334,7 @@
                                     <label for="User_License_Nr">License Number
                    <abbr *ngIf = "licenseRequired" class="required" title="required">*</abbr> 
                   </label>
-                                    <input type="text" class="input-text" [(ngModel)]="user.License_Nr" placeholder value name="License_Nr" id="User_License_Nr"
-                                        #License_Nr='ngModel' [required]="licenseRequired">
+                                    <input type="text" class="input-text" [(ngModel)]="user.License_Nr" placeholder value name="License_Nr" id="User_License_Nr" #License_Nr='ngModel' [required]="licenseRequired">
                                     <div *ngIf="License_Nr.errors && (License_Nr.dirty || License_Nr.touched)" class="error">
                                         <div [hidden]="!License_Nr.errors.required">This field is required</div>
                                     </div>
@@ -364,8 +343,7 @@
                                     <label for="User_Travel_Distance">Distance Willing to travel
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                                    <input type="number" class="input-text" [(ngModel)]="user.Travel_Distance" placeholder value name="Travel_Distance" id="User_Travel_Distance"
-                                        min="0" #Travel_Distance='ngModel' required>
+                                    <input type="number" class="input-text" [(ngModel)]="user.Travel_Distance" placeholder value name="Travel_Distance" id="User_Travel_Distance" min="0" #Travel_Distance='ngModel' required>
 
                                     <div *ngIf="Travel_Distance.errors && (Travel_Distance.dirty || Travel_Distance.touched)" class="error">
                                         <div [hidden]="!Travel_Distance.errors.required">This field is required</div>

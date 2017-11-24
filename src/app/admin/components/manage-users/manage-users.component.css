@@ -1,0 +1,14 @@
+:host /deep/ ng2-smart-table tbody>tr>td:first-child {}
+
+ :host /deep/ ng2-smart-table tbody {
+    font-size: 16px;
+}
+
+ :host /deep/ ng2-smart-table tbody>tr>td {
+    padding: 15px
+}
+
+ :host /deep/ ng2-smart-table thead>tr>th {
+    padding: 15px;
+    font-size: 16px;
+}

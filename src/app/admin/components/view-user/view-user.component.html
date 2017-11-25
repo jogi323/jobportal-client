@@ -154,10 +154,10 @@
                                 <tbody *ngFor="let offer of offerPagedIntems">
                                     <tr>
                                         <td>
-                                            <span class="col-lg-4">{{offer?.Position}}</span>
+                                            <span class="col-lg-4">{{offer?.Position_id._id}}</span>
                                         </td>
                                         <td>
-                                            <span class="col-lg-4">{{offer?.Date_Submitted | date: 'dd/MM/yyyy'}}</span>
+                                            <span class="col-lg-4">{{offer?.Availability_id.Date | date: 'dd/MM/yyyy'}}</span>
                                         </td>
                                         <td>
                                             <span class="col-lg-4">{{offer?.Status}}</span>

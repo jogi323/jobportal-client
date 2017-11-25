@@ -121,7 +121,6 @@ export class ProfileComponent implements OnInit {
     if (user.userType !== undefined) {
       this.userService.getData(user.Email_Address).subscribe(
         res => {
-          console.log(res)
           this.user = res.data;
           this.userInfoUpdated = res.data.personalInfo;
           this.workInfoUpdated = res.data.workInfo;

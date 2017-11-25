@@ -76,7 +76,6 @@ export class EmployerService {
       paymentId : paymentId,
       availabilities: this.itemsToHire
     }
-    console.log(data)
     return this.apiService.post(route, data).map( res => {
       return res;
     })

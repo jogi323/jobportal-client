@@ -11,6 +11,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { CustomEditorComponent } from './components/custom-editor/custom-editor.component';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     ChangePasswordComponent,
     ContactUsComponent,
     ForgotPasswordComponent,
+    CustomEditorComponent,
   ]
 })
 export class SharedModule { }

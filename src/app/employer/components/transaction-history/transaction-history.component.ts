@@ -25,9 +25,7 @@ export class TransactionHistoryComponent implements OnInit {
   ) {
     this.loaderService.display(true);
     this.employerService.getTransactions().subscribe(res => {
-      console.log(res)
       this.transactions = res.data;
-      console.log(this.transactions)
       // set items to json response
       this.allItems = res.data;
 
@@ -56,6 +54,5 @@ export class TransactionHistoryComponent implements OnInit {
 
     // get current page of items
     this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
-    console.log(this.pagedItems)
   }
 }

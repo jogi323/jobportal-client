@@ -118,7 +118,6 @@ export class PaymentComponent implements OnInit {
     this.loaderService.display(true);
     this.employerservice.makePayment(this.payment).subscribe(res => {
       if (res.message == 'Payment Sucessfull') {
-        console.log(res);
         this.initializePayment();
         this.releaseOffer(res.data._id);
       }

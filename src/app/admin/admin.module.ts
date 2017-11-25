@@ -8,7 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
 
 import { AdminService } from '../shared/services/admin.service';
-
+import { CustomEditorComponent } from '../shared/components/custom-editor/custom-editor.component';
 import { AdminComponent } from './admin.component';
 import { ManagePositionsComponent } from './components/manage-positions/manage-positions.component';
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
@@ -26,6 +26,7 @@ import { ViewUserComponent } from './components/view-user/view-user.component';
   declarations: [AdminComponent, ManagePositionsComponent, ManageUsersComponent, ViewUserComponent],
   providers:[ 
     AdminService
-  ]
+  ],
+  entryComponents:[CustomEditorComponent]
 })
 export class AdminModule { }

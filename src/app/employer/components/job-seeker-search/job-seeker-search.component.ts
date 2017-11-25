@@ -129,7 +129,6 @@ export class JobSeekerSearchComponent implements OnInit {
     this.userService.getPositions().subscribe(
       res => {
         this.positionList = res.data;
-        console.log(this.positionList);
       }
     )
     
@@ -193,12 +192,10 @@ export class JobSeekerSearchComponent implements OnInit {
             }
             if (count == 0) {
               this.jobseekers.push(jobseeker);
-              console.log(this.jobseekers);
             }
           }
           else{
-            this.jobseekers.push(jobseeker);  
-            console.log(this.jobseekers);          
+            this.jobseekers.push(jobseeker);       
           }
         }
       } else {

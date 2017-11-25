@@ -60,7 +60,6 @@ export class ViewUserComponent implements OnInit {
         this.setPage(1);
         this.offerPageSet(1);
         this.loaderService.display(false);
-        console.log(res)
       }, err => {
         console.log(err)
         this.loaderService.display(false);
@@ -84,7 +83,6 @@ export class ViewUserComponent implements OnInit {
     this.pager = this.paginationService.getPager(this.allItems.length, page);
     // get current page of items
     this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
-    console.log(this.pagedItems)
   }
   offerPageSet(page: number){
     if (page < 1 || page > this.pager.totalPages) {
@@ -94,8 +92,7 @@ export class ViewUserComponent implements OnInit {
     // get pager object from service
     this.offersPager = this.paginationService.getPager(this.allOfferItems.length,page)
     // get current page of items
-    this.offerPagedIntems = this.allOfferItems.slice(this.offersPager.startIndex, this.offersPager.endIndex + 1);    
-    console.log(this.pagedItems)
+    this.offerPagedIntems = this.allOfferItems.slice(this.offersPager.startIndex, this.offersPager.endIndex + 1);
   }
   ngOnInit() {
 

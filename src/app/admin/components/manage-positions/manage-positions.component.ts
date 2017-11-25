@@ -6,6 +6,7 @@ import { AdminService } from '../../../shared/services/admin.service';
 import { LoaderService } from '../../../shared/services/loader.service';
 import { NotificationsService } from 'angular2-notifications';
 import { environment } from '../../../../environments/environment';
+import { CustomEditorComponent } from '../../../shared/components/custom-editor/custom-editor.component'
 
 @Component({
   selector: 'app-manage-positions',
@@ -72,11 +73,26 @@ export class ManagePositionsComponent implements OnInit {
       
     }
   }
-
+  onDeleteConfirm(event) {
+    this.loaderService.display(true);
+    const positionId = event.data._id
+    if (window.confirm('Are you sure you want to delete?')) {
+      this.adminService.deletePosition(positionId).subscribe(
+        res => {
+          this.initPositions();
+          this.loaderService.display(false);
+        },
+        err => {
+          this.loaderService.display(false);
+        }
+      )
+    } else {
+      event.confirm.reject();
+      this.loaderService.display(false);   
+    }
+  }
   onCreateConfirm(event) {
     this.loaderService.display(true);
-
-    console.log(event)
     const data = {
       Position_Name: event.newData.Position_Name,
       Date_Submitted: new Date()
@@ -111,6 +127,11 @@ export class ManagePositionsComponent implements OnInit {
         width: '30%',
         editable: false,
         filter: false,
+        type: 'html',
+        editor: {
+          type: 'custom',
+          component: CustomEditorComponent,
+        },
       },
       Position_Name: {
         title: 'Position Name',
@@ -119,8 +140,11 @@ export class ManagePositionsComponent implements OnInit {
     },
     actions: {
       edit: true,
-      delete: false,
+      delete: true,
       position: 'right'
+    },
+    delete: {
+      confirmDelete: true
     },
     add: {
       confirmCreate: true

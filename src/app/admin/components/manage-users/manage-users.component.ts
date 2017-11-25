@@ -13,6 +13,7 @@ import { LoaderService } from '../../../shared/services/loader.service';
 export class ManageUsersComponent implements OnInit {
   usersList: any;
   source: LocalDataSource;
+  positionsList: any[] = [];
 
   constructor(
     private adminService: AdminService,
@@ -23,7 +24,6 @@ export class ManageUsersComponent implements OnInit {
 
     this.adminService.getAllUsers().subscribe(
       res => {
-        console.log(res);
         res.data.forEach(user => {
           if(user.Position){
             user.Position_Name = user.Position.Position_Name
@@ -43,43 +43,74 @@ export class ManageUsersComponent implements OnInit {
     this.router.navigate(['admin/viewuser'], { queryParams: { id: event.data._id } });
   }
   ngOnInit() {
+    this.adminService.getPositions().subscribe(
+      res => {
+        this.positionsList = res.data.map(position =>({value:position.Position_Name,title:position.Position_Name}));
+        this.settings = {
+          columns: {
+            Email_Address: {
+              title: 'Email Address',
+              width: '20%'
+            },
+            Position_Name: {
+              title: 'Position',
+              width: '20%',
+              filter: {
+                type: 'list',
+                config: {
+                  selectText: 'Select...',
+                  list: this.positionsList,
+                },
+              },
+            },
+            State: {
+              title: 'Location',
+              width: '10%'
+            },
+            Experience: {
+              title: 'Experience',
+              width: '10%'
+            },
+            userType: {
+              title: 'User Type',
+              width: '20%',
+              filter: {
+                type: 'list',
+                config: {
+                  selectText: 'Select...',
+                  list: [
+                    { value: 'employer', title: 'employer' },
+                    { value: 'jobseeker', title: 'jobseeker' }
+                  ],
+                },
+              },
+            },
+            Nr_of_Operations: {
+              title: 'No of Operatiories',
+              width: '10%'
+            },
+            Nr_of_Staff: {
+              title: 'No of Employee',
+              width: '10%'
+            }
+          },
+          actions: {
+            add: false,
+            edit: false,
+            delete: false,
+            position: 'right',
+            custom: [
+              {
+                name: 'view',
+                title: 'view ',
+              },
+            ],
+          },
+        };
+      },err => {
 
-  }
-  settings = {
-    columns: {
-      Email_Address: {
-        title: 'Email Address'
-      },
-      Position_Name: {
-        title: 'Position'
-      },
-      State: {
-        title: 'Location'
-      },
-      Experience: {
-        title: 'Experience'
-      },
-      userType: {
-        title: 'User Type'
-      },
-      Nr_of_Operations: {
-        title: 'No of Operatiories'
-      },
-      Nr_of_Staff: {
-        title: 'No of Employee'
       }
-    },
-    actions: {
-      add: false,
-      edit: false,
-      delete: false,
-      position: 'right',
-      custom: [
-        {
-          name: 'view',
-          title: 'view ',
-        },
-      ],
-    },
-  };
+    )
+  }
+  settings: any;
 }

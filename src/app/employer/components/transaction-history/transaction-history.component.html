@@ -22,7 +22,7 @@
                                     <a>{{transaction._id}}</a>
                                 </td>
                                 <td class="product-price">
-                                    <span class="amount" *ngFor="let position of transaction.JS_id">{{position.Position.Position_Name}}{{","}}</span>
+                                    <span class="amount" *ngFor="let position of transaction.Offers_id">{{position?.Position_id}}{{","}}</span>
                                     <span class="amount"></span>
                                 </td>
                                 <td class="product-quantity">

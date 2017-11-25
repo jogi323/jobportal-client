@@ -20,7 +20,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
-
+import { CustomEditorComponent } from './shared/components/custom-editor/custom-editor.component';
 //services
 import { HaversineService } from "ng2-haversine";
 import { ApiService } from './shared/services/api.service';
@@ -80,6 +80,6 @@ import { JobseekerNrtwComponent } from './offers/jobseeker-nrtw/jobseeker-nrtw.c
     PaginationService
   ],
   bootstrap: [AppComponent],
-  entryComponents:[ LoginComponent ]
+  entryComponents:[ LoginComponent, CustomEditorComponent ]
 })
 export class AppModule { }

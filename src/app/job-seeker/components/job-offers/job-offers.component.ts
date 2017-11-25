@@ -59,6 +59,5 @@ export class JobOffersComponent implements OnInit {
 
     // get current page of items
     this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
-    console.log(this.pagedItems)
   }
 }

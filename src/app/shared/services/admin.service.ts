@@ -40,6 +40,15 @@ export class AdminService {
       })
   }
 
+  deletePosition(id) {
+    let path = 'positions/delete/'+id
+    return this.apiService.delete(path)
+      .map(
+      data => {
+        return data;
+      })
+  }
+
   getAllUsers() {
     let path = 'user/getall'
     return this.apiService.get(path)

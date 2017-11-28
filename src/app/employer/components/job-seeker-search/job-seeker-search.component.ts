@@ -182,6 +182,8 @@ export class JobSeekerSearchComponent implements OnInit {
           lng: jobseeker.JS_id.locationLng
         }
         jobseeker.Distance = this.tryHaversine(this.employerLocation, jobseekerLocation);
+        console.log("distance willing to travel: " + jobseeker.JS_id.Travel_Distance)
+        console.log("distance between js and emp: " + jobseeker.Distance)
         if (jobseeker.Distance <= jobseeker.JS_id.Travel_Distance) {
           if(this.jobseekers.length>0){
             let count = 0;
@@ -215,10 +217,9 @@ export class JobSeekerSearchComponent implements OnInit {
       latitude: jobseekerLocation.lat,
       longitude: jobseekerLocation.lng
     };
-    console.log(empLocation)
-    console.log(jsLocation)
+
     let miles = this._haversineService.getDistanceInMiles(empLocation, jsLocation);
-    console.log(miles)
+
     return miles
   }
 

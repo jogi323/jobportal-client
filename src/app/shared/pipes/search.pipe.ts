@@ -37,7 +37,7 @@ export class SearchPipe implements PipeTransform {
         }
         else if (args.Position != '' && (args.pay_request == null || args.pay_request == "") && (args.distance == null || args.distance == "")) {
             value.filter(eachValue => {
-                if (eachValue) {
+                if (eachValue && !(eachValue.JS_id.Position === undefined)) {
                     if (eachValue.JS_id.Position._id == args.Position) {
                         source.push(eachValue);
                     }

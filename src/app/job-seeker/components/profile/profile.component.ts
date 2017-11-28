@@ -122,7 +122,9 @@ export class ProfileComponent implements OnInit {
     if (user.userType !== undefined) {
       this.userService.getData(user.Email_Address).subscribe(
         res => {
-          res.data.PositionId = res.data.Position._id
+          if(res.data.Position){
+            res.data.PositionId = res.data.Position._id          
+          }
           this.user = res.data;
           console.log(this.user)          
           this.userInfoUpdated = res.data.personalInfo;
@@ -160,6 +162,7 @@ export class ProfileComponent implements OnInit {
     }
   }
   updateUserData(user) {
+    console.log(user)
     this.loaderService.display(true);
     this.userService.updatePersonal(this.user).subscribe(
       res => {
@@ -194,6 +197,7 @@ export class ProfileComponent implements OnInit {
   }
 
   updateWorkData(user) {
+    console.log(user)
     this.loaderService.display(true);
     this.userService.updateWork(this.user).subscribe(
       res => {

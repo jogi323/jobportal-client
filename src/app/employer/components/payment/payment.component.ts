@@ -51,7 +51,7 @@ export class PaymentComponent implements OnInit {
       City: '',
       State: '',
       Zip_Code: null,
-      Amount: 2000,
+      Amount: 10,
       Position_id: '',
       cvv: ''
     }

@@ -52,10 +52,8 @@ export class LoginComponent extends DialogComponent<ConfirmModel, boolean> imple
       res => {
         if(res.userType){
           this.close();   
-          this.loaderService.display(false);                  
           this.router.navigate([res.userType+'']);
         }else{
-          this.loaderService.display(false);   
           this.close();               
           this.notificationsService.success(
             'messahe',

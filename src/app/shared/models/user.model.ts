@@ -5,6 +5,7 @@ export  class User {
     Email_Address: String;
     Address_street : String;
     Address_Unit: String;
+    PositionId?:String;
     City : String;
     State : String;
     Zip_Code: number;

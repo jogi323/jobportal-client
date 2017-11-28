@@ -213,9 +213,12 @@ export class JobSeekerSearchComponent implements OnInit {
     };
     let jsLocation: GeoCoord = {
       latitude: jobseekerLocation.lat,
-      longitude: jobseekerLocation.lat
+      longitude: jobseekerLocation.lng
     };
+    console.log(empLocation)
+    console.log(jsLocation)
     let miles = this._haversineService.getDistanceInMiles(empLocation, jsLocation);
+    console.log(miles)
     return miles
   }
 

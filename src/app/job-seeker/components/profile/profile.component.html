@@ -250,7 +250,7 @@
                                     <label for="User_Position">Position
                   <abbr class="required" title="required">*</abbr>
                   </label>
-                                    <select name="Position" [(ngModel)]="user.Position" id="Position" class="country_to_state country_select" title="Position *" (ngModelChange)="onChange($event)" #Position='ngModel' required>
+                                    <select name="PositionId" [(ngModel)]="user.PositionId" id="Position" class="country_to_state country_select" title="Position *" (ngModelChange)="onChange($event)" #Position='ngModel' required>
                     <option value="" disabled selected>select</option>
                     <option *ngFor="let position of positionList" [attr.value]="position._id">{{position.Position_Name}}</option>
                   </select>
@@ -271,12 +271,11 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="User_Speciality">Speciality
-                  <!--<abbr class="required" title="required">*</abbr>-->
                   </label>
                                     <select name="Speciality" [(ngModel)]="user.Speciality" id="Speciality" class="country_to_state country_select" title="Speciality *">
-                    <option value="" disabled selected>select</option>
-                    <option *ngFor="let speciality of specialityList" [attr.value]="speciality.name">{{speciality.name}}</option>
-                  </select>
+                                        <option value="" disabled selected>select</option>
+                                        <option *ngFor="let speciality of specialityList" [attr.value]="speciality.name">{{speciality.name}}</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">

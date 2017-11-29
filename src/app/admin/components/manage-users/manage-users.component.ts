@@ -22,6 +22,9 @@ export class ManageUsersComponent implements OnInit {
   ) {
     this.loaderService.display(true);
 
+    this.initAllUsers()
+  }
+  initAllUsers(){
     this.adminService.getAllUsers().subscribe(
       res => {
         res.data.forEach(user => {
@@ -41,6 +44,10 @@ export class ManageUsersComponent implements OnInit {
   }
   onCustom(event) {
     this.router.navigate(['admin/viewuser'], { queryParams: { id: event.data._id } });
+  }
+  filterNo0fOperations(){
+    console.log("asd");
+    // this.initAllUsers()
   }
   ngOnInit() {
     this.adminService.getPositions().subscribe(
@@ -87,11 +94,25 @@ export class ManageUsersComponent implements OnInit {
             },
             Nr_of_Operations: {
               title: 'No of Operatiories',
-              width: '10%'
+              width: '10%',
+              filterFunction(cell?: any, search?: string): boolean {          
+                if (cell >= search || search === '') {
+                  return true;
+                } else {
+                  return false;
+                }          
+              }
             },
             Nr_of_Staff: {
               title: 'No of Employee',
-              width: '10%'
+              width: '10%',
+              filterFunction(cell?: any, search?: string): boolean {          
+                if (cell >= search || search === '') {
+                  return true;
+                } else {
+                  return false;
+                }          
+              }
             }
           },
           actions: {

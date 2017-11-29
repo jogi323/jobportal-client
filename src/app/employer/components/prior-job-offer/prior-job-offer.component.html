@@ -2,7 +2,7 @@
 <section class="section-wrap shopping-cart">
     <div class="container relative">
         <div class="row">
-            <h2 class="heading relative uppercase bottom-line full-grey mb-30">Job Seekers hired</h2>
+            <h2 class="heading relative uppercase bottom-line full-grey mb-30">Job Seekers Status</h2>
             <div class="col-md-12">
                 <div class="table-wrap mb-30">
                     <table class="shop_table prior_job_table cart table">
@@ -11,7 +11,7 @@
                                 <!--<th class="product-name" >Image</th>-->
                                 <!-- <th class="col-lg-2">Position Id</th> -->
                                 <th class="col-lg-2">Position</th>
-                                <!-- <th class="col-lg-2">Hired</th> -->
+                                <th class="col-lg-2">Status</th>
                                 <th class="col-lg-2">Date</th>
                                 <th class="col-lg-2">Hourly Pay</th>
                             </tr>
@@ -29,9 +29,10 @@
                                 <td class="col-lg-2">
                                     {{offer.Position_id}}
                                 </td>
-                                <!-- <td class="col-lg-2">
-                          {{offer.Status}}                        
-                        </td> -->
+                                <td class="col-lg-2">
+                                    <span *ngIf="offer.Status === 'HIRED'">{{offer.Status}}</span>
+                                    <span *ngIf="offer.Status === 'ACCEPTED'">Need to RTW</span>
+                                </td>
                                 <td class="col-lg-2">
                                     {{offer.Availability_id.Date | date: 'dd/MM/yyyy'}}
                                 </td>

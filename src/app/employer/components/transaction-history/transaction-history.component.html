@@ -11,7 +11,7 @@
                                 <th class="product-name">Transaction Id</th>
                                 <th class="product-price">Position</th>
                                 <th class="product-price">Amount</th>
-                                <th class="product-price">Hours guaranteed</th>
+                                <th class="product-price">Hourly Pay</th>
                                 <th class="product-quantity">Transcation Status</th>
                                 <th class="product-subtotal" colspan="2">Date</th>
                             </tr>
@@ -26,7 +26,7 @@
                                     <span class="amount"></span>
                                 </td>
                                 <td class="product-quantity">
-                                    <span class="amount">{{transaction.Amount}}</span>
+                                    <span class="amount">$ {{transaction.Amount}}</span>
                                 </td>
                                 <td class="product-quantity">
                                     <span class="amount" *ngFor="let hourlypay of transaction.JS_id">{{hourlypay.Hourly_Pay}}{{","}}</span>

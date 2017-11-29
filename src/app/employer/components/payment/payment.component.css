@@ -1,6 +1,15 @@
-.active{
-    color:green;
+.active {
+    color: green;
 }
-.checkbox{
+
+.checkbox {
     margin-left: 4%;
+}
+
+.left {
+    float: left
+}
+
+.right {
+    float: right
 }

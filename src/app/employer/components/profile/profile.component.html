@@ -232,12 +232,12 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="User_Speciality">Speciality
-                  <abbr class="required" title="required">*</abbr>
-                  </label>
+                                        <abbr class="required" title="required">*</abbr>
+                                    </label>
                                     <select name="Speciality" [(ngModel)]="user.Speciality" id="Speciality" class="country_to_state country_select" title="Speciality *" #Speciality='ngModel' required>
-                    <option value="" disabled selected>select</option>
-                    <option *ngFor="let speciality of specialityList" [attr.value]="speciality._id">{{speciality.name}}</option>
-                  </select>
+                                        <option value="" disabled selected>select</option>
+                                        <option *ngFor="let speciality of specialityList" [attr.value]="speciality._id">{{speciality.name}}</option>
+                                    </select>
                                     <div *ngIf="Speciality.errors && (Speciality.dirty || Speciality.touched)" class="error">
                                         <div [hidden]="!Speciality.errors.required">This field is required</div>
                                     </div>

@@ -94,6 +94,7 @@ export class ProfileComponent implements OnInit {
       Travel_Distance: undefined,
       Experience: undefined,
       Position: "",
+      PositionId: "",
       Practice_Name: "",
       Speciality: "",
       Practice_Phone: undefined,
@@ -123,7 +124,11 @@ export class ProfileComponent implements OnInit {
     if (user.userType !== undefined) {
       this.userService.getData(user.Email_Address).subscribe(
         res => {
+          if(res.data.Position){
+            res.data.PositionId = res.data.Position._id          
+          }
           this.user = res.data;
+          console.log(this.user)          
           this.userInfoUpdated = res.data.personalInfo;
           this.workInfoUpdated = res.data.workInfo;
           this.loaderService.display(false);
@@ -163,6 +168,7 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUserData(user) {
+    console.log(user)
     this.loaderService.display(true);
     this.userService.updatePersonal(this.user).subscribe(
       res => {
@@ -174,6 +180,7 @@ export class ProfileComponent implements OnInit {
         )
         this.userInfoUpdated = false;
         this.isUserDataEdit = !this.isUserDataEdit;
+        this.initUserData(this.currentUser);
         this.removeNotification();
       },
       err => {
@@ -196,6 +203,7 @@ export class ProfileComponent implements OnInit {
   }
 
   updateWorkData(user) {
+    console.log(user)
     this.loaderService.display(true);
     this.userService.updateWork(this.user).subscribe(
       res => {

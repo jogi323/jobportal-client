@@ -38,6 +38,7 @@ export class ProfileComponent implements OnInit {
   showVerifyOtp: Boolean = false;
   showOtpbutton: Boolean = false;
   phone1Verified: Boolean = false;
+  showVerify: Boolean = false;
   otp: Number;
   specialityList = [
     { "name": "General Dentistry" },
@@ -106,7 +107,8 @@ export class ProfileComponent implements OnInit {
       Years_in_Practice: 5,
       Contact_Person: "",
       Contact_Phone_Nr: undefined,
-      image: ""
+      image: "",
+      otpVerified:true
     }
     this.otp = null;
     this.loaderService.display(true);
@@ -130,7 +132,6 @@ export class ProfileComponent implements OnInit {
           this.userInfoUpdated = res.data.personalInfo;
           this.workInfoUpdated = res.data.workInfo;
           this.loaderService.display(false);
-
         },
         err => {
           this.loaderService.display(false);
@@ -161,6 +162,11 @@ export class ProfileComponent implements OnInit {
       this.licenseRequired = false;
     }
   }
+
+  editNumber(){
+    this.showVerify = true;
+  }
+
   updateUserData(user) {
     console.log(user)
     this.loaderService.display(true);

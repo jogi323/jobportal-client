@@ -33,5 +33,6 @@ export  class User {
     Contact_Person?: String;
     Contact_Phone_Nr?: number;
     token?:string
-    role?:string
+    role?:string;
+    otpVerified?:Boolean
 }

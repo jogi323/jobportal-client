@@ -23,9 +23,13 @@ export class WorkScheduleComponent implements OnInit {
     minDateAlert: boolean;
     calendarminDate: any;
     startTime: any;
-    endTime: any
+    endTime: any;
+    startTime1: any;
+    endTime1: any
     startTimes: any;
-    endTimes: any;    
+    endTimes: any;  
+    startTimes1: any;
+    endTimes1: any;   
     repeatDay: string;
     constructor(private cd: ChangeDetectorRef, public apiservice: ApiService, public jobseekerservice: JobseekerService, private notificationsService: NotificationsService,
         private loaderService: LoaderService) {
@@ -33,6 +37,8 @@ export class WorkScheduleComponent implements OnInit {
         this.calendarminDate = moment(this.minDate).format('MM/DD/YYYY');
         this.startTimes = ['00:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00', '13:00', '14:00', '15:00', '16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00','24:00'];
         this.endTimes = ['00:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00', '13:00', '14:00', '15:00', '16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00','24:00'];        
+        this.startTimes1 = ['00:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00', '13:00', '14:00', '15:00', '16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00','24:00'];
+        this.endTimes1 = ['00:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00', '13:00', '14:00', '15:00', '16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00','24:00'];        
         this.events = [{
             id: null,
             Date: null
@@ -53,7 +59,17 @@ export class WorkScheduleComponent implements OnInit {
     // set end time function
     setEndTime(startTime){
         this.endTimes = this.startTimes.slice(this.startTimes.indexOf(startTime)+1);
+        this.startTimes1 = this.startTimes.slice(this.startTimes.indexOf(startTime)+2);
+        this.endTimes1 = this.startTimes.slice(this.startTimes.indexOf(startTime)+3);        
         this.endTime = this.endTimes[0];
+    }
+    setStarttime(endtime){
+        this.startTimes1 = this.startTimes.slice(this.startTimes.indexOf(endtime)+1);
+        this.endTimes1 = this.startTimes.slice(this.startTimes.indexOf(endtime)+2);        
+    }
+    setEndTime1(startTime){
+        this.endTimes1 = this.startTimes1.slice(this.startTimes1.indexOf(startTime)+1);
+        this.endTime1 = this.endTimes1[0];
     }
     // Repeat day or week 
     setWeek(event){
@@ -75,13 +91,23 @@ export class WorkScheduleComponent implements OnInit {
             }]
             // this.events = res.data;
             for (let index = 0; index < res.data.length; index++) {
-                let eventToshow = {
-                    id: res.data[index]._id,
-                    start: this.formatDate(res.data[index].Date),
-                    title: 'Available Time\n' + res.data[index].Time_Start + '-' + res.data[index].Time_Finish
+                if(res.data[index].Time_Start1 && res.data[index].Time_Finish1){
+                    let eventToshow = {
+                        id: res.data[index]._id,
+                        start: this.formatDate(res.data[index].Date),
+                        title: 'Available Time\n Time slot1 \n' + res.data[index].Time_Start + '-' + res.data[index].Time_Finish+'\n Time slot2 \n'+res.data[index].Time_Start1 + '-' + res.data[index].Time_Finish1
+                    }
+                    this.events.push(eventToshow);
                 }
-                this.events.push(eventToshow);
-            }
+                else{
+                    let eventToshow = {
+                        id: res.data[index]._id,
+                        start: this.formatDate(res.data[index].Date),
+                        title: 'Available Time\n Time slot1 \n' + res.data[index].Time_Start + '-' + res.data[index].Time_Finish
+                    }
+                    this.events.push(eventToshow);
+                }
+                            }
             this.loaderService.display(false);
         },
             err => {
@@ -225,6 +251,8 @@ export class WorkScheduleComponent implements OnInit {
                         Date: new Date(startDate.setDate(startDate.getDate() + 0)),
                         Time_Start: this.startTime,
                         Time_Finish: this.endTime,
+                        Time_Start1: this.startTime1,
+                        Time_Finish1: this.endTime1,
                         Date_Submitted: new Date(),
                         Hours_Guaranteed: this.endTime.substr(0,2)-this.startTime.substr(0,2)
                     }
@@ -236,6 +264,8 @@ export class WorkScheduleComponent implements OnInit {
                         Date: new Date(startDate.setDate(startDate.getDate() + 7)),
                         Time_Start: this.startTime,
                         Time_Finish: this.endTime,
+                        Time_Start1: this.startTime1,
+                        Time_Finish1: this.endTime1,
                         Date_Submitted: new Date(),
                         Hours_Guaranteed: this.endTime.substr(0,2)-this.startTime.substr(0,2)
                     }
@@ -256,6 +286,8 @@ export class WorkScheduleComponent implements OnInit {
                         Date: new Date(startDate.setDate(startDate.getDate() + 0)),
                         Time_Start: this.startTime,
                         Time_Finish: this.endTime,
+                        Time_Start1: this.startTime1,
+                        Time_Finish1: this.endTime1,
                         Date_Submitted: new Date(),
                         Hours_Guaranteed: this.endTime.substr(0,2)-this.startTime.substr(0,2)
                     }
@@ -267,6 +299,8 @@ export class WorkScheduleComponent implements OnInit {
                         Date: new Date(startDate.setDate(startDate.getDate() + 1)),
                         Time_Start: this.startTime,
                         Time_Finish: this.endTime,
+                        Time_Start1: this.startTime1,
+                        Time_Finish1: this.endTime1,
                         Date_Submitted: new Date(),
                         Hours_Guaranteed: this.endTime.substr(0,2)-this.startTime.substr(0,2)
                     }
@@ -280,6 +314,8 @@ export class WorkScheduleComponent implements OnInit {
             this.eventToStore[0].Date = new Date(this.event.start);
             this.eventToStore[0].Time_Start = this.startTime;
             this.eventToStore[0].Time_Finish = this.endTime;
+            this.eventToStore[0].Time_Start1 = this.startTime1,
+            this.eventToStore[0].Time_Finish1 = this.endTime1,
             this.eventToStore[0].Hours_Guaranteed = this.endTime.substr(0,2)-this.startTime.substr(0,2);
             this.eventToStore[0].Date_Submitted = new Date();
             this.postEvent(this.eventToStore);

@@ -23,7 +23,7 @@ export class JobseekerService {
   }
 
   deleteScheduledJob(id){
-    const url = 'availability/delete'+id;
+    const url = 'availability/delete/'+id;
     return this.apiservice.delete(url).map( res => {
       return res;
     })

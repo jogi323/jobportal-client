@@ -1,16 +1,19 @@
-<div class="col-md-8 col-md-offset-2 calendar" ><p-schedule [events]="events" [header]="header" [defaultDate]="calendarminDate" [eventLimit]="4" [editable]="true" (onDayClick)="handleDayClick($event)" (onEventClick)="handleEventClick($event)"
- ></p-schedule>
+<div class="col-md-8 col-md-offset-2 calendar">
+  <p-schedule [events]="events" [header]="header" [defaultDate]="calendarminDate" [eventLimit]="4" [editable]="true" (onDayClick)="handleDayClick($event)"
+    (onEventClick)="handleEventClick($event)"></p-schedule>
 </div>
 
-<p-dialog header="Availability Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="false" [contentStyle]="{'overflow':'visible'}"
-  [style]="{'overflow':'visible'}" [resizable]="false">
+<p-dialog header="Availability Details" [(visible)]="dialogVisible" [responsive]="true" showEffect="fade" [modal]="false"
+  [contentStyle]="{'overflow':'visible'}" [style]="{'overflow':'visible'}" [resizable]="false">
   <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="event">
     <!-- <div class="ui-grid-row">
       <div class="ui-grid-col-4"><label for="vin"></label></div>
       <div class="ui-grid-col-8"><input pInputText id="title" [(ngModel)]="event.title" /></div>
     </div> -->
     <div class="ui-grid-row">
-      <div class="ui-grid-col-4"><label for="start">Start</label></div>
+      <div class="ui-grid-col-4">
+        <label for="start">Start</label>
+      </div>
       <div class="ui-grid-col-8">
         <p-calendar [(ngModel)]="event.start" dateFormat="yy-mm-dd" dataType="string" class="checkbox"></p-calendar>
       </div>
@@ -29,24 +32,26 @@
         </select>
       </div>
       <div class="ui-grid-col-6">
-          <label for="end" style="visibility:hidden;">endTime</label>
-          <select class="form-control" [(ngModel)]="endTime" [disabled]="!endTime" (ngModelChange)="setStarttime(endTime)">
-            <option *ngFor="let time of endTimes" [ngValue]="time">{{time}}</option>
-          </select>
+        <label for="end" style="visibility:hidden;">endTime</label>
+        <select class="form-control" [(ngModel)]="endTime" [disabled]="!endTime" (ngModelChange)="setStarttime(endTime)">
+          <option *ngFor="let time of endTimes" [ngValue]="time">{{time}}</option>
+        </select>
       </div>
     </div>
     <div class="ui-grid-row" *ngIf="!event.allDay">
       <div class="ui-grid-col-6">
         <label for="end">Time slot2</label>
         <select class="form-control" [(ngModel)]="startTime1" (ngModelChange)="setEndTime1(startTime1)" [disabled]="!endTime">
+          <option [ngValue]=""></option>
           <option *ngFor="let time of startTimes1" [ngValue]="time">{{time}}</option>
         </select>
       </div>
       <div class="ui-grid-col-6">
-          <label for="end" style="visibility:hidden;">End Time</label>
-          <select class="form-control" [(ngModel)]="endTime1" [disabled]="!startTime1">
-            <option *ngFor="let time of endTimes1" [ngValue]="time">{{time}}</option>
-          </select>
+        <label for="end" style="visibility:hidden;">End Time</label>
+        <select class="form-control" [(ngModel)]="endTime1" [disabled]="!startTime1">
+          <option [ngValue]=""></option>
+          <option *ngFor="let time of endTimes1" [ngValue]="time">{{time}}</option>
+        </select>
       </div>
     </div>
     <!-- <div class="ui-grid-row">
@@ -56,13 +61,17 @@
       </div>
     </div> -->
     <div class="ui-grid-row">
-      <div class="ui-grid-col-4"><label for="allweek">All Week</label></div>
+      <div class="ui-grid-col-4">
+        <label for="allweek">All Week</label>
+      </div>
       <div class="ui-grid-col-8">
         <p-checkbox [(ngModel)]="event.allWeek" binary="checkbox" (ngModelChange)="setWeek($event)"></p-checkbox>
       </div>
     </div>
     <div class="ui-grid-row">
-      <div class="ui-grid-col-4"><label for="allmonth">Repeat All {{repeatDay}}</label></div>
+      <div class="ui-grid-col-4">
+        <label for="allmonth">Repeat All {{repeatDay}}</label>
+      </div>
       <div class="ui-grid-col-8">
         <p-checkbox [(ngModel)]="event.allMonth" binary="checkbox" (ngModelChange)="setMonth($event)"></p-checkbox>
       </div>

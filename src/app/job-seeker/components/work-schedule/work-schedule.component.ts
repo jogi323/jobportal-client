@@ -31,6 +31,7 @@ export class WorkScheduleComponent implements OnInit {
     startTimes1: any;
     endTimes1: any;
     repeatDay: string;
+    eventsData: any = [];
     deleteEventStatus: Boolean = false;
     constructor(private cd: ChangeDetectorRef, public apiservice: ApiService, public jobseekerservice: JobseekerService, private notificationsService: NotificationsService,
         private loaderService: LoaderService) {
@@ -90,6 +91,7 @@ export class WorkScheduleComponent implements OnInit {
                 id: null,
                 Date: null
             }]
+            this.eventsData = res.data;
             // this.events = res.data;
             for (let index = 0; index < res.data.length; index++) {
                 if (res.data[index].Time_Start1 && res.data[index].Time_Finish1) {
@@ -153,6 +155,7 @@ export class WorkScheduleComponent implements OnInit {
         else {
             this.start = event.date._d;
             this.event = new MyEvent();
+            this.initializeTimes();
             this.event.start = event.date.format();
             switch (this.start.getDay()) {
                 case 0:
@@ -185,20 +188,21 @@ export class WorkScheduleComponent implements OnInit {
     }
 
     handleEventClick(e) {
+        // console.log(e);
         this.deleteEventStatus = true;
         if (e.calEvent.start.format() < this.minDate) {
             alert('outdated event');
         }
         else {
             this.event = new MyEvent();
-            this.event.title = e.calEvent.title;
+            // this.event.title = e.calEvent.title;
 
             let start = e.calEvent.start;
-            let end = e.calEvent.end;
+            // let end = e.calEvent.end;
 
-            if (e.view.name === 'month') {
-                start.stripTime();
-            }
+            // if (e.view.name === 'month') {
+            //     start.stripTime();
+            // }
 
             // if (end) {
             //     end.stripTime();
@@ -206,10 +210,33 @@ export class WorkScheduleComponent implements OnInit {
             // }
 
             this.event.id = e.calEvent.id;
+            this.getEventDetails(e.calEvent.id);
             this.event.start = start.format();
             // this.event.allDay = e.calEvent.allDay;
             this.dialogVisible = true;
         }
+    }
+
+    //get Event details on event click
+    getEventDetails(id){
+        for(let i=0; i<this.eventsData.length; i++){
+            if(this.eventsData[i]._id == id){
+                this.startTime = this.eventsData[i].Time_Start;
+                this.endTime = this.eventsData[i].Time_Finish;
+                if(this.eventsData[i].Time_Start1 && this.eventsData[i].Time_Finish1){
+                    this.startTime1 = this.eventsData[i].Time_Start1;
+                    this.endTime1 = this.eventsData[i].Time_Finish1; 
+                } 
+                else{
+                    this.startTime1 = '';
+                    this.endTime1 = ''; 
+                }              
+            }
+        }
+    }
+    //Initialize start & end times
+    initializeTimes(){
+        this.startTime = this.endTime = this.startTime1 = this.endTime1 = '';
     }
 
     postEvent(data) {

@@ -40,6 +40,8 @@ export class ProfileComponent implements OnInit {
   phone1Verified: Boolean = false;
   showVerify: Boolean = false;
   otp: Number;
+  specialChar: Boolean = false;
+  mobileValid: Boolean;
   specialityList = [
     { "name": "General Dentistry" },
     { "name": "Endodontist" },
@@ -128,7 +130,6 @@ export class ProfileComponent implements OnInit {
             res.data.PositionId = res.data.Position._id          
           }
           this.user = res.data;
-          console.log(this.user)          
           this.userInfoUpdated = res.data.personalInfo;
           this.workInfoUpdated = res.data.workInfo;
           this.loaderService.display(false);
@@ -168,7 +169,6 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUserData(user) {
-    console.log(user)
     this.loaderService.display(true);
     this.userService.updatePersonal(this.user).subscribe(
       res => {
@@ -203,7 +203,6 @@ export class ProfileComponent implements OnInit {
   }
 
   updateWorkData(user) {
-    console.log(user)
     this.loaderService.display(true);
     this.userService.updateWork(this.user).subscribe(
       res => {
@@ -235,6 +234,22 @@ export class ProfileComponent implements OnInit {
       },5000);
     }
   }
+
+  mobileValidation(event){
+    var regex = /[!@#\$%\^\&*\)\(+=._-]$/g
+    var mobile = this.user.Phone1 ? this.user.Phone1.toString() : '';
+    if(mobile.match(regex)){
+      this.specialChar = true;
+    }else {
+      this.specialChar = false;      
+    }
+    if(mobile.length === 10) {
+      this.mobileValid = true;
+    }else {
+      this.mobileValid = false;
+    }
+  }
+
   ngOnInit() {
     this.jsonLoaderService.getStates()
       .subscribe(data => {
@@ -291,7 +306,7 @@ export class ProfileComponent implements OnInit {
         environment.options
       )
     } else {
-      this.loaderService.display(false);
+      this.loaderService.display(true);
       var payload = { otp: this.otp };
       this.jobseekerService.verifyOtp(this.currentUser.Email_Address, payload).subscribe(res => {
         this.loaderService.display(false);
@@ -299,6 +314,7 @@ export class ProfileComponent implements OnInit {
         this.showOtpInput = false;
         this.otp = null;
         this.phone1Verified = true;
+        this.user.otpVerified = true;
         this.notificationsService.success(
           'Success',
           res.message,

@@ -231,10 +231,12 @@ export class WorkScheduleComponent implements OnInit {
                     this.startTime1 = '';
                     this.endTime1 = '';
                 }
-                console.log(this.startTime);
-                console.log(this.endTime);
-                console.log(this.startTime1);
-                console.log(this.endTime1);                
+                this.startTimes1 = this.startTimes.slice(this.startTimes.indexOf(this.endTime) + 1);
+                this.endTimes1 = this.startTimes.slice(this.startTimes.indexOf(this.endTime) + 2);
+                // console.log(this.startTime);
+                // console.log(this.endTime);
+                // console.log(this.startTime1);
+                // console.log(this.endTime1);                
             }
         }
     }
@@ -269,6 +271,7 @@ export class WorkScheduleComponent implements OnInit {
             }
         )
         this.event = null;
+        this.initializeTimes();
         this.eventsToStoreInitialize();
     }
 

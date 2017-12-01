@@ -153,15 +153,15 @@
                                     <label for="User_Phone1">Cell Phone
                                         <abbr class="required" title="required">*</abbr>
                                     </label>
-                                    <input type="number" class="input-text" placeholder [(ngModel)]="user.Phone1"  name="Phone1" #Phone1='ngModel' pattern="^\d{10}" required [disabled]="user.otpVerified">
+                                    <input type="number" class="input-text" placeholder [(ngModel)]="user.Phone1" name="Phone1" #Phone1='ngModel' pattern="^\d{10}" required [disabled]="!showVerify">
                                     <div *ngIf="Phone1.errors && (Phone1.dirty || Phone1.touched)" class="error">
                                         <div [hidden]="!Phone1.errors.required">This field is required</div>
                                         <div [hidden]="!Phone1.errors.pattern">Enter valid mobile number</div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 optSection" *ngIf="!showOtpInput">
-                                    <button class="btn btn-inv btn-md btn-stroke" (click)="sendOtp()" [disabled]="user.Phone1 === undefined" *ngIf="!user.otpVerified || showVerify"><span>Verify number</span></button>
-                                    <button class="btn btn-inv btn-md btn-stroke" *ngIf="user.otpVerified" (click)="editNumber()" ><span >Edit number</span></button>
+                                    <button class="btn btn-inv btn-md btn-stroke" (click)="sendOtp()" [disabled]="user.Phone1 === undefined" *ngIf="showVerify"><span>Verify number</span></button>
+                                    <button class="btn btn-md btn-dark" *ngIf="!showVerify" (click)="editNumber()"><span >Edit number</span></button>
                                 </div>
                                 <div class="col-lg-8 optSection" *ngIf="showOtpInput">
                                     <div class="col-lg-6">

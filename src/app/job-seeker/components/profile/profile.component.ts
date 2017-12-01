@@ -35,10 +35,7 @@ export class ProfileComponent implements OnInit {
   licenseRequired: Boolean = false;
   newImageUploaded: Boolean = false;
   showOtpInput: Boolean = false;
-  showVerifyOtp: Boolean = false;
-  showOtpbutton: Boolean = false;
-  phone1Verified: Boolean = false;
-  showVerify: Boolean = false;
+  showVerify: Boolean;
   otp: Number;
   specialityList = [
     { "name": "General Dentistry" },
@@ -116,6 +113,12 @@ export class ProfileComponent implements OnInit {
       this.isUserDataEdit = !user.personalInfo;
       this.isWorkDataEdit = !user.workInfo;
       this.currentUser = user;
+      console.log(user)
+      if(user.otpVerified){
+        this.showVerify = true
+      }else{
+        this.showVerify = false        
+      }
       this.initUserData(user);
     });
   }
@@ -164,7 +167,7 @@ export class ProfileComponent implements OnInit {
   }
 
   editNumber(){
-    this.showVerify = true;
+    this.showVerify = !this.showVerify;
   }
 
   updateUserData(user) {
@@ -264,7 +267,6 @@ export class ProfileComponent implements OnInit {
     this.loaderService.display(true);
     this.jobseekerService.sendOtp(this.currentUser.Email_Address, payload).subscribe(res => {
       this.showOtpInput = true;
-      this.showVerifyOtp = true;
       this.loaderService.display(false);
       this.notificationsService.success(
         'Success',
@@ -295,10 +297,10 @@ export class ProfileComponent implements OnInit {
       var payload = { otp: this.otp };
       this.jobseekerService.verifyOtp(this.currentUser.Email_Address, payload).subscribe(res => {
         this.loaderService.display(false);
-        this.showVerifyOtp = false;
+        this.showVerify = false;
+        // this.user.otpVerified = !this.user.otpVerified
         this.showOtpInput = false;
         this.otp = null;
-        this.phone1Verified = true;
         this.notificationsService.success(
           'Success',
           res.message,

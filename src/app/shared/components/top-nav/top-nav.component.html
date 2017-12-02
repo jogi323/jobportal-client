@@ -118,7 +118,7 @@
                                     </div>
 
                                     <div class="nav-cart-actions mt-20">
-                                        <a class="btn btn-md btn-dark" (click)="userProfile()"><span>View Profile</span></a>
+                                        <a class="btn btn-md btn-dark" *ngIf="userType != 'admin'" (click)="userProfile()"><span>View Profile</span></a>
                                         <a *ngIf="userType == 'employer'" class="btn btn-md btn-dark mt-10" [routerLink]="['employer/changepassword']" routerLinkActive="active"><span>Change Password</span></a>
                                         <a *ngIf="userType == 'jobseeker'" class="btn btn-md btn-dark mt-10" [routerLink]="['jobseeker/changepassword']" routerLinkActive="active"><span>Change Password</span></a>
                                         <a *ngIf="userType == 'admin'" class="btn btn-md btn-dark mt-10" [routerLink]="['admin/changepassword']" routerLinkActive="active"><span>Change Password</span></a>

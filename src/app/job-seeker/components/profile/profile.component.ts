@@ -117,9 +117,9 @@ export class ProfileComponent implements OnInit {
       this.currentUser = user;
       console.log(user)
       if(user.otpVerified){
-        this.showVerify = true
+        this.showVerify = false
       }else{
-        this.showVerify = false        
+        this.showVerify = true        
       }
       this.initUserData(user);
     });

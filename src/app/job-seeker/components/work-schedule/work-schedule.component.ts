@@ -172,37 +172,31 @@ export class WorkScheduleComponent implements OnInit {
             console.log(event.date);
             let d = new Date(Date.parse(event.date));
             this.event.start = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
-           
-            switch (this.start.getDay()) {
-                case 0:
-                    this.repeatDay = 'Sunday\'s';
-                    break;
-                case 1:
-                    this.repeatDay = 'Monday\'s';
-                    break;
-                case 2:
-                    this.repeatDay = 'Tuesday\'s';
-                    break;
-                case 3:
-                    this.repeatDay = 'Wednesday\'s';
-                    break;
-                case 4:
-                    this.repeatDay = 'Thursday\'s';
-                    break;
-                case 5:
-                    this.repeatDay = 'Friday\'s';
-                    break;
-                default:
-                    this.repeatDay = 'Saturday\'s';
-                    break;
-
-            }
+            this.repeatDay = this.getRepeatDay(this.start.getDay());
             this.dialogVisible = true;
             //trigger detection manually as somehow only moving the mouse quickly after click triggers the automatic detection
             this.cd.detectChanges();
         }
     }
-
+    // get repeat day function
+    getRepeatDay(day){
+        switch (day) {
+            case 0:
+                return'Sunday\'s';
+            case 1:
+                return 'Monday\'s';
+            case 2:
+                return 'Tuesday\'s';
+            case 3:
+                return 'Wednesday\'s';
+            case 4:
+                return 'Thursday\'s';
+            case 5:
+                return 'Friday\'s';
+            default:
+                 return 'Saturday\'s';
+        }
+    }
     handleEventClick(e) {
         // console.log(e);
         this.deleteEventStatus = true;
@@ -228,7 +222,7 @@ export class WorkScheduleComponent implements OnInit {
             this.event.id = e.calEvent.id;
             // this.event.start = start.format();
             this.event.start = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
-            
+            this.repeatDay = this.getRepeatDay(new Date(this.event.start).getDay());
             this.getEventDetails(e.calEvent.id);
             // this.event.allDay = e.calEvent.allDay;
             this.dialogVisible = true;

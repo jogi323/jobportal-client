@@ -147,16 +147,32 @@ export class WorkScheduleComponent implements OnInit {
 
         return [year, month, day].join('-');
     }
+    getFormattedDate(date) {
+        var year = date.getFullYear();
+      
+        var month = (1 + date.getMonth()).toString();
+        month = month.length > 1 ? month : '0' + month;
+      
+        var day = date.getDate().toString();
+        day = day.length > 1 ? day : '0' + day;
+        
+        return month + '/' + day + '/' + year;
+      }
     handleDayClick(event) {
         this.deleteEventStatus = false;
         if (event.date.format() < this.minDate) {
             alert('Please select a future date');
         }
         else {
+            
             this.start = event.date._d;
+            console.log(this.getFormattedDate(this.start))
             this.event = new MyEvent();
             this.initializeTimes();
-            this.event.start = event.date.format();
+            console.log(event.date);
+            let d = new Date(Date.parse(event.date));
+            this.event.start = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
+           
             switch (this.start.getDay()) {
                 case 0:
                     this.repeatDay = 'Sunday\'s';
@@ -208,9 +224,11 @@ export class WorkScheduleComponent implements OnInit {
             //     end.stripTime();
             //     this.event.end = end.format();
             // }
-
+            let d = new Date(Date.parse(e.calEvent.start));
             this.event.id = e.calEvent.id;
-            this.event.start = start.format();
+            // this.event.start = start.format();
+            this.event.start = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
+            
             this.getEventDetails(e.calEvent.id);
             // this.event.allDay = e.calEvent.allDay;
             this.dialogVisible = true;

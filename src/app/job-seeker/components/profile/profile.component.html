@@ -166,7 +166,7 @@
                                 </div>
                                 <div class="col-lg-8 optSection" *ngIf="showOtpInput">
                                     <div class="col-lg-6">
-                                        <input class="optInput" type="number" name="otp" min="0" maxlength="4" placeholder="Enter otp" [(ngModel)]="otp" minlength="4" required>
+                                        <input class="optInput" type="number" name="otp" min="0" maxlength="4" placeholder="otp received" [(ngModel)]="otp" minlength="4" required>
                                         <a (click)="sendOtp()">Resend OTP</a>
                                     </div>
                                     <div class="col-lg-6">

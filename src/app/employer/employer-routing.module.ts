@@ -15,14 +15,14 @@ const routes: Routes = [
     path:'', 
     component:EmployerComponent,
     children:[
-      {path:'', component:ProfileComponent},
-      {path:'search', component:JobSeekerSearchComponent},
+      {path:'', component:ProfileComponent, pathMatch: 'full'},
+      {path:'search', component:JobSeekerSearchComponent, pathMatch: 'full'},
       // {path:'profile', component:ViewProfileComponent},
-      {path:'transactionhistory', component:TransactionHistoryComponent},
-      {path:'joboffers', component:PriorJobOfferComponent},
-      {path:'payment', component:PaymentComponent},
-      {path:'profile', component:ProfileComponent},
-      {path:'changepassword',component:ChangePasswordComponent}
+      {path:'transactionhistory', component:TransactionHistoryComponent, pathMatch: 'full'},
+      {path:'joboffers', component:PriorJobOfferComponent, pathMatch: 'full'},
+      {path:'payment', component:PaymentComponent, pathMatch: 'full'},
+      {path:'profile', component:ProfileComponent, pathMatch: 'full'},
+      {path:'changepassword',component:ChangePasswordComponent, pathMatch: 'full'}
     ]
   }
 ];

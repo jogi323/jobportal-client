@@ -19,8 +19,9 @@ import { AuthGuardService } from './shared/services/auth-guard.service';
 import { NoAuthGuardService } from './shared/services/no-auth-guard.service';
 
 const routes: Routes = [
-    { path:'', component:HomeComponent,canActivate:[NoAuthGuardService] },
-    { path:'confirm/:id', component:ActivateUserComponent,canActivate:[NoAuthGuardService] },
+    { path:'', component:HomeComponent,canActivate:[NoAuthGuardService], pathMatch: 'full' },
+    { path:'confirm/:id', component:ActivateUserComponent,canActivate:[NoAuthGuardService],
+    pathMatch: 'full' },
     { 
       path:'employer', 
       loadChildren:'./employer/employer.module#EmployerModule',
@@ -32,17 +33,17 @@ const routes: Routes = [
       canActivate:[AuthGuardService] 
     },
     { path:'jobseeker', loadChildren:'./job-seeker/job-seeker.module#JobSeekerModule',canActivate:[AuthGuardService] },
-    { path:'changepassword', component:ChangePasswordComponent,canActivate:[AuthGuardService] },
-    { path:'forgotpassword/:id', component:ForgotPasswordComponent,canActivate:[NoAuthGuardService] },
+    { path:'changepassword', component:ChangePasswordComponent,canActivate:[AuthGuardService],pathMatch: 'full' },
+    { path:'forgotpassword/:id', component:ForgotPasswordComponent,canActivate:[NoAuthGuardService] ,pathMatch: 'full'},
     { path:'register',component:RegisterComponent ,canActivate:[NoAuthGuardService]},
-    { path:'contactus', component:ContactUsComponent },
-    { path:'acceptoffer/:id', component:AcceptOfferComponent },
-    { path:'rejectoffer/:id', component:DeclineOfferComponent },
-    { path:'acceptjobseeker/:id', component:AcceptJobseekerComponent },
-    { path:'rejectjobseeker/:id', component:RejectJobseekerComponent },
-    { path:'jobseekerrtw/:id', component:JobseekerRtwComponent },
-    { path:'jobseekernrtw/:id', component:JobseekerNrtwComponent },    
-    { path:'**', redirectTo:'' },
+    { path:'contactus', component:ContactUsComponent, pathMatch: 'full' },
+    { path:'acceptoffer/:id', component:AcceptOfferComponent, pathMatch: 'full' },
+    { path:'rejectoffer/:id', component:DeclineOfferComponent, pathMatch: 'full' },
+    { path:'acceptjobseeker/:id', component:AcceptJobseekerComponent, pathMatch: 'full' },
+    { path:'rejectjobseeker/:id', component:RejectJobseekerComponent, pathMatch: 'full' },
+    { path:'jobseekerrtw/:id', component:JobseekerRtwComponent, pathMatch: 'full' },
+    { path:'jobseekernrtw/:id', component:JobseekerNrtwComponent, pathMatch: 'full'  },    
+    { path:'**', redirectTo:'' , pathMatch: 'full'},
 ];
 
 @NgModule({

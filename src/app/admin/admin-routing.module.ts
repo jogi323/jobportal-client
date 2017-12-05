@@ -11,11 +11,11 @@ const routes: Routes = [
     path:'', 
     component:AdminComponent,
     children:[
-        {path:'',redirectTo:'positions'},
-        {path:'positions',component:ManagePositionsComponent},
-        {path:'users',component:ManageUsersComponent},
-        {path:'viewuser',component:ViewUserComponent},
-        {path:'changepassword',component:ChangePasswordComponent}
+        {path:'',redirectTo:'positions', pathMatch: 'full'},
+        {path:'positions',component:ManagePositionsComponent, pathMatch: 'full'},
+        {path:'users',component:ManageUsersComponent, pathMatch: 'full'},
+        {path:'viewuser',component:ViewUserComponent, pathMatch: 'full'},
+        {path:'changepassword',component:ChangePasswordComponent, pathMatch: 'full'}
     ]
   }
 ];

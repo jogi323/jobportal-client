@@ -13,13 +13,13 @@ const routes: Routes = [
     path:'', 
     component:JobSeekerComponent,
     children:[
-      {path:'', redirectTo:'profile'},
-      {path:'dashboard', component:DashboardComponent},
-      {path:'schedule', component:WorkScheduleComponent},
+      {path:'', redirectTo:'profile', pathMatch: 'full'},
+      {path:'dashboard', component:DashboardComponent, pathMatch: 'full'},
+      {path:'schedule', component:WorkScheduleComponent, pathMatch: 'full'},
       // {path:'update', component:UpdateProfileComponent},
-      {path:'profile', component:ProfileComponent},
-      {path:'joboffers', component:JobOffersComponent},
-      {path:'changepassword',component:ChangePasswordComponent}
+      {path:'profile', component:ProfileComponent, pathMatch: 'full'},
+      {path:'joboffers', component:JobOffersComponent, pathMatch: 'full'},
+      {path:'changepassword',component:ChangePasswordComponent, pathMatch: 'full'}
     ]
   }
 ];

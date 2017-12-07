@@ -166,10 +166,8 @@ export class WorkScheduleComponent implements OnInit {
         else {
             
             this.start = event.date._d;
-            console.log(this.getFormattedDate(this.start))
             this.event = new MyEvent();
             this.initializeTimes();
-            console.log(event.date);
             let d = new Date(Date.parse(event.date));
             this.event.start = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
             this.repeatDay = this.getRepeatDay(this.start.getDay());
@@ -198,7 +196,6 @@ export class WorkScheduleComponent implements OnInit {
         }
     }
     handleEventClick(e) {
-        // console.log(e);
         this.deleteEventStatus = true;
         if (e.calEvent.start.format() < this.minDate) {
             alert('outdated event');
@@ -244,11 +241,7 @@ export class WorkScheduleComponent implements OnInit {
                     this.endTime1 = '';
                 }
                 this.startTimes1 = this.startTimes.slice(this.startTimes.indexOf(this.endTime) + 1);
-                this.endTimes1 = this.startTimes.slice(this.startTimes.indexOf(this.endTime) + 2);
-                // console.log(this.startTime);
-                // console.log(this.endTime);
-                // console.log(this.startTime1);
-                // console.log(this.endTime1);                
+                this.endTimes1 = this.startTimes.slice(this.startTimes.indexOf(this.endTime) + 2);               
             }
         }
     }
@@ -262,6 +255,7 @@ export class WorkScheduleComponent implements OnInit {
         if (data.length > 1) {
             data.splice(0, 1);
         }
+        console.log(moment(data[0].Date).format('LL'))
         this.jobseekerservice.postJobSchedules(data).subscribe(res => {
             if (res) {
                 this.loaderService.display(false);
@@ -297,7 +291,7 @@ export class WorkScheduleComponent implements OnInit {
             for (let i = startDay; (i <= diff); i += 7) {
                 if (b == 0) {
                     let eventToSave = {
-                        Date: new Date(startDate.setDate(startDate.getDate() + 0)),
+                        Date: moment(new Date(startDate.setDate(startDate.getDate() + 0))).format('LL'),
                         Time_Start: this.startTime,
                         Time_Finish: this.endTime,
                         Time_Start1: this.startTime1,
@@ -310,7 +304,7 @@ export class WorkScheduleComponent implements OnInit {
                 }
                 else {
                     let eventToSave = {
-                        Date: new Date(startDate.setDate(startDate.getDate() + 7)),
+                        Date: moment(new Date(startDate.setDate(startDate.getDate() + 7))).format('LL'),
                         Time_Start: this.startTime,
                         Time_Finish: this.endTime,
                         Time_Start1: this.startTime1,
@@ -332,7 +326,7 @@ export class WorkScheduleComponent implements OnInit {
             for (let i = startDay; i < (diff); i++) {
                 if (a == 0) {
                     let eventToSave = {
-                        Date: new Date(startDate.setDate(startDate.getDate() + 0)),
+                        Date: moment(new Date(startDate.setDate(startDate.getDate() + 0))).format('LL'),
                         Time_Start: this.startTime,
                         Time_Finish: this.endTime,
                         Time_Start1: this.startTime1,
@@ -345,7 +339,7 @@ export class WorkScheduleComponent implements OnInit {
                 }
                 else {
                     let eventToSave = {
-                        Date: new Date(startDate.setDate(startDate.getDate() + 1)),
+                        Date: moment(new Date(startDate.setDate(startDate.getDate() + 1))).format('LL'),
                         Time_Start: this.startTime,
                         Time_Finish: this.endTime,
                         Time_Start1: this.startTime1,
@@ -360,7 +354,7 @@ export class WorkScheduleComponent implements OnInit {
             this.postEvent(this.eventToStore);
         }
         else {
-            this.eventToStore[0].Date = new Date(this.event.start);
+            this.eventToStore[0].Date = moment(new Date(this.event.start)).format('LL');
             this.eventToStore[0].Time_Start = this.startTime;
             this.eventToStore[0].Time_Finish = this.endTime;
             this.eventToStore[0].Time_Start1 = this.startTime1;

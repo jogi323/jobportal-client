@@ -9,6 +9,7 @@ import { HaversineService, GeoCoord } from "ng2-haversine";
 import { NotificationsService } from 'angular2-notifications';
 import { environment } from '../../../../environments/environment';
 import { LoaderService } from '../../../shared/services/loader.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-job-seeker-search',
@@ -24,7 +25,7 @@ export class JobSeekerSearchComponent implements OnInit {
   employerLocation: Location;
   itemsToHire: any;
 
-  filterJobseekers: FilterJobseekers
+  filterJobseekers: any;
   positionList: any[];
   jobseekers: any[];
 
@@ -69,7 +70,15 @@ export class JobSeekerSearchComponent implements OnInit {
       pay_request: null,
       distance: null
     }
-    this.getJobseekers(this.filterJobseekers);
+    let jobseekersFilter = {
+      Date: moment(date).format('LL'),
+      Hours_Guaranteed: null,
+      Position: '',
+      pay_request: null,
+      distance: null
+    };
+    console.log(this.filterJobseekers);
+    this.getJobseekers(jobseekersFilter);
   }
   // initialise employer data to use location lattitude and longitude
   initUserData(user) {
@@ -133,24 +142,42 @@ export class JobSeekerSearchComponent implements OnInit {
     )
     
   }
+  // constant for filter jobseeker
+  FilterJobseeker(){
+    let jobseekersFilter = {
+      Date: '',
+      Hours_Guaranteed: null,
+      Position: '',
+      pay_request: null,
+      distance: null
+    };
+    jobseekersFilter.Date = moment(this.filterJobseekers.Date).format('LL');
+    jobseekersFilter.Hours_Guaranteed = this.filterJobseekers.Hours_Guaranteed;
+    jobseekersFilter.Position = this.filterJobseekers.Position;
+    jobseekersFilter.pay_request = this.filterJobseekers.pay_request;
+    jobseekersFilter.distance = this.filterJobseekers.distance;
+    return jobseekersFilter;
+  }
   onDateChange(event) {
     event.setUTCHours(0);
     event.setUTCMinutes(0);
     event.setUTCSeconds(0);
     event.setUTCMilliseconds(0);
     this.filterJobseekers.Date = new Date(event.setDate(event.getDate() + 1));
-    this.getJobseekers(this.filterJobseekers);
+    // let jobseekersFilter = this.filterJobseekers;
+    // jobseekersFilter.Date = moment(this.filterJobseekers.Date).format('LL');
+    this.getJobseekers(this.FilterJobseeker());
   }
   onHoursChange() {
-    this.getJobseekers(this.filterJobseekers);
+    this.getJobseekers(this.FilterJobseeker());
   }
-  filterData() {
-    if (this.filterJobseekers.Date || this.filterJobseekers.Hours_Guaranteed) {
-      this.getJobseekers(this.filterJobseekers);
-    } else {
+  // filterData() {
+  //   if (this.filterJobseekers.Date || this.filterJobseekers.Hours_Guaranteed) {
+  //     this.getJobseekers(this.filterJobseekers);
+  //   } else {
 
-    }
-  }
+  //   }
+  // }
 
   // get the initial list of job seekers with todays date as input
   getJobseekers(data) {

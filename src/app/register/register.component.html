@@ -74,16 +74,24 @@
                                 <div [hidden]="!email.errors.pattern">Enter a valid email such as abc@xyz.com</div>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="pwd">Password:</label>
-                            <input name="password" id="password" type="password" placeholder="Password " class="form-control" [(ngModel)]="employee.Password" minlength="8" #password="ngModel" required>
-                            <div *ngIf="password.errors && (password.dirty || password.touched)" class="error">
-                                <div [hidden]="!password.errors.required">Please Enter password</div>
-                                <div [hidden]="!password.errors.minlength">Password length should be atleat 8</div>
+                        <div class="row form-group">
+                            <div class="pull-left col-lg-6 form-group">
+                                <label for="pwd">Password:</label>
+                                <input name="password" id="password" type="password" placeholder="Password " class="form-control" [(ngModel)]="employee.Password" minlength="8" #password="ngModel" required>
+                                <div *ngIf="password.errors && (password.dirty || password.touched)" class="error">
+                                    <div [hidden]="!password.errors.required">Please Enter password</div>
+                                    <div [hidden]="!password.errors.minlength">Password length should be atleat 8</div>
+                                </div>
+                            </div>
+                            <div class="pull-right col-lg-6 form-group">
+                                <label for="pwd">Confirm Password:</label>
+                                <input name="ConfirmPassword" id="ConfirmPassword" type="password" placeholder="Password " class="form-control" [(ngModel)]="employee.ConfirmPassword" pattern={{employee.Password}} #ConfirmPassword="ngModel" required>
+                                <div *ngIf="ConfirmPassword.errors && (ConfirmPassword.dirty || ConfirmPassword.touched)" class="error">
+                                    <div [hidden]="!ConfirmPassword.errors.required">Please Enter password</div>
+                                    <div [hidden]="!ConfirmPassword.errors.pattern">password mismatch</div>
+                                </div>
                             </div>
                         </div>
-
                         <div class="form-group">
 
                             <input type="checkbox" [(ngModel)]="employee.checkbox" name="checkbox" #checkbox="ngModel" required>

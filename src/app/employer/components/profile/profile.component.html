@@ -100,10 +100,11 @@
                   <abbr class="required" title="required">*</abbr>
                   </label>
                                     <input type="text" class="input-text" placeholder="Street address" [(ngModel)]="user.Address_street" value="" name="Address_street" id="User_Address_street">
-                                    <input type="text" class="input-text" placeholder="Apartment, suite, unit etc. (optional)" [(ngModel)]="user.Address_Unit" value="" name="Address_Unit" id="User_Address_Unit" #Address_Unit='ngModel' required>
                                     <div *ngIf="Address_Unit.errors && (Address_Unit.dirty || Address_Unit.touched)" class="error">
                                         <div [hidden]="!Address_Unit.errors.required">This field is required</div>
                                     </div>
+                                    <input type="text" class="input-text" placeholder="Apartment, suite, unit etc. (optional)" [(ngModel)]="user.Address_Unit" value="" name="Address_Unit" id="User_Address_Unit" #Address_Unit='ngModel'>
+
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" class="input-text" placeholder="Town / City" [(ngModel)]="user.City" value="" name="City" id="USer+City" #City='ngModel' required>

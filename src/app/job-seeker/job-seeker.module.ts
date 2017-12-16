@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
-
+import { TextMaskModule } from 'angular2-text-mask';
 import {GooglePlaceModule} from 'ng2-google-place-autocomplete';
 import {ScheduleModule, DialogModule, CalendarModule, ToggleButtonModule, DragDropModule, ButtonModule, InputTextareaModule, CheckboxModule, InputTextModule, SelectButtonModule} from 'primeng/primeng';
 import {AccordionModule} from 'primeng/primeng';     //accordion and accordion tab
@@ -38,7 +38,8 @@ import { SharedModule } from '../shared/shared.module';
     InputTextModule, 
     SelectButtonModule,
     SharedModule,
-    MultiselectDropdownModule
+    MultiselectDropdownModule,
+    TextMaskModule
   ],
   declarations: [
     JobSeekerComponent, 

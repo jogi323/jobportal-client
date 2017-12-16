@@ -31,7 +31,8 @@ export class ProfileComponent implements OnInit {
   yearsList: any[];
   positionList: any[];
   public options = { types: ['address'], componentRestrictions: { country: 'US' } }
-
+  public mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+  
   licenseRequired: Boolean = false;
   newImageUploaded: Boolean = false;
   showOtpInput: Boolean = false;

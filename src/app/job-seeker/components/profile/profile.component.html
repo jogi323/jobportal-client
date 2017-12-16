@@ -153,10 +153,10 @@
                                     <label for="User_Phone1">Cell Phone
                                         <abbr class="required" title="required">*</abbr>
                                     </label>
-                                    <input type="text" class="input-text" placeholder [(ngModel)]="user.Phone1" name="Phone1" #Phone1='ngModel' pattern="^\d{10}" required [disabled]="!showVerify">
+                                    <input type="text" class="input-text" placeholder [textMask]="{mask: mask}" [(ngModel)]="user.Phone1" name="Phone1" #Phone1='ngModel' minlength="4" required [disabled]="!showVerify">
                                     <div *ngIf="Phone1.errors && (Phone1.dirty || Phone1.touched)" class="error">
                                         <div [hidden]="!Phone1.errors.required">This field is required</div>
-                                        <div [hidden]="!Phone1.errors.pattern || specialChar">Enter a valid phone number of 10 digits </div>
+                                        <div [hidden]="!Phone1.errors.minlength">Enter a valid phone number of 10 digits </div>
                                     </div>
                                     <div *ngIf="specialChar" class="error">Special chacters are not allowed</div>
                                 </div>

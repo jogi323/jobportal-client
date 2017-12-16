@@ -297,7 +297,8 @@ export class WorkScheduleComponent implements OnInit {
                         Time_Start1: this.startTime1,
                         Time_Finish1: this.endTime1,
                         Date_Submitted: new Date(),
-                        Hours_Guaranteed: (this.endTime.substr(0, 2) - this.startTime.substr(0, 2))+(this.endTime1.substr(0, 2) - this.startTime1.substr(0, 2))
+                        Hours_Guaranteed: (this.endTime.substr(0, 2) - this.startTime.substr(0, 2))
+                        // +(this.endTime1.substr(0, 2) - this.startTime1.substr(0, 2))
                     }
                     this.eventToStore.push(eventToSave);
                     b++;
@@ -310,7 +311,8 @@ export class WorkScheduleComponent implements OnInit {
                         Time_Start1: this.startTime1,
                         Time_Finish1: this.endTime1,
                         Date_Submitted: new Date(),
-                        Hours_Guaranteed: (this.endTime.substr(0, 2) - this.startTime.substr(0, 2))+(this.endTime1.substr(0, 2) - this.startTime1.substr(0, 2))
+                        Hours_Guaranteed: (this.endTime.substr(0, 2) - this.startTime.substr(0, 2))
+                        // +(this.endTime1.substr(0, 2) - this.startTime1.substr(0, 2))
                     }
                     this.eventToStore.push(eventToSave);
                 }
@@ -332,7 +334,8 @@ export class WorkScheduleComponent implements OnInit {
                         Time_Start1: this.startTime1,
                         Time_Finish1: this.endTime1,
                         Date_Submitted: new Date(),
-                        Hours_Guaranteed: (this.endTime.substr(0, 2) - this.startTime.substr(0, 2))+(this.endTime1.substr(0, 2) - this.startTime1.substr(0, 2))
+                        Hours_Guaranteed: (this.endTime.substr(0, 2) - this.startTime.substr(0, 2))
+                        // +(this.endTime1.substr(0, 2) - this.startTime1.substr(0, 2))
                     }
                     this.eventToStore.push(eventToSave);
                     a++;
@@ -345,7 +348,8 @@ export class WorkScheduleComponent implements OnInit {
                         Time_Start1: this.startTime1,
                         Time_Finish1: this.endTime1,
                         Date_Submitted: new Date(),
-                        Hours_Guaranteed: (this.endTime.substr(0, 2) - this.startTime.substr(0, 2))+(this.endTime1.substr(0, 2) - this.startTime1.substr(0, 2))
+                        Hours_Guaranteed: (this.endTime.substr(0, 2) - this.startTime.substr(0, 2))
+                        // +(this.endTime1.substr(0, 2) - this.startTime1.substr(0, 2))
                     }
                     this.eventToStore.push(eventToSave);
                 }
@@ -359,7 +363,8 @@ export class WorkScheduleComponent implements OnInit {
             this.eventToStore[0].Time_Finish = this.endTime;
             this.eventToStore[0].Time_Start1 = this.startTime1;
             this.eventToStore[0].Time_Finish1 = this.endTime1;
-            this.eventToStore[0].Hours_Guaranteed = (this.endTime.substr(0, 2) - this.startTime.substr(0, 2))+(this.endTime1.substr(0, 2) - this.startTime1.substr(0, 2));
+            this.eventToStore[0].Hours_Guaranteed = (this.endTime.substr(0, 2) - this.startTime.substr(0, 2))
+            // +(this.endTime1.substr(0, 2) - this.startTime1.substr(0, 2));
             this.eventToStore[0].Date_Submitted = new Date();
             this.postEvent(this.eventToStore);
         }

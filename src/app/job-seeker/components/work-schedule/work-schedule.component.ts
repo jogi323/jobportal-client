@@ -41,10 +41,10 @@ export class WorkScheduleComponent implements OnInit {
         // this.endTimes = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '24:00'];
         // this.startTimes1 = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '24:00'];
         // this.endTimes1 = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '24:00'];
-        this.startTimes = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
-        this.endTimes = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
-        this.startTimes1 = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
-        this.endTimes1 = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
+        this.startTimes = [{ value: '08:00', name: '08:00 AM' }, { value: '09:00', name: '09:00 AM' }, { value: '10:00', name: '10:00 AM' }, { value: '11:00', name: '11:00 AM' }, { value: '12:00', name: '12:00 PM' }, { value: '13:00', name: '01:00 PM' }, { value: '14:00', name: '02:00 PM' }, { value: '15:00', name: '03:00 PM' }, { value: '16:00', name: '04:00 PM' }, { value: '17:00', name: '05:00 PM' }];
+        this.endTimes = [{ value: '08:00', name: '08:00 AM' }, { value: '09:00', name: '09:00 AM' }, { value: '10:00', name: '10:00 AM' }, { value: '11:00', name: '11:00 AM' }, { value: '12:00', name: '12:00 PM' }, { value: '13:00', name: '01:00 PM' }, { value: '14:00', name: '02:00 PM' }, { value: '15:00', name: '03:00 PM' }, { value: '16:00', name: '04:00 PM' }, { value: '17:00', name: '05:00 PM' }];
+        this.startTimes1 = [{ value: '08:00', name: '08:00 AM' }, { value: '09:00', name: '09:00 AM' }, { value: '10:00', name: '10:00 AM' }, { value: '11:00', name: '11:00 AM' }, { value: '12:00', name: '12:00 PM' }, { value: '13:00', name: '01:00 PM' }, { value: '14:00', name: '02:00 PM' }, { value: '15:00', name: '03:00 PM' }, { value: '16:00', name: '04:00 PM' }, { value: '17:00', name: '05:00 PM' }];
+        this.endTimes1 = [{ value: '08:00', name: '08:00 AM' }, { value: '09:00', name: '09:00 AM' }, { value: '10:00', name: '10:00 AM' }, { value: '11:00', name: '11:00 AM' }, { value: '12:00', name: '12:00 PM' }, { value: '13:00', name: '01:00 PM' }, { value: '14:00', name: '02:00 PM' }, { value: '15:00', name: '03:00 PM' }, { value: '16:00', name: '04:00 PM' }, { value: '17:00', name: '05:00 PM' }];
         this.events = [{
             id: null,
             Date: null
@@ -62,20 +62,32 @@ export class WorkScheduleComponent implements OnInit {
             Date_Submitted: null
         }];
     }
+
+    // get time object from array of objects
+    getTimeObject(time){
+        for (let i = 0; i < this.startTimes.length; i++) {
+            if (this.startTimes[i].value == time) {
+                return this.startTimes[i];
+            }
+        }
+    }
     // set end time function
     setEndTime(startTime) {
-        this.endTimes = this.startTimes.slice(this.startTimes.indexOf(startTime) + 1);
-        this.endTime = this.endTimes[0];
-        this.startTimes1 = this.startTimes.slice(this.startTimes.indexOf(startTime) + 2);
-        this.endTimes1 = this.startTimes.slice(this.startTimes.indexOf(startTime) + 3);
+        let object = this.getTimeObject(startTime);
+        this.endTimes = this.startTimes.slice(this.startTimes.indexOf(object) + 1);        
+        this.endTime = this.endTimes[0].value;
+        this.startTimes1 = this.startTimes.slice(this.startTimes.indexOf(object) + 2);
+        this.endTimes1 = this.startTimes.slice(this.startTimes.indexOf(object) + 3);
     }
     setStarttime(endtime) {
-        this.startTimes1 = this.startTimes.slice(this.startTimes.indexOf(endtime) + 1);
-        this.endTimes1 = this.startTimes.slice(this.startTimes.indexOf(endtime) + 2);
+        let object = this.getTimeObject(endtime);
+        this.startTimes1 = this.startTimes.slice(this.startTimes.indexOf(object) + 1);
+        this.endTimes1 = this.startTimes.slice(this.startTimes.indexOf(object) + 2);
     }
     setEndTime1(startTime) {
-        this.endTimes1 = this.startTimes1.slice(this.startTimes1.indexOf(startTime) + 1);
-        this.endTime1 = this.endTimes1[0];
+        let object = this.getTimeObject(startTime);        
+        this.endTimes1 = this.startTimes1.slice(this.startTimes1.indexOf(object) + 1);
+        this.endTime1 = this.endTimes1[0].value;
     }
     // Repeat day or week 
     setWeek(event) {
@@ -153,27 +165,27 @@ export class WorkScheduleComponent implements OnInit {
     }
     getFormattedDate(date) {
         var year = date.getFullYear();
-      
+
         var month = (1 + date.getMonth()).toString();
         month = month.length > 1 ? month : '0' + month;
-      
+
         var day = date.getDate().toString();
         day = day.length > 1 ? day : '0' + day;
-        
+
         return month + '/' + day + '/' + year;
-      }
+    }
     handleDayClick(event) {
         this.deleteEventStatus = false;
         if (event.date.format() < this.minDate) {
             alert('Please select a future date');
         }
         else {
-            
+
             this.start = event.date._d;
             this.event = new MyEvent();
             this.initializeTimes();
             let d = new Date(Date.parse(event.date));
-            this.event.start = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
+            this.event.start = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
             this.repeatDay = this.getRepeatDay(this.start.getDay());
             this.dialogVisible = true;
             //trigger detection manually as somehow only moving the mouse quickly after click triggers the automatic detection
@@ -181,10 +193,10 @@ export class WorkScheduleComponent implements OnInit {
         }
     }
     // get repeat day function
-    getRepeatDay(day){
+    getRepeatDay(day) {
         switch (day) {
             case 0:
-                return'Sunday\'s';
+                return 'Sunday\'s';
             case 1:
                 return 'Monday\'s';
             case 2:
@@ -196,7 +208,7 @@ export class WorkScheduleComponent implements OnInit {
             case 5:
                 return 'Friday\'s';
             default:
-                 return 'Saturday\'s';
+                return 'Saturday\'s';
         }
     }
     handleEventClick(e) {
@@ -222,7 +234,7 @@ export class WorkScheduleComponent implements OnInit {
             let d = new Date(Date.parse(e.calEvent.start));
             this.event.id = e.calEvent.id;
             // this.event.start = start.format();
-            this.event.start = `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
+            this.event.start = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
             this.repeatDay = this.getRepeatDay(new Date(this.event.start).getDay());
             this.getEventDetails(e.calEvent.id);
             // this.event.allDay = e.calEvent.allDay;
@@ -245,7 +257,7 @@ export class WorkScheduleComponent implements OnInit {
                     this.endTime1 = '';
                 }
                 this.startTimes1 = this.startTimes.slice(this.startTimes.indexOf(this.endTime) + 1);
-                this.endTimes1 = this.startTimes.slice(this.startTimes.indexOf(this.endTime) + 2);               
+                this.endTimes1 = this.startTimes.slice(this.startTimes.indexOf(this.endTime) + 2);
             }
         }
     }

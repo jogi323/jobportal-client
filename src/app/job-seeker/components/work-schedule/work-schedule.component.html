@@ -26,13 +26,13 @@
             <div class="ui-grid-col-6">
                 <label for="end">Time slot1</label>
                 <select class="form-control" [(ngModel)]="startTime" (ngModelChange)="setEndTime(startTime)">
-          <option *ngFor="let time of startTimes" [ngValue]="time">{{time}}</option>
+          <option *ngFor="let time of startTimes" [ngValue]="time.value">{{time.name}}</option>
         </select>
             </div>
             <div class="ui-grid-col-6">
                 <label for="end" style="visibility:hidden;">endTime</label>
                 <select class="form-control" [(ngModel)]="endTime" [disabled]="!endTime" (ngModelChange)="setStarttime(endTime)">
-          <option *ngFor="let time of endTimes" [ngValue]="time">{{time}}</option>
+          <option *ngFor="let time of endTimes" [ngValue]="time.value">{{time.name}}</option>
         </select>
             </div>
         </div>
@@ -41,14 +41,14 @@
                 <label for="end">Time slot2</label>
                 <select class="form-control" [(ngModel)]="startTime1" (ngModelChange)="setEndTime1(startTime1)" [disabled]="!endTime">
           <option [ngValue]=""></option>
-          <option *ngFor="let time of startTimes1" [ngValue]="time">{{time}}</option>
+          <option *ngFor="let time of startTimes1" [ngValue]="time.value">{{time.name}}</option>
         </select>
             </div>
             <div class="ui-grid-col-6">
                 <label for="end" style="visibility:hidden;">End Time</label>
                 <select class="form-control" [(ngModel)]="endTime1" [disabled]="!startTime1">
           <option [ngValue]=""></option>
-          <option *ngFor="let time of endTimes1" [ngValue]="time">{{time}}</option>
+          <option *ngFor="let time of endTimes1" [ngValue]="time.value">{{time.name}}</option>
         </select>
             </div>
         </div>

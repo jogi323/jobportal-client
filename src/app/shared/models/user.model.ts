@@ -11,7 +11,7 @@ export  class User {
     Zip_Code: number;
     locationLat?:Number;
     locationLng?: Number;
-    Phone1?:number;
+    Phone1?:any;
     Phone2?:number;
     Position?:String;
     workInfo?: Boolean;

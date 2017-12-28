@@ -1,36 +1,46 @@
-.forms-container-heading{
-    background-color:#00394E !important;
-    margin:0px;
-    padding:8px 15px;
+.forms-container-heading {
+    background-color: #00394E !important;
+    margin: 0px;
+    padding: 8px 15px;
 }
+
 .forms-container-heading h3 {
-    color:#fff;
+    color: #fff;
 }
-.preview_image{
-    margin:20px 30px; 
+
+.preview_image {
+    margin: 20px 30px;
 }
+
 .forms-container-heading h3 {
     margin-bottom: 0px;
     font-weight: normal;
 }
-.profile-minheight{
+
+.profile-minheight {
     min-height: 667px !important;
 }
+
 .workinfo-paddingTop {
     padding-top: 62.7%;
 }
+
 .row.edit-profile-button {
-    margin-top: 15%;
+    margin-top: 30%;
 }
+
 .row.edit-work-button {
     margin-top: 34%;
 }
+
 .optSection {
     padding-top: 7.5%;
 }
+
 .optInput {
     height: 30px;
 }
+
 .password-field {
     padding: 10px;
     border: none !important;
@@ -41,6 +51,7 @@
     border-bottom: 2px solid black !important;
     background: none;
 }
+
 .file {
     border: 1px solid #ccc;
     padding: 5px;

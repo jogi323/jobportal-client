@@ -173,6 +173,8 @@ export class ProfileComponent implements OnInit {
   }
 
   updateUserData(user) {
+    console.log();
+    this.user.Phone1 = this.user.Phone1.replace(/\D+/g, '');
     this.loaderService.display(true);
     this.userService.updatePersonal(this.user).subscribe(
       res => {
@@ -277,9 +279,16 @@ export class ProfileComponent implements OnInit {
     )
     
   }
-
-  sendOtp() {
-    var payload = { number: this.user.Phone1 };
+  converToNumber(){
+    if(this.user.Phone1.indexOf('-')>-1){
+      this.user.Phone1 = this.user.Phone1.replace(/\D+/g, '');
+        
+      }
+  }
+  sendOtp() {   
+    
+    var payload = { number: this.user.Phone1};
+    console.log(payload)
     this.loaderService.display(true);
     this.jobseekerService.sendOtp(this.currentUser.Email_Address, payload).subscribe(res => {
       this.showOtpInput = true;
